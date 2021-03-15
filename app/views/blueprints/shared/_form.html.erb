@@ -1,0 +1,35 @@
+<div class="m-form">
+  <div class="m-form__container">
+    <h1 class="m-form__title"><%= form_title %></h1>
+
+    <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
+      <%= f.input :title, required: true %>
+      <%= f.input :description %>
+      <%= f.input :collection,
+        collection: current_user.collections,
+        label_method: :name,
+        value_method: :id,
+        label: "Collection",
+        selected: @collection.id %>
+
+      <div class="m-form__important">
+        <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true %>
+      </div>
+      <div class="m-form__tags" data-controller="entitiesTags">
+        <label for="tag_list">
+          <abbr title="required">*</abbr>
+          Tags
+        </label>
+        <%= text_field_tag :tag_list, @blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
+        <% if @blueprint.errors[:tag_list].length > 0 %>
+          <span class="error tags"><%= @blueprint.errors[:tag_list].first %></span>
+        <% end %>
+      </div>
+
+      <%= f.input :cover, label: "Cover picture", as: :file, required: true %>
+      <%= f.input :pictures, label: "Additional pictures", as: :file, input_html: { multiple: true } %>
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

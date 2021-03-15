@@ -1,0 +1,42 @@
+.o-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--dark-blue);
+  padding: 12px 24px;
+  box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
+  -webkit-box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
+  -moz-box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
+
+  &__button {
+    margin-bottom: 0;
+    height: initial;
+    line-height: initial;
+    padding: 8px 12px;
+    background: transparent;
+    color: var(--purple);
+
+    &:hover {
+      background: transparent;
+      color: var(--white);
+    }
+  }
+
+  &__logo {
+    font-family: $logo-font;
+    color: var(--white);
+    font-size: $font-size-logo;
+  }
+
+  &-block {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__nav-item {
+    margin: 0 12px 0 12px;
+    display: inline-block;
+  }
+}

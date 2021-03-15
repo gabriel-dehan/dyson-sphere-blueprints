@@ -1,13 +1,70 @@
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
-@import "config/bootstrap_variables";
+@import "config/variables";
 
 // External libraries
-@import "bootstrap/scss/bootstrap";
+@import "milligram/dist/milligram.css";
+@import "@yaireo/tagify/dist/tagify.css";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
 // Your CSS partials
-@import "components/index";
+@import "molecules/index";
+@import "organisms/index";
 @import "pages/index";
+
+// Layout
+
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: $body-font;
+  background: $body-bg;
+  color: $body-color;
+}
+
+h1, h2, h3, h4 {
+  font-family: $headers-font;
+}
+
+h1 {
+  font-size: $font-size-header;
+}
+
+h2 {
+font-size: $font-size-title;
+}
+
+h3 {
+  font-size: $font-size-subtitle;
+}
+
+h4 {
+  font-size: $font-size-smalltitle;
+}
+
+a {
+  color: var(--purple);
+}
+
+input[type='color'], input[type='date'], input[type='datetime'], input[type='datetime-local'], input[type='email'], input[type='month'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], input[type='week'], input:not([type]), textarea {
+  color: var(--white);
+  background-color: rgba(0, 0, 0, 0.20);
+  border-color: var(--darker-blue);
+}
+
+select {
+  color: var(--white);
+  border-color: var(--darker-blue);
+  background-color: rgba(0, 0, 0, 0.20);
+}
+
+label {
+  font-weight: normal;
+  font-size: $font-size-base;
+}
+
+.l-wrapper {
+  margin: 2em 24px 1em 24px;
+}

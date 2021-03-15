@@ -1,16 +1,7 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Teko:wght@300;400;500;600;700&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
-
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
+$body-font: "Nunito Sans", "Helvetica", "Arial", "sans-serif";
+$headers-font: "Teko", "Helvetica", "Arial", "sans-serif";
+$logo-font: "Fredericka the Great";

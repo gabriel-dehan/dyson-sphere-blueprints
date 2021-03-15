@@ -1,10 +1,18 @@
 // Define variables for your color scheme
 
-// For example:
-$red: #FD1015;
-$blue: #167FFB;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+:root {
+  --night-blue: #171c31;
+  --midnight-blue: #1b213a;
+  --darker-blue: #222845;
+  --dark-blue: #282b4a;
+  --blue: #333b6a;
+  --light-blue: #1ba0d1;
+  --orange: #ff5b3f;
+  --red: #f22b6b;
+  --dark-red: #d7265f;
+  --green: #0de077;
+  --purple: #9b4dca;
+  --white: #eef3fc;
+  --grey65: rgb(238, 243, 252, 0.65);
+  --grey50: rgb(238, 243, 252, 0.50);
+}
