@@ -32,11 +32,18 @@
           Cover picture
         </label>
         <%= f.drag_and_drop_file_field :cover, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 5_000_000 %>
+
         <span class="error">
           <% if @blueprint.errors[:cover].length > 0 %>
             <%= @blueprint.errors[:cover].first %>
           <% end %>
         </span>
+        <div class="m-form__picture-preview">
+          <% if @blueprint.cover.key %>
+            <%= cl_image_tag @blueprint.cover.key, height: 100, width: 100, crop: :fill %>
+          <% end %>
+          <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
+        </div>
       </div>
 
       <div class="m-form__pictures">
@@ -49,6 +56,14 @@
             <%= @blueprint.errors[:pictures].first %>
           <% end %>
         </span>
+        <div class="m-form__pictures-preview">
+          <% if @blueprint.pictures.any? %>
+            <% @blueprint.pictures.each do |picture| %>
+              <%= cl_image_tag picture.key, height: 100, width: 100, crop: :fill %>
+            <% end %>
+            <span class="m-form__pictures-preview__warning">*Uploading new images will overwrite the existing ones.</span>
+          <% end %>
+        </div>
       </div>
 
       <%= f.submit %>

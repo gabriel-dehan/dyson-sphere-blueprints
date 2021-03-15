@@ -30,6 +30,24 @@ class BlueprintsController < ApplicationController
   end
 
   def edit
+    # TODO: Authorization
+    @blueprint = current_user.blueprints.friendly.find(params[:id])
+    @collection = @blueprint.collection
+  end
+
+  def update
+    @collection = current_user.collections.find(params[:blueprint][:collection])
+    @blueprint = current_user.blueprints.friendly.find(params[:id])
+
+    @blueprint.collection = @collection
+    @blueprint.assign_attributes(blueprint_params)
+    @blueprint.tag_list = params[:tag_list]
+
+    if @blueprint.save
+      redirect_to blueprint_path(@blueprint)
+    else
+      render 'blueprints/edit'
+    end
   end
 
   private

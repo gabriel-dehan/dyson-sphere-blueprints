@@ -47,10 +47,32 @@
 
   &__picture {
     margin-top: 22px;
+
+    &-preview {
+      img {
+        border: 2px solid var(--blue);
+        border-radius: 6px;
+      }
+      &__warning {
+        display: block;
+        color: var(--orange);
+      }
+    }
   }
 
   &__pictures {
     margin-top: 30px;
+
+    &-preview {
+      img {
+        border: 2px solid var(--blue);
+        border-radius: 6px;
+      }
+      &__warning {
+        display: block;
+        color: var(--orange);
+      }
+    }
   }
 
   .error {
