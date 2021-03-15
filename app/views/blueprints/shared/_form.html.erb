@@ -26,8 +26,30 @@
         <% end %>
       </div>
 
-      <%= f.input :cover, label: "Cover picture", as: :file, required: true %>
-      <%= f.input :pictures, label: "Additional pictures", as: :file, input_html: { multiple: true } %>
+      <div class="m-form__picture">
+        <label for="cover">
+          <abbr title="required">*</abbr>
+          Cover picture
+        </label>
+        <%= f.drag_and_drop_file_field :cover, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 5_000_000 %>
+        <span class="error">
+          <% if @blueprint.errors[:cover].length > 0 %>
+            <%= @blueprint.errors[:cover].first %>
+          <% end %>
+        </span>
+      </div>
+
+      <div class="m-form__pictures">
+        <label for="pictures">
+          Additional pictures
+        </label>
+        <%= f.drag_and_drop_file_field :pictures, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 5_000_000 %>
+        <span class="error">
+          <% if @blueprint.errors[:pictures].length > 0 %>
+            <%= @blueprint.errors[:pictures].first %>
+          <% end %>
+        </span>
+      </div>
 
       <%= f.submit %>
     <% end %>

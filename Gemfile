@@ -39,6 +39,7 @@ gem 'acts-as-taggable-on', '~> 7.0'
 gem 'cloudinary'
 gem 'active_storage_validations'
 gem 'mini_magick', '>= 4.9.5'
+gem 'active_storage_drag_and_drop'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

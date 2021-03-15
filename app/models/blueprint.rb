@@ -18,19 +18,19 @@ class Blueprint < ApplicationRecord
 
   validates :cover,
     attached: true,
-    content_type: [:png, :jpg, :jpeg],
+    content_type: [:png, :jpg, :jpeg, :gif],
     dimension: {
-      width: { max: 2800 },
-      height: { max: 2000 },
+      width: { max: 3000 },
+      height: { max: 3000 },
       message: 'is too large'
     }
 
   validates :pictures,
     limit: { max: 5 },
-    content_type: [:png, :jpg, :jpeg],
+    content_type: [:png, :jpg, :jpeg, :gif],
     dimension: {
-      width: { max: 2800 },
-      height: { max: 2000 },
+      width: { max: 3000 },
+      height: { max: 3000 },
       message: 'is too large'
     }
 end

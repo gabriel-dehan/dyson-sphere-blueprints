@@ -45,8 +45,16 @@
     label { font-weight: bold; }
   }
 
+  &__picture {
+    margin-top: 22px;
+  }
+
+  &__pictures {
+    margin-top: 30px;
+  }
+
   .error {
-    color: var(--red);
+    color: var(--error-red);
     display: block;
     margin-bottom: 20px;
     margin-top: -8px;
@@ -63,5 +71,63 @@
 
   &__wrapper {
     border-radius: 2px;
+  }
+}
+
+label.asdndzone {
+  cursor: pointer;
+  border: 3px solid var(--dark-red);
+  font-size: 20px;
+  max-width: initial;
+  min-height: initial;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 15px;
+
+  input {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .asdndz__icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .asdndz-highlight {
+    color: var(--red);
+  }
+
+  .direct-upload {
+    background-color: var(--midnight-blue);
+    color: var(--white);
+    height: initial;
+    display: inline-flex;
+    align-items: center;
+
+    &__progress {
+      background-color: var(--green);
+    }
+
+    &__remove {
+      color: var(--white);
+
+      &:hover {
+        color: var(--red);
+      }
+    }
+
+    &__filesize {
+      color: var(--white);
+    }
+  }
+
+  .direct-upload--pending {
+    .direct-upload__filesize {
+      color: #707e87;
+    }
   }
 }
