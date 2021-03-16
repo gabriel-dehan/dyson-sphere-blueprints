@@ -1,4 +1,5 @@
 class Blueprint < ApplicationRecord
+  include GameDataConcern
   include PgSearch::Model
   extend FriendlyId
   acts_as_votable
@@ -13,6 +14,8 @@ class Blueprint < ApplicationRecord
   has_one :user, through: :collection
 
   friendly_id :title, use: :slugged
+
+  after_save :decode_blueprint
 
   pg_search_scope :search_by_title,
     against: [:title],
@@ -46,5 +49,13 @@ class Blueprint < ApplicationRecord
 
     def formatted_mod_version
       "#{mod.name} - #{mod_version}"
+    end
+
+    private
+    def decode_blueprint
+      # TODO: Check if this should be a background job
+      if saved_change_to_attribute?(:encoded_blueprint)
+        BlueprintParserJob.perform_now(self.id)
+      end
     end
 end
