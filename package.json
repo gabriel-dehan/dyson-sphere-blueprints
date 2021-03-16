@@ -7,9 +7,11 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
     "@yaireo/tagify": "^3.23.1",
+    "clipboard": "^2.0.8",
     "milligram": "^1.4.1",
     "popper.js": "^1.16.1",
     "stimulus": "^2.0.0",
+    "tippy.js": "^6.3.1",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

@@ -41,8 +41,8 @@
         <div class="m-form__picture-preview">
           <% if @blueprint.cover.key %>
             <%= cl_image_tag @blueprint.cover.key, height: 100, width: 100, crop: :fill %>
+            <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
           <% end %>
-          <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
         </div>
       </div>
 

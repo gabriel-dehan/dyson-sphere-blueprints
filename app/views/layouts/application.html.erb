@@ -18,11 +18,24 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
+      <div class="wrapper">
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
 
-    <div class="l-wrapper">
-      <%= yield %>
+      <div class="l-wrapper">
+        <%= yield %>
+      </div>
+      <footer class="l-footer">
+        <span class="l-footer-item made-with">Made with&nbsp;&nbsp;❤️</span>
+        <span class="l-footer__separator">|</span>
+        <span class="l-footer-item issues">
+          Noticed an <strong>issue?</strong> Tell me all about it&nbsp; <a target="_blank" rel="noopener noreferrer" href="https://github.com/gabriel-dehan/dspblueprints/issues">here.</a>
+        </span>
+        <span class="l-footer__separator">|</span>
+        <span class="l-footer-item source-code">
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/gabriel-dehan/dspblueprints">Source code</a>
+        </span>
+      </footer>
     </div>
   </body>
 </html>

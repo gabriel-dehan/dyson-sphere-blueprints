@@ -9,6 +9,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "active_storage_drag_and_drop";
+@import "tippy.js/dist/tippy.css";
 
 // Your CSS partials
 @import "molecules/index";
@@ -27,6 +28,7 @@ body {
 
 h1, h2, h3, h4 {
   font-family: $headers-font;
+  letter-spacing: initial;
 }
 
 h1 {
@@ -53,6 +55,7 @@ input[type='color'], input[type='date'], input[type='datetime'], input[type='dat
   color: var(--white);
   background-color: rgba(0, 0, 0, 0.20);
   border-color: var(--darker-blue);
+  font-family: $body-font;
 }
 
 select {
@@ -66,6 +69,26 @@ label {
   font-size: $font-size-base;
 }
 
+.wrapper {
+  min-height: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 .l-wrapper {
   margin: 2em 24px 1em 24px;
+}
+
+.l-footer {
+  width: 100%;
+  background: var(--night-blue);
+  padding: 10px;
+  text-align: center;
+
+  &__separator {
+    display: inline-block;
+    padding: 0 1em;
+    margin-top: -1px;
+  }
 }

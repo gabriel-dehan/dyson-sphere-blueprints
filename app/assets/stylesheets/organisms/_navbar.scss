@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   background: var(--dark-blue);
-  padding: 12px 24px;
+  padding: 14px 24px;
   box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
   -webkit-box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
   -moz-box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
@@ -26,6 +26,23 @@
     font-family: $logo-font;
     color: var(--white);
     font-size: $font-size-logo;
+    line-height: 1em;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
+  &__logoName {
+    font-family: $headers-font;
+    font-size: 42px;
+    line-height: 1em;
+    color: #444e8d;
+  }
+  &__logoEm {
+    transform: rotate(-4deg) translateY(-5px);
+    display: inline-block;
+    font-size: 30px;
   }
 
   &-block {
