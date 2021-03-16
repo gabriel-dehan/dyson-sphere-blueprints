@@ -1,38 +1,3 @@
 <div class="p-blueprint-index">
-
-  <ul class="p-blueprint-list">
-  <% @blueprints.each do |blueprint| %>
-    <li class="o-blueprint-card" data-controller="blueprintCards">
-      <div class="o-blueprint-card__cover">
-        <%= cl_image_tag blueprint.cover.key, height: 400, crop: :fill %>
-        <button
-          id="bp-card-<%= blueprint.id %>"
-          class="o-blueprint-card__copy"
-          data-blueprintCards-target="copy"
-          data-clipboard-text="<%= blueprint.encoded_blueprint %>">
-          Copy
-        </button>
-      </div>
-      <div class="o-blueprint-card__content">
-        <div>
-          <h2><%= blueprint.title %></h2>
-          <p>
-            by <%= link_to blueprint.user.username, root_path %>
-          </p>
-        </div>
-        <div class="o-blueprint-card__votes">
-          <strong class="count"><%= blueprint.get_likes.length %></strong>
-          <i class="fas fa-heart"></i>
-        </div>
-      </div>
-      <ul class="o-blueprint-card__tags">
-        <% blueprint.tags.take(5).each do |tag| %>
-          <li class="o-blueprint-card__tags-tag">
-            <%= tag %>
-          </li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
-  </ul>
+  <%= render "blueprints/shared/list", blueprints: @blueprints %>
 </div>

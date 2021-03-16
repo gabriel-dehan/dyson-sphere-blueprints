@@ -1,8 +1,19 @@
-.p-blueprint-new, .p-blueprint-edit {
-}
+// .p-blueprint-new, .p-blueprint-edit {
+// }
+
+// .p-blueprint-index {
+// }
 
 .p-blueprint-list {
   display: flex;
-  max-width: 960px;
+  flex-direction: column;
+  max-width: 1140px;
   margin: 0 auto;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }

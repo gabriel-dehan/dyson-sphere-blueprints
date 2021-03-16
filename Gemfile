@@ -44,6 +44,8 @@ gem 'active_storage_drag_and_drop'
 gem 'awesome_print'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
+gem 'kaminari'
+gem 'pg_search'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

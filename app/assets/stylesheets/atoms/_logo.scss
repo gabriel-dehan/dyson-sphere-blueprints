@@ -1,0 +1,24 @@
+.a-logo {
+  font-family: $logo-font;
+  color: var(--white);
+  font-size: $font-size-logo;
+  line-height: 1em;
+
+  &:hover {
+    color: inherit;
+  }
+
+  &__logoName {
+    font-family: $headers-font;
+    // font-size: 42px;
+    font-size: 1.313em;
+    line-height: 1em;
+    color: #444e8d;
+  }
+  &__logoEm {
+    transform: rotate(-4deg) translateY(-5px);
+    display: inline-block;
+    font-size: 30px;
+    font-size: 0.938em;
+  }
+}

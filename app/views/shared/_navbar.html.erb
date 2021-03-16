@@ -1,24 +1,24 @@
 <div class="o-navbar">
-  <%= link_to root_path, class: "o-navbar__logo" do %>
-    <span class="o-navbar__logoName">Dyson Sphere</span> <span class="o-navbar__logoEm">Blueprints</span>
+  <%= link_to root_path, class: "a-logo" do %>
+    <span class="a-logo__logoName">Dyson Sphere</span> <span class="a-logo__logoEm">Blueprints</span>
   <% end %>
 
   <ul class="o-navbar-block">
     <li class="o-navbar__nav-item">
-      <button class="o-navbar__button">Add your blueprint</button>
+      <%= link_to "Add your blueprint", new_blueprint_path, class: "o-navbar__button" %>
     </li>
     <li class="o-navbar__nav-item <%= 'active' if current_page?(blueprints_path) %>">
-        <%= link_to "Blueprints", "#", class: "nav-link" %>
+        <%= link_to "Blueprints", blueprints_path, class: "nav-link" %>
       </li>
       <li class="o-navbar__nav-item <%= 'active' if current_page?(collections_path) %>">
-        <%= link_to "Collections", "#", class: "nav-link" %>
+        <%= link_to "Collections", collections_path, class: "nav-link" %>
       </li>
     <% if user_signed_in? %>
       <li class="o-navbar__nav-item o-dropdown">
         <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>
         <div class="o-dropdown__content">
-          <%= link_to "Action", "#", class: "o-dropdown__item" %>
-          <%= link_to "Another action", "#", class: "o-dropdown__item" %>
+          <%= link_to "My blueprints", "#", class: "o-dropdown__item" %>
+          <%= link_to "My collections", "#", class: "o-dropdown__item" %>
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "o-dropdown__item" %>
         </div>
       </li>

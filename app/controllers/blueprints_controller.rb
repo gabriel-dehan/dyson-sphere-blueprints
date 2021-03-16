@@ -2,10 +2,44 @@ class BlueprintsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
+    @filters = {
+      search: params[:search],
+      tags: (params[:tags] || "").split(", "),
+      order: params[:order] || "recent",
+      mod_id: params[:mod_id] || Mod.first.id,
+      mod_version: params[:mod_version].blank? ? 'Any' : params[:mod_version]
+    }
+
+    # TODO: At some point when we have hundreds of thousands of blueprints, this will not hold
     @blueprints = policy_scope(Blueprint)
       .joins(:collection)
       .where(collection: { type: "Public" })
       .includes(:collection)
+
+      if !@filters[:tags].blank?
+        @blueprints = @blueprints.tagged_with(@filters[:tags], :any => true)
+      end
+
+      if @filters[:search] && !@filters[:search].blank?
+        @blueprints = @blueprints.search_by_title(@filters[:search])
+      end
+
+      if @filters[:mod_version] && @filters[:mod_version] != 'Any'
+        @blueprints = @blueprints.where(mod_version: @filters[:mod_version])
+      end
+
+      if @filters[:mod_id]
+        @blueprints = @blueprints.where(mod_id: @filters[:mod_id])
+      end
+
+      if @filters[:order] === 'recent'
+        @blueprints = @blueprints.reorder(created_at: :desc)
+      elsif @filters[:order] === 'popular'
+        @blueprints = @blueprints.reorder(cached_votes_total: :desc)
+      end
+
+      # Paginate
+      @blueprints = @blueprints.page(params[:page])
   end
 
   def show
@@ -64,7 +98,7 @@ class BlueprintsController < ApplicationController
   private
 
   def blueprint_params
-    params.require(:blueprint).permit(:title, :description, :encoded_blueprint, :cover, pictures: [], mod_version: )
+    params.require(:blueprint).permit(:title, :description, :encoded_blueprint, :cover, :mod_id, :mod_version, pictures: [])
   end
 
 end

@@ -13,10 +13,6 @@ Turbolinks.start()
 ActiveStorage.start()
 
 // External imports
-import ActiveStorageDragAndDrop from "../vendor/active_storage_drag_and_drop"
-
-ActiveStorageDragAndDrop.start()
-
 document.addEventListener('dnd-upload:initialize', (e) => {
   const errorNode = e.target.parentNode.parentNode.querySelector('.error');
   errorNode.textContent = '';

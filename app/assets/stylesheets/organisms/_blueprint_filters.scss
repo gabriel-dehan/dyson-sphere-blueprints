@@ -1,0 +1,152 @@
+.o-blueprint-filters {
+  &__line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+
+    input {
+      margin-bottom: 0;
+    }
+
+    & > div {
+      flex-grow: 1;
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+
+    & > div:first-child {
+      margin-left: 0;
+    }
+
+    & > div:last-child {
+      margin-right: 0;
+    }
+
+    &.no-grow > div {
+      flex-grow: initial;
+    }
+  }
+
+  &__search {
+    position: relative;
+    width: 50%;
+    flex-grow: 0;
+
+    i {
+      color: var(--darker-blue);
+      font-size: 18px;
+      position: absolute;
+      top: 11px;
+      right: 12px;
+    }
+  }
+
+  &__tags {
+    position: relative;
+    width: 50%;
+    flex-grow: 0;
+
+    i {
+      color: var(--darker-blue);
+      font-size: 16px;
+      position: absolute;
+      top: 12px;
+      right: 10px;
+    }
+  }
+
+  &__order-container {
+    width: 50%;
+  }
+
+  &__order {
+    display: flex;
+    border: 1px solid var(--blue);
+    display: inline-flex;
+    border-radius: 8px;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+
+    &-choice {
+      flex-grow: 1;
+
+      label {
+        cursor: pointer;
+        background-color: var(--night-blue);
+        border-right: 1px solid var(--blue);
+        color: var(--white);
+        padding: 8px 24px;
+        margin: 0;
+
+        &:hover {
+          background-color: var(--blue);
+        }
+      }
+
+      input[type='radio']  {
+        display: none;
+      }
+
+      input[type='radio']:checked + label {
+        background-color: var(--dark-red);
+      }
+
+      &:first-child label {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+
+      &:last-child label {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-left: 0;
+      }
+    }
+  }
+
+  &__mods {
+    display: flex;
+    width: 50%;
+
+    label {
+      margin: 0 8px 0 0;
+      white-space: nowrap;
+      color: var(--grey50);
+      font-style: italic;
+    }
+    select { margin: 0; }
+
+    &-mod {
+      display: inline-flex;
+      align-items: center;
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+
+    &-version {
+      display: inline-flex;
+      align-items: center;
+      flex-grow: 1;
+    }
+  }
+
+  &__submit {
+    display: flex;
+    justify-content: flex-end;
+
+    input[type='submit'] {
+      width: 100%;
+      border-color: var(--dark-red);
+      background: transparent;
+      color: var(--dark-red);
+
+      &:hover {
+        background: var(--dark-red);
+        border-color: var(--dark-red);
+        color: var(--white);
+      }
+    }
+  }
+}

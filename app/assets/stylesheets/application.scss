@@ -12,6 +12,8 @@
 @import "tippy.js/dist/tippy.css";
 
 // Your CSS partials
+@import "overrides";
+@import "atoms/index";
 @import "molecules/index";
 @import "organisms/index";
 @import "pages/index";
@@ -56,6 +58,13 @@ input[type='color'], input[type='date'], input[type='datetime'], input[type='dat
   background-color: rgba(0, 0, 0, 0.20);
   border-color: var(--darker-blue);
   font-family: $body-font;
+}
+
+input[type='color'], input[type='date'], input[type='datetime'], input[type='datetime-local'], input[type='email'], input[type='month'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], input[type='week'] {
+  &::placeholder {
+    color: var(--grey50);
+    font-size: 14px;
+  }
 }
 
 select {

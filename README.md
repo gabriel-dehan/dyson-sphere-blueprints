@@ -4,7 +4,7 @@ WIP - Community website to share Dyson Sphere Program blueprints.
 
 ## Roadmap
 
-- [ ] Add versionning of blueprints with a mod version attribute
+- [x] Add versionning of blueprints with a mod version attribute
 - [ ] Decoded blueprint
 - [ ] Index of all public blueprints
   - [ ] Search bar
@@ -19,6 +19,7 @@ WIP - Community website to share Dyson Sphere Program blueprints.
 - [ ] Parsing the blueprint to display data
 - [ ] Add a mailer
 - [ ] GA
+- [ ] Handle multipe blueprint mods, add js in the blueprint and search form to load versions according to the selected mod
 
 # Deploy
 

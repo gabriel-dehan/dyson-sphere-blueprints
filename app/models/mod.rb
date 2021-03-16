@@ -5,6 +5,10 @@ class Mod < ApplicationRecord
     'MultiBuildBeta'
   ]
 
+  def self.to_select
+    self.all.map { |mod| [mod.name, mod.id] }
+  end
+
   def version_list
     versions.keys
   end

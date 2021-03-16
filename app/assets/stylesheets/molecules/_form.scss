@@ -1,10 +1,15 @@
 .m-form {
   &__container {
-    max-width: 960px;
+    max-width: 1140px;
     margin: 0 auto;
     background: var(--night-blue);
     padding: 3em 4em;
     border-radius: 8px;
+  }
+
+  em {
+    font-size: 12px;
+    color: var(--grey65);
   }
 
   form {
@@ -21,23 +26,18 @@
 
   &__tags {
     margin-bottom: 20px;
+  }
 
-    .tagify {
-      --tags-border-color: var(--darker-blue);
-      --tag-hover: var(--blue);
-      --tag-bg: var(--light-blue);
-      --tag-text-color: var(--white);
-      --tag-invalid-bg: var(--red);
-      --tag-invalid-color: var(--white);
-      --tag-remove-bg: var(--blue);
-      --placeholder-color: var(--grey65);
-      --placeholder-color-focus: var(--grey50);
+  &__inline {
+    display: flex;
 
-      background: rgba(0, 0, 0, 0.2);
+    & > div {
+      margin-right: 20px;
+      flex-grow: 1;
+    }
 
-      &__input::before {
-        line-height: inherit;
-      }
+    & > div:last-child {
+      margin-right: 0;
     }
   }
 
@@ -84,73 +84,6 @@
 
     &.tags {
       margin-top: 4px;
-    }
-  }
-}
-
-.tagify__dropdown {
-  --tagify-dd-color-primary: var(--dark-blue);
-  --tagify-dd-bg-color: var(--blue);
-
-  &__wrapper {
-    border-radius: 2px;
-  }
-}
-
-label.asdndzone {
-  cursor: pointer;
-  border: 3px solid var(--dark-red);
-  font-size: 20px;
-  max-width: initial;
-  min-height: initial;
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  margin-bottom: 15px;
-
-  input {
-    visibility: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-
-  .asdndz__icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .asdndz-highlight {
-    color: var(--red);
-  }
-
-  .direct-upload {
-    background-color: var(--midnight-blue);
-    color: var(--white);
-    height: initial;
-    display: inline-flex;
-    align-items: center;
-
-    &__progress {
-      background-color: var(--green);
-    }
-
-    &__remove {
-      color: var(--white);
-
-      &:hover {
-        color: var(--red);
-      }
-    }
-
-    &__filesize {
-      color: var(--white);
-    }
-  }
-
-  .direct-upload--pending {
-    .direct-upload__filesize {
-      color: #707e87;
     }
   }
 }

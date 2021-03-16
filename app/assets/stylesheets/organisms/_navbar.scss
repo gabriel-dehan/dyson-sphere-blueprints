@@ -9,9 +9,18 @@
   -moz-box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
 
   &__button {
+    border: 0.1rem solid #9b4dca;
+    border-radius: .4rem;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
     margin-bottom: 0;
-    height: initial;
-    line-height: initial;
     padding: 8px 12px;
     background: transparent;
     color: var(--purple);
@@ -20,29 +29,6 @@
       background: transparent;
       color: var(--white);
     }
-  }
-
-  &__logo {
-    font-family: $logo-font;
-    color: var(--white);
-    font-size: $font-size-logo;
-    line-height: 1em;
-
-    &:hover {
-      color: inherit;
-    }
-  }
-
-  &__logoName {
-    font-family: $headers-font;
-    font-size: 42px;
-    line-height: 1em;
-    color: #444e8d;
-  }
-  &__logoEm {
-    transform: rotate(-4deg) translateY(-5px);
-    display: inline-block;
-    font-size: 30px;
   }
 
   &-block {

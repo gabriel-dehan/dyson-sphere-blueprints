@@ -1,1 +1,28 @@
-// Specific CSS for your home-page
+.p-home {
+  display: flex;
+  flex-direction: column;
+  max-width: 1140px;
+  margin: 0 auto;
+
+  .dsp {
+    font-family: $headers-font;
+    font-weight: normal;
+    font-size: 1.2em;
+    letter-spacing: 0.01rem;
+    text-transform: uppercase;
+  }
+
+  &__header {
+    margin: 25px 0 20px 0;
+    text-align: center;
+
+    .a-logo {
+      font-size: 48px;
+    }
+
+    p {
+      font-size: $font-size-smalltitle;
+      color: #d0d5de;
+    }
+  }
+}

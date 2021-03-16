@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_152939) do
+ActiveRecord::Schema.define(version: 2021_03_16_211356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 2021_03_16_152939) do
     t.string "slug"
     t.bigint "mod_id"
     t.string "mod_version", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
     t.index ["mod_id"], name: "index_blueprints_on_mod_id"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true

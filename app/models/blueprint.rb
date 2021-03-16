@@ -1,7 +1,9 @@
 class Blueprint < ApplicationRecord
+  include PgSearch::Model
   extend FriendlyId
   acts_as_votable
   acts_as_taggable_on :tags
+  paginates_per 50
 
   has_one_attached :cover
   has_many_attached :pictures
@@ -11,6 +13,12 @@ class Blueprint < ApplicationRecord
   has_one :user, through: :collection
 
   friendly_id :title, use: :slugged
+
+  pg_search_scope :search_by_title,
+    against: [:title],
+    using: {
+      tsearch: { prefix: true }
+    }
 
   validates :title, presence: true
   validates :encoded_blueprint, presence: true
