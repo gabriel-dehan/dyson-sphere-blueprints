@@ -5,6 +5,7 @@ WIP - Community website to share Dyson Sphere Program blueprints.
 ## Roadmap
 
 - [ ] Add versionning of blueprints with a mod version attribute
+- [ ] Decoded blueprint
 - [ ] Index of all public blueprints
   - [ ] Search bar
   - [ ] Search by tags

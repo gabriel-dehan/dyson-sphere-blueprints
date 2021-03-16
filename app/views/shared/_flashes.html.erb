@@ -1,20 +1,20 @@
 <% if notice %>
-  <div data-controller="alerts">
+  <span class="alert-wrapper" data-controller="alerts">
     <div class="m-alert m-alert-info" data-alerts-target="notice" role="alert">
       <%= notice %>
       <button type="button" class="m-alert__close" data-action="click->alerts#close" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-  </div>
+  </span>
 <% end %>
 <% if alert %>
-  <div data-controller="alerts">
+  <span class="alert-wrapper" data-controller="alerts">
     <div class="m-alert m-alert-warning" data-alerts-target="notice" role="alert">
       <%= alert %>
       <button type="button" class="m-alert__close" data-action="click->alerts#close" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-  </div>
+  </span>
 <% end %>

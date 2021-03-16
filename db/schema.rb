@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_15_155031) do
+ActiveRecord::Schema.define(version: 2021_03_16_152939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,10 @@ ActiveRecord::Schema.define(version: 2021_03_15_155031) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.bigint "mod_id"
+    t.string "mod_version", null: false
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
+    t.index ["mod_id"], name: "index_blueprints_on_mod_id"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true
   end
 
@@ -65,6 +68,15 @@ ActiveRecord::Schema.define(version: 2021_03_15_155031) do
     t.index ["slug"], name: "index_collections_on_slug", unique: true
     t.index ["type"], name: "index_collections_on_type"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "mods", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "author", null: false
+    t.string "uuid4", null: false
+    t.json "versions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -108,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_03_15_155031) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "role", default: "member", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -131,6 +144,7 @@ ActiveRecord::Schema.define(version: 2021_03_15_155031) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blueprints", "collections"
+  add_foreign_key "blueprints", "mods"
   add_foreign_key "collections", "users"
   add_foreign_key "taggings", "tags"
 end

@@ -64,7 +64,7 @@ class BlueprintsController < ApplicationController
   private
 
   def blueprint_params
-    params.require(:blueprint).permit(:title, :description, :encoded_blueprint, :cover, pictures: [])
+    params.require(:blueprint).permit(:title, :description, :encoded_blueprint, :cover, pictures: [], mod_version: )
   end
 
 end

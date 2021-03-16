@@ -13,13 +13,13 @@ Collection.destroy_all
 Blueprint.destroy_all
 
 puts "Creating user..."
-user = User.create!(email: "admin@dspblueprints.com", username: "Admin", password: "password");
+user = User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", password: "password", role: "admin")
 puts "Creating collections..."
 
-puts "Creating blueprints..."
-5.times do
-  user.collections.first.blueprints.create!(title: "60 Smelters", description: "Hello world", encoded_blueprint: "//f23fewoifjwfoewjifjw;]fwoeif")
-  user.collections.last.blueprints.create!(title: "60 Smelters", description: "Hello world", encoded_blueprint: "//f23fewoifjwfoewjifjw;]fwoeif")
-end
+# puts "Creating blueprints..."
+# 5.times do
+#   user.collections.first.blueprints.create!(title: "60 Smelters", description: "Hello world", encoded_blueprint: "//f23fewoifjwfoewjifjw;]fwoeif")
+#   user.collections.last.blueprints.create!(title: "60 Smelters", description: "Hello world", encoded_blueprint: "//f23fewoifjwfoewjifjw;]fwoeif")
+# end
 
 puts "Done !"

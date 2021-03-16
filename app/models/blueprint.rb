@@ -7,6 +7,7 @@ class Blueprint < ApplicationRecord
   has_many_attached :pictures
 
   belongs_to :collection
+  belongs_to :mod
   has_one :user, through: :collection
 
   friendly_id :title, use: :slugged
@@ -15,6 +16,7 @@ class Blueprint < ApplicationRecord
   validates :encoded_blueprint, presence: true
 
   validates :tag_list, length: { minimum: 1, message: "needs at least one tag." }
+  # validates :mod_version, format: { with: /((Dyson Sphere Program)|(MultiBuildBeta)|(MultiBuild))\s?-\s?\d+\.\d+.\d+((\.|-)\w+)?/i, message:  "Unregistered mod or version format." }
 
   validates :cover,
     attached: true,
@@ -33,4 +35,8 @@ class Blueprint < ApplicationRecord
       height: { max: 3000 },
       message: 'is too large'
     }
+
+    def formatted_mod_version
+      "#{mod.name} - #{mod_version}"
+    end
 end

@@ -1,0 +1,11 @@
+:concurrency: 3
+:timeout: 60
+:verbose: true
+:queues:
+  # Queue priority:
+  # https://github.com/mperham/sidekiq/wiki/Advanced-Options
+  # https://mikerogers.io/2019/06/06/rails-6-sidekiq-queues
+  - default
+  - mailers
+  - active_storage_analysis
+  - active_storage_purge

@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
   before_create :create_default_collections
 
+  def admin?
+    role == 'admin'
+  end
+
   private
 
   def create_default_collections

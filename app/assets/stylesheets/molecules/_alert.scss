@@ -1,7 +1,10 @@
-.m-alert {
+.alert-wrapper {
   position: fixed;
   width: 100%;
   bottom: 0;
+}
+
+.m-alert {
   text-align: center;
   display: flex;
   justify-content: center;
