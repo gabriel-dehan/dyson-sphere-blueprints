@@ -4,7 +4,7 @@
 // .p-blueprint-index {
 // }
 
-.p-blueprint-list {
+.t-blueprint-list {
   display: flex;
   flex-direction: column;
   max-width: 1140px;
@@ -16,4 +16,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
+}
+
+.t-blueprint-no-result {
+  font-size: $font-size-smalltitle;
+  color: var(--white);
+  text-align: center;
 }
