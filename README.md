@@ -20,6 +20,14 @@ WIP - Community website to share Dyson Sphere Program blueprints.
 - [ ] Add a mailer
 - [ ] GA
 
+# Deploy
+
+Make sure the Gemfile has the proper platforms set:
+
+```
+$ bundle lock --add-platform x86_64-linux
+```
+
 ## License
 
 **Important**: this license only applies to the logic and application in itself and does not pertain to any data or assets coming from the game Dyson Sphere Program which is the intellectual property of Youthcat Studio.
