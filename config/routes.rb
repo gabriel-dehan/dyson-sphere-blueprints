@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   end
   resources :users, only: [] do
     get :blueprints, to: "users#blueprints"
+
+    collection do
+      get :my_blueprints, to: "users#my_blueprints"
+      get :my_collections, to: "users#my_collections"
+    end
   end
   resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
     member do

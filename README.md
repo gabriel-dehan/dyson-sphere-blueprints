@@ -5,22 +5,20 @@ WIP - Community website to share Dyson Sphere Program blueprints.
 ## Roadmap
 
 - [x] Add versionning of blueprints with a mod version attribute
-- [ ] Decoded blueprint
+- [x] Decoded blueprint
 - [x] Index of all public blueprints
   - [x] Search bar
   - [x] Search by tags
   - [x] Search by mod version
-- [ ] Show page for a blueprint
-- [ ] Parsing the blueprint to display data
-- [ ] Index of public collections
+- [x] Show page for a blueprint
+- [x] Parsing the blueprint to display data
 - [ ] Creating a new collection
 - [ ] Updating a collection
+- [ ] Index of public collections
 - [ ] User's collection page (index with update / delete actions)
 - [ ] User's blueprints page (index with update / delete actions)
 - [ ] Add a mailer
-- [ ] GA
 - [ ] Handle multipe blueprint mods, add js in the blueprint and search form to load versions according to the selected mod
-- [ ] Refacto all max-width / margin: 0 auto in a single wrapper
 
 # Deploy
 
