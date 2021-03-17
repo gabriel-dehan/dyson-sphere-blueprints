@@ -75,7 +75,7 @@
         <ul class="o-blueprint-card__tags">
           <% blueprint.tags.take(5).each do |tag| %>
             <li class="o-blueprint-card__tags-tag">
-              <%= tag %>
+              <%= tag.name.capitalize %>
             </li>
           <% end %>
         </ul>

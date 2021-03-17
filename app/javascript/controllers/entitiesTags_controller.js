@@ -21,7 +21,7 @@ export default class extends Controller {
   connect() {
     const tagify = new Tagify(
       this.inputTarget, {
-        placeholder: "Search for a tag: iron ingot, x-ray cracking, fractionator...",
+        placeholder: "Search for a tag: mall, oil refinery, fractionator...",
         whitelist: this.whitelist,
         enforceWhitelist: true,
         editTags: false,
