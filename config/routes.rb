@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
+
+  get 'help', to: 'pages#help'
+
   devise_for :users
   # Sidekiq Web UI, only for admins.
   require "sidekiq/web"
@@ -15,5 +18,5 @@ Rails.application.routes.draw do
       put 'unlike', to: "blueprints#unlike"
     end
   end
-  resources :collections, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+  resources :collections, only: [:new, :show, :edit, :create, :update, :destroy]
 end

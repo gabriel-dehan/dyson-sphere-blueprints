@@ -18,6 +18,7 @@
       </div>
       <div class="m-form__important">
         <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true %>
+        <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(anchor: "copy"), target: '_blank' %></div>
       </div>
       <div class="m-form__tags" data-controller="entitiesTags">
         <label for="tag_list">

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [ :home, :help ]
 
   def home
     @filters = {
@@ -17,5 +17,8 @@ class PagesController < ApplicationController
       .where(mod_id: @filters[:mod_id])
       .order(created_at: :desc)
       .page(params[:page])
+  end
+
+  def help
   end
 end
