@@ -45,5 +45,10 @@
   &__nav-item {
     margin: 0 12px 0 12px;
     display: inline-block;
+    border-bottom: 2px solid transparent;
+
+    &.active, .nav-link:hover {
+      border-bottom: 2px solid var(--purple);
+    }
   }
 }

@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :blueprints, only: [:index]
   end
-  resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+  resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
+    member do
+      put 'like', to: "blueprints#like"
+      put 'unlike', to: "blueprints#unlike"
+    end
+  end
   resources :collections, only: [:index, :new, :show, :edit, :create, :update, :destroy]
 end

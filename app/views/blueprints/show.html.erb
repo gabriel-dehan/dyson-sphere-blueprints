@@ -30,9 +30,11 @@
           <i class="fas fa-copy"></i>Copy to clipboard
         </button>
       </div>
-      <div class="t-blueprint__description">
-        <%= @blueprint.description %>
-      </div>
+      <% if !@blueprint.description.blank? %>
+        <div class="t-blueprint__description">
+          <%= @blueprint.description %>
+        </div>
+      <% end %>
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
         <h3>Blueprint</h3>
         <textarea readonly><%= @blueprint.encoded_blueprint %></textarea>
@@ -46,8 +48,8 @@
     </div>
     <div class="t-blueprint-sidebar">
       <div class="t-blueprint__requirements">
+        <h3>This blueprint requires</h3>
         <% if @blueprint.decoded_blueprint_data && @blueprint.decoded_blueprint_data.any? %>
-          <h3>This blueprint requires</h3>
           <ul class="t-blueprint__requirements-data">
             <% if @blueprint.decoded_blueprint_data["buildings"] %>
               <% @blueprint.decoded_blueprint_data["buildings"].each do |entity_id, count| %>
@@ -104,9 +106,23 @@
             <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
           <li>
-            <strong>Updated:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.updated_at) %> ago</span>
+            <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
           </li>
         </ul>
+        <div class="t-blueprint__info-votes">
+          <strong class="count"><%= @blueprint.get_likes.length %></strong>
+          <% if !current_user %>
+            <i class="fas fa-heart active"></i>
+          <% elsif current_user.voted_for?(@blueprint) %>
+            <%= button_to unlike_blueprint_path(@blueprint.id), method: :put do %>
+              <i class="fas fa-heart active"></i>
+            <% end %>
+          <% else %>
+            <%= button_to like_blueprint_path(@blueprint.id), method: :put do %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          <% end %>
+        </div>
       </div>
       <div class="t-blueprint__tags">
         <h3>Tagged with</h3>

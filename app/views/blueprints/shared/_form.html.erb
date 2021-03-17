@@ -22,7 +22,7 @@
       <div class="m-form__tags" data-controller="entitiesTags">
         <label for="tag_list">
           <abbr title="required">*</abbr>
-          Tags
+          Tags <em>(5 maximum)</em>
         </label>
         <%= text_field_tag :tag_list, @blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
         <% if @blueprint.errors[:tag_list].length > 0 %>

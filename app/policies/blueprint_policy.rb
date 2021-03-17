@@ -24,4 +24,12 @@ class BlueprintPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
+
+  def like?
+    true
+  end
+
+  def unlike?
+    true
+  end
 end

@@ -95,6 +95,22 @@ class BlueprintsController < ApplicationController
     end
   end
 
+  def like
+    @blueprint = Blueprint.find(params[:id])
+    authorize @blueprint
+
+    @blueprint.liked_by current_user
+    redirect_to @blueprint
+  end
+
+  def unlike
+    @blueprint = Blueprint.find(params[:id])
+    authorize @blueprint
+
+    @blueprint.unliked_by current_user
+    redirect_to @blueprint
+  end
+
   private
 
   def blueprint_params

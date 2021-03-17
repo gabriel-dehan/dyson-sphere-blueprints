@@ -88,6 +88,49 @@
   }
 
   &__info {
+    &-votes {
+      margin-top: 5px;
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      form {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+      }
+
+      button {
+        border: none;
+        width: initial;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        line-height: initial;
+        letter-spacing: initial;
+        font-size: 20px;
+
+        &:hover i {
+          color: var(--red);
+        }
+      }
+
+      .count {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      i {
+        font-size: 20px;
+        color: var(--grey50);
+
+        &.active {
+          color: var(--red);
+        }
+      }
+    }
+
     ul {
       display: flex;
       flex-direction: column;
