@@ -1,45 +1,4 @@
 <div class="t-blueprint-list">
-  <div class="o-blueprint-filters">
-    <%= form_with url: blueprints_path, method: :get do |f| %>
-      <div class="o-blueprint-filters__line">
-        <div class="o-blueprint-filters__search">
-          <%= f.text_field :search, placeholder: 'Search for a blueprint...', value: @filters[:search] %>
-          <i class="fas fa-search"></i>
-        </div>
-        <div class="o-blueprint-filters__tags" data-controller="entitiesTags">
-          <%= f.text_field :tags, value: @filters[:tags].join(', '), data: { 'entitiesTags-target': 'input' } %>
-          <i class="fas fa-tags"></i>
-        </div>
-      </div>
-      <div class="o-blueprint-filters__line">
-        <div class="o-blueprint-filters__order-container">
-          <div class="o-blueprint-filters__order">
-            <div class="o-blueprint-filters__order-choice">
-              <%= f.radio_button :order, "recent", checked: @filters[:order] === 'recent' %>
-              <%= f.label :order_recent, "Most recent" %>
-            </div>
-            <div class="o-blueprint-filters__order-choice">
-              <%= f.radio_button :order, "popular", checked: @filters[:order] === 'popular' %>
-              <%= f.label :order_popular, "Most Popular" %>
-            </div>
-          </div>
-        </div>
-        <div class="o-blueprint-filters__mods">
-          <div class="o-blueprint-filters__mods-mod">
-            <%= f.label :mod_id, "Mod" %>
-            <%= f.select :mod_id, Mod.to_select, selected: @filters[:mod_id], include_blank: false %>
-          </div>
-          <div class="o-blueprint-filters__mods-version">
-            <%= f.label :mod_version, "Mod Version" %>
-            <%= f.select :mod_version, Mod.first.version_list, selected: @filters[:mod_version], include_blank: 'Any' %>
-          </div>
-        </div>
-      </div>
-      <div class="o-blueprint-filters__submit">
-        <%= f.submit 'Search' %>
-      </div>
-    <% end %>
-  </div>
   <% if blueprints.any? %>
     <ul class="t-blueprint-list__container">
     <% blueprints.each do |blueprint| %>
@@ -64,7 +23,7 @@
               <% end %>
             </h2>
             <p>
-              by <%= link_to blueprint.user.username, root_path %>
+              by <%= link_to blueprint.user.username, user_blueprints_path(blueprint.user) %>
             </p>
           </div>
           <div class="o-blueprint-card__votes">
@@ -90,5 +49,4 @@
       Sorry! Couldn't find any result for your query :'(
     </div>
   <% end %>
-
 </div>

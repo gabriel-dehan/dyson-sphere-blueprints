@@ -1,10 +1,11 @@
 <div class="p-home">
-  <div class="p-home__header">
+  <div class="p-page__header">
     <h1 class="a-logo big">
       <span class="a-logo__logoName" target="_blank" rel="noopener noreferrer">Dyson Sphere</span>&nbsp;<span class="a-logo__logoEm">Blueprints</span>
     </h1>
     <p>Share your <strong class="dsp">Dyson Sphere Program</strong> blueprints for the mod <a href="https://dsp.thunderstore.io/package/brokenmass/MultiBuildBeta/" target="_blank" rel="noopener noreferrer">MultiBuildBeta</a> by <em>brokenmass</em>!</p>
   </div>
 
+  <%= render "blueprints/shared/filters", filters: @filters %>
   <%= render "blueprints/shared/list", blueprints: @blueprints %>
 </div>

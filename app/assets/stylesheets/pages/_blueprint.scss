@@ -1,20 +1,17 @@
 // .p-blueprint-new, .p-blueprint-edit {
 // }
 
-// .p-blueprint-index {
-// }
-
-.t-blueprint-list {
+.p-blueprint-index {
   display: flex;
   flex-direction: column;
-  max-width: 1140px;
-  margin: 0 auto;
+}
 
+.t-blueprint-list {
   &__container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    // justify-content: space-between;
   }
 }
 
@@ -26,8 +23,6 @@
 
 .t-blueprint {
   display: flex;
-  max-width: 1140px;
-  margin: 0 auto;
 
   &-main {
     width: 880px;

@@ -1,0 +1,39 @@
+.p-page {
+
+  &__header {
+    margin: 25px 0 20px 0;
+    text-align: center;
+
+    .a-logo {
+      font-size: 48px;
+    }
+
+    p {
+      margin-top: 30px;
+      font-size: $font-size-smalltitle;
+      color: #d0d5de;
+    }
+
+    &-title {
+      font-family: $logo-font;
+      color: var(--white);
+      font-size: $font-size-logo;
+      line-height: 1em;
+      font-size: 48px;
+
+      &-main {
+        font-family: $headers-font;
+        font-size: 1.313em;
+        line-height: 1em;
+        color: var(--dark-red);
+      }
+
+      &-em {
+        padding-left: 2px;
+        display: inline-block;
+        font-size: 30px;
+        font-size: 0.938em;
+      }
+    }
+  }
+}

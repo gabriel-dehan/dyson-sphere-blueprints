@@ -1,0 +1,9 @@
+<div class="p-user-blueprints">
+  <div class="p-page__header">
+    <h1 class="p-page__header-title">
+      <span class="p-page__header-title-main" target="_blank" rel="noopener noreferrer"><%= @user.username %>'s </span><span class="p-page__header-title-em">Blueprints</span>
+    </h1>
+    <br />
+  </div>
+  <%= render "blueprints/shared/list", blueprints: @blueprints %>
+</div>

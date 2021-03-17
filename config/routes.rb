@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
   resources :users, only: [] do
-    resources :blueprints, only: [:index]
+    get :blueprints, to: "users#blueprints"
   end
   resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
     member do

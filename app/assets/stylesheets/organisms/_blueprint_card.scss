@@ -2,12 +2,19 @@
   list-style: none;
   // width: 300px;
   flex: 0 1 23%;
-  // margin-right: 30px;
-  margin-bottom: 20px;
-  // background: var(--night-blue);
+  background: var(--night-blue);
   background: rgba(0, 0, 0, 0.29);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
+  margin: 0 15px 20px 15px;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  &:nth-child(4n+1), &:first-child {
+    margin-left: 0;
+  }
 
   &__cover {
     position: relative;
