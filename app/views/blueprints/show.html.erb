@@ -1,5 +1,135 @@
-<h1><%= @blueprint.title %></h1>
+<div class="p-blueprint-show">
+  <div class="t-blueprint" data-controller="carousel tooltip">
+    <div class="t-blueprint-main">
 
-<%= cl_image_tag @blueprint.cover.key, height: 300, width: 400, crop: :fill %>
-
-<%= @blueprint.description %>
+      <div class="swiper-container" data-carousel-target="container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="<%= @blueprint.cover.url %>" target="_blank" rel="noopener noreferrer">
+              <%= cl_image_tag @blueprint.cover.key, width: 880, height: 495, crop: :fill %>
+            </a>
+          </div>
+          <% @blueprint.pictures.each do |picture| %>
+            <div class="swiper-slide">
+              <a href="<%= picture.url %>" target="_blank" rel="noopener noreferrer">
+                <%= cl_image_tag picture.key, width: 880, height: 495, crop: :fill %>
+              </a>
+            </div>
+          <% end %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="t-blueprint__title" data-controller="blueprintCopyButton">
+        <h2><%= @blueprint.title %></h2>
+        <button
+          class="t-blueprint__copy"
+          data-blueprintCopyButton-target="copy"
+          data-clipboard-text="<%= @blueprint.encoded_blueprint %>">
+          <i class="fas fa-copy"></i>Copy to clipboard
+        </button>
+      </div>
+      <div class="t-blueprint__description">
+        <%= @blueprint.description %>
+      </div>
+      <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
+        <h3>Blueprint</h3>
+        <textarea readonly><%= @blueprint.encoded_blueprint %></textarea>
+        <button
+          class="t-blueprint__copy"
+          data-blueprintCopyButton-target="copy"
+          data-clipboard-text="<%= @blueprint.encoded_blueprint %>">
+          <i class="fas fa-copy"></i>Copy to clipboard
+        </button>
+      </div>
+    </div>
+    <div class="t-blueprint-sidebar">
+      <div class="t-blueprint__requirements">
+        <% if @blueprint.decoded_blueprint_data && @blueprint.decoded_blueprint_data.any? %>
+          <h3>This blueprint requires</h3>
+          <ul class="t-blueprint__requirements-data">
+            <% if @blueprint.decoded_blueprint_data["buildings"] %>
+              <% @blueprint.decoded_blueprint_data["buildings"].each do |entity_id, count| %>
+                <li class="t-blueprint__requirements-tally">
+                  <span
+                    class="t-blueprint_requirements-tally__picture tooltip-trigger"
+                    data-tippy-content="<%= get_game_entity_name_by_uuid(entity_id) %>"
+                  >
+                    <%= image_tag get_game_icon_by_uuid(entity_id) %>
+                  </span>
+                  <%= count %>
+                </li>
+              <% end %>
+            <%end %>
+            <% if @blueprint.decoded_blueprint_data["inserters"] %>
+              <% @blueprint.decoded_blueprint_data["inserters"].each do |entity_id, count| %>
+                <li class="t-blueprint__requirements-tally">
+                  <span
+                    class="t-blueprint_requirements-tally__picture tooltip-trigger"
+                    data-tippy-content="<%= get_game_entity_name_by_uuid(entity_id) %>"
+                  >
+                    <%= image_tag get_game_icon_by_uuid(entity_id) %>
+                  </span>
+                  <%= count %>
+                </li>
+              <% end %>
+            <%end %>
+            <% if @blueprint.decoded_blueprint_data["belts"] %>
+              <% @blueprint.decoded_blueprint_data["belts"].each do |entity_id, count| %>
+                <li class="t-blueprint__requirements-tally">
+                  <span
+                    class="t-blueprint_requirements-tally__picture tooltip-trigger"
+                    data-tippy-content="<%= get_game_entity_name_by_uuid(entity_id) %>"
+                  >
+                    <%= image_tag get_game_icon_by_uuid(entity_id) %>
+                  </span>
+                  <%= count %>
+                </li>
+              <% end %>
+            <%end %>
+          </ul>
+        <% else %>
+          <div class="t-blueprint__requirements-error">
+            Could not decode blueprint data.
+          </div>
+        <% end %>
+      </div>
+      <div class="t-blueprint__info">
+        <ul>
+          <li>
+            <strong>Author:</strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
+          </li>
+          <li>
+            <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
+          </li>
+          <li>
+            <strong>Updated:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.updated_at) %> ago</span>
+          </li>
+        </ul>
+      </div>
+      <div class="t-blueprint__tags">
+        <h3>Tagged with</h3>
+        <ul>
+          <% @blueprint.tags.each do |tag| %>
+            <li class="t-blueprint__tags-tag">
+              <span
+                class="t-blueprint_requirements-tally__picture tooltip-trigger"
+                data-tippy-content="<%= tag.name.capitalize %>"
+                data-tippy-placement="bottom"
+              >
+                <%= image_tag get_game_icon(tag.name) %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <% if policy(@blueprint).update? %>
+        <div class="t-blueprint__actions">
+          <%= button_to 'Edit', edit_blueprint_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' %>
+          <%= button_to 'Delete', blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm:'Are you sure you want to delete your blueprint?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

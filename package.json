@@ -12,6 +12,7 @@
     "milligram": "^1.4.1",
     "popper.js": "^1.16.1",
     "stimulus": "^2.0.0",
+    "swiper": "^6.5.0",
     "tippy.js": "^6.3.1",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"

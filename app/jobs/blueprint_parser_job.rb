@@ -5,10 +5,15 @@ class BlueprintParserJob < ApplicationJob
 
   def perform(blueprint_id)
     puts "Fetching blueprint..."
-    blueprint = Blueprint.find(blueprint_id)
-    first_pass = Base64.decode64(blueprint.encoded_blueprint)
-    puts "Unzipping..."
-    decoded_blueprint = ActiveSupport::Gzip.decompress(first_pass)
+    begin
+      blueprint = Blueprint.find(blueprint_id)
+      first_pass = Base64.decode64(blueprint.encoded_blueprint)
+      puts "Unzipping..."
+      decoded_blueprint = ActiveSupport::Gzip.decompress(first_pass)
+    rescue
+      puts "Couldn't decode blueprint."
+      return nil
+    end
     json = JSON.parse(decoded_blueprint)
 
     puts "Parsing..."

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :delete]
-  resources :collections, only: [:index, :new, :show, :edit, :create, :update, :delete]
+  resources :users, only: [] do
+    resources :blueprints, only: [:index]
+  end
+  resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+  resources :collections, only: [:index, :new, :show, :edit, :create, :update, :destroy]
 end

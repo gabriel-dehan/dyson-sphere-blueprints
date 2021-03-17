@@ -43,7 +43,7 @@
   <% if blueprints.any? %>
     <ul class="t-blueprint-list__container">
     <% blueprints.each do |blueprint| %>
-      <li class="o-blueprint-card" data-controller="blueprintCards">
+      <li class="o-blueprint-card" data-controller="blueprintCopyButton">
         <div class="o-blueprint-card__cover">
           <%= link_to blueprint_path(blueprint) do %>
             <%= cl_image_tag blueprint.cover.key, height: 400, crop: :fill %>
@@ -51,7 +51,7 @@
           <button
             id="bp-card-<%= blueprint.id %>"
             class="o-blueprint-card__copy"
-            data-blueprintCards-target="copy"
+            data-blueprintCopyButton-target="copy"
             data-clipboard-text="<%= blueprint.encoded_blueprint %>">
             Copy
           </button>

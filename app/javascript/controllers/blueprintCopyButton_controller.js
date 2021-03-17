@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = [ "copy" ]
 
   connect() {
-    this.clipboard = new ClipboardJS('.o-blueprint-card__copy');
+    this.clipboard = new ClipboardJS(this.copyTarget);
 
     this.clipboard.on('success', (e) => {
       const tooltip = tippy(e.trigger, {

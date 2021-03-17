@@ -36,6 +36,10 @@
     list-style: none;
     display: flex;
     align-items: center;
+
+    a {
+      color: var(--purple);
+    }
   }
 
   &__nav-item {

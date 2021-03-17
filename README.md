@@ -20,6 +20,7 @@ WIP - Community website to share Dyson Sphere Program blueprints.
 - [ ] Add a mailer
 - [ ] GA
 - [ ] Handle multipe blueprint mods, add js in the blueprint and search form to load versions according to the selected mod
+- [ ] Refacto all max-width / margin: 0 auto in a single wrapper
 
 # Deploy
 
