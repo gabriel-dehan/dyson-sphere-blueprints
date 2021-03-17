@@ -1,66 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>500 - Something went wrong</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    @import url('https://fonts.googleapis.com/css?family=Teko:300,500&family=Nunito+Sans:300,400');
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    body {
+      background-image: url('images/space.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      min-width: 100vw;
+      font-family: "Nunito Sans", "Liberation Mono", Consolas, monospace;
+      color: rgba(255,255,255,.87);
+      margin: 0;
+    }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    .container {
+      margin-left: auto;
+      margin-right: auto;
+      height: 100%;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.60);
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    #error {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    #error .text {
+      font-weight: 300;
+      text-align: center;
+    }
+
+    .number {
+      font-family: "Teko", "Liberation Mono", Consolas, monospace;
+      font-size: 104px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      line-height: 1em;
+    }
+
+    .number + .text {
+      margin: 0 0 1rem;
+    }
+
+    .actions {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    a {
+      color: #eaeaea;
+      margin-top: 15px;
+      background: #d7265f;
+      border-radius: 2px;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    a:hover {
+      background: #be2254;
+    }
   </style>
 </head>
 
 <body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
+  <!-- This file lives in public/404.html -->
+  <div class="container">
+    <div id="error">
+      <h1 class="number">500</h1>
+      <div class="text"><strong>Oops, it seems that something went wrong.</strong></div>
+      <div class="text">
+        Go back to the previous page and try again.<br />
+        If you think something is broken, report a problem.
+      </div>
+      <div class="actions">
+        <a href="https://dysonsphereblueprints.com">Home page</a>
+        <a href="mailto:support@dysonsphereblueprints.com">Report a problem</a>
+      </div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
+</div>
 </body>
 </html>

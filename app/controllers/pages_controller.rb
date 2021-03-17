@@ -14,6 +14,8 @@ class PagesController < ApplicationController
       .joins(:collection)
       .where(collection: { type: "Public" })
       .includes(:collection)
+      .where(mod_id: @filters[:mod_id])
+      .order(created_at: :desc)
       .page(params[:page])
   end
 end
