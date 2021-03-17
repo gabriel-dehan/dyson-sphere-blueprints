@@ -4,7 +4,7 @@
 
     <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
       <%= f.input :title, required: true %>
-      <%= f.input :description %>
+      <%= f.input :description, as: :rich_text_area %>
       <%= f.input :collection,
         collection: current_user.collections,
         label_method: :name,

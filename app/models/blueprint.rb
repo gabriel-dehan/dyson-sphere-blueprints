@@ -6,6 +6,7 @@ class Blueprint < ApplicationRecord
   acts_as_taggable_on :tags
   paginates_per 50
 
+  has_rich_text :description
   has_one_attached :cover
   has_many_attached :pictures
 
@@ -46,6 +47,8 @@ class Blueprint < ApplicationRecord
       height: { max: 3000 },
       message: 'is too large'
     }
+
+    default_scope { with_rich_text_description }
 
     def formatted_mod_version
       "#{mod.name} - #{mod_version}"

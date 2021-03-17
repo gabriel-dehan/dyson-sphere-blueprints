@@ -93,3 +93,57 @@ label.asdndzone {
     }
   }
 }
+
+trix-toolbar .trix-button {
+  background: #b3aff1;
+  border: none;
+  line-height: initial;
+  letter-spacing: initial;
+}
+
+trix-toolbar .trix-input--dialog {
+  background-color: var(--night-blue) !important;
+  font-size: 14px !important;
+}
+
+trix-toolbar .trix-dialog {
+  box-shadow: 0 0.3em 1em #18161f;
+  background: rgba(0, 0, 0, 0.45);
+  border-top: 2px solid var(--purple);
+
+  .trix-button {
+    background: transparent;
+    border: 1px solid var(--purple) !important;
+    border-radius: 3px;
+    color: var(--white);
+    margin-left: 5px;
+    padding: 6px 24px;
+
+    &:hover {
+      background: var(--purple);
+      color: var(--white);
+    }
+  }
+}
+
+trix-toolbar .trix-button-group {
+  border-color: var(--night-blue);
+}
+
+trix-toolbar .trix-button:not(:first-child) {
+  border-color: var(--night-blue);
+}
+
+trix-editor {
+  color: var(--white);
+  background-color: rgba(0, 0, 0, 0.20);
+  border-color: var(--darker-blue);
+  font-family: $body-font;
+
+  margin-bottom: 20px;
+}
+
+.trix-button--icon-attach,
+.trix-button--icon-code,
+.trix-button--icon-increase-nesting-level,
+.trix-button--icon-decrease-nesting-level { display: none; }
