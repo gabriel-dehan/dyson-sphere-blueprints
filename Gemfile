@@ -28,7 +28,7 @@ gem 'redis', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'master'
 gem 'pundit'
 
 gem 'autoprefixer-rails'
@@ -46,6 +46,8 @@ gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'kaminari'
 gem 'pg_search'
+gem "omniauth-rails_csrf_protection"
+gem 'omniauth-discord'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

@@ -3,3 +3,33 @@
     margin-bottom: 0;
   }
 }
+
+.m-omniauth {
+  display: flex;
+  margin-top: 20px;
+  padding-top: 25px;
+  border-top: 1px solid var(--midnight-blue);
+}
+
+.a-discord-auth-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: #7389da;
+  padding: 10px 14px 8px 14px;
+  border-radius: 5px;
+  color: var(--white);
+  font-family: $body-font;
+  font-size: 14px;
+  font-weight: bold;
+
+  i {
+    font-size: 32px;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: #6073b8;
+    color: var(--white);
+  }
+}

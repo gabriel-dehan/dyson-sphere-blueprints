@@ -15,6 +15,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Seo, sitemap...
 
 ### Features
+- [ ] Minimal responsive
 - [ ] Blueprint preview
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
