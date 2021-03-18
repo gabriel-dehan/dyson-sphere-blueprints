@@ -56,6 +56,12 @@
             <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
           <li>
+            <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
+          </li>
+          <li>
+            <strong>Version:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod_version %></span>
+          </li>
+          <li>
             <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
           </li>
         </ul>

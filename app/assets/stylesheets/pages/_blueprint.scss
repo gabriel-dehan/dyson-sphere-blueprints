@@ -157,6 +157,11 @@
       font-style: italic;
       color: var(--grey50);
     }
+
+    &-mod {
+      text-align: right;
+      color: var(--grey50);
+    }
   }
 
   &__actions {

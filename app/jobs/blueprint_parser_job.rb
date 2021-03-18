@@ -9,7 +9,7 @@ class BlueprintParserJob < ApplicationJob
       if blueprint.mod_version <= "2.0.6"
         MultibuildBetaBlueprintParser::parse_version_206(blueprint, false)
       else
-        MultibuildBetaBlueprintParser::parse_version_207(blueprint, false)
+        MultibuildBetaBlueprintParser::parse_version_210(blueprint, false)
       end
     end
   end

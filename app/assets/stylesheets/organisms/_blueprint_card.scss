@@ -1,6 +1,8 @@
 .o-blueprint-card {
   list-style: none;
   // width: 300px;
+  display: flex;
+  flex-direction: column;
   flex: 0 1 23%;
   background: var(--night-blue);
   background: rgba(0, 0, 0, 0.29);
@@ -111,6 +113,22 @@
       right: -3px;
       margin-left: 5px;
       color: var(--dark-red);
+    }
+  }
+
+  &__version {
+    margin: auto 16px 16px 16px;
+    display: inline-block;
+
+    &-tag {
+      font-size: 90%;
+      box-sizing: border-box;
+      max-width: 100%;
+      padding: .25em .5em;
+      background-color: var(--dark-red);
+      color: var(--white);
+      line-height: inherit;
+      border-radius: 3px;
     }
   }
 

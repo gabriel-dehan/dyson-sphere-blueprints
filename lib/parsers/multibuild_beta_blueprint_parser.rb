@@ -1,7 +1,7 @@
 class MultibuildBetaBlueprintParser
   class << self
-    def parse_version_207(blueprint, validate = false)
-      puts "Fetching blueprint for 207..."
+    def parse_version_210(blueprint, validate = false)
+      puts "Fetching blueprint for 210..."
       begin
         first_pass = Base64.decode64(blueprint.encoded_blueprint)
         puts "Unzipping..."

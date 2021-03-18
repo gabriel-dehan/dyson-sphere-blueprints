@@ -69,7 +69,7 @@ class Blueprint < ApplicationRecord
       if self.mod_version <= "2.0.6"
         valid = MultibuildBetaBlueprintParser::parse_version_206(self, validate: true)
       else
-        valid = MultibuildBetaBlueprintParser::parse_version_207(self, validate: true)
+        valid = MultibuildBetaBlueprintParser::parse_version_210(self, validate: true)
       end
     end
 
