@@ -23,7 +23,7 @@
       <div class="m-form__tags" data-controller="entitiesTags">
         <label for="tag_list">
           <abbr title="required">*</abbr>
-          Tags <em>(5 maximum)</em>
+          Tags <em>(10 maximum)</em>
         </label>
         <%= text_field_tag :tag_list, @blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
         <% if @blueprint.errors[:tag_list].length > 0 %>
@@ -34,9 +34,9 @@
       <div class="m-form__picture">
         <label for="cover">
           <abbr title="required">*</abbr>
-          Cover picture <em>(5 MB maximum)</em>
+          Cover picture <em>(3 MB maximum)</em>
         </label>
-        <%= f.drag_and_drop_file_field :cover, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 5_000_000 %>
+        <%= f.drag_and_drop_file_field :cover, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
 
         <span class="error">
           <% if @blueprint.errors[:cover].length > 0 %>
@@ -53,9 +53,9 @@
 
       <div class="m-form__pictures">
         <label for="pictures">
-          Additional pictures <em>(5 pictures maximum, 5 MB maximum each)</em>
+          Additional pictures <em>(4 pictures maximum, 3 MB maximum each)</em>
         </label>
-        <%= f.drag_and_drop_file_field :pictures, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 5_000_000 %>
+        <%= f.drag_and_drop_file_field :pictures, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
         <span class="error">
           <% if @blueprint.errors[:pictures].length > 0 %>
             <%= @blueprint.errors[:pictures].first %>

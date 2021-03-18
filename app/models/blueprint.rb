@@ -27,7 +27,7 @@ class Blueprint < ApplicationRecord
   validates :title, presence: true
   validates :encoded_blueprint, presence: true
 
-  validates :tag_list, length: { minimum: 1, message: "needs at least one tag." }
+  validates :tag_list, length: { minimum: 1, maximum: 10, message: "needs at least one tag, maximum 10." }
   # validates :mod_version, format: { with: /((Dyson Sphere Program)|(MultiBuildBeta)|(MultiBuild))\s?-\s?\d+\.\d+.\d+((\.|-)\w+)?/i, message:  "Unregistered mod or version format." }
 
   validates :cover,
@@ -40,7 +40,7 @@ class Blueprint < ApplicationRecord
     }
 
   validates :pictures,
-    limit: { max: 5 },
+    limit: { max: 4 },
     content_type: [:png, :jpg, :jpeg, :gif],
     dimension: {
       width: { max: 3000 },

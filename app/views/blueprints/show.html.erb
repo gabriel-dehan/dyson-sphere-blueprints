@@ -47,6 +47,56 @@
       </div>
     </div>
     <div class="t-blueprint-sidebar">
+      <div class="t-blueprint__info">
+        <ul>
+          <li>
+            <strong>Author:</strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
+          </li>
+          <li>
+            <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
+          </li>
+          <li>
+            <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
+          </li>
+        </ul>
+        <div class="t-blueprint__info-votes">
+          <strong class="count"><%= @blueprint.get_likes.length %></strong>
+          <% if !current_user %>
+            <i class="fas fa-heart active"></i>
+          <% elsif current_user.voted_for?(@blueprint) %>
+            <%= button_to unlike_blueprint_path(@blueprint.id), method: :put do %>
+              <i class="fas fa-heart active"></i>
+            <% end %>
+          <% else %>
+            <%= button_to like_blueprint_path(@blueprint.id), method: :put do %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <% if policy(@blueprint).update? %>
+        <div class="t-blueprint__actions">
+          <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
+          <div class="t-blueprint__actions-buttons">
+            <%= button_to edit_blueprint_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
+              <span
+                class="tooltip-trigger"
+                data-tippy-content="Edit"
+                data-tippy-placement="bottom">
+                <i class="fas fa-edit"></i>
+              </span>
+            <% end %>
+            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: 'Are you sure you want to delete your blueprint?' } do %>
+              <span
+                class="tooltip-trigger"
+                data-tippy-content="Delete"
+                data-tippy-placement="bottom">
+                <i class="fas fa-trash"></i>
+              </span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
       <div class="t-blueprint__requirements">
         <h3>This blueprint requires</h3>
         <% if @blueprint.decoded_blueprint_data && @blueprint.decoded_blueprint_data.any? %>
@@ -97,53 +147,6 @@
           </div>
         <% end %>
       </div>
-      <div class="t-blueprint__info">
-        <ul>
-          <li>
-            <strong>Author:</strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
-          </li>
-          <li>
-            <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
-          </li>
-          <li>
-            <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
-          </li>
-        </ul>
-        <div class="t-blueprint__info-votes">
-          <strong class="count"><%= @blueprint.get_likes.length %></strong>
-          <% if !current_user %>
-            <i class="fas fa-heart active"></i>
-          <% elsif current_user.voted_for?(@blueprint) %>
-            <%= button_to unlike_blueprint_path(@blueprint.id), method: :put do %>
-              <i class="fas fa-heart active"></i>
-            <% end %>
-          <% else %>
-            <%= button_to like_blueprint_path(@blueprint.id), method: :put do %>
-              <i class="far fa-heart"></i>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <% if policy(@blueprint).update? %>
-        <div class="t-blueprint__actions">
-          <%= button_to edit_blueprint_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
-            <span
-              class="tooltip-trigger"
-              data-tippy-content="Edit"
-              data-tippy-placement="bottom">
-              <i class="fas fa-edit"></i>
-            </span>
-          <% end %>
-          <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: 'Are you sure you want to delete your blueprint?' } do %>
-            <span
-              class="tooltip-trigger"
-              data-tippy-content="Delete"
-              data-tippy-placement="bottom">
-              <i class="fas fa-trash"></i>
-            </span>
-          <% end %>
-        </div>
-      <% end %>
       <div class="t-blueprint__tags">
         <h3>Tagged with</h3>
         <ul>
