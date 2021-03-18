@@ -48,17 +48,33 @@ class Blueprint < ApplicationRecord
       message: 'is too large'
     }
 
-    default_scope { with_rich_text_description }
+  validate :encoded_blueprint_parsable
 
-    def formatted_mod_version
-      "#{mod.name} - #{mod_version}"
+  default_scope { with_rich_text_description }
+
+  def formatted_mod_version
+    "#{mod.name} - #{mod_version}"
+  end
+
+  private
+  def decode_blueprint
+    if saved_change_to_attribute?(:encoded_blueprint)
+      BlueprintParserJob.perform_now(self.id)
     end
+  end
 
-    private
-    def decode_blueprint
-      # TODO: Check if this should be a background job
-      if saved_change_to_attribute?(:encoded_blueprint)
-        BlueprintParserJob.perform_now(self.id)
+  # TODO: Refactor, cleanup, make validator and parsers distinct
+  def encoded_blueprint_parsable
+    if self.mod.name === "MultiBuildBeta"
+      if self.mod_version <= "2.0.6"
+        valid = MultibuildBetaBlueprintParser::parse_version_206(self, validate: true)
+      else
+        valid = MultibuildBetaBlueprintParser::parse_version_207(self, validate: true)
       end
     end
+
+    if !valid
+      errors.add(:encoded_blueprint, "Wrong blueprint format for mod version: #{self.mod.name} - #{self.mod_version}")
+    end
+  end
 end

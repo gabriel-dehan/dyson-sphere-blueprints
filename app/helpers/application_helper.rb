@@ -13,7 +13,8 @@ module ApplicationHelper
   end
 
   def get_game_icon_by_uuid(uuid)
-    image_path "game_icons/#{uuid}.png"
+    file = uuid.blank? ? 'default' : uuid
+    image_path "game_icons/#{file}.png"
   end
 
   def get_game_entity_name_by_uuid(uuid)

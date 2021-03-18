@@ -10,6 +10,6 @@ class Mod < ApplicationRecord
   end
 
   def version_list
-    versions.keys
+    versions.keys.sort.reverse
   end
 end

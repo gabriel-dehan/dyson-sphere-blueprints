@@ -13,8 +13,8 @@
         selected: @collection.id %>
 
       <div class="m-form__inline">
-        <%= f.input :mod_id, label: "Mod", as: :select, collection: Mod.all, selected: Mod.first, include_blank: false %>
-        <%= f.input :mod_version, as: :select, collection: Mod.first.version_list, selected: Mod.first.version_list.first, include_blank: false %>
+        <%= f.input :mod_id, label: "Mod", as: :select, collection: Mod.all, selected: blueprint.mod || Mod.first, include_blank: false %>
+        <%= f.input :mod_version, as: :select, collection: Mod.first.version_list, selected: blueprint.mod_version || Mod.first.version_list.first, include_blank: false %>
       </div>
       <div class="m-form__important">
         <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true %>
