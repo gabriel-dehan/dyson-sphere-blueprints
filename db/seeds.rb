@@ -8,12 +8,12 @@
 
 puts "Cleaning up..."
 
-#User.destroy_all
-#Collection.destroy_all
-#Blueprint.destroy_all
+# User.destroy_all
+# Collection.destroy_all
+# Blueprint.destroy_all
 
 puts "Creating user..."
-#user = User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", password: "password", role: "admin")
+user = User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", password: "password", role: "admin")
 puts "Creating collections..."
 user = User.last
 puts "Creating blueprints..."
