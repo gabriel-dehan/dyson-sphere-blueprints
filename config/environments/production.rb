@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "https://dysonsphereblueprints.com" }
+  config.action_mailer.default_url_options = { host: "https://www.dysonsphereblueprints.com" }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
