@@ -59,7 +59,12 @@
             <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
           </li>
           <li>
-            <strong>Version:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod_version %></span>
+            <strong>Version:</strong>
+            <span class="t-blueprint__info-mod tooltip-trigger <%= @blueprint.is_mod_version_latest? ? 'latest' : 'outdated' %>"
+                data-tippy-content="<%= @blueprint.is_mod_version_latest? ? 'Latest' : 'Outdated' %>"
+                data-tippy-placement="right">
+              <%= @blueprint.mod_version %>
+            </span>
           </li>
           <li>
             <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>

@@ -56,6 +56,10 @@ class Blueprint < ApplicationRecord
     "#{mod.name} - #{mod_version}"
   end
 
+  def is_mod_version_latest?
+    mod_version >= mod.version_list.first
+  end
+
   private
   def decode_blueprint
     if saved_change_to_attribute?(:encoded_blueprint)

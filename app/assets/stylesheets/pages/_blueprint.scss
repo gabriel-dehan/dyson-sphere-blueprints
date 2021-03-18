@@ -159,8 +159,17 @@
     }
 
     &-mod {
+      cursor: default;
       text-align: right;
       color: var(--grey50);
+
+      &.latest {
+        color: var(--green);
+      }
+
+      &.outdated {
+        color: var(--orange);
+      }
     }
   }
 
