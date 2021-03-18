@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DSP Blueprints</title>
+    <title><%= meta_title%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <meta meta name="description" content="<%= meta_description %>" />
+
+    <meta property="og:title" content="<%= meta_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= meta_image %>" />
+    <meta property="og:description" content="<%= meta_description %>" />
+    <meta property="og:site_name" content="<%= meta_title %>" />
 
     <%= favicon_link_tag asset_path('favicon/favicon.ico') %>
     <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path('favicon/apple-touch-icon.png') %>">
