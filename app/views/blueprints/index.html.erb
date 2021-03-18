@@ -1,4 +1,5 @@
 <div class="p-blueprint-index">
-  <%= render "blueprints/shared/filters", filters: @filters %>
+  <h1>All public blueprints</h1>
+  <%= render "blueprints/shared/filters", filters: @filters, filter_path: blueprints_path %>
   <%= render "blueprints/shared/list", blueprints: @blueprints %>
 </div>

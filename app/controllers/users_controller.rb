@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include BlueprintsFilters
   skip_before_action :authenticate_user!, only: [ :blueprints ]
 
   def blueprints
@@ -9,8 +10,18 @@ class UsersController < ApplicationController
       .joins(:collection)
       .where(collection: { type: "Public" })
       .includes(:collection)
-      .page(params[:page])
       .order(cached_votes_total: :desc)
+      .page(params[:page])
+  end
+
+  def my_blueprints
+    set_filters
+    @blueprints = filter(current_user.blueprints)
+
+    # Paginate
+    @blueprints = @blueprints.page(params[:page])
+
+    authorize current_user
   end
 
   def my_collections

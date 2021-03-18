@@ -19,6 +19,8 @@ WIP - Community website to share Dyson Sphere Program blueprints.
 - [ ] User's blueprints page (index with update / delete actions)
 - [ ] Add a mailer
 - [ ] Handle multipe blueprint mods, add js in the blueprint and search form to load versions according to the selected mod
+- [ ] Add filters and search to all blueprint related pages
+- [ ] Add a way to flag outdated blueprints and notify the users
 - [ ] Optimize, add includes, check for n+1 queries...
 
 # Deploy

@@ -6,6 +6,6 @@
     <p>Share your <strong class="dsp">Dyson Sphere Program</strong> blueprints for the mod <a href="https://dsp.thunderstore.io/package/brokenmass/MultiBuildBeta/" target="_blank" rel="noopener noreferrer">MultiBuildBeta</a> by <em>brokenmass</em>!</p>
   </div>
 
-  <%= render "blueprints/shared/filters", filters: @filters %>
+  <%= render "blueprints/shared/filters", filters: @filters, filter_path: blueprints_path %>
   <%= render "blueprints/shared/list", blueprints: @blueprints %>
 </div>
