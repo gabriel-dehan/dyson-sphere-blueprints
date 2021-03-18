@@ -1,30 +1,24 @@
 # DSP Blueprints
 
-WIP - Community website to share Dyson Sphere Program blueprints.
+Community website to share Dyson Sphere Program blueprints.
+
+Currently only supports the mod [MultiBuildBeta](https://dsp.thunderstore.io/package/brokenmass/MultiBuildBeta/), but will try to support other mods and native blueprints once they are out.
+
+Official website: [https://www.dysonsphereblueprints.com](https://www.dysonsphereblueprints.com/)
 
 ## Roadmap
 
-- [x] Add versionning of blueprints with a mod version attribute
-- [x] Decoded blueprint
-- [x] Index of all public blueprints
-  - [x] Search bar
-  - [x] Search by tags
-  - [x] Search by mod version
-- [x] Show page for a blueprint
-- [x] Parsing the blueprint to display data
-- [x] Creating a new collection
-- [x] Updating a collection
-- [x] Index of public collections
-- [x] User's collection page (index with update / delete actions)
-- [x] User's blueprints page (index with update / delete actions)
-- [ ] Add a mailer
+### Dev
+- [ ] Handle password recover emails
 - [ ] Setup staging pipeline
-- [ ] Handle multiple blueprint mods, add js in the blueprint and search form to load versions according to the selected mod
-- [ ] Add filters and search to all blueprint related pages
-- [ ] Add a way to flag outdated blueprints and notify the users
 - [ ] Optimize, add includes, check for n+1 queries...
 - [ ] Seo, sitemap...
-- [ ] Blueprint preview (canvas)
+
+### Features
+- [ ] Blueprint preview
+- [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
+- [ ] Add filters and search to all blueprint related pages
+- [ ] Add a way to flag outdated blueprints and notify the users
 
 # Deploy
 
