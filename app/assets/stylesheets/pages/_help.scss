@@ -4,7 +4,13 @@
   border-radius: 8px;
 
   h1 {
+    display: flex;
+    justify-content: space-between;
     font-weight: 400;
+
+    img {
+      max-width: 150px;
+    }
   }
 
   h2 {

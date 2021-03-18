@@ -2,6 +2,7 @@
   position: fixed;
   width: 100%;
   bottom: 0;
+  z-index: 1;
 }
 
 .m-alert {
@@ -9,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 40px;
 
   &.m-alert-info {
     background: var(--dark-green);
@@ -36,6 +38,8 @@
     padding: 0px;
     letter-spacing: 1px;
     line-height: inherit;
+    position: absolute;
+    right: 10px;
 
     &:hover {
       background: var(--white);

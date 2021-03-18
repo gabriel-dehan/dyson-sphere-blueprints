@@ -1,2 +1,9 @@
-<h1>Collections#index</h1>
-<p>Find me in app/views/collections/index.html.erb</p>
+<div class="p-collections-index">
+  <h1>All public collections</h1>
+  <div class="t-collections">
+    <%= render "collections/shared/list", collections: @collections, with_actions: false %>
+    <div class="m-pagination">
+      <%= paginate @collections %>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
 
+  .p-page__header {
+    margin: 25px 0 25px 0;
+    text-align: center;
+  }
+
   .dsp {
     font-family: $headers-font;
     font-weight: normal;

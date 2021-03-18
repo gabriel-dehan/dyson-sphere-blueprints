@@ -8,4 +8,8 @@ class UserPolicy < ApplicationPolicy
   def blueprints?
     true
   end
+
+  def my_collections?
+    true
+  end
 end

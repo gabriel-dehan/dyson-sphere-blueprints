@@ -1,2 +1,15 @@
-<h1>Collections#show</h1>
-<p>Find me in app/views/collections/show.html.erb</p>
+<div class="p-user-blueprints">
+  <div class="p-page__header">
+    <h1 class="p-page__header-title">
+      <span class="p-page__header-title-main" target="_blank" rel="noopener noreferrer"><%= @collection.name %> <span class="author">collection by <%= @collection.user.username %></span> </span>
+    </h1>
+    <br />
+  </div>
+  <% if @blueprints.any? %>
+    <%= render "blueprints/shared/list", blueprints: @blueprints %>
+  <% else %>
+    <div class="t-blueprint-no-result">
+      This collection is empty.
+    </div>
+  <% end %>
+</div>

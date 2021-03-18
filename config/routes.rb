@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     get :blueprints, to: "users#blueprints"
 
     collection do
-      get :my_blueprints, to: "users#my_blueprints"
-      get :my_collections, to: "users#my_collections"
+      get :blueprints, to: "users#my_blueprints"
+      get :collections, to: "users#my_collections"
     end
   end
   resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
@@ -23,5 +23,5 @@ Rails.application.routes.draw do
       put 'unlike', to: "blueprints#unlike"
     end
   end
-  resources :collections, only: [:new, :show, :edit, :create, :update, :destroy]
+  resources :collections, only: [:new, :show, :index, :edit, :create, :update, :destroy]
 end

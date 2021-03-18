@@ -1,0 +1,24 @@
+.a-button {
+  margin-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  background: var(--dark-red);
+  border: 0.1rem solid var(--dark-red);
+  color: var(--white);
+  padding: 0 3.0rem;
+  border-radius: .4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  height: 3.8rem;
+  letter-spacing: .1rem;
+  line-height: 1em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  i {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+}

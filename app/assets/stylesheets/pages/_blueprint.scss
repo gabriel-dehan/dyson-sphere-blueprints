@@ -161,7 +161,7 @@
 
   &__actions {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
 
     form {
       margin: 0;
@@ -170,27 +170,35 @@
 
     &-edit {
       margin: 0;
-      width: 100%;
-      background-color: var(--night-blue) !important;
-      color: var(--purple) !important;
-      border-color: var(--purple) !important;
+      color: var(--white);
+      background: transparent;
+      padding: 0;
+      border: none;
+
+      i {
+        font-size: 18px;
+      }
 
       &:hover {
-        background-color: var(--purple) !important;
-        color: var(--white) !important;
+        color: var(--red);
+        background: transparent;
       }
     }
 
     &-delete {
-      margin: 10px 0 0 0;
-      width: 100%;
-      background-color: var(--night-blue) !important;
-      border-color: var(--error-red) !important;
-      color: var(--error-red) !important;
+      margin: 0 0 0 20px;
+      color: var(--white);
+      background: transparent;
+      padding: 0;
+      border: none;
+
+      i {
+        font-size: 18px;
+      }
 
       &:hover {
-        background-color: var(--error-red) !important;
-        color: var(--white) !important;
+        color: var(--red);
+        background: transparent;
       }
     }
   }
@@ -238,6 +246,7 @@
     align-items: center;
     background: var(--dark-red);
     border-color: var(--dark-red);
+    line-height: 1em;
 
     i {
       font-size: 14px;

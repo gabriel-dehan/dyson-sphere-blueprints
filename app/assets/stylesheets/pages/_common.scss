@@ -1,8 +1,7 @@
 .p-page {
 
   &__header {
-    margin: 25px 0 20px 0;
-    text-align: center;
+    margin: 5px 0 10px 0;
 
     .a-logo {
       font-size: 48px;
@@ -15,24 +14,29 @@
     }
 
     &-title {
-      font-family: $logo-font;
+      font-family: $headers-font;
       color: var(--white);
       font-size: $font-size-logo;
       line-height: 1em;
-      font-size: 48px;
+      font-size: 42px;
+      margin-bottom: 0;
 
       &-main {
-        font-family: $headers-font;
-        font-size: 1.313em;
+        font-size: 1em;
         line-height: 1em;
-        color: var(--dark-red);
+        color: var(--red);
+
+        .author {
+          color: var(--white);
+        }
       }
 
       &-em {
         padding-left: 2px;
+        font-family: $logo-font;
         display: inline-block;
         font-size: 30px;
-        font-size: 0.938em;
+        font-size: 0.8em;
       }
     }
   }

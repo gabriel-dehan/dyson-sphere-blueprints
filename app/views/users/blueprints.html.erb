@@ -5,5 +5,10 @@
     </h1>
     <br />
   </div>
-  <%= render "blueprints/shared/list", blueprints: @blueprints %>
-</div>
+  <% if @blueprints.any? %>
+    <%= render "blueprints/shared/list", blueprints: @blueprints %>
+  <% else %>
+    <div class="t-blueprint-no-result">
+      This user has no blueprints yet.
+    </div>
+  <% end %></div>

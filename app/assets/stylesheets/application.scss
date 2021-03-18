@@ -14,11 +14,11 @@
 @import "swiper/swiper-bundle.css";
 
 // Your CSS partials
-@import "overrides";
 @import "atoms/index";
 @import "molecules/index";
 @import "organisms/index";
 @import "pages/index";
+@import "overrides";
 
 // Layout
 
@@ -78,6 +78,10 @@ select {
 label {
   font-weight: normal;
   font-size: $font-size-base;
+}
+
+button {
+  font-family: $body-font;
 }
 
 .wrapper {

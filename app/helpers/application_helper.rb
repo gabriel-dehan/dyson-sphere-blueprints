@@ -21,4 +21,11 @@ module ApplicationHelper
     entity ? entity[1] : "Unknown"
   end
 
+  def pluralize_without_count(count, text)
+    if count != 0
+      count == 1 ? "#{text}" : "#{text.pluralize}"
+    end
+    text
+  end
+
 end

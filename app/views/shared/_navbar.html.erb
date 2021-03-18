@@ -11,7 +11,7 @@
         <%= link_to "Blueprints", blueprints_path, class: "nav-link" %>
       </li>
       <li class="o-navbar__nav-item <%= 'active' if current_page?(collections_path) %>">
-        <%= link_to "Collections (coming soon)", collections_path, class: "nav-link" %>
+        <%= link_to "Collections", collections_path, class: "nav-link" %>
       </li>
       <li class="o-navbar__nav-item <%= 'active' if current_page?(help_path) %>">
         <%= link_to "Help", help_path, class: "nav-link" %>
@@ -20,8 +20,8 @@
       <li class="o-navbar__nav-item o-dropdown">
         <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>
         <div class="o-dropdown__content">
-          <%= link_to "My blueprints", my_blueprints_users_path, class: "o-dropdown__item" %>
-          <%= link_to "My collections", my_collections_users_path, class: "o-dropdown__item" %>
+          <%= link_to "My blueprints", blueprints_users_path, class: "o-dropdown__item" %>
+          <%= link_to "My collections", collections_users_path, class: "o-dropdown__item" %>
           <%= link_to "Settings", edit_user_registration_path, class: "o-dropdown__item" %>
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "o-dropdown__item" %>
         </div>

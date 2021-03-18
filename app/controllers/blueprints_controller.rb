@@ -48,9 +48,9 @@ class BlueprintsController < ApplicationController
   end
 
   def new
-    @collection = params[:collection] ?
-      current_user.collections.friendly.find(params[:collection]) :
-      current_user.collections.where(type: "Private").first
+    @collection = params[:blueprint] && params[:blueprint][:collection] ?
+      current_user.collections.friendly.find(params[:blueprint][:collection]) :
+      current_user.collections.where(type: "Public").first
 
     @blueprint = @collection.blueprints.new
 
@@ -65,6 +65,7 @@ class BlueprintsController < ApplicationController
     authorize @blueprint
 
     if @blueprint.save
+      flash[:notice] = "Blueprint successfully created."
       redirect_to blueprint_path(@blueprint)
     else
       render 'blueprints/new'
@@ -89,10 +90,19 @@ class BlueprintsController < ApplicationController
     authorize @blueprint
 
     if @blueprint.save
+      flash[:notice] = "Blueprint successfully updated."
       redirect_to blueprint_path(@blueprint)
     else
       render 'blueprints/edit'
     end
+  end
+
+  def destroy
+    @blueprint = current_user.blueprints.friendly.find(params[:id])
+    authorize @blueprint
+    @blueprint.destroy
+    flash[:notice] = "Blueprint successfully deleted."
+    redirect_to blueprints_users_path
   end
 
   def like
@@ -116,5 +126,4 @@ class BlueprintsController < ApplicationController
   def blueprint_params
     params.require(:blueprint).permit(:title, :description, :encoded_blueprint, :cover, :mod_id, :mod_version, pictures: [])
   end
-
 end

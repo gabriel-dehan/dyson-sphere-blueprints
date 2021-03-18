@@ -1,0 +1,12 @@
+<div class="m-form">
+  <div class="m-form__container">
+    <h1 class="m-form__title"><%= form_title %></h1>
+
+    <%= simple_form_for(collection, html: { class: 'm-form' } ) do |f| %>
+      <%= f.input :name, required: true %>
+      <%= f.input :type, collection: ["Public", "Private"], selected: "Public" %>
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

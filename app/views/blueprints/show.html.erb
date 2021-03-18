@@ -124,6 +124,26 @@
           <% end %>
         </div>
       </div>
+      <% if policy(@blueprint).update? %>
+        <div class="t-blueprint__actions">
+          <%= button_to edit_blueprint_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
+            <span
+              class="tooltip-trigger"
+              data-tippy-content="Edit"
+              data-tippy-placement="bottom">
+              <i class="fas fa-edit"></i>
+            </span>
+          <% end %>
+          <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: 'Are you sure you want to delete your blueprint?' } do %>
+            <span
+              class="tooltip-trigger"
+              data-tippy-content="Delete"
+              data-tippy-placement="bottom">
+              <i class="fas fa-trash"></i>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
       <div class="t-blueprint__tags">
         <h3>Tagged with</h3>
         <ul>
@@ -140,12 +160,6 @@
           <% end %>
         </ul>
       </div>
-      <% if policy(@blueprint).update? %>
-        <div class="t-blueprint__actions">
-          <%= button_to 'Edit', edit_blueprint_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' %>
-          <%= button_to 'Delete', blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm:'Are you sure you want to delete your blueprint?' } %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>
