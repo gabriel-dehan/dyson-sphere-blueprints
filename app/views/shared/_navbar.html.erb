@@ -20,6 +20,7 @@
       <li class="o-navbar__nav-item o-dropdown">
         <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>
         <div class="o-dropdown__content">
+          <%= link_to "My favorites", favorites_users_path, class: "o-dropdown__item" %>
           <%= link_to "My blueprints", blueprints_users_path, class: "o-dropdown__item" %>
           <%= link_to "My collections", collections_users_path, class: "o-dropdown__item" %>
           <%= link_to "Settings", edit_user_registration_path, class: "o-dropdown__item" %>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     collection do
       get :blueprints, to: "users#my_blueprints"
       get :collections, to: "users#my_collections"
+      get :favorites, to: "users#my_favorites"
     end
   end
   resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy] do

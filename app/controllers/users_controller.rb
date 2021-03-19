@@ -14,6 +14,15 @@ class UsersController < ApplicationController
       .page(params[:page])
   end
 
+  def my_favorites
+    set_filters
+    @blueprints = filter(current_user.get_voted(Blueprint))
+    # Paginate
+    @blueprints = @blueprints.page(params[:page])
+
+    authorize current_user
+  end
+
   def my_blueprints
     set_filters
     @blueprints = filter(current_user.blueprints)
