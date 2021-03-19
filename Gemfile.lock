@@ -283,8 +283,10 @@ GEM
     sentry-rails (4.3.0)
       rails (>= 5.0)
       sentry-ruby-core (~> 4.3.0)
-    sentry-raven (3.1.1)
+    sentry-ruby (4.3.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
       faraday (>= 1.0)
+      sentry-ruby-core (= 4.3.0)
     sentry-ruby-core (4.3.0)
       concurrent-ruby
       faraday
@@ -377,7 +379,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sentry-rails
-  sentry-raven
+  sentry-ruby
   sentry-sidekiq
   sidekiq
   sidekiq-failures (~> 1.0)
