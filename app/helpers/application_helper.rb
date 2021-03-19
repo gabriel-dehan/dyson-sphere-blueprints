@@ -4,6 +4,8 @@ module ApplicationHelper
     # TODO: Refacto in a tag list with icons
     if name.downcase === "mall"
       icon_name = '2303'
+    elsif name.downcase === "research"
+      icon_name = '2901'
     else
       entity = Blueprint::game_data.find { |id, entity_name| entity_name.downcase == name.downcase }
       icon_name = entity ? entity[0] : 'default'

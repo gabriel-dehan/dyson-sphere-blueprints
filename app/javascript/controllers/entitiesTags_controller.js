@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = [ "input" ]
 
   initialize() {
-    this.whitelist = ["Mall", ...Object.values(GameEntities)]
+    this.whitelist = ["Mall", "Research", ...Object.values(GameEntities)]
   }
 
   connect() {

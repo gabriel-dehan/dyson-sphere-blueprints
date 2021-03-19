@@ -16,11 +16,12 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Add tests
 
 ### Features
+- [x] Meta tags
 - [ ] Add a reset button to homepage form
-- [ ] Hide collections with no blueprints
-- [ ] Order collections by popularity
+- [x] Hide collections with no blueprints
+- [x] Order collections by popularity
+- [ ] Way to add tags with icons in a cleaner fashion
 - [ ] Search / filters for collections
-- [ ] Meta tags
 - [ ] Blueprint preview
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
