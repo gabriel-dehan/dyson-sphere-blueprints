@@ -17,19 +17,39 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ### Features
 - [x] Meta tags
-- [ ] Select color on windows
-- [ ] Add a reset button to homepage form
-- [ ] Add smelters / assemblers recipes detail
+- [x] Add a way to flag outdated blueprints and notify the users
 - [x] Hide collections with no blueprints
 - [x] Order collections by popularity
+- [ ] Select color on windows
+- [ ] Add a reset button to homepage form
+- [ ] Improve search by mod version (use bp format instead maybe?)
+- [ ] Add smelters / assemblers recipes detail
 - [ ] Way to add tags with icons in a cleaner fashion
 - [ ] Search / filters for collections
 - [ ] Blueprint preview
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
-- [ ] Add a way to flag outdated blueprints and notify the users
-- [ ] Minimal responsive
 - [ ] Localisation chinese
+- [ ] Minimal responsive
+
+## Changelog
+
+### v.1.0.7
+
+- Display a range of compatible mod versions for a blueprint instead of just the mod's version the blueprint was created for
+- On a blueprint's page when hovering the version in the sidebar, it will display a "Compatibility summary"
+- Fix crashes that happened when you deleted all your collections and tried to create a new blueprint
+- Updated pagination UI
+
+### v.1.0.1 - v.1.0.6
+
+- Multiple bug fixes
+- Fix some crashes
+- UI/UX improvements
+
+### v.1.0.0
+
+- Release
 
 # Deploy
 
