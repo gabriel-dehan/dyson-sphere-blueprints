@@ -4,8 +4,10 @@ class CollectionsController < ApplicationController
   def index
     @collections = policy_scope(Collection)
       .where(type: "Public")
-      .includes(:blueprints)
-      .order("blueprints.cached_votes_total ASC")
+      .joins(:blueprints)
+      .where.not(blueprints: { id: nil })
+      .group('collections.id')
+      .order("sum(blueprints.cached_votes_total) DESC")
       .page(params[:page])
   end
 

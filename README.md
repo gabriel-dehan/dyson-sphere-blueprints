@@ -13,13 +13,19 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Setup staging pipeline
 - [ ] Optimize, add includes, check for n+1 queries...
 - [ ] Seo, sitemap...
+- [ ] Add tests
 
 ### Features
-- [ ] Minimal responsive
+- [ ] Add a reset button to homepage form
+- [ ] Hide collections with no blueprints
+- [ ] Order collections by popularity
+- [ ] Search / filters for collections
+- [ ] Meta tags
 - [ ] Blueprint preview
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Add a way to flag outdated blueprints and notify the users
+- [ ] Minimal responsive
 
 # Deploy
 

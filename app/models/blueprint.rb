@@ -4,7 +4,7 @@ class Blueprint < ApplicationRecord
   extend FriendlyId
   acts_as_votable
   acts_as_taggable_on :tags
-  paginates_per 50
+  paginates_per 32
 
   has_rich_text :description
   has_one_attached :cover
@@ -50,7 +50,7 @@ class Blueprint < ApplicationRecord
 
   validate :encoded_blueprint_parsable
 
-  default_scope { with_rich_text_description }
+  default_scope { with_rich_text_description.includes(:taggings, :mod, :user, { cover_attachment: :blob }, pictures_attachments: :blob) }
 
   def formatted_mod_version
     "#{mod.name} - #{mod_version}"

@@ -71,7 +71,7 @@
           </li>
         </ul>
         <div class="t-blueprint__info-votes">
-          <strong class="count"><%= @blueprint.get_likes.length %></strong>
+          <strong class="count"><%= @blueprint.cached_votes_total %></strong>
           <% if !current_user %>
             <i class="fas fa-heart active"></i>
           <% elsif current_user.voted_for?(@blueprint) %>

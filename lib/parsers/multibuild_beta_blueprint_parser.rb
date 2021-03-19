@@ -13,9 +13,9 @@ class MultibuildBetaBlueprintParser
         insertersData = json["copiedInserters"].map { |inserter| inserter["protoId"] }
         beltsData = json["copiedBelts"].map { |belts| belts["protoId"] }
 
-        if buildingsData.compact.length === 0 ||
-          insertersData.compact.length === 0 ||
-          beltsData.compact.length === 0
+        if buildingsData.compact.length == 0 &&
+          insertersData.compact.length == 0 &&
+          beltsData.compact.length == 0
           raise "No data found in blueprint"
         end
 
@@ -53,8 +53,8 @@ class MultibuildBetaBlueprintParser
         insertersData = json["copiedInserters"].map { |inserter| inserter["Value"]["protoId"] }
         beltsData = json["copiedBelts"].map { |belts| belts["Value"]["protoId"] }
 
-        if buildingsData.compact.length === 0 ||
-          insertersData.compact.length === 0 ||
+        if buildingsData.compact.length === 0 &&
+          insertersData.compact.length === 0 &&
           beltsData.compact.length === 0
           raise "No data found in blueprint"
         end
