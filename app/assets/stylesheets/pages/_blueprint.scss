@@ -167,8 +167,12 @@
         color: var(--green);
       }
 
-      &.outdated {
+      &.compatible {
         color: var(--orange);
+      }
+
+      &.outdated {
+        color: var(--error-red);
       }
     }
   }

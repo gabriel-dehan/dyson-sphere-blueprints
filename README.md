@@ -17,7 +17,9 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ### Features
 - [x] Meta tags
+- [ ] Select color on windows
 - [ ] Add a reset button to homepage form
+- [ ] Add smelters / assemblers recipes detail
 - [x] Hide collections with no blueprints
 - [x] Order collections by popularity
 - [ ] Way to add tags with icons in a cleaner fashion
@@ -27,6 +29,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Add a way to flag outdated blueprints and notify the users
 - [ ] Minimal responsive
+- [ ] Localisation chinese
 
 # Deploy
 

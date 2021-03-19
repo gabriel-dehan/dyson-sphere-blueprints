@@ -57,7 +57,19 @@ class Blueprint < ApplicationRecord
   end
 
   def is_mod_version_latest?
-    mod_version >= mod.version_list.first
+    mod_version >= mod.latest
+  end
+
+  def mod_compatibility_range
+    # Handle retro compatibility only for <= 2.0.6
+    if mod_version <= "2.0.6"
+      [
+        mod.compatibility_range_for(mod_version).first,
+        mod.compatibility_range_for(mod.latest).last
+      ]
+    else
+      mod.compatibility_range_for(mod_version)
+    end
   end
 
   private

@@ -65,9 +65,10 @@
             <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
           </li>
           <li>
+            <% compatibility_status, compatibility_message = compatibility_recap(@blueprint) %>
             <strong>Version:</strong>
-            <span class="t-blueprint__info-mod tooltip-trigger <%= @blueprint.is_mod_version_latest? ? 'latest' : 'outdated' %>"
-                data-tippy-content="<%= @blueprint.is_mod_version_latest? ? 'Latest' : 'Outdated' %>"
+            <span class="t-blueprint__info-mod tooltip-trigger <%= compatibility_status %>"
+                data-tippy-content="<%= compatibility_message %>"
                 data-tippy-placement="right">
               <%= @blueprint.mod_version %>
             </span>

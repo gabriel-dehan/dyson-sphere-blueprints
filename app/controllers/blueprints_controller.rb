@@ -26,9 +26,15 @@ class BlueprintsController < ApplicationController
       current_user.collections.friendly.find(params[:blueprint][:collection]) :
       current_user.collections.where(type: "Public").first
 
-    @blueprint = @collection.blueprints.new
+    if !@collection
+      flash[:alert] = "You don't seem to have any collection, please create one before adding a blueprint."
+      redirect_to collections_users_path
+      authorize Blueprint.new
+    else
+      @blueprint = @collection.blueprints.new
+      authorize @blueprint
+    end
 
-    authorize @blueprint
   end
 
   def create
