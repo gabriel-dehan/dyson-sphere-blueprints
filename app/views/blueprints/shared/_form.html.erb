@@ -4,7 +4,7 @@
 
     <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
       <%= f.input :title, required: true %>
-      <%= f.input :description, as: :rich_text_area %>
+      <%= f.input :description, as: :rich_text_area, placeholder: "Describe your blueprint here. If you are using mods that add items that are not in the base game, don't forget to list them." %>
       <%= f.input :collection,
         collection: current_user.collections,
         label_method: :name,
@@ -34,7 +34,7 @@
       <div class="m-form__picture">
         <label for="cover">
           <abbr title="required">*</abbr>
-          Cover picture <em>(3 MB maximum)</em>
+          Cover picture <em>(3 MB maximum, ideal ratio 16:9 for instance 1280x720, ...)</em>
         </label>
         <%= f.drag_and_drop_file_field :cover, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
 
@@ -53,7 +53,7 @@
 
       <div class="m-form__pictures">
         <label for="pictures">
-          Additional pictures <em>(4 pictures maximum, 3 MB maximum each)</em>
+          Additional pictures <em>(4 pictures maximum, 3 MB maximum each, ideal ratio 16:9 for instance 1280x720, ...)</em>
         </label>
         <%= f.drag_and_drop_file_field :pictures, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
         <span class="error">

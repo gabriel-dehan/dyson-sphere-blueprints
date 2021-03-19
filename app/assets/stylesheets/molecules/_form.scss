@@ -53,7 +53,7 @@
 
   &__important {
     label { font-weight: bold; }
-    textarea { font-family: monospace; }
+    textarea { font-family: monospace; min-height: 120px; }
   }
 
   &__picture {
