@@ -11,6 +11,6 @@ class Collection < ApplicationRecord
   friendly_id :name, use: :slugged
 
   def total_votes
-    blueprints.sum(:cached_votes_total)
+    blueprints.distinct.sum(:cached_votes_total)
   end
 end
