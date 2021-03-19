@@ -20,8 +20,9 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add a way to flag outdated blueprints and notify the users
 - [x] Hide collections with no blueprints
 - [x] Order collections by popularity
-- [ ] Select color on windows
-- [ ] Add a reset button to homepage form
+- [x] Add a favorites page
+- [x] Fix wrong <Select> background color on windows
+- [x] Add a reset button to homepage form
 - [ ] Improve search by mod version (use bp format instead maybe?)
 - [ ] Add smelters / assemblers recipes detail
 - [ ] Way to add tags with icons in a cleaner fashion
@@ -33,6 +34,9 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Minimal responsive
 
 ## Changelog
+
+### v.1.0.8
+- Added a page to display a user's favorites blueprints, accessible from the user menu as "My favorites".
 
 ### v.1.0.7
 

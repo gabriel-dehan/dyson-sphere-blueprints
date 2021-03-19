@@ -1,4 +1,8 @@
 .o-blueprint-filters {
+  form {
+    margin-bottom: 3rem;
+  }
+
   &__line {
     display: flex;
     align-items: center;
@@ -135,17 +139,33 @@
   &__submit {
     display: flex;
     justify-content: flex-end;
+    margin-top: 15px;
 
-    input[type='submit'] {
-      width: 100%;
+    a, input[type='submit'] {
+      min-width: 268px;
       border-color: var(--dark-red);
-      background: transparent;
-      color: var(--dark-red);
+      background: var(--dark-red);
+      color: var(--white);
 
       &:hover {
-        background: var(--dark-red);
+        background: transparent;
         border-color: var(--dark-red);
-        color: var(--white);
+        color: var(--dark-red);
+      }
+    }
+
+    a {
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      background-color: var(--blue);
+      border-color: var(--blue);
+      margin-left: 25px;
+
+      &:hover {
+        background: transparent;
+        border-color: #5a68b9;
+        color: #5a68b9;
       }
     }
   }
