@@ -7,9 +7,5 @@ if Rails.env.production?
     # of transactions for performance monitoring.
     # We recommend adjusting this value in production
     config.traces_sample_rate = 0.0
-    # or
-    config.traces_sampler = lambda do |context|
-      true
-    end
   end
 end
