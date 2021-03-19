@@ -11,12 +11,21 @@ module ApplicationHelper
       icon_name = entity ? entity[0] : 'default'
     end
 
-    image_path "game_icons/#{icon_name}.png"
+    begin
+      image_path "game_icons/#{icon_name}.png"
+    rescue
+      image_path "game_icons/default.png"
+    end
   end
 
   def get_game_icon_by_uuid(uuid)
     file = uuid.blank? ? 'default' : uuid
-    image_path "game_icons/#{file}.png"
+
+    begin
+      image_path "game_icons/#{file}.png"
+    rescue
+      image_path "game_icons/default.png"
+    end
   end
 
   def get_game_entity_name_by_uuid(uuid)
