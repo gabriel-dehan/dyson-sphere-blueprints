@@ -12,13 +12,13 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <a href="<%= @blueprint.cover.url %>" target="_blank" rel="noopener noreferrer">
-              <%= cl_image_tag @blueprint.cover.key, width: 880, height: 495, crop: :fill %>
+              <%= cl_image_tag @blueprint.cover.key, width: 880, height: 495, quality: "auto", fetch_format: :auto, crop: :fill %>
             </a>
           </div>
           <% @blueprint.pictures.each do |picture| %>
             <div class="swiper-slide">
               <a href="<%= picture.url %>" target="_blank" rel="noopener noreferrer">
-                <%= cl_image_tag picture.key, width: 880, height: 495, crop: :fill %>
+                <%= cl_image_tag picture.key, width: 880, height: 495, quality: "auto", fetch_format: :auto, crop: :fill %>
               </a>
             </div>
           <% end %>

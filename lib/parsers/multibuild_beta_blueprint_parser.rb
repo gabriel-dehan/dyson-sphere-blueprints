@@ -3,7 +3,9 @@ class MultibuildBetaBlueprintParser
     def parse_version_210(blueprint, validate = false)
       puts "Fetching blueprint for 210..."
       begin
-        first_pass = Base64.decode64(blueprint.encoded_blueprint)
+        # Blueprints can be prefixed with /\w+:/ so we remove the first part
+        blueprint_without_name = blueprint.encoded_blueprint.split(":")[1..-1].join(":")
+        first_pass = Base64.decode64(blueprint_without_name)
         puts "Unzipping..."
         decoded_blueprint = ActiveSupport::Gzip.decompress(first_pass)
 
@@ -42,7 +44,9 @@ class MultibuildBetaBlueprintParser
     def parse_version_206(blueprint, validate = false)
       puts "Fetching blueprint for 206..."
       begin
-        first_pass = Base64.decode64(blueprint.encoded_blueprint)
+        # Blueprints can be prefixed with /\w+:/ so we remove the first part
+        blueprint_without_name = blueprint.encoded_blueprint.split(":")[1..-1].join(":")
+        first_pass = Base64.decode64(blueprint_without_name)
         puts "Unzipping..."
         decoded_blueprint = ActiveSupport::Gzip.decompress(first_pass)
 

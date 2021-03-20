@@ -1,3 +1,11 @@
+.p-collections-index {
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .t-collections {
   &-actions {
     display: flex;

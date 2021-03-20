@@ -1,5 +1,11 @@
 <div class="p-collections-index">
-  <h1>All public collections</h1>
+  <div class="p-collections-index__header">
+    <h1>All public collections</h1>
+    <% if current_user %>
+      <%= link_to 'My collections', collections_users_path, class: 'a-button' %>
+    <% end %>
+  </div>
+
   <div class="t-collections">
     <%= render "collections/shared/list", collections: @collections, with_actions: false %>
     <div class="m-pagination">

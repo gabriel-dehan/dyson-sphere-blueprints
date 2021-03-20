@@ -69,6 +69,17 @@ input[type='color'], input[type='date'], input[type='datetime'], input[type='dat
   }
 }
 
+input[type='submit'] {
+  background-color: var(--purple);
+  border-color: var(--purple);
+
+  &:hover {
+    border-color: var(--purple);
+    background: transparent;
+    color: var(--purple);
+  }
+}
+
 select {
   color: var(--white);
   border-color: var(--darker-blue);

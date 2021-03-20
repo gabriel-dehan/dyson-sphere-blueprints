@@ -1,6 +1,5 @@
 .o-blueprint-card {
   list-style: none;
-  // width: 300px;
   display: flex;
   flex-direction: column;
   flex: 0 1 23%;
@@ -45,7 +44,7 @@
     height: initial;
 
     &:hover {
-      background-color: var(--purple);
+      background-color: var(--dark-red);
     }
   }
 

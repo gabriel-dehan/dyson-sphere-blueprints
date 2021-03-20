@@ -21,4 +21,9 @@
     font-size: 14px;
     margin-right: 8px;
   }
+
+  &:hover {
+    background: transparent;
+    color: var(--dark-red);
+  }
 }

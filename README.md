@@ -15,7 +15,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Seo, sitemap...
 - [ ] Add tests
 
-### Features
+### Features / Bugs
 - [x] Meta tags
 - [x] Add a way to flag outdated blueprints and notify the users
 - [x] Hide collections with no blueprints
@@ -24,7 +24,11 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Fix wrong <Select> background color on windows
 - [x] Add a reset button to homepage form
 - [x] Improve search by mod version, should find all compatible versions
+- [x] Remove blueprint name when parsing blueprint
+- [x] Add a link to "my collections" page from the collection page
+- [ ] Fix rendering of blueprints 3 times in show page
 - [ ] Add smelters / assemblers recipes detail
+- [ ] Add power needed
 - [ ] Way to add tags with icons in a cleaner fashion
 - [ ] Blueprint preview
 - [ ] Search / filters for collections

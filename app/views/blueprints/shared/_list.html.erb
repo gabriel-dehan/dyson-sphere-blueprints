@@ -5,7 +5,7 @@
       <li class="o-blueprint-card" data-controller="blueprintCopyButton">
         <div class="o-blueprint-card__cover">
           <%= link_to blueprint_path(blueprint) do %>
-            <%= cl_image_tag blueprint.cover.key, height: 400, quality: "auto", fetch_format: :auto, crop: :fill %>
+            <%= cl_image_tag blueprint.cover.key, height: 200, quality: "auto", fetch_format: :auto, crop: :fill %>
           <% end %>
           <button
             id="bp-card-<%= blueprint.id %>"
