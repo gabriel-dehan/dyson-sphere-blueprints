@@ -76,7 +76,7 @@ group :test do
   gem 'webdrivers'
 end
 
-group :production do
+group :staging, :production do
   gem "sentry-ruby"
   gem "sentry-rails"
   gem "sentry-sidekiq"
