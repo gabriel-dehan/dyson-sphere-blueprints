@@ -26,8 +26,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Improve search by mod version, should find all compatible versions
 - [ ] Add smelters / assemblers recipes detail
 - [ ] Way to add tags with icons in a cleaner fashion
-- [ ] Search / filters for collections
 - [ ] Blueprint preview
+- [ ] Search / filters for collections
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Localisation chinese
