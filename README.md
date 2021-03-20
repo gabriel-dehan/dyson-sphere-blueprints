@@ -23,7 +23,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add a favorites page
 - [x] Fix wrong <Select> background color on windows
 - [x] Add a reset button to homepage form
-- [ ] Improve search by mod version (use bp format instead maybe?)
+- [x] Improve search by mod version, should find all compatible versions
 - [ ] Add smelters / assemblers recipes detail
 - [ ] Way to add tags with icons in a cleaner fashion
 - [ ] Search / filters for collections
@@ -34,6 +34,13 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Minimal responsive
 
 ## Changelog
+
+### v.1.0.10
+- Added "Compatible with" mod version search, the search will now find any blueprint that is compatible with the specified mod version.
+
+### v.1.0.9
+- Fixed sentry issues
+- Improved search UI
 
 ### v.1.0.8
 - Added a page to display a user's favorites blueprints, accessible from the user menu as "My favorites".

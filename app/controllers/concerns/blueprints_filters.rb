@@ -23,12 +23,18 @@ module BlueprintsFilters
         blueprints = blueprints.search_by_title(@filters[:search])
       end
 
-      if @filters[:mod_version] && @filters[:mod_version] != 'Any'
-        blueprints = blueprints.where(mod_version: @filters[:mod_version])
-      end
-
       if @filters[:mod_id]
         blueprints = blueprints.where(mod_id: @filters[:mod_id])
+      end
+
+      if @filters[:mod_version] && @filters[:mod_version] != 'Any'
+        if @filters[:mod_id]
+          mod = Mod.find(@filters[:mod_id])
+          compat_list = mod.compatibility_list_for(@filters[:mod_version])
+          blueprints = blueprints.where(mod_version: compat_list)
+        else
+          blueprints = blueprints.where(mod_version: @filters[:mod_version])
+        end
       end
 
       if @filters[:order] === 'recent'
