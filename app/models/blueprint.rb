@@ -82,11 +82,9 @@ class Blueprint < ApplicationRecord
   # TODO: Refactor, cleanup, make validator and parsers distinct
   def encoded_blueprint_parsable
     if self.mod.name === "MultiBuildBeta"
-      if self.mod_version <= "2.0.6"
-        valid = MultibuildBetaBlueprintParser::parse_version_206(self, validate: true)
-      else
-        valid = MultibuildBetaBlueprintParser::parse_version_210(self, validate: true)
-      end
+      valid = MultibuildBetaBlueprintParser::parse(self, validate: true)
+    else
+      valid = true
     end
 
     if !valid

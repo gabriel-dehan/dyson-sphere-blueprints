@@ -39,6 +39,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
+### v.1.0.12
+- Fix the multiple rendering of the blueprints data on a blueprints page, which was causing slow downs for big blueprints.
 ### v.1.0.11
 - Multiple CSS improvements, especially in the overall coherence of button styles and hovers
 - Image optimization
