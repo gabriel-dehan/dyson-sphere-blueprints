@@ -26,7 +26,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Improve search by mod version, should find all compatible versions
 - [x] Remove blueprint name when parsing blueprint
 - [x] Add a link to "my collections" page from the collection page
-- [ ] Fix rendering of blueprints 3 times in show page
+- [x] Fix rendering of blueprints 3 times in show page
 - [ ] Add smelters / assemblers recipes detail
 - [ ] Add power needed
 - [ ] Way to add tags with icons in a cleaner fashion
@@ -38,6 +38,12 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Minimal responsive
 
 ## Changelog
+
+### v.1.0.11
+- Multiple CSS improvements, especially in the overall coherence of button styles and hovers
+- Image optimization
+- Blueprints can now be prefixed with a name (my_blueprint_name:<BASE_64_ENCODED_BLUEPRINT>) without crashing the parser
+- Added a button to quickly access "My collection" from the collections index page.
 
 ### v.1.0.10
 - Added "Compatible with" mod version search, the search will now find any blueprint that is compatible with the specified mod version.

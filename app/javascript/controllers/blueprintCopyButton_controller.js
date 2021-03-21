@@ -6,7 +6,16 @@ export default class extends Controller {
   static targets = [ "copy" ]
 
   connect() {
-    this.clipboard = new ClipboardJS(this.copyTarget);
+    this.clipboard = new ClipboardJS(this.copyTarget, {
+      text: () => {
+        const dataAttribute = this.copyTarget.getAttribute('data-clipboard-text');
+        if (dataAttribute) {
+          return dataAttribute;
+        } else {
+          return document.querySelector('[data-clipboard-target="true"]').value;
+        }
+      }
+    });
 
     this.clipboard.on('success', (e) => {
       const tooltip = tippy(e.trigger, {

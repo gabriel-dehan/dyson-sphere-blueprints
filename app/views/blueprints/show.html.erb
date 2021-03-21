@@ -31,8 +31,7 @@
         <h2><%= @blueprint.title %></h2>
         <button
           class="t-blueprint__copy"
-          data-blueprintCopyButton-target="copy"
-          data-clipboard-text="<%= @blueprint.encoded_blueprint %>">
+          data-blueprintCopyButton-target="copy">
           <i class="fas fa-copy"></i>Copy to clipboard
         </button>
       </div>
@@ -43,11 +42,10 @@
       <% end %>
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
         <h3>Blueprint</h3>
-        <textarea readonly><%= @blueprint.encoded_blueprint %></textarea>
+        <textarea data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
         <button
           class="t-blueprint__copy"
-          data-blueprintCopyButton-target="copy"
-          data-clipboard-text="<%= @blueprint.encoded_blueprint %>">
+          data-blueprintCopyButton-target="copy">
           <i class="fas fa-copy"></i>Copy to clipboard
         </button>
       </div>
