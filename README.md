@@ -27,7 +27,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Remove blueprint name when parsing blueprint
 - [x] Add a link to "my collections" page from the collection page
 - [x] Fix rendering of blueprints 3 times in show page
-- [ ] Add smelters / assemblers recipes detail
+- [x] Add smelters / assemblers recipes detail
+- [ ] Add tag "Lettering" / "Conveyor Belt Art"
 - [ ] Add power needed
 - [ ] Way to add tags with icons in a cleaner fashion
 - [ ] Blueprint preview

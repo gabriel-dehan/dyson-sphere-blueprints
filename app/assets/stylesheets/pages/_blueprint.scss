@@ -54,11 +54,10 @@
       margin-bottom: 0;
     }
 
-    &-tally {
-      list-style: none;
+    &-entity {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      list-style: none;
       font-weight: bold;
       font-size: 16px;
       border-bottom: 1px solid var(--blue);
@@ -66,14 +65,58 @@
       padding-bottom: 0.5rem;
       padding-top: 0.5rem;
 
+      img {
+        width: 48px;
+      }
+
+      &__tally {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__recipes {
+        display: flex;
+        list-style: none;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        margin: 5px 0 4px 0;
+        padding: 0;
+        position: relative;
+
+        &::before {
+          // content: "└";
+          // font-family: "Font Awesome 5 Free";
+          // content: "\f3bf";
+          // font-size: 30px;
+          // color: var(--grey50);
+          // position: absolute;
+          // top: 0;
+          // left: 10px;
+        }
+
+        img {
+          width: 32px;
+          margin-left: 8px;
+        }
+      }
+
+      &__recipe {
+        display: inline-flex;
+        align-items: center;
+        cursor: default;
+
+        margin: 0 0 4px 10px;
+
+        &:first-child, &:nth-child(3n+1) {
+          margin: 0;
+        }
+      }
+
       &:last-child {
         border-bottom: none;
         margin-bottom: 0;
         padding-bottom: 0;
-      }
-
-      img {
-        width: 48px;
       }
     }
 

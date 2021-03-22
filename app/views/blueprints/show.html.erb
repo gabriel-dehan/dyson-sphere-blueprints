@@ -118,41 +118,59 @@
         <% if @blueprint.decoded_blueprint_data && @blueprint.decoded_blueprint_data.any? %>
           <ul class="t-blueprint__requirements-data">
             <% if @blueprint.decoded_blueprint_data["buildings"] %>
-              <% @blueprint.decoded_blueprint_data["buildings"].each do |entity_id, count| %>
-                <li class="t-blueprint__requirements-tally">
-                  <span
-                    class="t-blueprint_requirements-tally__picture tooltip-trigger"
-                    data-tippy-content="<%= get_game_entity_name_by_uuid(entity_id) %>"
-                  >
-                    <%= image_tag get_game_icon_by_uuid(entity_id) %>
-                  </span>
-                  <%= count %>
+              <% @blueprint.decoded_blueprint_data["buildings"].each do |entity_id, data| %>
+                <li class="t-blueprint__requirements-entity">
+                  <div class="t-blueprint__requirements-entity__tally">
+                    <span
+                      class="t-blueprint__requirements-entity__picture tooltip-trigger"
+                      data-tippy-content="<%= data["name"] %>"
+                    >
+                      <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
+                    </span>
+                    <%= data["tally"] %>
+                  </div>
+                  <% if data["recipes"]&.any? %>
+                    <ul class="t-blueprint__requirements-entity__recipes">
+                      <% data["recipes"].each do |recipe_id, recipe| %>
+                        <li
+                          class="t-blueprint__requirements-entity__recipe tooltip-trigger"
+                          data-tippy-content="<%= recipe["name"] %>"
+                          data-tippy-placement="bottom">
+                          <%= recipe["tally"] %> <%= image_tag get_game_entity_icon_by_uuid(recipe_id) %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
                 </li>
               <% end %>
             <%end %>
             <% if @blueprint.decoded_blueprint_data["inserters"] %>
-              <% @blueprint.decoded_blueprint_data["inserters"].each do |entity_id, count| %>
-                <li class="t-blueprint__requirements-tally">
-                  <span
-                    class="t-blueprint_requirements-tally__picture tooltip-trigger"
-                    data-tippy-content="<%= get_game_entity_name_by_uuid(entity_id) %>"
-                  >
-                    <%= image_tag get_game_icon_by_uuid(entity_id) %>
-                  </span>
-                  <%= count %>
+              <% @blueprint.decoded_blueprint_data["inserters"].each do |entity_id, data| %>
+                <li class="t-blueprint__requirements-entity">
+                  <div class="t-blueprint__requirements-entity__tally">
+                    <span
+                      class="t-blueprint__requirements-entity__picture tooltip-trigger"
+                      data-tippy-content="<%= data["name"] %>"
+                    >
+                      <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
+                    </span>
+                    <%= data["tally"] %>
+                  </div>
                 </li>
               <% end %>
             <%end %>
             <% if @blueprint.decoded_blueprint_data["belts"] %>
-              <% @blueprint.decoded_blueprint_data["belts"].each do |entity_id, count| %>
-                <li class="t-blueprint__requirements-tally">
-                  <span
-                    class="t-blueprint_requirements-tally__picture tooltip-trigger"
-                    data-tippy-content="<%= get_game_entity_name_by_uuid(entity_id) %>"
-                  >
-                    <%= image_tag get_game_icon_by_uuid(entity_id) %>
-                  </span>
-                  <%= count %>
+              <% @blueprint.decoded_blueprint_data["belts"].each do |entity_id, data| %>
+                <li class="t-blueprint__requirements-entity">
+                  <div class="t-blueprint__requirements-entity__tally">
+                    <span
+                      class="t-blueprint__requirements-entity__picture tooltip-trigger"
+                      data-tippy-content="<%= data["name"] %>"
+                    >
+                      <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
+                    </span>
+                    <%= data["tally"] %>
+                  </div>
                 </li>
               <% end %>
             <%end %>
@@ -169,11 +187,11 @@
           <% @blueprint.tags.each do |tag| %>
             <li class="t-blueprint__tags-tag">
               <span
-                class="t-blueprint_requirements-tally__picture tooltip-trigger"
+                class="t-blueprint__requirements-tally__picture tooltip-trigger"
                 data-tippy-content="<%= tag.name.capitalize %>"
                 data-tippy-placement="bottom"
               >
-                <%= image_tag get_game_icon(tag.name) %>
+                <%= image_tag get_game_entity_icon_by_name(tag.name) %>
               </span>
             </li>
           <% end %>

@@ -82,7 +82,7 @@ class Blueprint < ApplicationRecord
   # TODO: Refactor, cleanup, make validator and parsers distinct
   def encoded_blueprint_parsable
     if self.mod.name === "MultiBuildBeta"
-      valid = MultibuildBetaBlueprintParser::parse(self, validate: true)
+      valid = Parsers::MultibuildBetaBlueprint.new(self).validate
     else
       valid = true
     end
