@@ -43,7 +43,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ### v.1.1.0
 - Rewrote the blueprint validators and parsers entirely.
-- Improved the blueprint summary, blueprints "Requirements" will now also show assemblers / smelters / refineries / colliders recipes and the number of buildings that have been affected with the recipe.
+- Improved the blueprint summary, blueprints "Requirements" will now also show [assemblers / smelters / refineries / colliders / chemical plants] recipes and the number of buildings that have been affected the recipe.
 - Added new tags when creating blueprints: "Early-game", "Mid-game", "Late-game", "Lettering" and "Conveyor Belt Art".
 - Small UI improvements / Optimizations and code cleanup.
 
