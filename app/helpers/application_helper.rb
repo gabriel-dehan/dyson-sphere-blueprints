@@ -7,7 +7,7 @@ module ApplicationHelper
     elsif name.downcase === "research"
       icon_name = '2901'
     else
-      icon_name = Engine::Entities.get_uuid(name) || 'default'
+      icon_name = Engine::Entities.instance.get_uuid(name) || 'default'
     end
 
     begin
@@ -28,7 +28,7 @@ module ApplicationHelper
   end
 
   def get_game_recipe_icon_by_uuid(uuid)
-    file = uuid.blank? ? 'default' : uuid
+    file = uuid.blank? || uuid == 0 ? 'default' : uuid
 
     begin
       image_path "game_icons/recipes/#{file}.png"

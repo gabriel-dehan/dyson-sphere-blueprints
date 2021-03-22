@@ -9,7 +9,7 @@ class Engine::Recipes
 
   def get_name(recipe_uuid)
     recipe = @recipes_map.find { |id, recipe_name| id.to_s == recipe_uuid.to_s }
-    recipe ? recipe[1] : "Unknown"
+    recipe ? recipe[1] : "Not set"
   end
 
 end

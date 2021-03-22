@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_214645) do
+ActiveRecord::Schema.define(version: 2021_03_22_155855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_214645) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
-    t.json "decoded_blueprint_data"
+    t.json "summary"
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
     t.index ["mod_id"], name: "index_blueprints_on_mod_id"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true

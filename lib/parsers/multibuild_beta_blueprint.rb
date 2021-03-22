@@ -26,7 +26,7 @@ class Parsers::MultibuildBetaBlueprint
     end
   end
 
-  def parse!
+  def parse!(silent_errors: true)
     puts "Analyzing blueprint..."
     begin
       json_data = self.extract_blueprint_data(@blueprint.encoded_blueprint)
@@ -34,14 +34,18 @@ class Parsers::MultibuildBetaBlueprint
       puts "Parsing..."
       has_data, data = self.extract_data(json_data)
       raise "No data found in blueprint" if !has_data
-      @blueprint.decoded_blueprint_data = data
+      @blueprint.summary = data
 
       puts "Saving..."
       @blueprint.save!
 
       puts "Done!"
-    rescue
-      puts "Couldn't decode blueprint."
+    rescue StandardError => e
+      if silent_errors
+        puts "Couldn't decode blueprint: #{e.message}"
+      else
+        raise "Couldn't decode blueprint: #{e.message}"
+      end
       return nil
     end
   end
@@ -111,7 +115,8 @@ class Parsers::MultibuildBetaBlueprint
     if entities_engine.is_builder?(protoId)
       dataExtract[protoId][:recipes] ||= {}
       recipeId = get_key("recipeId", entity)
-      if recipeId && recipeId != 0
+
+      if recipeId
         dataExtract[protoId][:recipes][recipeId] ||= { tally: 0 }
         dataExtract[protoId][:recipes][recipeId][:name] ||= recipes_engine.get_name(recipeId)
         dataExtract[protoId][:recipes][recipeId][:tally] += 1

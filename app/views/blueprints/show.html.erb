@@ -115,10 +115,10 @@
       <% end %>
       <div class="t-blueprint__requirements">
         <h3>This blueprint requires</h3>
-        <% if @blueprint.decoded_blueprint_data && @blueprint.decoded_blueprint_data.any? %>
+        <% if @blueprint.summary && @blueprint.summary.any? %>
           <ul class="t-blueprint__requirements-data">
-            <% if @blueprint.decoded_blueprint_data["buildings"] %>
-              <% @blueprint.decoded_blueprint_data["buildings"].each do |entity_id, data| %>
+            <% if @blueprint.summary["buildings"] %>
+              <% @blueprint.summary["buildings"].each do |entity_id, data| %>
                 <li class="t-blueprint__requirements-entity">
                   <div class="t-blueprint__requirements-entity__tally">
                     <span
@@ -136,7 +136,7 @@
                           class="t-blueprint__requirements-entity__recipe tooltip-trigger"
                           data-tippy-content="<%= recipe["name"] %>"
                           data-tippy-placement="bottom">
-                          <%= recipe["tally"] %> <%= image_tag get_game_entity_icon_by_uuid(recipe_id) %>
+                          <%= recipe["tally"] %> <%= image_tag get_game_recipe_icon_by_uuid(recipe_id) %>
                         </li>
                       <% end %>
                     </ul>
@@ -144,8 +144,8 @@
                 </li>
               <% end %>
             <%end %>
-            <% if @blueprint.decoded_blueprint_data["inserters"] %>
-              <% @blueprint.decoded_blueprint_data["inserters"].each do |entity_id, data| %>
+            <% if @blueprint.summary["inserters"] %>
+              <% @blueprint.summary["inserters"].each do |entity_id, data| %>
                 <li class="t-blueprint__requirements-entity">
                   <div class="t-blueprint__requirements-entity__tally">
                     <span
@@ -159,8 +159,8 @@
                 </li>
               <% end %>
             <%end %>
-            <% if @blueprint.decoded_blueprint_data["belts"] %>
-              <% @blueprint.decoded_blueprint_data["belts"].each do |entity_id, data| %>
+            <% if @blueprint.summary["belts"] %>
+              <% @blueprint.summary["belts"].each do |entity_id, data| %>
                 <li class="t-blueprint__requirements-entity">
                   <div class="t-blueprint__requirements-entity__tally">
                     <span

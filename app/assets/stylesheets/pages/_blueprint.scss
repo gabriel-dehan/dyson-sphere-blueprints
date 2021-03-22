@@ -80,7 +80,7 @@
         list-style: none;
         justify-content: flex-end;
         flex-wrap: wrap;
-        margin: 5px 0 4px 0;
+        margin: 0px 0 8px 0;
         padding: 0;
         position: relative;
 
@@ -109,7 +109,7 @@
         margin: 0 0 4px 10px;
 
         &:first-child, &:nth-child(3n+1) {
-          margin: 0;
+          margin: 0 0 4px 0;
         }
       }
 
