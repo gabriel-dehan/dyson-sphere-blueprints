@@ -9,10 +9,11 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 ## Roadmap
 
 ### Dev
+- [x] Setup staging pipeline
+- [~] Optimize, add includes, check for n+1 queries...
+- [~] Seo, sitemap...
+- [ ] Move image hosting to S3
 - [ ] Handle password recover emails
-- [ ] Setup staging pipeline
-- [ ] Optimize, add includes, check for n+1 queries...
-- [ ] Seo, sitemap...
 - [ ] Add tests
 
 ### Features / Bugs
@@ -28,9 +29,9 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add a link to "my collections" page from the collection page
 - [x] Fix rendering of blueprints 3 times in show page
 - [x] Add smelters / assemblers recipes detail
-- [ ] Add tag "Lettering" / "Conveyor Belt Art"
+- [x] Way to add tags with icons in a cleaner fashion
+- [x] Add tag "Lettering" / "Conveyor Belt Art" / "Early-game" / "Mid-game" / "Late-game"
 - [ ] Add power needed
-- [ ] Way to add tags with icons in a cleaner fashion
 - [ ] Blueprint preview
 - [ ] Search / filters for collections
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
@@ -39,6 +40,12 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Minimal responsive
 
 ## Changelog
+
+### v.1.1.0
+- Rewrote the blueprint validators and parsers entirely.
+- Improved the blueprint summary, blueprints "Requirements" will now also show assemblers / smelters / refineries / colliders recipes and the number of buildings that have been affected with the recipe.
+- Added new tags when creating blueprints: "Early-game", "Mid-game", "Late-game", "Lettering" and "Conveyor Belt Art".
+- Small UI improvements / Optimizations and code cleanup.
 
 ### v.1.0.12
 - Fix the multiple rendering of the blueprints data on a blueprints page, which was causing slow downs for big blueprints.

@@ -1,5 +1,4 @@
 class Blueprint < ApplicationRecord
-  include GameDataConcern
   include PgSearch::Model
   extend FriendlyId
   acts_as_votable

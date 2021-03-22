@@ -1,12 +1,13 @@
 import { Controller } from "stimulus"
 import Tagify from '@yaireo/tagify'
 import GameEntities from '../data/gameEntities.json';
+import GameTags from '../data/additionalTags.json';
 
 export default class extends Controller {
   static targets = [ "input" ]
 
   initialize() {
-    this.whitelist = ["Mall", "Research", ...Object.values(GameEntities)]
+    this.whitelist = [...Object.keys(GameTags), ...Object.values(GameEntities)]
   }
 
   connect() {

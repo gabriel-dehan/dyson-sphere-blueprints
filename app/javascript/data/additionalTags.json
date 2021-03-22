@@ -1,0 +1,30 @@
+{
+  "Mall": {
+    "icon": "2303",
+    "iconType": "entities"
+  },
+  "Research": {
+    "icon": "2901",
+    "iconType": "entities"
+  },
+  "Conveyor belt art": {
+    "icon": "2001",
+    "iconType": "entities"
+  },
+  "Lettering": {
+    "icon": "2001",
+    "iconType": "entities"
+  },
+  "Early-game": {
+    "icon": "early-game",
+    "iconType": "tags"
+  },
+  "Mid-game": {
+    "icon": "mid-game",
+    "iconType": "tags"
+  },
+  "Late-game": {
+    "icon": "late-game",
+    "iconType": "tags"
+  }
+}

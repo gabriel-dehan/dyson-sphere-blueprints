@@ -1,19 +1,29 @@
 module ApplicationHelper
+  GAME_TAGS_PATH = Rails.root.join('app', 'javascript', 'data', 'additionalTags.json')
 
-  def get_game_entity_icon_by_name(name)
+  def get_additional_tags
+    @@tags ||= JSON.parse(File.read(GAME_TAGS_PATH))
+  end
+
+  def get_game_tag_icon_by_name(name)
+    additional_tags = get_additional_tags
     # TODO: Refacto in a tag list with icons
-    if name.downcase === "mall"
-      icon_name = '2303'
-    elsif name.downcase === "research"
-      icon_name = '2901'
+    if additional_tags.keys.include?(name.capitalize)
+      icon_info = additional_tags[name.capitalize]
+
+      begin
+        image_path "game_icons/#{icon_info["iconType"]}/#{icon_info["icon"]}.png"
+      rescue
+        image_path "game_icons/entities/default.png"
+      end
     else
       icon_name = Engine::Entities.instance.get_uuid(name) || 'default'
-    end
 
-    begin
-      image_path "game_icons/entities/#{icon_name}.png"
-    rescue
-      image_path "game_icons/entities/default.png"
+      begin
+        image_path "game_icons/entities/#{icon_name}.png"
+      rescue
+        image_path "game_icons/entities/default.png"
+      end
     end
   end
 
@@ -43,5 +53,4 @@ module ApplicationHelper
     end
     text
   end
-
 end
