@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   get 'help', to: 'pages#help'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
+
   # Sidekiq Web UI, only for admins.
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
+
   resources :users, only: [] do
     get :blueprints, to: "users#blueprints"
 

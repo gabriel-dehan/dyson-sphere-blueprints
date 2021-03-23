@@ -1,4 +1,13 @@
-<div class="m-form" data-controller="blueprintForm">
+<div class="m-form">
+  <!-- TODO: Remove -->
+  <% if @blueprint.errors.any? %>
+    <ul class="list-unstyled alert alert-danger">
+      <% @blueprint.errors.full_messages.each do |message| %>
+        <li>Blueprint <%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div class="m-form__container">
     <h1 class="m-form__title"><%= form_title %></h1>
 
@@ -36,7 +45,18 @@
           <abbr title="required">*</abbr>
           Cover picture <em>(3 MB maximum, ideal ratio 16:9 for instance 1280x720, ...)</em>
         </label>
-        <%= f.drag_and_drop_file_field :cover, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
+
+        <%= f.file_field :cover,
+          accept: ImageUploader::ALLOWED_TYPES.join(","),
+          data: {
+            upload_server: upload_server,
+            preview_element: "m-form__picture-preview-cover",
+            upload_result_element: "m-form__picture-cover-upload-result",
+          } %>
+
+        <%= f.hidden_field :cover,
+          value: @blueprint.cached_cover_data,
+          id: "m-form__picture-cover-upload-result" %>
 
         <span class="error">
           <% if @blueprint.errors[:cover].length > 0 %>
@@ -44,10 +64,11 @@
           <% end %>
         </span>
         <div class="m-form__picture-preview">
-          <% if @blueprint.cover.key %>
-            <%= cl_image_tag @blueprint.cover.key, height: 100, width: 100, crop: :fill %>
-            <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
-          <% end %>
+          <%= image_tag @blueprint.cover_url(:small).to_s,
+            width: 300,
+            class: "img-thumbnail file-upload-preview",
+            id: "m-form__picture-preview-cover" %>
+          <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
         </div>
       </div>
 
@@ -55,12 +76,40 @@
         <label for="pictures">
           Additional pictures <em>(4 pictures maximum, 3 MB maximum each, ideal ratio 16:9 for instance 1280x720, ...)</em>
         </label>
-        <%= f.drag_and_drop_file_field :pictures, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
+
+        <div class="form-group">
+          <!-- will be replaced by Uppy -->
+          <%= f.file_field :pictures,
+            multiple: true,
+            accept: ImageUploader::ALLOWED_TYPES.join(","),
+            data: {
+              upload_server: upload_server,
+            } %>
+        </div>
+
         <span class="error">
           <% if @blueprint.errors[:pictures].length > 0 %>
             <%= @blueprint.errors[:pictures].first %>
           <% end %>
         </span>
+
+        <ul class="file-upload-list" id="blueprint-picture-list">
+          <%= f.fields_for :pictures do |pf| %>
+            <li>
+              <div class="media">
+                <%= image_tag pf.object.image.derivation_url(:thumbnail, 300, 300).to_s,
+                  width: 150,
+                  class: "img-thumbnail mr-3" %>
+                  <div class="form-group">
+                    <%= pf.label :_destroy, "Remove Photo" %>
+                    <%= pf.check_box :_destroy %>
+                  </div>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+
         <div class="m-form__pictures-preview">
           <% if @blueprint.pictures.any? %>
             <% @blueprint.pictures.each do |picture| %>

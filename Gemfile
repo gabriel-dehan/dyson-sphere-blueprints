@@ -37,10 +37,6 @@ gem 'simple_form'
 gem 'friendly_id', '~> 5.4.0'
 gem 'acts_as_votable'
 gem 'acts-as-taggable-on', '~> 7.0'
-gem 'cloudinary'
-gem 'active_storage_validations'
-gem 'mini_magick', '>= 4.9.5'
-gem 'active_storage_drag_and_drop'
 gem 'awesome_print'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
@@ -48,6 +44,12 @@ gem 'kaminari'
 gem 'pg_search'
 gem "omniauth-rails_csrf_protection"
 gem 'omniauth-discord'
+
+gem "aws-sdk-s3", '~> 1.14'
+gem 'shrine', '~> 3.3'
+gem 'image_processing', '~> 1.10'
+gem 'fastimage'
+gem 'marcel'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
@@ -81,7 +83,6 @@ group :staging, :production do
   gem "sentry-rails"
   gem "sentry-sidekiq"
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
