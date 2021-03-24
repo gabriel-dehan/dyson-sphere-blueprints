@@ -91,6 +91,14 @@ Make sure the Gemfile has the proper platforms set:
 $ bundle lock --add-platform x86_64-linux
 ```
 
+## Staging
+
+Copy prod DB to staging
+
+```
+heroku pg:backups:restore `heroku pg:backups:url --app dyson-sphere-blueprints` DATABASE_URL --app dyson-sphere-blueprints-stage
+```
+
 ## License
 
 **Important**: this license only applies to the logic and application in itself and does not pertain to any data or assets coming from the game Dyson Sphere Program which is the intellectual property of Youthcat Studio.

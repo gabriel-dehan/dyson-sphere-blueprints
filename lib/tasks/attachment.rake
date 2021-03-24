@@ -1,7 +1,7 @@
 namespace :attachment do
   desc "Migrate from cloudinary to s3"
   task migrate: [ :environment ] do
-    Blueprint.all.take(10).each do |bp|
+    Blueprint.all.each do |bp|
       puts "Migrating #{bp.id}"
       if !bp.cover_picture
         bp.cover_picture_remote_url = bp.cover.url
@@ -14,7 +14,6 @@ namespace :attachment do
       end
 
       bp.save!
-
     end
   end
 end
