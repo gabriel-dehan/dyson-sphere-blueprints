@@ -7,7 +7,11 @@ class BlueprintPolicy < ApplicationPolicy
 
   def show?
     if (record.collection.type == "Private")
-      record.user == user
+      if user.admin?
+        true
+      else
+        record.user == user
+      end
     else
       true
     end
