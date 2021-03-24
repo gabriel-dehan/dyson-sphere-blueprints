@@ -10,9 +10,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ### Dev
 - [x] Setup staging pipeline
+- [x] Move image hosting to S3
+- [x] Move database to new host
 - [~] Optimize, add includes, check for n+1 queries...
 - [~] Seo, sitemap...
-- [ ] Move image hosting to S3
 - [ ] Handle password recover emails
 - [ ] Add tests
 
@@ -33,14 +34,20 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add tag "Lettering" / "Conveyor Belt Art" / "Early-game" / "Mid-game" / "Late-game"
 - [ ] Add power needed
 - [ ] Blueprint preview
+- [ ] Clicking on a tag on the blueprints index will search for this tag
 - [ ] Search / filters for collections
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Localisation chinese
-- [ ] Minimal responsive
+- [ ] Minimal responsive (Maybe)
 
 
 ## Changelog
+
+### v.2.0.0
+- Rewrote all image handling code in the site
+- Updated the blueprint creation form with a new image upload UI
+- Moved all the pictures to the new host AWS S3
 
 ### v.1.1.0
 - Rewrote the blueprint validators and parsers entirely.
