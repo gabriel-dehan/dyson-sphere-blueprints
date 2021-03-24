@@ -7,14 +7,18 @@ class Blueprint < ApplicationRecord
   paginates_per 32
 
   # Pictures
-  include PictureUploader::Attachment(:cover)
-  has_many :pictures, dependent: :destroy
-  accepts_nested_attributes_for :pictures, allow_destroy: true
+  include PictureUploader::Attachment(:cover_picture)
+  has_many :additional_pictures, dependent: :destroy, class_name: "Picture"
+  accepts_nested_attributes_for :additional_pictures, allow_destroy: true
 
-  has_one :user, through: :collection
+  # TODO: Remove when switch to s3 is over
+  has_one_attached :cover
+  has_many_attached :pictures
 
   belongs_to :collection
   belongs_to :mod
+  has_one :user, through: :collection
+
   has_rich_text :description
 
   friendly_id :title, use: :slugged
@@ -24,8 +28,8 @@ class Blueprint < ApplicationRecord
   validates :title, presence: true
   validates :encoded_blueprint, presence: true
   validates :tag_list, length: { minimum: 1, maximum: 10, message: "needs at least one tag, maximum 10." }
-  validates :cover, presence: true
-  validates :pictures, length: { maximum: 4, message: "are authorized. Please make sure you don't have too many pictures attached." },
+  validates :cover_picture, presence: true
+  validates :additional_pictures, length: { maximum: 4, message: "Too many pictures. Please make sure you don't have too many pictures attached." }
   validate :encoded_blueprint_parsable
 
   pg_search_scope :search_by_title,
@@ -34,7 +38,7 @@ class Blueprint < ApplicationRecord
       tsearch: { prefix: true }
     }
 
-  default_scope { with_rich_text_description.includes(:taggings, :mod, :user, { cover_attachment: :blob }, pictures_attachments: :blob) }
+  default_scope { with_rich_text_description.includes(:taggings, :mod, :user, :additional_pictures) }
 
   def formatted_mod_version
     "#{mod.name} - #{mod_version}"

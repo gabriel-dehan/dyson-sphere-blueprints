@@ -1,91 +1,115 @@
-import 'uppy/dist/uppy.min.css'
 
 import {
   Core,
-  FileInput,
-  Informer,
-  ProgressBar,
-  ThumbnailGenerator,
   Dashboard,
   AwsS3,
 } from 'uppy'
 
-const randomstring = require('randomstring')
+import randomstring from 'randomstring';
+
+const UPPY_DEFAULT_OPTIONS = {
+  inline: true,
+  height: 200,
+  width: '100%',
+  doneButtonHandler: null,
+  hideProgressAfterFinish: true,
+  showLinkToFileUploadResult: false,
+  proudlyDisplayPoweredByUppy: false,
+  showProgressDetails: true,
+  replaceTargetContent: true,
+  theme: 'dark',
+};
 
 const singleFileUpload = (fileInput) => {
-  const imagePreview = document.getElementById(fileInput.dataset.previewElement)
-  const formGroup    = fileInput.parentNode
-
-  formGroup.removeChild(fileInput)
-
-  const uppy = fileUpload(fileInput)
-
-  uppy
-    .use(FileInput, {
-      target: formGroup,
-      locale: { strings: { chooseFiles: 'Choose file' } },
-    })
-    .use(Informer, {
-      target: formGroup,
-    })
-    .use(ProgressBar, {
-      target: imagePreview.parentNode,
-    })
-    .use(ThumbnailGenerator, {
-      thumbnailWidth: 600,
-    })
-
-  uppy.on('upload-success', (file, response) => {
-    const fileData = uploadedFileData(file, response, fileInput)
-
-    // set hidden field value to the uploaded file data so that it's submitted with the form as the attachment
-    const hiddenInput = document.getElementById(fileInput.dataset.uploadResultElement)
-    hiddenInput.value = fileData
-  })
-
-  uppy.on('thumbnail:generated', (file, preview) => {
-    imagePreview.src = preview
-  })
-}
-
-const multipleFileUpload = (fileInput) => {
-  const formGroup = fileInput.parentNode
-
-  const uppy = fileUpload(fileInput)
+  const container = fileInput.parentNode;
+  container.removeChild(fileInput);
+  const uppy = fileUpload(fileInput, { maximum: 1 });
 
   uppy
     .use(Dashboard, {
-      target: formGroup,
-      inline: true,
-      height: 300,
-      replaceTargetContent: true,
+      ...UPPY_DEFAULT_OPTIONS,
+      target: container,
+      note: 'Single cover picture. 3 MB maximum, ideal ratio 16:9. For instance 1920x1080, etc...',
+    });
+
+  uppy.on('upload-success', (file, response) => {
+    const fileData = uploadedFileData(file, response, fileInput);
+    const hiddenInput = document.getElementById(fileInput.dataset.uploadResultElement);
+    hiddenInput.value = fileData;
+  });
+
+  uppy.on('complete', () => {
+    createResetButton(container, uppy);
+  });
+}
+
+const multipleFileUpload = (fileInput) => {
+  const container = fileInput.parentNode
+  const uppy = fileUpload(fileInput, { maximum: 4 })
+
+  uppy
+    .use(Dashboard, {
+      ...UPPY_DEFAULT_OPTIONS,
+      target: container,
+      note: '4 pictures maximum, 3 MB maximum each, ideal ratio 16:9. For instance 1920x1080, etc...',
     })
 
   uppy.on('upload-success', (file, response) => {
     const hiddenField = document.createElement('input')
 
+    hiddenField.classList = 'm-form__pictures-additional-pictures-data';
     hiddenField.type = 'hidden'
-    hiddenField.name = `album[photos_attributes][${randomstring.generate()}][image]`
+    hiddenField.name = `blueprint[additional_pictures_attributes][${randomstring.generate()}][picture]`
     hiddenField.value = uploadedFileData(file, response, fileInput)
 
     document.querySelector('form').appendChild(hiddenField)
-  })
+  });
+
+  uppy.on('upload', () => {
+    const submit = document.querySelector('form input[type=submit]');
+    submit.disabled = true;
+  });
+
+  uppy.on('complete', () => {
+    createResetButton(container, uppy);
+
+    const submit = document.querySelector('form input[type=submit]');
+    submit.disabled = false;
+  });
 }
 
-const fileUpload = (fileInput) => {
+const createResetButton = (container, uppy) => {
+  if (!container.querySelector('.uppy-DashboardContent-bar .uppy-DashboardContent-reset-button')) {
+    const resetButton = document.createElement('button');
+    resetButton.classList = 'uppy-DashboardContent-reset-button';
+    resetButton.textContent = 'Reset';
+    resetButton.addEventListener('click', function() {
+      document
+        .querySelectorAll('.m-form__pictures-additional-pictures-data')
+        .forEach(element => element.remove())
+      uppy.reset();
+    });
+
+    container.querySelector('.uppy-DashboardContent-bar').appendChild(resetButton);
+  }
+}
+
+const fileUpload = (fileInput, { maximum }) => {
   const uppy = Core({
     id: fileInput.id,
     autoProceed: true,
     restrictions: {
+      maxFileSize: 3*1024*1024,
+      maxNumberOfFiles: maximum,
       allowedFileTypes: fileInput.accept.split(','),
     },
-  })
+  });
 
   uppy.use(AwsS3, {
     companionUrl: '/', // will call Shrine's presign endpoint mounted on `/s3/params`
-  })
+  });
 
-  return uppy
+  return uppy;
 }
 
 const uploadedFileData = (file, response, fileInput) => {
@@ -94,7 +118,7 @@ const uploadedFileData = (file, response, fileInput) => {
   return JSON.stringify(fileData(file, id))
 }
 
-// constructs uploaded file data in the format that Shrine expects
+// Constructs uploaded file data in the format that Shrine expects
 const fileData = (file, id) => ({
   id: id,
   storage: 'cache',

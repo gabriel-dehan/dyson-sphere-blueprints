@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  authenticate :user do
+    mount Shrine.presign_endpoint(:cache) => "/s3/params"
+  end
+  mount PictureUploader.derivation_endpoint => "/derivations/image"
+
   resources :users, only: [] do
     get :blueprints, to: "users#blueprints"
 

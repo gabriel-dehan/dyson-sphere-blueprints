@@ -45,6 +45,11 @@ gem 'pg_search'
 gem "omniauth-rails_csrf_protection"
 gem 'omniauth-discord'
 
+gem 'cloudinary'
+# gem 'active_storage_validations'
+# gem 'mini_magick', '>= 4.9.5'
+# gem 'active_storage_drag_and_drop'
+
 gem "aws-sdk-s3", '~> 1.14'
 gem 'shrine', '~> 3.3'
 gem 'image_processing', '~> 1.10'

@@ -27,7 +27,26 @@
   }
 
   input[type=submit] {
-    margin-top: 2em;
+    margin-top: 2.2em;
+    color: var(--white);
+    border-color: var(--dark-red);
+    background-color: var(--dark-red);
+
+    &:hover {
+      background-color: transparent;
+      border-color: var(--dark-red);
+      color: var(--dark-red);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+
+      &:hover {
+        color: var(--white);
+        border-color: var(--dark-red);
+        background-color: var(--dark-red);
+      }
+    }
   }
 
   &__title {
@@ -56,6 +75,10 @@
     textarea { font-family: monospace; min-height: 120px; }
   }
 
+  &__uploader {
+    margin-bottom: 15px;
+  }
+
   &__picture {
     margin-top: 22px;
 
@@ -67,21 +90,80 @@
       &__warning {
         display: block;
         color: var(--orange);
+        margin-bottom: 10px;
       }
     }
   }
 
   &__pictures {
     margin-top: 30px;
+    margin-bottom: 10px;
 
     &-preview {
-      img {
-        border: 2px solid var(--blue);
-        border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+
+      &-remove {
+        display: flex;
       }
+
       &__warning {
         display: block;
         color: var(--orange);
+        margin-bottom: 10px;
+      }
+
+      &-container {
+        border: 2px solid var(--dark-error-red);
+        border-radius: 6px;
+        display: inline-block;
+        margin-right: 20px;
+
+        label {
+          cursor: pointer;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: 0;
+
+          strong {
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: .1rem;
+            color: var(--white);
+            background-color: var(--dark-error-red);
+            text-align: center;
+            padding: 6px 0;
+          }
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        input[type=checkbox] {
+          display: none;
+        }
+
+        input[type=checkbox]:checked + label {
+          &::before {
+            font-family: "Font Awesome 5 Free";
+            content: "\f057";
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark-error-red);
+            font-size: 50px;
+          }
+        }
       }
     }
   }

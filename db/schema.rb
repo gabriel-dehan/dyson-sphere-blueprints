@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_230011) do
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
     t.json "summary"
-    t.text "cover_data"
+    t.text "cover_picture_data"
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
     t.index ["mod_id"], name: "index_blueprints_on_mod_id"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true

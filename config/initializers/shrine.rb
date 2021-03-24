@@ -20,6 +20,7 @@ Shrine.plugin :cached_attachment_data
 Shrine.plugin :restore_cached_data
 Shrine.plugin :derivatives
 Shrine.plugin :derivation_endpoint, secret_key: Rails.application.secret_key_base
+Shrine.plugin :url_options, store: { host: ENV["AWS_CLOUDFRONT_URL"] }
 
 Shrine.plugin :presign_endpoint, presign_options: -> (request) {
   filename = request.params["filename"]
