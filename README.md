@@ -32,8 +32,9 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add smelters / assemblers recipes detail
 - [x] Way to add tags with icons in a cleaner fashion
 - [x] Add tag "Lettering" / "Conveyor Belt Art" / "Early-game" / "Mid-game" / "Late-game"
-- [ ] Add power needed
+- [ ] Remove cloudinary and active storage entirely
 - [ ] Blueprint preview
+- [ ] Add power needed
 - [ ] Clicking on a tag on the blueprints index will search for this tag
 - [ ] Search / filters for collections
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
