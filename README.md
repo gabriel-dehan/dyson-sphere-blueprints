@@ -91,6 +91,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 - Release
 
+# Contributors
+
+- [Brokenmass](https://github.com/brokenmass), wrote the 3D Preview renderer (as well as the blueprint mod).
+
 # Deploy
 
 Make sure the Gemfile has the proper platforms set:
