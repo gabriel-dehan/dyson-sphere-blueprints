@@ -4,11 +4,18 @@ Rails.application.routes.draw do
   get 'help', to: 'pages#help'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
+
   # Sidekiq Web UI, only for admins.
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
+
+  authenticate :user do
+    mount Shrine.presign_endpoint(:cache) => "/s3/params"
+  end
+  mount PictureUploader.derivation_endpoint => "/derivations/image"
+
   resources :users, only: [] do
     get :blueprints, to: "users#blueprints"
 

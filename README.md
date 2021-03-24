@@ -22,7 +22,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Hide collections with no blueprints
 - [x] Order collections by popularity
 - [x] Add a favorites page
-- [x] Fix wrong <Select> background color on windows
+- [x] Fix wrong `<Select>` background color on windows
 - [x] Add a reset button to homepage form
 - [x] Improve search by mod version, should find all compatible versions
 - [x] Remove blueprint name when parsing blueprint
@@ -38,6 +38,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Localisation chinese
 - [ ] Minimal responsive
+
 
 ## Changelog
 
@@ -88,6 +89,14 @@ Make sure the Gemfile has the proper platforms set:
 
 ```
 $ bundle lock --add-platform x86_64-linux
+```
+
+## Staging
+
+Copy prod DB to staging
+
+```
+heroku pg:backups:restore `heroku pg:backups:url --app dyson-sphere-blueprints` DATABASE_URL --app dyson-sphere-blueprints-stage
 ```
 
 ## License

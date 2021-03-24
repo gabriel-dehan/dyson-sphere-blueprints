@@ -5,33 +5,22 @@
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "trix"
 import "@rails/actiontext"
 
 Rails.start()
 Turbolinks.start()
-ActiveStorage.start()
 
-// External imports
-document.addEventListener('dnd-upload:initialize', (e) => {
-  const errorNode = e.target.parentNode.parentNode.querySelector('.error');
-  errorNode.textContent = '';
-});
-
-document.addEventListener('dnd-upload:error', (e) => {
-  e.preventDefault();
-  const errorNode = e.target.parentNode.parentNode.querySelector('.error');
-  errorNode.textContent = e.detail.error;
-});
-
-// Internal imports, e.g:
-document.addEventListener('turbolinks:load', () => {
-  // Call your functions here
-});
-
+import { singleFileUpload, multipleFileUpload } from 'fileUpload'
 import "controllers"
 
-require("trix")
-require("@rails/actiontext")
+document.addEventListener('turbolinks:load', () => {
+  document.querySelectorAll('input[type=file]').forEach(fileInput => {
+    if (fileInput.multiple) {
+      multipleFileUpload(fileInput)
+    } else {
+      singleFileUpload(fileInput)
+    }
+  })
+});

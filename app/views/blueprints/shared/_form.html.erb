@@ -1,4 +1,5 @@
-<div class="m-form" data-controller="blueprintForm">
+<div class="m-form">
+  <% blueprint.errors.full_messages %>
   <div class="m-form__container">
     <h1 class="m-form__title"><%= form_title %></h1>
 
@@ -23,50 +24,81 @@
       <div class="m-form__tags" data-controller="entitiesTags">
         <label for="tag_list">
           <abbr title="required">*</abbr>
-          Tags <em>(10 maximum)</em>
+          Tags <em>(1 minimum - 10 maximum)</em>
         </label>
-        <%= text_field_tag :tag_list, @blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
-        <% if @blueprint.errors[:tag_list].length > 0 %>
-          <span class="error tags"><%= @blueprint.errors[:tag_list].first %></span>
+        <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
+        <% if blueprint.errors[:tag_list].length > 0 %>
+          <span class="error tags"><%= blueprint.errors[:tag_list].first %></span>
         <% end %>
       </div>
 
       <div class="m-form__picture">
-        <label for="cover">
+        <label for="cover_picture">
           <abbr title="required">*</abbr>
-          Cover picture <em>(3 MB maximum, ideal ratio 16:9 for instance 1280x720, ...)</em>
+          Cover picture
         </label>
-        <%= f.drag_and_drop_file_field :cover, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
-
+        <div class="m-form__uploader">
+          <%= f.file_field :cover_picture,
+            accept: PictureUploader::ALLOWED_TYPES.join(","),
+            data: {
+              upload_server: upload_server,
+              preview_element: "m-form__picture-preview-cover",
+              upload_result_element: "m-form__picture-cover-upload-result",
+            } %>
+        </div>
+        <%= f.hidden_field :cover_picture, value: blueprint.cached_cover_picture_data, id: "m-form__picture-cover-upload-result" %>
         <span class="error">
-          <% if @blueprint.errors[:cover].length > 0 %>
-            <%= @blueprint.errors[:cover].first %>
+          <% if blueprint.errors[:cover_picture].length > 0 %>
+            <%= blueprint.errors[:cover_picture].first %>
           <% end %>
         </span>
+
         <div class="m-form__picture-preview">
-          <% if @blueprint.cover.key %>
-            <%= cl_image_tag @blueprint.cover.key, height: 100, width: 100, crop: :fill %>
+          <% if blueprint.cover_picture %>
             <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
+            <%= image_tag blueprint.cover_picture_url(:small), height: 100, width: 100 %>
           <% end %>
         </div>
       </div>
 
       <div class="m-form__pictures">
-        <label for="pictures">
-          Additional pictures <em>(4 pictures maximum, 3 MB maximum each, ideal ratio 16:9 for instance 1280x720, ...)</em>
+        <label for="additional_pictures">
+          Additional pictures <em></em>
         </label>
-        <%= f.drag_and_drop_file_field :pictures, nil, accept: 'image/png, image/jpeg, image/jpg, image/gif', size_limit: 3_000_000 %>
+
+        <div class="m-form__uploader">
+          <%= f.file_field :additional_pictures,
+            multiple: true,
+            accept: PictureUploader::ALLOWED_TYPES.join(","),
+            data: {
+              upload_server: upload_server,
+            } %>
+        </div>
+
         <span class="error">
-          <% if @blueprint.errors[:pictures].length > 0 %>
-            <%= @blueprint.errors[:pictures].first %>
+          <% if blueprint.errors[:additional_pictures].length > 0 %>
+            <%= blueprint.errors[:additional_pictures].first %>
           <% end %>
         </span>
+
         <div class="m-form__pictures-preview">
-          <% if @blueprint.pictures.any? %>
-            <% @blueprint.pictures.each do |picture| %>
-              <%= cl_image_tag picture.key, height: 100, width: 100, crop: :fill %>
-            <% end %>
-            <span class="m-form__pictures-preview__warning">*Uploading new images will overwrite the existing ones.</span>
+          <% if blueprint.additional_pictures.any? %>
+            <span class="m-form__pictures-preview__warning">*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint.</span>
+            <div class="m-form__pictures-preview-remove">
+              <%= f.fields_for :additional_pictures do |pictures_form| %>
+                <% additional_picture = pictures_form.object %>
+                <% if additional_picture.picture %>
+                  <%= pictures_form.hidden_field :picture, value: additional_picture.cached_picture_data %>
+                  <div class="m-form__pictures-preview-container">
+                    <%= pictures_form.check_box :_destroy %>
+                    <%= pictures_form.label :_destroy do %>
+                      <strong>Remove</strong>
+                      <%= image_tag additional_picture.picture.derivation_url(:thumbnail, 100, 100).to_s %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>

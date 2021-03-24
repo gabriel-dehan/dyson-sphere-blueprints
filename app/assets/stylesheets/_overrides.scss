@@ -36,60 +36,97 @@
   }
 }
 
-label.asdndzone {
-  cursor: pointer;
-  border: 3px solid var(--dark-red);
-  font-size: 20px;
-  max-width: initial;
-  min-height: initial;
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  margin-bottom: 15px;
+[data-uppy-theme=dark] {
+  .uppy-Dashboard {
+    &-AddFiles {
+      border-color: #89193d;
 
-  input {
-    visibility: hidden;
-    position: absolute;
-    z-index: -1;
-  }
+      &-title {
+        z-index: 1004;
+      }
 
-  .asdndz__icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .asdndz-highlight {
-    color: var(--red);
-  }
-
-  .direct-upload {
-    background-color: var(--midnight-blue);
-    color: var(--white);
-    height: initial;
-    display: inline-flex;
-    align-items: center;
-
-    &__progress {
-      background-color: var(--green);
-    }
-
-    &__remove {
-      color: var(--white);
-
-      &:hover {
-        color: var(--red);
+      &-info {
+        display: inline;
+        font-style: italic;
       }
     }
 
-    &__filesize {
-      color: var(--white);
+    &-note {
+      max-width: initial;
+    }
+
+    &-inner {
+      border: 3px solid var(--dark-red);
+      font-family: "Nunito Sans", "Helvetica", "Arial", "sans-serif";
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    &-browse {
+      color: var(--dark-red);
+
+      &:hover {
+        border-color: var(--dark-red);
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    &-Item {
+      max-height: 80px;
+
+      &-preview {
+        max-height: 80px;
+      }
     }
   }
 
-  .direct-upload--pending {
-    .direct-upload__filesize {
-      color: #707e87;
+  .uppy-DashboardContent {
+    &-bar {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-color: var(--dark-blue);
+      height: 40px;
+    }
+
+    &-title {
+      line-height: 40px;
+    }
+
+    &-reset-button, &-addMore {
+      display: inline-flex;
+      align-items: center;
+      font-size: 1.1rem;
+      border: 1px solid var(--dark-red);
+      background-color: var(--dark-red);
+      color: var(--white);
+      height: 30px;
+      line-height: 30px;
+      margin: 0;
+      padding: 0 1.6rem;
+      font-weight: 700;
+      border-radius: 3px;
+
+      &:focus {
+        border: 1px solid var(--dark-red);
+        background-color: var(--dark-red);
+        color: var(--white);
+      }
+
+      &:hover {
+        border-color: var(--dark-red);
+        background-color: transparent;
+        color: var(--dark-red);
+      }
+    }
+
+    &-reset-button {
+      margin-left: 15px;
+    }
+
+    &-addMore {
+      margin-left: auto !important;
+    }
+
+    &-addMoreCaption {
+      line-height: 1em;
     }
   }
 }

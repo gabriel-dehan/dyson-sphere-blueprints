@@ -1,11 +1,17 @@
 class Blueprint < ApplicationRecord
   include PgSearch::Model
   extend FriendlyId
+
   acts_as_votable
   acts_as_taggable_on :tags
   paginates_per 32
 
-  has_rich_text :description
+  # Pictures
+  include PictureUploader::Attachment(:cover_picture)
+  has_many :additional_pictures, dependent: :destroy, class_name: "Picture"
+  accepts_nested_attributes_for :additional_pictures, allow_destroy: true
+
+  # TODO: Remove when switch to s3 is over
   has_one_attached :cover
   has_many_attached :pictures
 
@@ -13,9 +19,18 @@ class Blueprint < ApplicationRecord
   belongs_to :mod
   has_one :user, through: :collection
 
+  has_rich_text :description
+
   friendly_id :title, use: :slugged
 
   after_save :decode_blueprint
+
+  validates :title, presence: true
+  validates :encoded_blueprint, presence: true
+  validates :tag_list, length: { minimum: 1, maximum: 10, message: "needs at least one tag, maximum 10." }
+  validates :cover_picture, presence: true
+  validates :additional_pictures, length: { maximum: 4, message: "Too many pictures. Please make sure you don't have too many pictures attached." }
+  validate :encoded_blueprint_parsable
 
   pg_search_scope :search_by_title,
     against: [:title],
@@ -23,33 +38,7 @@ class Blueprint < ApplicationRecord
       tsearch: { prefix: true }
     }
 
-  validates :title, presence: true
-  validates :encoded_blueprint, presence: true
-
-  validates :tag_list, length: { minimum: 1, maximum: 10, message: "needs at least one tag, maximum 10." }
-  # validates :mod_version, format: { with: /((Dyson Sphere Program)|(MultiBuildBeta)|(MultiBuild))\s?-\s?\d+\.\d+.\d+((\.|-)\w+)?/i, message:  "Unregistered mod or version format." }
-
-  validates :cover,
-    attached: true,
-    content_type: [:png, :jpg, :jpeg, :gif],
-    dimension: {
-      width: { max: 3000 },
-      height: { max: 3000 },
-      message: 'is too large'
-    }
-
-  validates :pictures,
-    limit: { max: 4 },
-    content_type: [:png, :jpg, :jpeg, :gif],
-    dimension: {
-      width: { max: 3000 },
-      height: { max: 3000 },
-      message: 'is too large'
-    }
-
-  validate :encoded_blueprint_parsable
-
-  default_scope { with_rich_text_description.includes(:taggings, :mod, :user, { cover_attachment: :blob }, pictures_attachments: :blob) }
+  default_scope { with_rich_text_description.includes(:taggings, :mod, :user, :additional_pictures) }
 
   def formatted_mod_version
     "#{mod.name} - #{mod_version}"

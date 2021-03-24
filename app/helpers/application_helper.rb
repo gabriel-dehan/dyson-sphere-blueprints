@@ -1,6 +1,10 @@
 module ApplicationHelper
   GAME_TAGS_PATH = Rails.root.join('app', 'javascript', 'data', 'additionalTags.json')
 
+  def upload_server
+    Rails.configuration.upload_server
+  end
+
   def get_additional_tags
     @@tags ||= JSON.parse(File.read(GAME_TAGS_PATH))
   end

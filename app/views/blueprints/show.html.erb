@@ -11,14 +11,14 @@
       <div class="swiper-container" data-carousel-target="container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <a href="<%= @blueprint.cover.url %>" target="_blank" rel="noopener noreferrer">
-              <%= cl_image_tag @blueprint.cover.key, width: 880, height: 495, quality: "auto", fetch_format: :auto, crop: :fill %>
+            <a href="<%= @blueprint.cover_picture.url %>" target="_blank" rel="noopener noreferrer">
+              <%= image_tag @blueprint.cover_picture_url(:large), width: 880, height: 495 %>
             </a>
           </div>
-          <% @blueprint.pictures.each do |picture| %>
+          <% @blueprint.additional_pictures.each do |additional_picture| %>
             <div class="swiper-slide">
-              <a href="<%= picture.url %>" target="_blank" rel="noopener noreferrer">
-                <%= cl_image_tag picture.key, width: 880, height: 495, quality: "auto", fetch_format: :auto, crop: :fill %>
+              <a href="<%= additional_picture.picture.url %>" target="_blank" rel="noopener noreferrer">
+                <%= image_tag additional_picture.picture_url(:large), width: 880, height: 495 %>
               </a>
             </div>
           <% end %>

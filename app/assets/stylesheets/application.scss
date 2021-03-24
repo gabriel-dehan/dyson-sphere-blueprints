@@ -8,10 +8,10 @@
 @import "@yaireo/tagify/dist/tagify";
 @import "font-awesome-sprockets";
 @import "font-awesome";
-@import "active_storage_drag_and_drop";
 @import "tippy.js/dist/tippy";
 @import "trix/dist/trix";
 @import "swiper/swiper-bundle";
+@import 'uppy/dist/uppy.min';
 
 // Your CSS partials
 @import "atoms/index";
@@ -88,7 +88,7 @@ select {
 
 label {
   font-weight: normal;
-  font-size: $font-size-base;
+  font-size: 16px;
 }
 
 button {

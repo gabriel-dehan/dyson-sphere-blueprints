@@ -24,5 +24,7 @@ module Dspblueprints
     #
     # config.time_zone = "Central Time (US & Canada)"
     config.eager_load_paths << Rails.root.join("lib")
+
+    config.upload_server = :s3
   end
 end
