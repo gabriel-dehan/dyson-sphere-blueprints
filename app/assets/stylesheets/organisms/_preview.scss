@@ -11,14 +11,13 @@
   &-tooltip {
     position: absolute;
     width: 120px;
-    // height: 50px;
     background: rgba(30, 30, 30, 0.8);
     color: var(--white);
     padding: 10px;
     z-index: 999;
     pointer-events: none;
     display: none;
-    font-size: 10px;
+    font-size: 14px;
 
     p {
       margin: 4px;
