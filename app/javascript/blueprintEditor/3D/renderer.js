@@ -1,169 +1,53 @@
+import pako from 'pako';
+import { createNanoEvents } from "nanoevents"
 import * as THREE from "three/build/three.module";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineMaterial } from 'three.meshline';
-import pako from 'pako';
+import { generateGraticules, wireframe } from './graticules';
+import recipeMaterials from './recipes.js.erb';
 import modelsData from './modelsData';
 
 export default class {
-  constructor({ tooltipContainer, container, data, width, height }) {
+  constructor({ tooltipContainer, container, data, width, height, setTooltipContent }) {
     this.tooltipContainer = tooltipContainer;
     this.container = container;
-    this.data = JSON.parse(pako.inflate(atob(data), { to: 'string' }));
     this.rendererWidth = width;
     this.rendererHeight = height;
+    this.getTooltipContent = setTooltipContent;
+    this.emitter = createNanoEvents();
+    this.eventHandlers = {};
+    this.data = JSON.parse(pako.inflate(atob(data), { to: 'string' }));
+  }
+
+  // render:start, render:complete
+  on(eventName, callback) {
+    if (this.eventHandlers[eventName]) {
+      // Unbind
+      this.eventHandlers[eventName].call();
+    }
+
+    this.eventHandlers[eventName] = this.emitter.on(eventName, callback);
   }
 
   render() {
     var camera,
       scene,
       renderer,
-      geometry,
-      material,
-      mesh,
+      sphere,
       controls,
-      globe,
       buildings = [],
       buildingsGroup,
       beltsGroup;
-
-    var { data, tooltipContainer, container, rendererWidth, rendererHeight } = this;
-
     const DEGREES_TO_RADIANS = Math.PI / 180;
-    // TODO: Change bp. to this.data.
-    const bp = data;
-
-    function* range(start, stop, step) {
-      for (let i = 0, v = start; v < stop; v = start + ++i * step) {
-        yield v;
-      }
-    }
-
-    function meridian(x, y0, y1, dy = 1.8) {
-      return Array.from(range(y0, y1 + 1e-6, dy), (y) => [x, y]);
-    }
-
-    function parallel(y, x0, x1, dx = 1.8) {
-      return Array.from(range(x0, x1 + 1e-6, dx), (x) => [x, y]);
-    }
-
-    function generateGraticules() {
-      var grid = [{
-          segments: 20,
-          count: 5,
-        },
-        {
-          segments: 40,
-          count: 5,
-        },
-        {
-          segments: 80,
-          count: 5,
-        },
-        {
-          segments: 100,
-          count: 5,
-        },
-        {
-          segments: 160,
-          count: 10,
-        },
-        {
-          segments: 200,
-          count: 10,
-        },
-        {
-          segments: 300,
-          count: 15,
-        },
-        {
-          segments: 400,
-          count: 15,
-        },
-        {
-          segments: 500,
-          count: 25,
-        },
-        {
-          segments: 600,
-          count: 25,
-        },
-        {
-          segments: 800,
-          count: 50,
-        },
-        {
-          segments: 1000,
-          count: 80,
-        },
-      ];
-
-      var coords = [];
-      var mainCoords = [];
-      for (var i = 0; i < 1000; i++) {
-        var segment = parallel(i * 0.36 - 180, -180, 180);
-
-        if (i % 5 === 0) {
-          mainCoords.push(segment);
-        } else {
-          coords.push(segment);
-        }
-      }
-      var index = 0;
-      grid.forEach((section) => {
-        var angle = 360 / section.segments;
-        var start = index * 0.36;
-        var end = (index + section.count) * 0.36;
-
-        for (var i = 0; i < section.segments; i++) {
-          var segA = meridian(i * angle - 180, -90 + start, -90 + end);
-          var segB = meridian(i * angle - 180, 90 - end, 90 - start);
-
-          if (i % 5 === 0) {
-            mainCoords.push(segA);
-            mainCoords.push(segB);
-          } else {
-            coords.push(segA);
-            coords.push(segB);
-          }
-        }
-
-        index += section.count;
-      });
-
-      var normal = {
-        type: 'MultiLineString',
-        coordinates: coords,
-      };
-
-      var main = {
-        type: 'MultiLineString',
-        coordinates: mainCoords,
-      };
-      return {
-        normal,
-        main,
-      };
-    }
-
-    function vertex([longitude, latitude], radius) {
-      const lambda = (longitude * Math.PI) / 180;
-      const phi = (latitude * Math.PI) / 180;
-      return new THREE.Vector3(
-        radius * Math.cos(phi) * Math.cos(lambda),
-        radius * Math.sin(phi),
-        -radius * Math.cos(phi) * Math.sin(lambda)
-      );
-    }
-
-    function wireframe(multilinestring, radius, material) {
-      const geometry = new THREE.Geometry();
-      for (const P of multilinestring.coordinates) {
-        for (let p0, p1 = vertex(P[0], radius), i = 1; i < P.length; ++i) {
-          geometry.vertices.push((p0 = p1), (p1 = vertex(P[i], radius)));
-        }
-      }
-      return new THREE.LineSegments(geometry, material);
-    }
+    const {
+      data: bp,
+      tooltipContainer,
+      container,
+      rendererWidth,
+      rendererHeight,
+      getTooltipContent,
+      emitter,
+    } = this;
 
     function init() {
       scene = new THREE.Scene();
@@ -176,37 +60,6 @@ export default class {
       camera.position.z = 500;
       scene.add(camera);
 
-      geometry = new THREE.SphereGeometry(200, 36, 36);
-
-      globe = new THREE.Group();
-
-      const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.1,
-        linewidth: 0.5,
-      });
-      const mainLineMaterial = new THREE.LineBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.2,
-      });
-      const meshMaterial = new THREE.MeshPhongMaterial({
-        color: 0x156289,
-        emissive: 0x072534,
-        side: THREE.DoubleSide,
-      });
-
-      var graticules = generateGraticules();
-
-      var normalWf = wireframe(graticules.normal, 200, lineMaterial);
-      var mainWf = wireframe(graticules.main, 200, mainLineMaterial);
-      mesh = new THREE.Mesh(geometry, meshMaterial);
-      globe.add(mesh);
-      globe.add(mainWf);
-      globe.add(normalWf);
-
-      scene.add(globe);
       renderer = new THREE.WebGLRenderer({
         antialias: true,
       });
@@ -236,6 +89,52 @@ export default class {
 
       const light = new THREE.AmbientLight(0x404040); // soft white light
       scene.add(light);
+
+      renderGlobe();
+    }
+
+    function renderGlobe() {
+      var globe = new THREE.Group();
+
+      const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.1,
+        linewidth: 0.5,
+      });
+      const intermediateMaterial = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.2,
+      });
+      const mainLineMaterial = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.4,
+      });
+
+      var graticules = generateGraticules();
+      var normalWf = wireframe(graticules.normal, 200.1, lineMaterial);
+      var intermediateWf = wireframe(
+        graticules.intermediate,
+        200.1,
+        intermediateMaterial
+      );
+      var mainWf = wireframe(graticules.main, 200.1, mainLineMaterial);
+
+      var sphereGeometry = new THREE.SphereGeometry(200, 36, 36);
+      const sphereMaterial = new THREE.MeshPhongMaterial({
+        color: 0x156289,
+        emissive: 0x072534,
+        side: THREE.DoubleSide,
+      });
+      sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+      scene.add(globe);
+      globe.add(sphere);
+      globe.add(normalWf);
+      globe.add(intermediateWf);
+      globe.add(mainWf);
     }
 
     function LightenDarkenColor(num, amt) {
@@ -295,6 +194,9 @@ export default class {
 
       var positions = {};
 
+      //recipeMaterial.repeat.set(meshWidth / textureWidth, meshHeight / textureHeight);
+      const recipeGeometry = new THREE.PlaneGeometry(2, 2, 1, 1);
+
       for (let i = 0; i < bp.copiedBuildings.length; i++) {
         const building = bp.copiedBuildings[i];
         var model = modelsData[building.modelIndex];
@@ -302,7 +204,11 @@ export default class {
         var point = toCartesian(toSpherical(building.cursorRelativePos));
         stick.lookAt(point);
         buildingsGroup.add(stick);
-        var geometry = new THREE.BoxGeometry(...model.size);
+        var geometry = new THREE.BoxGeometry(
+          model.size[0] - 0.25,
+          model.size[1] - 0.25,
+          model.size[2]
+        );
         //const material = new THREE.MeshBasicMaterial({color: 0xffff00});
 
         const material = new THREE.MeshPhongMaterial({
@@ -314,7 +220,7 @@ export default class {
         });
         var mesh = new THREE.Mesh(geometry, material);
         mesh.rotateZ(THREE.Math.degToRad(building.cursorRelativeYaw));
-        mesh.position.set(0, 0, 200.2);
+        mesh.position.set(0, 0, 200.2 + model.size[2] / 2);
 
         mesh.data = building;
         stick.add(mesh);
@@ -329,17 +235,24 @@ export default class {
 
         var wireframe = new THREE.LineSegments(geo, mat);
         wireframe.rotateZ(THREE.Math.degToRad(building.cursorRelativeYaw));
-        wireframe.position.set(0, 0, 200.2);
+        wireframe.position.set(0, 0, 200.2 + model.size[2] / 2);
         stick.add(wireframe);
 
+        if (building.recipeId != 0 && recipeMaterials[building.recipeId]) {
+          const plane = new THREE.Mesh(
+            recipeGeometry,
+            recipeMaterials[building.recipeId]
+          );
+          plane.position.set(0, 0, 200.3 + model.size[2]);
+          stick.add(plane);
+        }
         positions[building.originalId] = point;
         buildings.push(mesh);
       }
-      const markerGeometry = new THREE.SphereGeometry(0.3, 4, 4);
-      const markerMaterial = new THREE.MeshBasicMaterial({
-        color: 0xff0000
-      });
-      console.log('start');
+
+      // const markerGeometry = new THREE.SphereGeometry(0.3, 4, 4);
+      // const markerMaterial = new THREE.MeshBasicMaterial({color: 0xff0000});
+
       var beltMap = {};
       for (let i = 0; i < bp.copiedBelts.length; i++) {
         const belt = bp.copiedBelts[i];
@@ -377,7 +290,7 @@ export default class {
         lanes.push(lane);
       }
 
-      var resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
+      // var resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
       lanes.forEach((lane) => {
         const materialA = new MeshLineMaterial({
           color: 0xff0000,
@@ -399,36 +312,34 @@ export default class {
 
     const raycaster = new THREE.Raycaster();
     raycaster.params = {
-      Mesh: {
-        threshold: 0.5
-      },
-      Line: {
-        threshold: 1
-      },
+      Mesh: {threshold: 0.5},
+      Line: {threshold: 1},
       LOD: {},
-      Points: {
-        threshold: 1
-      },
+      Points: {threshold: 1},
       Sprite: {},
     };
     const mouse = new THREE.Vector2();
-    var lastMouseEvent;
-
+    let lastMousePosition;
     function onMouseMove(event) {
-      lastMouseEvent = event;
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      const containerBounds = container.getBoundingClientRect();
+
+      const relativeX = event.clientX - containerBounds.left;
+      const relativeY = event.clientY - containerBounds.top;
+
+      lastMousePosition = { x: relativeX, y: relativeY };
+
+      mouse.x = (relativeX / rendererWidth) * 2 - 1;
+      mouse.y = -(relativeY / rendererHeight) * 2 + 1;
     }
 
-    function onClick(event) {
+    function onClick() {
       if (selected) {
-        console.log(selected.data);
+        emitter.emit('entity:select', selected.data);
       }
     }
 
     var selected;
     var tooltip = tooltipContainer;
-
     function render() {
       // update the picking ray with the camera and mouse position
       raycaster.setFromCamera(mouse, camera);
@@ -449,10 +360,7 @@ export default class {
         selected.material.emissiveIntensity = 1;
         var data = selected.data;
         tooltip.style.display = 'block';
-        tooltip.innerHTML = `
-                <p>originalId  ${data.originalId}</p>
-                <p>modelIndex: ${data.modelIndex}</p>
-                <p>recipeId:   ${data.recipeId}</p>`;
+        tooltip.innerHTML = getTooltipContent(data);
       } else {
         if (selected) {
           selected.material.emissiveIntensity = 0.5;
@@ -462,19 +370,21 @@ export default class {
         tooltip.style.display = 'none';
       }
 
-      if (selected && lastMouseEvent) {
-        tooltip.style.left = lastMouseEvent.clientX - 60 + 'px';
-        tooltip.style.top = lastMouseEvent.clientY - 80 + 'px';
+      if (selected && lastMousePosition) {
+        tooltip.style.left = lastMousePosition.x - 60 + 'px';
+        tooltip.style.top = lastMousePosition.y - 80 + 'px';
       }
 
       renderer.render(scene, camera);
     }
 
+    emitter.emit('render:start');
     init();
     renderBP();
     animate();
+    emitter.emit('render:complete');
 
-    window.addEventListener('pointermove', onMouseMove, false);
-    window.addEventListener('click', onClick, false);
+    container.addEventListener('pointermove', onMouseMove, false);
+    container.addEventListener('click', onClick, false);
   }
 }

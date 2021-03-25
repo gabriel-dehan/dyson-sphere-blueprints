@@ -15,7 +15,25 @@ export default class extends Controller {
       data,
       width: container.clientWidth,
       height: container.clientHeight,
+      setTooltipContent: (data) => {
+        return `<p>originalId  ${data.originalId}</p>
+         <p>modelIndex: ${data.modelIndex}</p>
+         <p>recipeId:   ${data.recipeId}</p>`;
+      }
     });
+
+    renderer.on('render:start', function() {
+      console.log('Started');
+    })
+
+    renderer.on('render:complete', function() {
+      console.log('Rendered');
+    })
+
+    renderer.on('entity:select', function(data) {
+      console.log('Select', data);
+    })
+
 
     renderer.render();
   }
