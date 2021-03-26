@@ -29,16 +29,22 @@ export default class extends Controller {
             <img src="${assetPathResolver('entities', protoId)}" />
             <h4>${Entities[protoId]}</h4>
           </span>`;
-        const recipeHtml = `
-          <span class="o-preview-tooltip__recipe">
-            <img src="${assetPathResolver('recipes', recipeId === 0 ? 'default' : recipeId )}" />
-            <h4>Recipe: ${Recipes[recipeId]}</h4>
-          </span>`;
+
+
+        let recipeHtml = '';
+
+        if (recipeId && recipeId > 0) {
+          recipeHtml = `
+            <span class="o-preview-tooltip__recipe">
+              <img src="${assetPathResolver('recipes', recipeId === 0 ? 'default' : recipeId )}" />
+              <h4>Recipe: ${Recipes[recipeId]}</h4>
+            </span>`;
+        }
 
         return `
           <span class="o-preview-tooltip__content">
             ${entityHtml}
-            ${recipeId ? recipeHtml : ''}
+            ${recipeHtml}
           </span>
         `;
       },
@@ -46,15 +52,15 @@ export default class extends Controller {
     });
 
     renderer.on('render:start', function() {
-      console.log('Started');
+      // TODO: Loader
     })
 
     renderer.on('render:complete', function() {
-      console.log('Rendered');
+      // TODO: Loader
     })
 
     renderer.on('entity:select', function(data) {
-      console.log('Select', data);
+      // console.log('Select', data);
     })
 
 

@@ -32,9 +32,13 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add smelters / assemblers recipes detail
 - [x] Way to add tags with icons in a cleaner fashion
 - [x] Add tag "Lettering" / "Conveyor Belt Art" / "Early-game" / "Mid-game" / "Late-game"
-- [ ] Remove cloudinary and active storage entirely
 - [ ] Blueprint preview
+- [ ] Remove cloudinary and active storage entirely
+- [ ] Find and fix memory leak
+- [ ] Blueprint preview loader
+- [ ] Blueprints on S3
 - [ ] Add tabs for preview / description / render preview only when needed
+- [ ] Preview editor
 - [ ] Add power needed
 - [ ] Clicking on a tag on the blueprints index will search for this tag
 - [ ] Search / filters for collections
