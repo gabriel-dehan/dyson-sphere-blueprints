@@ -4,11 +4,7 @@ import Entities from '../data/gameEntities.json';
 import Recipes from '../data/gameRecipes.json';
 
 const assetPathResolver = (assetType, id) => {
-  if (railsAssetsHash == '') {
-    return `${railsAssetsPath}/game_icons/${assetType}/${id}.png`;
-  } else {
-    return `${railsAssetsPath}/game_icons/${assetType}/${id}-${railsAssetsHash}.png`;
-  }
+  return `${window._cdnURL}/public/game_icons/${assetType}/${id}.png`;
 }
 export default class extends Controller {
   static targets = [ "data", "output", "tooltip", "loader" ]
