@@ -339,6 +339,10 @@
   &__description {
     padding: 20px 28px;
 
+    & > a {
+      cursor: pointer;
+    }
+
     h1 {
       font-size: $font-size-header;
       margin-bottom: 5px;

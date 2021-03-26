@@ -6,6 +6,23 @@
     margin: 8px;
     line-height: 0;
     border-bottom: 0;
+    background-color: black;
+  }
+
+  &-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   &-tooltip {

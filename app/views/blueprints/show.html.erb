@@ -35,38 +35,40 @@
           <i class="fas fa-copy"></i>Copy to clipboard
         </button>
       </div>
-      <%
-=begin%>
- <div class="m-tabs" data-controller="tabs">
+
+      <div class="m-tabs" data-controller="tabs">
         <ul class="m-tabs-select-container" data-tabs-target="select">
-          <li class="m-tabs-select active" data-tab-select="description">Description</li>
-          <li class="m-tabs-select" data-tab-select="3d-preview">3D Preview</li>
+          <li
+            class="m-tabs-select active"
+            data-tab-select="description"
+            data-action="click->tabs#select">
+            Description
+          </li>
+          <li
+            class="m-tabs-select"
+            data-tab-select="3d-preview"
+            data-action="click->tabs#select">
+            3D Preview
+          </li>
         </ul>
         <div class="m-tabs-tab active" data-tabs-target="tab" data-tabs-id="description">
-          <% if !@blueprint.description.blank? %>
-            <div class="t-blueprint__description">
+          <div class="t-blueprint__description">
+            <% if @blueprint.description.blank? %>
+              This blueprint doesn't have a description! Instead you can check the <a data-tab-select="3d-preview" data-action="click->tabs#select">3D Preview.</a>
+            <% else %>
               <%= @blueprint.description %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
         <div class="m-tabs-tab" data-tabs-target="tab" data-tabs-id="3d-preview">
           <div class="o-preview">
             <div class="o-preview-container" data-preview-target="output"></div>
+            <div class="o-preview-loader" data-preview-target="loader"><%= image_tag 'loader.svg' %></div>
             <div class="o-preview-tooltip" data-preview-target="tooltip"></div>
           </div>
         </div>
       </div>
-<%
-=end%>
-      <% if !@blueprint.description.blank? %>
-        <div class="t-blueprint__description">
-          <%= @blueprint.description %>
-        </div>
-      <% end %>
-      <div class="o-preview">
-        <div class="o-preview-container" data-preview-target="output"></div>
-        <div class="o-preview-tooltip" data-preview-target="tooltip"></div>
-      </div>
+
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
         <h3>Blueprint</h3>
         <textarea data-preview-target="data" data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
