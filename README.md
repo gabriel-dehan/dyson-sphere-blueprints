@@ -32,8 +32,15 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add smelters / assemblers recipes detail
 - [x] Way to add tags with icons in a cleaner fashion
 - [x] Add tag "Lettering" / "Conveyor Belt Art" / "Early-game" / "Mid-game" / "Late-game"
+- [x] Blueprint preview
+- [x] Blueprint preview loader
+- [x] Add tabs for preview / description / render preview only when needed
 - [ ] Remove cloudinary and active storage entirely
-- [ ] Blueprint preview
+- [ ] Find and fix memory leak
+- [ ] Optimize bundle size
+- [ ] Add preview in blueprint creation form
+- [ ] Blueprints on S3
+- [ ] Preview editor
 - [ ] Add power needed
 - [ ] Clicking on a tag on the blueprints index will search for this tag
 - [ ] Search / filters for collections
@@ -42,6 +49,13 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Localisation chinese
 - [ ] Minimal responsive (Maybe)
 
+### TODO Blueprint Previewer:
+- Memoize setTooltipContent so it doesn't get called every millisecond
+- Colors:
+```
+Grid: 0xb0f566
+Belts: 0x282828
+```
 
 ## Changelog
 
@@ -90,6 +104,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 ### v.1.0.0
 
 - Release
+
+# Contributors
+
+- [Brokenmass](https://github.com/brokenmass), wrote the 3D Preview renderer (as well as the blueprint mod).
 
 # Deploy
 
