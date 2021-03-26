@@ -34,6 +34,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Add tag "Lettering" / "Conveyor Belt Art" / "Early-game" / "Mid-game" / "Late-game"
 - [ ] Remove cloudinary and active storage entirely
 - [ ] Blueprint preview
+- [ ] Add tabs for preview / description / render preview only when needed
 - [ ] Add power needed
 - [ ] Clicking on a tag on the blueprints index will search for this tag
 - [ ] Search / filters for collections
@@ -43,7 +44,6 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Minimal responsive (Maybe)
 
 ### TODO Blueprint Previewer:
-- Zoom onto the blueprint by default
 - Memoize setTooltipContent so it doesn't get called every millisecond
 - Colors:
 ```

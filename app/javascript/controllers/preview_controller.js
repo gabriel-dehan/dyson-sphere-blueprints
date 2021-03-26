@@ -22,18 +22,23 @@ export default class extends Controller {
       tooltipContainer,
       container,
       data,
-      width: container.clientWidth,
-      height: container.clientHeight,
       setTooltipContent: (data) => {
         const { protoId, recipeId } = data;
-        return `
-          <span>
+        const entityHtml = `
+          <span class="o-preview-tooltip__entity">
             <img src="${assetPathResolver('entities', protoId)}" />
             <h4>${Entities[protoId]}</h4>
-          </span>
-          <span>
-            <img src="${assetPathResolver('recipes', recipeId)}" />
+          </span>`;
+        const recipeHtml = `
+          <span class="o-preview-tooltip__recipe">
+            <img src="${assetPathResolver('recipes', recipeId === 0 ? 'default' : recipeId )}" />
             <h4>Recipe: ${Recipes[recipeId]}</h4>
+          </span>`;
+
+        return `
+          <span class="o-preview-tooltip__content">
+            ${entityHtml}
+            ${recipeId ? recipeHtml : ''}
           </span>
         `;
       },

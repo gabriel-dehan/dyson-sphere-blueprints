@@ -35,6 +35,29 @@
           <i class="fas fa-copy"></i>Copy to clipboard
         </button>
       </div>
+      <%
+=begin%>
+ <div class="m-tabs" data-controller="tabs">
+        <ul class="m-tabs-select-container" data-tabs-target="select">
+          <li class="m-tabs-select active" data-tab-select="description">Description</li>
+          <li class="m-tabs-select" data-tab-select="3d-preview">3D Preview</li>
+        </ul>
+        <div class="m-tabs-tab active" data-tabs-target="tab" data-tabs-id="description">
+          <% if !@blueprint.description.blank? %>
+            <div class="t-blueprint__description">
+              <%= @blueprint.description %>
+            </div>
+          <% end %>
+        </div>
+        <div class="m-tabs-tab" data-tabs-target="tab" data-tabs-id="3d-preview">
+          <div class="o-preview">
+            <div class="o-preview-container" data-preview-target="output"></div>
+            <div class="o-preview-tooltip" data-preview-target="tooltip"></div>
+          </div>
+        </div>
+      </div>
+<%
+=end%>
       <% if !@blueprint.description.blank? %>
         <div class="t-blueprint__description">
           <%= @blueprint.description %>
