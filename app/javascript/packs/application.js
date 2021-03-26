@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import "channels"
 import "trix"
 import "@rails/actiontext"
+import "../config.js.erb";
 
 Rails.start()
 Turbolinks.start()

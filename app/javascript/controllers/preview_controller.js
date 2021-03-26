@@ -1,6 +1,15 @@
 import { Controller } from "stimulus"
 import Preview3DRenderer from 'brokenmass3dpreview';
+import Entities from '../data/gameEntities.json';
+import Recipes from '../data/gameRecipes.json';
 
+const assetPathResolver = (assetType, id) => {
+  if (railsAssetsHash == '') {
+    return `${railsAssetsPath}/game_icons/${assetType}/${id}.png`;
+  } else {
+    return `${railsAssetsPath}/game_icons/${assetType}/${id}-${railsAssetsHash}.png`;
+  }
+}
 export default class extends Controller {
   static targets = [ "data", "output", "tooltip" ]
 
@@ -16,13 +25,19 @@ export default class extends Controller {
       width: container.clientWidth,
       height: container.clientHeight,
       setTooltipContent: (data) => {
-        return `<p>originalId  ${data.originalId}</p>
-         <p>modelIndex: ${data.modelIndex}</p>
-         <p>recipeId:   ${data.recipeId}</p>`;
+        const { protoId, recipeId } = data;
+        return `
+          <span>
+            <img src="${assetPathResolver('entities', protoId)}" />
+            <h4>${Entities[protoId]}</h4>
+          </span>
+          <span>
+            <img src="${assetPathResolver('recipes', recipeId)}" />
+            <h4>Recipe: ${Recipes[recipeId]}</h4>
+          </span>
+        `;
       },
-      assetPathResolver: (assetType, id) => {
-        return `https://dyson-sphere-blueprints-dev.s3-eu-west-1.amazonaws.com/public/game_icons/${assetType}/${id}.png`;
-      },
+      assetPathResolver,
     });
 
     renderer.on('render:start', function() {

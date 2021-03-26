@@ -42,6 +42,14 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Localisation chinese
 - [ ] Minimal responsive (Maybe)
 
+### TODO Blueprint Previewer:
+- Zoom onto the blueprint by default
+- Memoize setTooltipContent so it doesn't get called every millisecond
+- Colors:
+```
+Grid: 0xb0f566
+Belts: 0x282828
+```
 
 ## Changelog
 
