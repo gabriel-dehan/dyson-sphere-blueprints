@@ -14,12 +14,15 @@ export default class extends Controller {
     const container = this.outputTarget;
     const data = this.dataTarget.value;
 
+    const dataSplitOnName = data.split(':');
+    const strippedData = dataSplitOnName.length > 1 ? dataSplitOnName[1] : data;
+
     // Only render if output is empty (hasn't been rendered yet)
     if (!container.childNodes.length) {
       const renderer = new Preview3DRenderer({
         tooltipContainer,
         container,
-        data,
+        data: strippedData,
         setTooltipContent: (data) => {
           const { protoId, recipeId } = data;
           const entityName = Entities[protoId];
