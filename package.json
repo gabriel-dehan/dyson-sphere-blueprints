@@ -8,7 +8,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
     "@yaireo/tagify": "^3.23.1",
-    "brokenmass3dpreview": "https://github.com/gabriel-dehan/brokenmass-3d-preview#1.0.0",
+    "brokenmass3dpreview": "https://github.com/gabriel-dehan/brokenmass-3d-preview#1.0.1",
     "clipboard": "^2.0.8",
     "milligram": "^1.4.1",
     "popper.js": "^1.16.1",

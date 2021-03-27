@@ -22,10 +22,14 @@ export default class extends Controller {
         data,
         setTooltipContent: (data) => {
           const { protoId, recipeId } = data;
+          const entityName = Entities[protoId];
+          // If we don't find the entity name we probably don't have an icon for it (modded entity)
+          const entityIconId = entityName ? protoId : 'default';
+
           const entityHtml = `
             <span class="o-preview-tooltip__entity">
-              <img src="${assetPathResolver('entities', protoId)}" />
-              <h4>${Entities[protoId]}</h4>
+              <img src="${assetPathResolver('entities', entityIconId)}" />
+              <h4>${entityName || 'Unknown'}</h4>
             </span>`;
 
 

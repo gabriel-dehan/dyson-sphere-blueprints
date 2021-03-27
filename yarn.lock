@@ -1944,9 +1944,9 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-"brokenmass3dpreview@https://github.com/gabriel-dehan/brokenmass-3d-preview#1.0.0":
+"brokenmass3dpreview@https://github.com/gabriel-dehan/brokenmass-3d-preview#1.0.1":
   version "0.0.1"
-  resolved "https://github.com/gabriel-dehan/brokenmass-3d-preview#bd0463908145e5a40cc15a0888ae1be28534b653"
+  resolved "https://github.com/gabriel-dehan/brokenmass-3d-preview#7dd82c4c323657c6410eb18bad2d988bab3e5f67"
   dependencies:
     nanoevents "^5.1.13"
     pako "^1.0.11"
