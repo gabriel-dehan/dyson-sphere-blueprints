@@ -325,6 +325,8 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    skylight (5.0.1)
+      activesupport (>= 5.2.0)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -410,6 +412,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-failures (~> 1.0)
   simple_form
+  skylight
   spring
   turbolinks (~> 5)
   tzinfo-data

@@ -55,6 +55,7 @@ gem 'shrine', '~> 3.3'
 gem 'image_processing', '~> 1.10'
 gem 'fastimage'
 gem 'marcel'
+gem "skylight"
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
