@@ -42,6 +42,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Blueprints on S3
 - [ ] Preview editor
 - [ ] Add power needed
+- [ ] Downvote feature
 - [ ] Clicking on a tag on the blueprints index will search for this tag
 - [ ] Search / filters for collections
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)

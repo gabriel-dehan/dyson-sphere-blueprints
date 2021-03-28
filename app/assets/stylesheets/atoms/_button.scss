@@ -24,6 +24,13 @@
 
   &:hover {
     background: transparent;
+    border: 0.1rem solid var(--dark-red);
     color: var(--dark-red);
+  }
+
+  &:focus:not(:hover), &:active:not(:hover) {
+    background: var(--dark-red);
+    border: 0.1rem solid var(--dark-red);
+    color: var(--white);
   }
 }

@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = [ "select", "tab" ]
 
   select(event) {
+    const previewController = this.previewController;
     const selectors = this.selectTarget.querySelectorAll('[data-tab-select]');
     const tabs = this.tabTargets;
     const targetId = event.target.dataset.tabSelect;
@@ -20,8 +21,17 @@ export default class extends Controller {
 
     if (targetId === '3d-preview') {
       // Defer the execution just a tiny bit to give the tab change a chance
-      setTimeout(() => this.previewController.render(), 500)
+      setTimeout(() => previewController.render(), 400);
 
+      // Restart if paused
+      if (this.previewController.renderer) {
+        this.previewController.renderer.restart();
+      }
+    } else {
+      // If the tab is not the previewer, pause the previewer to save CPU
+      if (this.previewController.renderer) {
+        this.previewController.renderer.pause();
+      }
     }
   }
 
