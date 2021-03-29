@@ -13,7 +13,7 @@
         label: "Collection",
         selected: @collection.id %>
 
-      <div class="m-form__inline">
+      <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
         <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.last.id, include_blank: false %>
         <%= f.input :mod_version, as: :select, collection: @mods.last.version_list, selected: blueprint.mod_version || @mods.last.version_list.first, include_blank: false %>
       </div>

@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="o-blueprint-filters__mods">
+      <div class="o-blueprint-filters__mods" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys } }.to_json %>" data-include-blank="true">
         <div class="o-blueprint-filters__mods-mod">
           <%= f.label :mod_id, "Mod" %>
           <%= f.select :mod_id, Mod.to_select, selected: filters[:mod_id], include_blank: 'Any' %>
