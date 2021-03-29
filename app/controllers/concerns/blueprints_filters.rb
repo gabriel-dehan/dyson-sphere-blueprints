@@ -10,6 +10,12 @@ module BlueprintsFilters
         mod_id: params[:mod_id].blank? ? 'Any' : params[:mod_id],
         mod_version: params[:mod_version].blank? ? 'Any' : params[:mod_version],
       }
+
+      if @filters[:mod_id] && @filters[:mod_id] != 'Any'
+        @filter_mod = @mods.find { |mod| mod.id == @filters[:mod_id].to_i }
+      else
+        @filter_mod = @mods.last
+      end
     end
 
     def filter(blueprints)
