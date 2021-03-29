@@ -6,7 +6,7 @@ class PagesController < ApplicationController
       search: nil,
       tags: [],
       order: 'recent',
-      mod_id: Mod.first.id,
+      mod_id: 'Any',
       mod_version: 'Any'
     }
 
@@ -14,7 +14,6 @@ class PagesController < ApplicationController
       .joins(:collection)
       .where(collection: { type: "Public" })
       .includes(:collection)
-      .where(mod_id: @filters[:mod_id])
       .order(created_at: :desc)
       .page(params[:page])
   end

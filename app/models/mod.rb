@@ -3,6 +3,7 @@ class Mod < ApplicationRecord
 
   # Used to decide which mods are automaticaly fetched from the thunderstore API
   MANAGED_MODS = [
+    'MultiBuild',
     'MultiBuildBeta'
   ]
 

@@ -40,7 +40,13 @@
         </ul>
         <div class="o-blueprint-card__version">
           <span class="o-blueprint-card__version-tag">
-            <%= blueprint.mod.name %> <%= formatted_mod_compatibility_range(blueprint) %>
+            <%
+=begin%>
+ <%= blueprint.mod.name %>
+<%
+=end%>
+            MultiBuild(Beta)
+             <%= formatted_mod_compatibility_range(blueprint) %>
           </span>
         </div>
       </li>

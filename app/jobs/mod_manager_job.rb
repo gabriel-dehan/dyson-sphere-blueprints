@@ -23,12 +23,15 @@ class ModManagerJob < ApplicationJob
         # Find new version and add them to the list
         mod_data["versions"].each do |version|
           unless registered_versions[version["version_number"]]
-            puts "Registering new mod version #{version['version_number']}"
-            registered_versions[version["version_number"]] = {
-              uuid4: version["uuid4"],
-              breaking: false,
-              created_at: version["date_created"]
-            }
+            # Only MultiBuild >= 2.2.0
+            if mod.name == 'MultiBuildBeta' || (mod.name == 'MultiBuild' && version["version_number"] >= "2.2.0")
+              puts "Registering new mod version #{version['version_number']}"
+              registered_versions[version["version_number"]] = {
+                uuid4: version["uuid4"],
+                breaking: false,
+                created_at: version["date_created"]
+              }
+            end
           end
         end
 

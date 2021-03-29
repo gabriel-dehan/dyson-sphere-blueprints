@@ -7,8 +7,8 @@ module BlueprintsFilters
         search: params[:search],
         tags: (params[:tags] || "").split(", "),
         order: params[:order] || "recent",
-        mod_id: params[:mod_id] || Mod.first.id,
-        mod_version: params[:mod_version].blank? ? 'Any' : params[:mod_version]
+        mod_id: params[:mod_id].blank? ? 'Any' : params[:mod_id],
+        mod_version: params[:mod_version].blank? ? 'Any' : params[:mod_version],
       }
     end
 
@@ -23,7 +23,7 @@ module BlueprintsFilters
         blueprints = blueprints.search_by_title(@filters[:search])
       end
 
-      if @filters[:mod_id]
+      if @filters[:mod_id] && @filters[:mod_id] != 'Any'
         blueprints = blueprints.where(mod_id: @filters[:mod_id])
       end
 

@@ -71,6 +71,8 @@ class Blueprint < ApplicationRecord
   def encoded_blueprint_parsable
     if self.mod.name === "MultiBuildBeta"
       valid = Parsers::MultibuildBetaBlueprint.new(self).validate
+    elsif self.mod.name === "MultiBuild"
+      valid = Parsers::MultibuildBetaBlueprint.new(self).validate
     else
       valid = true
     end
