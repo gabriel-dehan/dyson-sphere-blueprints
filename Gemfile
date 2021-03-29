@@ -22,9 +22,6 @@ gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -44,11 +41,6 @@ gem 'kaminari'
 gem 'pg_search'
 gem "omniauth-rails_csrf_protection"
 gem 'omniauth-discord'
-
-gem 'cloudinary'
-# gem 'active_storage_validations'
-# gem 'mini_magick', '>= 4.9.5'
-# gem 'active_storage_drag_and_drop'
 
 gem "aws-sdk-s3", '~> 1.14'
 gem 'shrine', '~> 3.3'

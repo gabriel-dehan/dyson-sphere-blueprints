@@ -35,7 +35,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [x] Blueprint preview
 - [x] Blueprint preview loader
 - [x] Add tabs for preview / description / render preview only when needed
-- [ ] Remove cloudinary and active storage entirely
+- [x] Remove cloudinary and active storage entirely
 - [ ] Find and fix memory leak
 - [ ] Optimize bundle size
 - [ ] Add preview in blueprint creation form

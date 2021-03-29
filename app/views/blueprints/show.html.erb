@@ -2,7 +2,7 @@
 <% if !@blueprint.description.blank? %>
   <%= content_for(:meta_description, @blueprint.description.to_plain_text.truncate(150)) %>
 <% end %>
-<%= content_for(:meta_image, @blueprint.cover.url) %>
+<%= content_for(:meta_image, @blueprint.cover_picture_url(:medium)) %>
 
 <div class="p-blueprint-show">
   <div class="t-blueprint" data-controller="carousel tooltip preview">

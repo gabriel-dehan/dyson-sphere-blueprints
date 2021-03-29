@@ -11,10 +11,6 @@ class Blueprint < ApplicationRecord
   has_many :additional_pictures, dependent: :destroy, class_name: "Picture"
   accepts_nested_attributes_for :additional_pictures, allow_destroy: true
 
-  # TODO: Remove when switch to s3 is over
-  has_one_attached :cover
-  has_many_attached :pictures
-
   belongs_to :collection
   belongs_to :mod
   has_one :user, through: :collection
@@ -67,7 +63,6 @@ class Blueprint < ApplicationRecord
     end
   end
 
-  # TODO: Refactor, cleanup, make validator and parsers distinct
   def encoded_blueprint_parsable
     if self.mod.name === "MultiBuildBeta"
       valid = Parsers::MultibuildBetaBlueprint.new(self).validate
