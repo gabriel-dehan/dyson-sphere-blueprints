@@ -58,6 +58,47 @@ Grid: 0xb0f566
 Belts: 0x282828
 ```
 
+## Memory leak tracking:
+- Symbols AR:
+- Symbols L: ?
+
+t=0
+```
+# --- Symbols
+Symbols => 40856
+# --- Object Space summary
+String => 678863
+Array => 306340
+Hash => 15886
+# --- Object Space
+{
+         :TOTAL => 1903236,
+          :FREE => 339832,
+      :T_OBJECT => 13789,
+       :T_CLASS => 12130,
+      :T_MODULE => 1668,
+       :T_FLOAT => 12,
+      :T_STRING => 689204,
+      :T_REGEXP => 2131,
+       :T_ARRAY => 316708,
+        :T_HASH => 16863,
+      :T_STRUCT => 329791,
+      :T_BIGNUM => 145,
+        :T_FILE => 10,
+        :T_DATA => 7264,
+       :T_MATCH => 1336,
+     :T_COMPLEX => 1,
+    :T_RATIONAL => 696,
+      :T_SYMBOL => 898,
+       :T_IMEMO => 167746,
+      :T_ICLASS => 3012
+}
+```
+
+t=12h
+```
+```
+
 ## Changelog
 
 ### v.2.0.0
