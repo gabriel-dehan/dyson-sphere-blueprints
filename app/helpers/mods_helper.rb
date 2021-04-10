@@ -11,7 +11,7 @@ module ModsHelper
     range = @mods.find { |mod| mod.name == 'MultiBuildBeta' }.compatibility_range_for(blueprint.mod_version)
 
     if range.first == range.last
-      "<strong>range.first</strong>".html_safe
+      "<strong>#{range.first}</strong>".html_safe
     else
       "<strong>#{range.first}</strong> up to <strong>#{range.last}</strong>".html_safe
     end
