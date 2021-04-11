@@ -8,12 +8,15 @@ module ModsHelper
     # end
 
     # Use MultiBuildBeta compatibility range anyway because MultiBuild and ``Beta are pretty much the same mod and have the same versions (for now)
-    range = @mods.find { |mod| mod.name == 'MultiBuildBeta' }.compatibility_range_for(blueprint.mod_version)
+    multi_build_beta = @mods.find { |mod| mod.name == 'MultiBuildBeta' }
+    range = multi_build_beta.compatibility_range_for(blueprint.mod_version)
 
     if range.first == range.last
       "<strong>#{range.first}</strong>".html_safe
     else
-      "<strong>#{range.first}</strong> up to <strong>#{range.last}</strong>".html_safe
+      # TODO: this is a temp fix for retro compatibilty, needs to be baked in properly
+      "<strong>#{range.first}</strong> up to <strong>#{multi_build_beta.latest}</strong>".html_safe
+      # Correct: "<strong>#{range.first}</strong> up to <strong>#{range.last}</strong>".html_safe
     end
   end
 

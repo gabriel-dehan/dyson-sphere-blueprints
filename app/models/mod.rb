@@ -25,6 +25,7 @@ class Mod < ApplicationRecord
     versions.keys.sort.reverse
   end
 
+  # TODO: Handle backward compatible and non compatible versions
   # Returns a range of version strings compatible with check_version, e.g ["2.0.0", "3.0.0"]
   def compatibility_range_for(check_version)
     # Generates a version matrix [[version, breaking]], e.g: [["2.0.1", true], ["2.0.2", false], ...]
