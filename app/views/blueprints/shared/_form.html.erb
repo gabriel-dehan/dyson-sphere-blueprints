@@ -14,8 +14,8 @@
         selected: @collection.id %>
 
       <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
-        <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.last.id, include_blank: false %>
-        <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.last.version_list, selected: blueprint.mod_version || @mods.last.version_list.first, include_blank: false %>
+        <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
+        <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.first.version_list, selected: blueprint.mod_version || @mods.first.version_list.first, include_blank: false %>
       </div>
       <div class="m-form__important">
         <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true %>
