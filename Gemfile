@@ -47,7 +47,6 @@ gem 'shrine', '~> 3.3'
 gem 'image_processing', '~> 1.10'
 gem 'fastimage'
 gem 'marcel'
-gem "skylight"
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
@@ -66,6 +65,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem "memory_profiler"
+  gem "derailed_benchmarks"
 end
 
 group :test do
@@ -80,9 +81,8 @@ group :staging, :production do
   gem "sentry-ruby"
   gem "sentry-rails"
   gem "sentry-sidekiq"
+  gem 'puma_worker_killer'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem "memory_profiler"
-gem "derailed_benchmarks"
