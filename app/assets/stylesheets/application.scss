@@ -102,6 +102,20 @@ button {
   grid-template-rows: auto 1fr auto;
 }
 
+.l-message {
+  padding: 1.5em 1.8em;
+  background-color: #e91e6366;
+
+  strong {
+    font-style: normal;
+    font-size: 1.2em;
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+
 .l-wrapper {
   width: 1140px;
   margin: 2em auto 1em auto;
