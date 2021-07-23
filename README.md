@@ -2,11 +2,14 @@
 
 Community website to share Dyson Sphere Program blueprints.
 
-Currently only supports the mod [MultiBuildBeta](https://dsp.thunderstore.io/package/brokenmass/MultiBuildBeta/), but will try to support other mods and native blueprints once they are out.
-
 Official website: [https://www.dysonsphereblueprints.com](https://www.dysonsphereblueprints.com/)
 
 ## Roadmap
+
+## IMPORTANT
+
+- [ ] Remove multibuild & multibuild beta blueprints, either delete them all or hide them cleanly
+- [ ] Clean up after MultiBuild removal?
 
 ### Dev
 - [x] Setup staging pipeline
@@ -48,7 +51,6 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Localisation chinese
-- [ ] Minimal responsive (Maybe)
 
 ### TODO Blueprint Previewer:
 - Memoize setTooltipContent so it doesn't get called every millisecond
@@ -59,6 +61,9 @@ Belts: 0x282828
 ```
 
 ## Changelog
+
+### v.3.0.0
+- Handle native blueprints minimaly
 
 ### v.2.0.0
 - Rewrote all image handling code in the site

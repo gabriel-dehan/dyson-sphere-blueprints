@@ -1,6 +1,12 @@
 .o-preview {
   position: relative;
 
+  &-warning {
+    margin-left: 2em;
+    color: var(--red);
+    font-weight: 400;
+  }
+
   &-container {
     height: 500px;
     margin: 8px;

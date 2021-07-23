@@ -4,7 +4,8 @@ class Mod < ApplicationRecord
   # Used to decide which mods are automaticaly fetched from the thunderstore API
   MANAGED_MODS = [
     'MultiBuild',
-    'MultiBuildBeta'
+    'MultiBuildBeta',
+    'Dyson Sphere Program'
   ]
 
   def self.to_select

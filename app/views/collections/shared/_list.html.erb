@@ -15,7 +15,12 @@
             <strong><%= collection.type %></strong> collection,
           </span>
           <span class="t-collections-list__collection-meta-count">
-            with <strong><%= collection.blueprints.count %></strong> <%= pluralize_without_count(collection.blueprints.count, 'blueprint') %>
+            <%
+=begin%>
+ # TODO remove where when removing MB
+<%
+=end%>
+            with <strong><%= collection.blueprints.where(mod_id: @mods.first.id).count %></strong> <%= pluralize_without_count(collection.blueprints.where(mod_id: @mods.first.id).count, 'blueprint') %>
         </span>
       </div>
       <div class="t-collections-list__collection-block">
@@ -33,7 +38,7 @@
         </div>
         <% if policy(collection).update? && with_actions %>
           <div class="t-collections-list__collection-actions">
-            <%= button_to  edit_collection_path(collection), method: :get, class: 't-collections-list__collection-actions-edit' do %>
+            <%= button_to edit_collection_path(collection), method: :get, class: 't-collections-list__collection-actions-edit' do %>
               <span
                 class="tooltip-trigger"
                 data-tippy-content="Edit"

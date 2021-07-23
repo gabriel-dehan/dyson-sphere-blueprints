@@ -7,15 +7,16 @@ module ModsHelper
     #   range = blueprint.mod_compatibility_range
     # end
 
-    # Use MultiBuildBeta compatibility range anyway because MultiBuild and ``Beta are pretty much the same mod and have the same versions (for now)
-    multi_build_beta = @mods.find { |mod| mod.name == 'MultiBuildBeta' }
-    range = multi_build_beta.compatibility_range_for(blueprint.mod_version)
+    # Use Dyson Sphere Program compatibility range
+    # TODO: Handle any mod
+    base_mod = @mods.find { |mod| mod.name == 'Dyson Sphere Program' }
+    range = base_mod.compatibility_range_for(blueprint.mod_version)
 
     if range.first == range.last
       "<strong>#{range.first}</strong>".html_safe
     else
       # TODO: this is a temp fix for retro compatibilty, needs to be baked in properly
-      "<strong>#{range.first}</strong> up to <strong>#{multi_build_beta.latest}</strong>".html_safe
+      "<strong>#{range.first}</strong> up to <strong>#{base_mod.latest}</strong>".html_safe
       # Correct: "<strong>#{range.first}</strong> up to <strong>#{range.last}</strong>".html_safe
     end
   end
@@ -25,7 +26,7 @@ module ModsHelper
     latest = mod.latest
     latest_breaking = mod.latest_breaking
     # Same, we use multibuildbeta data for displaying the range for both MultiBuild and ``Beta
-    range = @mods.find { |mod| mod.name == 'MultiBuildBeta' }.compatibility_range_for(blueprint.mod_version)
+    range = @mods.find { |mod| mod.name == 'Dyson Sphere Program' }.compatibility_range_for(blueprint.mod_version)
 
     # Latest
     if blueprint.mod_version == latest

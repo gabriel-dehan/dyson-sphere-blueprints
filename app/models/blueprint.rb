@@ -64,10 +64,12 @@ class Blueprint < ApplicationRecord
   end
 
   def encoded_blueprint_parsable
-    if self.mod.name === "MultiBuildBeta"
+    if self.mod.name == "MultiBuildBeta"
       valid = Parsers::MultibuildBetaBlueprint.new(self).validate
-    elsif self.mod.name === "MultiBuild"
+    elsif self.mod.name == "MultiBuild"
       valid = Parsers::MultibuildBetaBlueprint.new(self).validate
+    elsif self.mod.name == "Dyson Sphere Program"
+      valid = Parsers::DysonSphereProgramBlueprint.new(self).validate
     else
       valid = true
     end

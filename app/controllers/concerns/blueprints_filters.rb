@@ -7,7 +7,7 @@ module BlueprintsFilters
         search: params[:search],
         tags: (params[:tags] || "").split(", "),
         order: params[:order] || "recent",
-        mod_id: params[:mod_id].blank? ? 'Any' : params[:mod_id],
+        mod_id: params[:mod_id].blank? ? @mods.first.id : params[:mod_id],
         mod_version: params[:mod_version].blank? ? 'Any' : params[:mod_version],
       }
 

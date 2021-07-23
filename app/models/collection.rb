@@ -11,6 +11,7 @@ class Collection < ApplicationRecord
   friendly_id :name, use: :slugged
 
   def total_votes
-    blueprints.distinct.sum(:cached_votes_total)
+    # TODO: Remove MB
+    blueprints.where(mod_id: Mod.last.id).distinct.sum(:cached_votes_total)
   end
 end

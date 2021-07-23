@@ -6,6 +6,7 @@ class CollectionsController < ApplicationController
       .where(type: "Public")
       .joins(:blueprints)
       .where.not(blueprints: { id: nil })
+      .where(blueprints: { mod_id: @mods.first.id }) # TODO: Remove when Multibuild is removed
       .group('collections.id')
       .order("sum(blueprints.cached_votes_total) DESC")
       .page(params[:page])
@@ -15,6 +16,7 @@ class CollectionsController < ApplicationController
     @collection = Collection.friendly.find(params[:id])
     @blueprints = @collection
       .blueprints
+      .where(mod_id: @mods.first.id) # TODO: Remove when Multibuild is removed
       .order(cached_votes_total: :desc)
       .page(params[:page])
 
