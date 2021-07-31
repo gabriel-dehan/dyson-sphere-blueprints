@@ -26,5 +26,25 @@
   "Late-game": {
     "icon": "late-game",
     "iconType": "tags"
+  },
+  "Mass-Construction-1": {
+    "icon": "Mass-1",
+    "iconType": "tags"
+  },
+  "Mass-Construction-2": {
+    "icon": "Mass-2",
+    "iconType": "tags"
+  },
+  "Mass-Construction-3": {
+    "icon": "Mass-3",
+    "iconType": "tags"
+  },
+  "Mass-Construction-4": {
+    "icon": "Mass-4",
+    "iconType": "tags"
+  },
+  "Mass-Construction-5": {
+    "icon": "Mass-5",
+    "iconType": "tags"
   }
 }
