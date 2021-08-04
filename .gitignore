@@ -40,3 +40,6 @@ yarn-debug.log*
 *.swp
 .DS_Store
 /derailed/*
+
+# Ignore Jetbrains IDE config
+/.idea/

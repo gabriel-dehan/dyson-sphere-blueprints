@@ -9,6 +9,8 @@ class BlueprintParserJob < ApplicationJob
       Parsers::MultibuildBetaBlueprint.new(blueprint).parse!
     elsif blueprint.mod.name === "MultiBuild"
       Parsers::MultibuildBetaBlueprint.new(blueprint).parse!
+    elsif blueprint.mod.name === "Dyson Sphere Program"
+      Parsers::DysonSphereProgramBlueprint.new(blueprint).parse!
     end
   end
 end
