@@ -14,9 +14,10 @@ module ModsHelper
     if range.first == range.last
       "<strong>#{range.first}</strong>".html_safe
     else
-      # TODO: Handle retro compatible patches properly
-      "<strong>#{range.first}</strong> up to <strong>#{base_mod.latest}</strong>".html_safe
+      # TODO: Find a way to handle retro compatible patches properly
+      # Temp fix used when we had retrocompatibility issies on MBP: "<strong>#{range.first}</strong> up to <strong>#{base_mod.latest}</strong>".html_safe
       # Correct: "<strong>#{range.first}</strong> up to <strong>#{range.last}</strong>".html_safe
+      "Up to version <strong>#{range.last}</strong>".html_safe
     end
   end
 
