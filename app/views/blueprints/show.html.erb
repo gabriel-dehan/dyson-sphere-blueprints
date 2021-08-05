@@ -146,10 +146,10 @@
       <% end %>
       <div class="t-blueprint__requirements">
         <h3>This blueprint requires</h3>
-        <% if @blueprint.summary["total_structures"] %>
-          <em class="t-blueprint__requirements-total"><strong><%= @blueprint.summary["total_structures"] %></strong> structures</em>
-        <% end %>
         <% if @blueprint.summary && @blueprint.summary.any? %>
+          <% if @blueprint.summary["total_structures"] %>
+            <em class="t-blueprint__requirements-total"><strong><%= @blueprint.summary["total_structures"] %></strong> structures</em>
+          <% end %>
           <ul class="t-blueprint__requirements-data">
             <% if @blueprint.summary["buildings"] %>
               <% @blueprint.summary["buildings"].each do |entity_id, data| %>

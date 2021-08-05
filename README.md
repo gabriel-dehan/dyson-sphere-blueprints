@@ -142,6 +142,15 @@ AWS_CLOUDFRONT_URL=https://XYZ.cloudfront.net
 ```
 Most of those are not needed to be able to work on most features, but if you want images to display and be able to upload images for instance you will need to setup an AWS S3 and Cloudfront.
 
+### Rake tasks
+
+There are a few rake tasks that you can use:
+```
+rake mod:fetch_latest # currently legacy, but fetches the latest versions of all mods handled (MultiBuild and MultiBuildBeta)
+rake mod:fetch_base_game_latest[PATCH] # creates a new version in the DB, use like this: rake 'mod:fetch_base_game_latest[0.8.19.7662]'
+rake blueprint:recompute_data # updates all blueprints summary if you have made any changes to it
+```
+
 ## Contributors
 
 - [Brokenmass](https://github.com/brokenmass), Wrote the 3D Preview renderer (as well as the original blueprint mod).
