@@ -18,10 +18,6 @@ class BlueprintsController < ApplicationController
 
   def show
     @blueprint = Blueprint.friendly.find(params[:id])
-
-    # if summary is null, try to parse it. The current request wont have it set, but future ones should.
-    @blueprint.summary ||= BlueprintParserJob.perform_now(@blueprint.id) unless @blueprint.nil?
-
     authorize @blueprint
   end
 
