@@ -222,11 +222,11 @@
       }
 
       &.compatible {
-        color: var(--orange);
+        color: var(--green);
       }
 
       &.outdated {
-        color: var(--error-red);
+        color: var(--orange);
       }
     }
   }
