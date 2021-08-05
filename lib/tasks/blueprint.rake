@@ -1,8 +1,8 @@
 namespace :blueprint do
-  desc "Fetches the latest versions of all managed mods"
+  desc "Recompute all blueprint datas"
   task recompute_data: :environment do
-    Blueprint.all.each do |blueprint|
-      Parsers::MultibuildBetaBlueprint.new(blueprint).parse!
+    Blueprint.where(mod: { name: "Dyson Sphere Program" }).each do |blueprint|
+      BlueprintParserJob.perform_later(blueprint.id)
     end
   end
 end

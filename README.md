@@ -6,11 +6,6 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Roadmap
 
-## IMPORTANT
-
-- [ ] Remove multibuild & multibuild beta blueprints, either delete them all or hide them cleanly
-- [ ] Clean up after MultiBuild removal?
-
 ### Dev
 - [x] Setup staging pipeline
 - [x] Move image hosting to S3
@@ -42,28 +37,24 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - [ ] Find and fix memory leak
 - [ ] Optimize bundle size
 - [ ] Add preview in blueprint creation form
-- [ ] Blueprints on S3
 - [ ] Preview editor
 - [ ] Add power needed
 - [ ] Downvote feature
 - [ ] Clicking on a tag on the blueprints index will search for this tag
-- [ ] Search / filters for collections
-- [ ] Handle multiple blueprint mods and native blueprints once out (note to self: add js in the blueprint and search form to load versions according to the selected mod)
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Localisation chinese
 
-### TODO Blueprint Previewer:
-- Memoize setTooltipContent so it doesn't get called every millisecond
-- Colors:
-```
-Grid: 0xb0f566
-Belts: 0x282828
-```
-
 ## Changelog
 
+### v.3.1.0
+- New blueprint parser
+- New help page
+- Improved contribution documentation
+- New tags for Mass Construction research
+- Added versions: 0.8.19.7677, 0.8.19.7715, 0.8.19.7757, 0.8.19.7815, 0.8.19.7863
+
 ### v.3.0.0
-- Handle native blueprints minimaly
+- Handle native blueprints minimaly for version 0.8.19.7662
 
 ### v.2.0.0
 - Rewrote all image handling code in the site
@@ -111,11 +102,56 @@ Belts: 0x282828
 
 - Release
 
-# Contributors
+## Contribute
 
-- [Brokenmass](https://github.com/brokenmass), wrote the 3D Preview renderer (as well as the blueprint mod).
+Pull requests are always welcome, if you want a copy of the production or staging database for development purposes (meaning all emails and passwords will be random, I am not just gonna give away personal information to whoever wants them), just send me an email or open a ticket and we'll see to that.
 
-# Deploy
+### Seeding
+
+The main thing you'll need to setup is to create a `Mod` for the blueprints. Currently there are 3 mods in production, 2 are legacy and one is for the base game. A `Mod` contains a field `version` which is a JSON like that:
+
+```ruby
+{
+  "0.8.19.7662" => {
+    "uuid4" => "0.8.19.7662-1627063708",
+    "breaking"=>true,
+    "created_at"=>"2021-07-23T18:08:28.644+00:00"
+  }
+}
+```
+`breaking` is used for the display of blueprints compatibility from one version of the mod / game to another.
+You can also go in lib/tasks/mod.rake and have a look at the tasks, those tasks were used to seed the mods in staging and production:
+
+```
+noglob rake 'mod:fetch_base_game_latest[0.8.19.7662]'
+noglob rake 'mod:flag_breaking[Dyson Sphere Program, 0.8.19.7662]'
+```
+The task rake mod:fetch_latest used to be to retrieve MultiBuild version from the Thunderstore API but we don't need it anymore.
+
+### Environment
+
+For proper development, you also will need a `.env` file at the root of the project. It needs to have the following environment variables:
+```
+DISCORD_CLIENT_ID=XXX
+DISCORD_CLIENT_SECRET=XXX
+AWS_S3_ACCESS_ID_KEY=XXX
+AWS_S3_ACCESS_SECRET_KEY=XXX
+AWS_S3_REGION=eu-west-1
+AWS_S3_BUCKET=dyson-sphere-blueprints
+AWS_CLOUDFRONT_URL=https://XYZ.cloudfront.net
+```
+Most of those are not needed to be able to work on most features, but if you want images to display and be able to upload images for instance you will need to setup an AWS S3 and Cloudfront.
+
+## Contributors
+
+- [Brokenmass](https://github.com/brokenmass), Wrote the 3D Preview renderer (as well as the original blueprint mod).
+- [LRFalk01](https://github.com/LRFalk01), DSP Blueprint Parser library and integration in the project
+- [RandyCarrero](https://github.com/randycarrero), Help page and new tags for Mass construction
+- [Glouel](https://github.com/glouel), Fixed some typos
+## Deploy
+
+This project is currently hosted on Heroku.
+Notes to self:
 
 Make sure the Gemfile has the proper platforms set:
 
@@ -123,7 +159,7 @@ Make sure the Gemfile has the proper platforms set:
 $ bundle lock --add-platform x86_64-linux
 ```
 
-## Staging
+### Staging
 
 Copy prod DB to staging
 
@@ -131,7 +167,7 @@ Copy prod DB to staging
 heroku pg:backups:restore `heroku pg:backups:url --app dyson-sphere-blueprints` DATABASE_URL --app dyson-sphere-blueprints-stage
 ```
 
-## License
+# License
 
 **Important**: this license only applies to the logic and application in itself and does not pertain to any data or assets coming from the game Dyson Sphere Program which is the intellectual property of Youthcat Studio.
 

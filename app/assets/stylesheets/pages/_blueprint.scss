@@ -50,6 +50,17 @@
       margin-bottom: 8px;
     }
 
+    &-total {
+      display: block;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      color: var(--dark-red);
+
+      strong {
+        color: var(--red);
+      }
+    }
+
     &-data {
       margin-bottom: 0;
     }
