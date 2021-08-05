@@ -104,7 +104,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Contribute
 
-Pull requests are always welcome, if you want a copy of the production or staging database for development purposes (meaning all emails and passwords will be random, I am not just gonna give away personal information to whoever wants them), just send me an email or open a ticket and we'll see to that.
+Pull requests are always welcome, if you want a copy of the production or staging database for development purposes (meaning all emails and passwords will be randomized, I am not just gonna give away personal information to whoever wants them), just send me an email or open a ticket and we'll see to that.
 
 ### Seeding
 
