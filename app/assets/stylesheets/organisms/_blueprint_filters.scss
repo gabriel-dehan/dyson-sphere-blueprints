@@ -1,6 +1,6 @@
 .o-blueprint-filters {
   form {
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
   }
 
   &__line {
@@ -29,6 +29,10 @@
 
     &.no-grow > div {
       flex-grow: initial;
+    }
+
+    &:last-child {
+      margin-top: 12px;
     }
   }
 
@@ -61,7 +65,7 @@
   }
 
   &__order-container {
-    width: 50%;
+    width: 25%;
   }
 
   &__order {
@@ -110,17 +114,25 @@
     }
   }
 
-  &__mods {
+  &__select {
     display: flex;
-    width: 50%;
 
     label {
       margin: 0 8px 0 0;
       white-space: nowrap;
       color: var(--grey50);
       font-style: italic;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
     }
+
     select { margin: 0; }
+  }
+
+  &__mods {
+    display: flex;
+    width: 50%;
 
     &-mod {
       display: inline-flex;
@@ -139,7 +151,7 @@
   &__submit {
     display: flex;
     justify-content: flex-end;
-    margin-top: 15px;
+    // margin-top: 15px;
 
     a, input[type='submit'] {
       min-width: 268px;

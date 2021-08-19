@@ -5,15 +5,15 @@ module ApplicationHelper
     Rails.configuration.upload_server
   end
 
-  def get_additional_tags
-    @@tags ||= JSON.parse(File.read(GAME_TAGS_PATH))
+  def additional_tags
+    @@tags ||= JSON.parse(File.read(GAME_TAGS_PATH)).transform_keys(&:capitalize)
   end
 
   def get_game_tag_icon_by_name(name)
-    additional_tags = get_additional_tags
-    # TODO: Refacto in a tag list with icons
-    if additional_tags.keys.include?(name.capitalize)
-      icon_info = additional_tags[name.capitalize]
+    tag_name = name.capitalize
+
+    if additional_tags.keys.include?(tag_name)
+      icon_info = additional_tags[tag_name]
 
       begin
         image_path "game_icons/#{icon_info["iconType"]}/#{icon_info["icon"]}.png"

@@ -11,19 +11,11 @@
       </div>
     </div>
     <div class="o-blueprint-filters__line">
-      <div class="o-blueprint-filters__order-container">
-        <div class="o-blueprint-filters__order">
-          <div class="o-blueprint-filters__order-choice">
-            <%= f.radio_button :order, "recent", checked: filters[:order] === 'recent' %>
-            <%= f.label :order_recent, "Most recent" %>
-          </div>
-          <div class="o-blueprint-filters__order-choice">
-            <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular' %>
-            <%= f.label :order_popular, "Most Popular" %>
-          </div>
-        </div>
+     <div class="o-blueprint-filters__structuresCount o-blueprint-filters__select">
+        <%= f.label :max_structures, "Max structures" %>
+        <%= f.select :max_structures, Engine::Researches.instance.formatted_mass_construction_with_limits.invert.to_a, selected: filters[:max_structures], include_blank: 'Any' %>
       </div>
-      <div class="o-blueprint-filters__mods" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys } }.to_json %>" data-include-blank="true">
+      <div class="o-blueprint-filters__mods o-blueprint-filters__select" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys } }.to_json %>" data-include-blank="true">
         <div class="o-blueprint-filters__mods-mod">
           <%= f.label :mod_id, "Mod" %>
           <%= f.select :mod_id, Mod.to_select, selected: filters[:mod_id], include_blank: 'Any' %>
@@ -34,9 +26,23 @@
         </div>
       </div>
     </div>
-    <div class="o-blueprint-filters__submit">
-      <%= f.submit 'Search' %>
-      <%= link_to 'Reset', filter_path, class: 'a-button' %>
+    <div class="o-blueprint-filters__line">
+      <div class="o-blueprint-filters__order-container">
+          <div class="o-blueprint-filters__order">
+            <div class="o-blueprint-filters__order-choice">
+              <%= f.radio_button :order, "recent", checked: filters[:order] === 'recent' %>
+              <%= f.label :order_recent, "Most recent" %>
+            </div>
+            <div class="o-blueprint-filters__order-choice">
+              <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular' %>
+              <%= f.label :order_popular, "Most Popular" %>
+            </div>
+          </div>
+        </div>
+      <div class="o-blueprint-filters__submit">
+        <%= f.submit 'Search' %>
+        <%= link_to 'Reset', filter_path, class: 'a-button' %>
+      </div>
     </div>
   <% end %>
 </div>

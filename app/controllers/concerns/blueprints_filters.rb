@@ -7,6 +7,7 @@ module BlueprintsFilters
         search: params[:search],
         tags: (params[:tags] || "").split(", "),
         order: params[:order] || "recent",
+        max_structures: params[:max_structures] || 'Any',
         mod_id: params[:mod_id].blank? ? @mods.first.id : params[:mod_id],
         mod_version: params[:mod_version].blank? ? 'Any' : params[:mod_version],
       }
@@ -40,6 +41,14 @@ module BlueprintsFilters
           blueprints = blueprints.where(mod_version: compat_list)
         else
           blueprints = blueprints.where(mod_version: @filters[:mod_version])
+        end
+      end
+
+      # Mass 5 is infinity so we can return any blueprint
+      if @filters[:max_structures] && @filters[:max_structures] != 'Any' && @filters[:max_structures] != 'mass-5'
+        limit = Engine::Researches::MASS_CONSTRUCTION_LIMITS[@filters[:max_structures]]
+        if limit
+          blueprints = blueprints.where("(summary ->> 'total_structures')::int <= ?", limit)
         end
       end
 

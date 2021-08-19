@@ -28,23 +28,23 @@
     "iconType": "tags"
   },
   "Mass Construction 1": {
-    "icon": "Mass1",
+    "icon": "mass-1",
     "iconType": "tags"
   },
   "Mass Construction 2": {
-    "icon": "Mass2",
+    "icon": "mass-2",
     "iconType": "tags"
   },
   "Mass Construction 3": {
-    "icon": "Mass3",
+    "icon": "mass-3",
     "iconType": "tags"
   },
   "Mass Construction 4": {
-    "icon": "Mass4",
+    "icon": "mass-4",
     "iconType": "tags"
   },
   "Mass Construction 5": {
-    "icon": "Mass5",
+    "icon": "mass-5",
     "iconType": "tags"
   }
 }
