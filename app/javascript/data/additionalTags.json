@@ -1,4 +1,8 @@
 {
+  "Smelter": {
+    "icon": "2302",
+    "iconType": "entities"
+  },
   "Mall": {
     "icon": "2303",
     "iconType": "entities"
