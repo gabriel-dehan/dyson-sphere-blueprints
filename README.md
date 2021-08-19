@@ -15,19 +15,19 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 - Renamed Smelter into Arc Smelter
 - Ability to search by maximum structure count
 - Ability to search by author
-- Displays the minimum "Mass Construction" research needed on the blueprints cards on the homepage
-- Fixed a bug where the "Mass Construction" tags would not display their icon properly
-- Added versions: 0.8.20.7962, 0.8.20.7996
+- Displays the minimum "Mass Construction" research needed on the blueprints' cards on the homepage
+- Fixed a bug where the "Mass Construction" tags would not display their icon properly in a blueprint's page
+- Added game versions: 0.8.20.7962, 0.8.20.7996
 
 ### v.3.1.0
 - New blueprint parser
 - New help page
 - Improved contribution documentation
 - New tags for Mass Construction research
-- Added versions: 0.8.19.7677, 0.8.19.7715, 0.8.19.7757, 0.8.19.7815, 0.8.19.7863
+- Added game versions: 0.8.19.7677, 0.8.19.7715, 0.8.19.7757, 0.8.19.7815, 0.8.19.7863
 
 ### v.3.0.0
-- Handle native blueprints minimaly for version 0.8.19.7662
+- Handle native blueprints minimaly for game version 0.8.19.7662
 
 ### v.2.0.0
 - Rewrote all image handling code in the site
