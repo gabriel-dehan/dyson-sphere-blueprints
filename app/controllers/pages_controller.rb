@@ -5,6 +5,7 @@ class PagesController < ApplicationController
     @filters = {
       search: nil,
       tags: [],
+      author: nil,
       order: 'recent',
       max_structures: 'Any',
       mod_id: @mods.first.id,

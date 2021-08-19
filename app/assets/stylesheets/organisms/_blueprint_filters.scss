@@ -36,30 +36,37 @@
     }
   }
 
-  &__search {
+  &__search, &__author, &__tags {
     position: relative;
     width: 50%;
     flex-grow: 0;
+    height: 3.75rem;
 
     i {
       color: var(--darker-blue);
       font-size: 18px;
       position: absolute;
-      top: 11px;
+      top: 10px;
       right: 12px;
+    }
+
+    input {
+      padding: .7rem 1.0rem .6rem;
     }
   }
 
   &__tags {
-    position: relative;
-    width: 50%;
-    flex-grow: 0;
-
     i {
-      color: var(--darker-blue);
       font-size: 16px;
-      position: absolute;
       top: 12px;
+      right: 10px;
+    }
+  }
+
+  &__author {
+    flex-shrink: 2.69;
+    i {
+      top: 10px;
       right: 10px;
     }
   }
@@ -87,6 +94,7 @@
         color: var(--white);
         padding: 8px 24px;
         margin: 0;
+        height: 3.8rem;
 
         &:hover {
           background-color: var(--blue);
@@ -102,13 +110,13 @@
       }
 
       &:first-child label {
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
       }
 
       &:last-child label {
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
         border-right: 0;
       }
     }

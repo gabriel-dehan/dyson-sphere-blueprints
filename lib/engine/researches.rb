@@ -18,4 +18,9 @@ class Engine::Researches
     @@formatted_mass_construction_with_limits ||= MASS_CONSTRUCTION_LIMITS.map { |key, limit| [key, "#{@researches_map[key]} (#{limit})"] }.to_h
   end
 
+  def get_name(research_uuid)
+    research = @researches_map.find { |id, research_name| id.to_s == research_uuid.to_s }
+    research ? research[1] : "Unknown"
+  end
+
 end

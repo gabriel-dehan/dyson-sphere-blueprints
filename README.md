@@ -6,45 +6,18 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Roadmap
 
-### Dev
-- [x] Setup staging pipeline
-- [x] Move image hosting to S3
-- [x] Move database to new host
-- [~] Optimize, add includes, check for n+1 queries...
-- [~] Seo, sitemap...
-- [ ] Handle password recover emails
-- [ ] Add tests
-
-### Features / Bugs
-- [x] Meta tags
-- [x] Add a way to flag outdated blueprints and notify the users
-- [x] Hide collections with no blueprints
-- [x] Order collections by popularity
-- [x] Add a favorites page
-- [x] Fix wrong `<Select>` background color on windows
-- [x] Add a reset button to homepage form
-- [x] Improve search by mod version, should find all compatible versions
-- [x] Remove blueprint name when parsing blueprint
-- [x] Add a link to "my collections" page from the collection page
-- [x] Fix rendering of blueprints 3 times in show page
-- [x] Add smelters / assemblers recipes detail
-- [x] Way to add tags with icons in a cleaner fashion
-- [x] Add tag "Lettering" / "Conveyor Belt Art" / "Early-game" / "Mid-game" / "Late-game"
-- [x] Blueprint preview
-- [x] Blueprint preview loader
-- [x] Add tabs for preview / description / render preview only when needed
-- [x] Remove cloudinary and active storage entirely
-- [ ] Find and fix memory leak
-- [ ] Optimize bundle size
-- [ ] Add preview in blueprint creation form
-- [ ] Preview editor
-- [ ] Add power needed
-- [ ] Downvote feature
-- [ ] Clicking on a tag on the blueprints index will search for this tag
-- [ ] Add filters and search to all blueprint related pages
-- [ ] Localisation chinese
+[See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v.3.2.0
+- Added Plane Smelter and its icon
+- Renamed Smelter into Arc Smelter
+- Ability to search by maximum structure count
+- Ability to search by author
+- Displays the minimum "Mass Construction" research needed on the blueprints cards on the homepage
+- Fixed a bug where the "Mass Construction" tags would not display their icon properly
+- Added versions: 0.8.20.7962, 0.8.20.7996
 
 ### v.3.1.0
 - New blueprint parser
@@ -157,6 +130,7 @@ rake blueprint:recompute_data # updates all blueprints summary if you have made 
 - [LRFalk01](https://github.com/LRFalk01), DSP Blueprint Parser library and integration in the project
 - [RandyCarrero](https://github.com/randycarrero), Help page and new tags for Mass construction
 - [Glouel](https://github.com/glouel), Fixed some typos
+
 ## Deploy
 
 This project is currently hosted on Heroku.

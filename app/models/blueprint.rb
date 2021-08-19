@@ -40,6 +40,10 @@ class Blueprint < ApplicationRecord
     "#{mod.name} - #{mod_version}"
   end
 
+  def tags_without_mass_construction
+    tags.where.not("name ILIKE ?", "%mass construction%")
+  end
+
   def is_mod_version_latest?
     mod_version >= mod.latest
   end

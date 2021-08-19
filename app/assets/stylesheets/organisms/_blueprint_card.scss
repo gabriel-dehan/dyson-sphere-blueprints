@@ -28,6 +28,10 @@
       object-fit: cover;
     }
 
+    a {
+      display: inline-flex;
+    }
+
     &:hover + .o-blueprint-card__content h2 a {
       color: var(--grey65);
     }
@@ -51,8 +55,8 @@
   &__content{
     padding: 16px 16px 10px 16px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
     position: relative;
 
     h2 {
@@ -90,13 +94,13 @@
   &__votes {
     font-size: 18px;
     position: absolute;
-    right: 16px;
+    right: 12px;
     top: -29px;
     background: var(--blue);
     border-radius: 15px;
     min-width: 45px;
     padding: 6px 8px;
-    height: 45px;
+    height: 44px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -104,6 +108,7 @@
     .count {
       font-size: 20px;
       font-weight: normal;
+      cursor: default;
     }
 
     i {
@@ -148,6 +153,10 @@
       line-height: inherit;
       border-radius: 3px;
       margin-right: 5px;
+
+      &.research {
+        background-color: var(--blue);
+      }
     }
   }
 

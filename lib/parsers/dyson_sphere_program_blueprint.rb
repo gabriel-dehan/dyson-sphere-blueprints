@@ -13,14 +13,12 @@ module Parsers
     end
 
     def parse!(silent_errors: true)
-      puts "Analyzing blueprint..."
+      puts "Analyzing blueprint... #{@blueprint.id}"
       begin
         @blueprint_data = DspBlueprintParser.parse(@blueprint.encoded_blueprint)
         raise "No data found in blueprint" if !@blueprint_data || @blueprint_data.buildings.size.zero?
 
-        puts "Parsing..."
-        data = { total_structures: 0, buildings: {}, inserters: {}, belts: {} }
-        @blueprint_data.buildings.reduce(data) { |res, entity| building_summary(res, entity) }
+        data = parse_blueprint_data
         @blueprint.summary = data
 
         puts "Saving..."
@@ -38,6 +36,16 @@ module Parsers
     end
 
     private
+
+    def parse_blueprint_data
+      puts "Parsing..."
+      data = { total_structures: 0, buildings: {}, inserters: {}, belts: {} }
+      @blueprint_data.buildings.reduce(data) { |res, entity| building_summary(res, entity) }
+      # Set the current mass construction research depending on the total number of structures
+      research_uuid = Engine::Researches::MASS_CONSTRUCTION_LIMITS.find { |research, limit| data[:total_structures] <= limit }.first
+      data[:research] = Engine::Researches.instance.get_name(research_uuid)
+      data
+    end
 
     # @param entity [DspBlueprintParser::Building]
     # Example summary:
@@ -81,6 +89,7 @@ module Parsers
     def building_summary(data_extract, entity)
       entities_engine = Engine::Entities.instance
       recipes_engine  = Engine::Recipes.instance
+
       proto_id  = entity.item_id
       recipe_id = entity.recipe_id
       is_belt   = entities_engine.is_belt?(proto_id)

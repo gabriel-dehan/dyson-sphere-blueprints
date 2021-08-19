@@ -32,9 +32,14 @@
           </div>
         </div>
         <ul class="o-blueprint-card__tags">
-          <% blueprint.tags.take(5).each do |tag| %>
+          <% blueprint.tags_without_mass_construction.limit(4).each do |tag| %>
             <li class="o-blueprint-card__tags-tag">
               <%= tag.name.capitalize %>
+            </li>
+          <% end %>
+          <% if blueprint.summary["research"] %>
+            <li class="o-blueprint-card__tags-tag research">
+              <%= blueprint.summary["research"] %>
             </li>
           <% end %>
         </ul>

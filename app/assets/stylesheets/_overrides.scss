@@ -1,6 +1,8 @@
 
 .tagify {
   --tags-border-color: var(--darker-blue);
+  --tags-hover-border-color: transparent;
+  --tags-focus-border-color: var(--dark-purple);
   --tag-hover: var(--blue);
   --tag-bg: var(--light-blue);
   --tag-text-color: var(--white);
@@ -11,6 +13,7 @@
   --placeholder-color-focus: var(--grey40);
 
   background: rgba(0, 0, 0, 0.2);
+  border-radius: .4rem;
 
   &__input {
     font-size: 14px;

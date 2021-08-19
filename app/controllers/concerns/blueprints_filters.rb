@@ -6,6 +6,7 @@ module BlueprintsFilters
       @filters = {
         search: params[:search],
         tags: (params[:tags] || "").split(", "),
+        author: params[:author],
         order: params[:order] || "recent",
         max_structures: params[:max_structures] || 'Any',
         mod_id: params[:mod_id].blank? ? @mods.first.id : params[:mod_id],
@@ -28,6 +29,10 @@ module BlueprintsFilters
 
       if @filters[:search] && !@filters[:search].blank?
         blueprints = blueprints.search_by_title(@filters[:search])
+      end
+
+      if @filters[:author] && !@filters[:author].blank?
+        blueprints = blueprints.references(:user).where('users.username ILIKE ?', "%#{@filters[:author]}%")
       end
 
       if @filters[:mod_id] && @filters[:mod_id] != 'Any'

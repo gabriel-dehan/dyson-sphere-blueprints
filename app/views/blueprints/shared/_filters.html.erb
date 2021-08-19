@@ -9,6 +9,10 @@
         <%= f.text_field :tags, value: filters[:tags].join(', '), data: { 'entitiesTags-target': 'input' } %>
         <i class="fas fa-tags"></i>
       </div>
+      <div class="o-blueprint-filters__author">
+        <%= f.text_field :author, placeholder: 'Search for an author...', value: filters[:author] %>
+        <i class="fas fa-user"></i>
+      </div>
     </div>
     <div class="o-blueprint-filters__line">
      <div class="o-blueprint-filters__structuresCount o-blueprint-filters__select">
