@@ -4,6 +4,33 @@ Community website to share Dyson Sphere Program blueprints.
 
 Official website: [https://www.dysonsphereblueprints.com](https://www.dysonsphereblueprints.com/)
 
+## Table of content
+- [DSP Blueprints](#dsp-blueprints)
+  - [Table of content](#table-of-content)
+  - [Roadmap](#roadmap)
+  - [Changelog](#changelog)
+    - [v.3.2.0](#v320)
+    - [v.3.1.0](#v310)
+    - [v.3.0.0](#v300)
+    - [v.2.0.0](#v200)
+    - [v.1.1.0](#v110)
+    - [v.1.0.12](#v1012)
+    - [v.1.0.11](#v1011)
+    - [v.1.0.10](#v1010)
+    - [v.1.0.9](#v109)
+    - [v.1.0.8](#v108)
+    - [v.1.0.7](#v107)
+    - [v.1.0.1 - v.1.0.6](#v101---v106)
+    - [v.1.0.0](#v100)
+  - [Contribute](#contribute)
+    - [Seeding](#seeding)
+    - [Environment](#environment)
+    - [Rake tasks](#rake-tasks)
+  - [Contributors](#contributors)
+  - [Deploy](#deploy)
+    - [Staging](#staging)
+- [License](#license)
+
 ## Roadmap
 
 [See the roadmap/todo file](ROADMAP.md)
