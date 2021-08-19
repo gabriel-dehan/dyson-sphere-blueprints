@@ -37,7 +37,7 @@
               <%= tag.name.capitalize %>
             </li>
           <% end %>
-          <% if blueprint.summary["research"] %>
+          <% if blueprint.summary && blueprint.summary["research"] %>
             <li class="o-blueprint-card__tags-tag research">
               <%= blueprint.summary["research"] %>
             </li>
