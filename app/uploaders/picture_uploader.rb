@@ -1,15 +1,15 @@
 require "image_processing/mini_magick"
 
 class PictureUploader < Shrine
-  ALLOWED_TYPES  = %w[image/jpeg image/jpg image/png image/webp]
+  ALLOWED_TYPES  = %w[image/jpeg image/jpg image/png image/webp].freeze
   MAX_SIZE       = 3.megabyte
-  MAX_DIMENSIONS = [4000, 4000]
+  MAX_DIMENSIONS = [4000, 4000].freeze
 
   DERIVATIVES = {
-    small:  [100, 100],
+    small: [100, 100],
     medium: [262, 200],
-    large:  [880, 495],
-  }
+    large: [880, 495],
+  }.freeze
 
   plugin :remote_url, max_size: 5.megabyte
   plugin :default_url
@@ -26,9 +26,7 @@ class PictureUploader < Shrine
   Attacher.validate do
     validate_size 0..MAX_SIZE
 
-    if validate_mime_type_inclusion ALLOWED_TYPES
-      validate_max_dimensions MAX_DIMENSIONS
-    end
+    validate_max_dimensions MAX_DIMENSIONS if validate_mime_type_inclusion ALLOWED_TYPES
   end
 
   Attacher.derivatives do |original|

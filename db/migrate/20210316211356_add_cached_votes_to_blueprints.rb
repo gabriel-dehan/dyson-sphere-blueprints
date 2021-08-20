@@ -1,6 +1,6 @@
 class AddCachedVotesToBlueprints < ActiveRecord::Migration[6.1]
   def change
-    change_table :blueprints do |t|
+    change_table :blueprints, bulk: true do |t|
       t.integer :cached_votes_total, default: 0
       t.integer :cached_votes_score, default: 0
       t.integer :cached_votes_up, default: 0

@@ -1,10 +1,10 @@
 namespace :db do
   desc "Backs up heroku database and restores it locally."
-  task import_from_heroku: [ :environment, :create ] do
-    HEROKU_APP_NAME = 'dyson-sphere-blueprints' # Change this if app name is not picked up by `heroku` git remote.
+  task import_from_heroku: [:environment, :create] do
+    app_name = "dyson-sphere-blueprints" # Change this if app name is not picked up by `heroku` git remote.
 
     c = Rails.configuration.database_configuration[Rails.env]
-    heroku_app_flag = HEROKU_APP_NAME ? " --app #{HEROKU_APP_NAME}" : nil
+    heroku_app_flag = app_name ? " --app #{app_name}" : nil
     Bundler.with_clean_env do
       puts "[1/4] Capturing backup on Heroku"
       `heroku pg:backups capture DATABASE_URL#{heroku_app_flag}`

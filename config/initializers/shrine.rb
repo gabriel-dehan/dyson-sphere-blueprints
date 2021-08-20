@@ -22,14 +22,14 @@ Shrine.plugin :derivatives
 Shrine.plugin :derivation_endpoint, secret_key: Rails.application.secret_key_base
 Shrine.plugin :url_options, store: { host: ENV["AWS_CLOUDFRONT_URL"] }
 
-Shrine.plugin :presign_endpoint, presign_options: -> (request) {
+Shrine.plugin :presign_endpoint, presign_options: lambda { |request|
   filename = request.params["filename"]
   type     = request.params["type"]
 
   {
-    content_disposition:    ContentDisposition.inline(filename),
-    content_type:           type,
-    content_length_range:   0..(5*1024*1024),
+    content_disposition: ContentDisposition.inline(filename),
+    content_type: type,
+    content_length_range: 0..(5.megabytes),
   }
 }
 

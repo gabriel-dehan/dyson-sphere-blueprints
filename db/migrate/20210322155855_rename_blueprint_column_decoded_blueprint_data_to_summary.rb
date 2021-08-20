@@ -5,6 +5,5 @@ class RenameBlueprintColumnDecodedBlueprintDataToSummary < ActiveRecord::Migrati
     Blueprint.all.each do |blueprint|
       Parsers::MultibuildBetaBlueprint.new(blueprint).parse!(silent_errors: false)
     end
-
   end
 end

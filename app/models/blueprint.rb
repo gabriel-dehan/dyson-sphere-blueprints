@@ -29,10 +29,10 @@ class Blueprint < ApplicationRecord
   validate :encoded_blueprint_parsable
 
   pg_search_scope :search_by_title,
-    against: [:title],
-    using: {
-      tsearch: { prefix: true }
-    }
+                  against: [:title],
+                  using: {
+                    tsearch: { prefix: true },
+                  }
 
   default_scope { with_rich_text_description.includes(:tags, :mod, :user, :additional_pictures) }
 
@@ -61,25 +61,22 @@ class Blueprint < ApplicationRecord
   end
 
   private
+
   def decode_blueprint
-    if saved_change_to_attribute?(:encoded_blueprint)
-      BlueprintParserJob.perform_now(self.id)
-    end
+    BlueprintParserJob.perform_now(id) if saved_change_to_attribute?(:encoded_blueprint)
   end
 
   def encoded_blueprint_parsable
-    if self.mod.name == "MultiBuildBeta"
+    if mod.name == "MultiBuildBeta"
       valid = Parsers::MultibuildBetaBlueprint.new(self).validate
-    elsif self.mod.name == "MultiBuild"
+    elsif mod.name == "MultiBuild"
       valid = Parsers::MultibuildBetaBlueprint.new(self).validate
-    elsif self.mod.name == "Dyson Sphere Program"
+    elsif mod.name == "Dyson Sphere Program"
       valid = Parsers::DysonSphereProgramBlueprint.new(self).validate
     else
       valid = true
     end
 
-    if !valid
-      errors.add(:encoded_blueprint, "Wrong blueprint format for mod version: #{self.mod.name} - #{self.mod_version}")
-    end
+    errors.add(:encoded_blueprint, "Wrong blueprint format for mod version: #{mod.name} - #{mod_version}") if !valid
   end
 end

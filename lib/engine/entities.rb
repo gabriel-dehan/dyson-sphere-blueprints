@@ -1,27 +1,27 @@
 class Engine::Entities
   include Singleton
 
-  GAME_ENTITIES_PATH = Rails.root.join('app', 'javascript', 'data', 'gameEntities.json')
+  GAME_ENTITIES_PATH = Rails.root.join("app/javascript/data/gameEntities.json")
 
-  BELTS = [2001, 2002, 2003]
-  SORTERS = [2011, 2012, 2013]
-  STORAGES = [2101, 2102, 2106]
-  BUILDERS = [2303, 2304, 2305, 2302, 2308, 2309, 2310, 2901]
-  ASSEMBLERS = [2303, 2304, 2305]
-  SMELTER = [2302]
-  POWER_GENERATORS = [2203, 2204, 2211, 2210, 2208]
+  BELTS = [2001, 2002, 2003].freeze
+  SORTERS = [2011, 2012, 2013].freeze
+  STORAGES = [2101, 2102, 2106].freeze
+  BUILDERS = [2303, 2304, 2305, 2302, 2308, 2309, 2310, 2901].freeze
+  ASSEMBLERS = [2303, 2304, 2305].freeze
+  SMELTER = [2302].freeze
+  POWER_GENERATORS = [2203, 2204, 2211, 2210, 2208].freeze
 
   def initialize
     @entities_map = JSON.parse(File.read(GAME_ENTITIES_PATH))
   end
 
   def get_uuid(name)
-    entity = @entities_map.find { |id, entity_name| entity_name.downcase == name.downcase }
+    entity = @entities_map.find { |_id, entity_name| entity_name.casecmp(name).zero? }
     entity ? entity[0] : nil
   end
 
   def get_name(entity_uuid)
-    entity = @entities_map.find { |id, entity_name| id.to_s == entity_uuid.to_s }
+    entity = @entities_map.find { |id, _entity_name| id.to_s == entity_uuid.to_s }
     entity ? entity[1] : "Unknown"
   end
 
@@ -53,7 +53,7 @@ class Engine::Entities
     POWER_GENERATORS.include(entity_uuid)
   end
 
-  def is_power_consumer?(entity_uuid)
+  def is_power_consumer?(_entity_uuid)
     # TODO
     false
   end

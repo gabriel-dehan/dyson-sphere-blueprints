@@ -7,33 +7,28 @@ class Parsers::MultibuildBetaBlueprint
   def validate
     puts "Validating blueprint..."
     begin
-      json_data = self.extract_blueprint_data(@blueprint.encoded_blueprint)
+      json_data = extract_blueprint_data(@blueprint.encoded_blueprint)
 
       buildingsData = json_data["copiedBuildings"].map { |entity| get_key("protoId", entity) }
       insertersData = json_data["copiedInserters"].map { |entity| get_key("protoId", entity) }
       beltsData = json_data["copiedBelts"].map { |entity| get_key("protoId", entity) }
 
-      if buildingsData.compact.length == 0 &&
-        insertersData.compact.length == 0 &&
-        beltsData.compact.length == 0
-        return false
-      else
-        return true
-      end
-    rescue
+      !(buildingsData.compact.empty? && insertersData.compact.empty? && beltsData.compact.empty?)
+    rescue StandardError
       puts "Blueprint invalid."
-      return false
+      false
     end
   end
 
   def parse!(silent_errors: true)
     puts "Analyzing blueprint..."
     begin
-      json_data = self.extract_blueprint_data(@blueprint.encoded_blueprint)
+      json_data = extract_blueprint_data(@blueprint.encoded_blueprint)
 
       puts "Parsing..."
-      has_data, data = self.extract_data(json_data)
+      has_data, data = extract_data(json_data)
       raise "No data found in blueprint" if !has_data
+
       @blueprint.summary = data
 
       puts "Saving..."
@@ -46,7 +41,7 @@ class Parsers::MultibuildBetaBlueprint
       else
         raise "Couldn't decode blueprint: #{e.message}"
       end
-      return nil
+      nil
     end
   end
 
@@ -57,7 +52,7 @@ class Parsers::MultibuildBetaBlueprint
     # Blueprints can be prefixed with /\w+:/ so we remove the first part
     split_on_name = encoded_blueprint.split(":")
     if split_on_name.length > 1
-      blueprint_without_name = split_on_name[1..-1].join(":")
+      blueprint_without_name = split_on_name[1..].join(":")
     else
       blueprint_without_name = encoded_blueprint
     end
@@ -81,9 +76,9 @@ class Parsers::MultibuildBetaBlueprint
       belts: beltsData,
     }
 
-    if buildingsData.compact.length == 0 &&
-      insertersData.compact.length == 0 &&
-      beltsData.compact.length == 0
+    if buildingsData.compact.empty? &&
+       insertersData.compact.empty? &&
+       beltsData.compact.empty?
       has_data = false
     end
 
@@ -91,8 +86,6 @@ class Parsers::MultibuildBetaBlueprint
 
     [has_data, data]
   end
-
-  private
 
   def basicSummary(dataExtract, entity)
     entities_engine = Engine::Entities.instance

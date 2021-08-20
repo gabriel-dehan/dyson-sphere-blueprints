@@ -31,7 +31,7 @@ module Parsers
         else
           raise "Couldn't decode blueprint: #{e.message}"
         end
-        return nil
+        nil
       end
     end
 
@@ -42,7 +42,7 @@ module Parsers
       data = { total_structures: 0, buildings: {}, inserters: {}, belts: {} }
       @blueprint_data.buildings.reduce(data) { |res, entity| building_summary(res, entity) }
       # Set the current mass construction research depending on the total number of structures
-      research_uuid = Engine::Researches::MASS_CONSTRUCTION_LIMITS.find { |research, limit| data[:total_structures] <= limit }.first
+      research_uuid = Engine::Researches::MASS_CONSTRUCTION_LIMITS.find { |_research, limit| data[:total_structures] <= limit }.first
       data[:research] = Engine::Researches.instance.get_name(research_uuid)
       data
     end
