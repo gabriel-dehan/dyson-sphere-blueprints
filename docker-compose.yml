@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "dev"
+      POSTGRES_PASSWORD: "password"
+    volumes:
+      - "pg_data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:latest
+    volumes:
+      - "redis_data:/data"
+    ports:
+      - "6379:6379"
+
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - SERVICES=s3
+      - DEFAULT_REGION=eu-west-1
+      - DATA_DIR=/tmp/localstack/data
+      - DISABLE_CORS_CHECKS=1
+    volumes:
+      - ./localstack:/tmp/localstack
+      - ./localstack/aws:/docker-entrypoint-initaws.d
+    ports:
+      - "4566:4566"
+
+  smtp:
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+volumes:
+  pg_data:
+  redis_data:

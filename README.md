@@ -147,6 +147,45 @@ AWS_CLOUDFRONT_URL=https://XYZ.cloudfront.net
 ```
 Most of those are not needed to be able to work on most features, but if you want images to display and be able to upload images for instance you will need to setup an AWS S3 and Cloudfront.
 
+### Build development environment
+
+You can build a development environment with docker compose.
+
+following services will start:
+- PostgreSQL
+- Redis
+- AWS S3 (localstack)
+- SMTP (mailhog)
+
+```bash
+$ docker compose up -d
+```
+
+to connect each service, use these credentials:
+- PostgreSQL
+  - User: `dev`
+  - Password: `password`
+  - Host: `127.0.0.1`
+  - Database: `dspblueprints_development`
+- Redis
+  - URL: `redis://127.0.0.1:6379/0`
+- AWS S3
+  - Access key: `XXX` (some non-empty string)
+  - Secret key: `XXX` (some non-empty string)
+  - Region: `eu-west-1`
+  - Bucket: `dyson-sphere-blueprints`
+  - Endpoint: `http://localhost:4566`
+- SMTP
+  - SMTP Server: `localhost:1025`
+  - HTTP Server: `localhost:8025` (You can see the emails you have sent with WebUI)
+
+The above configuration is written in `.envrc.sample`.
+You can copy it and set it easily.
+
+```bash
+$ cp .envrc.sample .envrc
+```
+
 ### Rake tasks
 
 There are a few rake tasks that you can use:

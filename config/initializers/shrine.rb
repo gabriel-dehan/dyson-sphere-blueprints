@@ -8,6 +8,11 @@ s3_options = {
   region: ENV["AWS_S3_REGION"],
 }
 
+if Rails.env.development? && ENV["AWS_S3_ENDPOINT"]
+  s3_options[:endpoint] = ENV["AWS_S3_ENDPOINT"]
+  s3_options[:force_path_style] = true
+end
+
 Shrine.storages = {
   cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
   store: Shrine::Storage::S3.new(**s3_options),

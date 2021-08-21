@@ -14,6 +14,10 @@ puts "Cleaning up..."
 
 puts "Creating admin..."
 User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", password: "password", role: "admin")
+
+puts "Creating mods..."
+BaseGameManagerJob.perform_now("0.8.19.7662")
+
 # puts "Creating collections..."
 # user = User.last
 # puts "Creating blueprints..."
