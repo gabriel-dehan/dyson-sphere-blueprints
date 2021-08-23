@@ -7,7 +7,7 @@ namespace :mod do
   # noglob rake 'mod:fetch_base_game_latest[0.8.19.7662]'
   desc "Update the latest version of the game"
   task :fetch_base_game_latest, [:patch] => [:environment] do |t, args|
-    BaseGameManagerJob.perform_now(args[:patch])
+    BaseGameManagerJob.perform_later(args[:patch])
   end
 
   # noglob rake 'mod:flag_breaking[MultiBuildBeta, 2.1.0]'
