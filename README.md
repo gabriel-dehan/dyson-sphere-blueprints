@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v.3.2.1](#v321)
     - [v.3.2.0](#v320)
     - [v.3.1.0](#v310)
     - [v.3.0.0](#v300)
@@ -36,6 +37,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v.3.2.1
+- Added Plane Smelter recipe and renamed Smelter to Arc Smelter
+- Now fetches the game versions from Steam News API
 
 ### v.3.2.0
 - Added Plane Smelter and its icon
