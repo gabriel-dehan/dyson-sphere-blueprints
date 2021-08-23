@@ -54,7 +54,7 @@
   "53":	"Microcrystalline component",
   "54":	"Organic crystal (original)",
   "55":	"Information matrix",
-  "56":	"Smelter",
+  "56":	"Arc Smelter",
   "57":	"Glass",
   "58":	"X-ray cracking",
   "59":	"High-purity silicon",
@@ -112,5 +112,6 @@
   "112": "Foundation",
   "113": "Mini fusion power station",
   "114": "Storage tank",
-  "115": "Deuterium fractionation"
+  "115": "Deuterium fractionation",
+  "116": "Plane Smelter"
 }
