@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v.3.2.2](#v322)
     - [v.3.2.1](#v321)
     - [v.3.2.0](#v320)
     - [v.3.1.0](#v310)
@@ -26,6 +27,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Contribute](#contribute)
     - [Seeding](#seeding)
     - [Environment](#environment)
+    - [Build development environment](#build-development-environment)
     - [Rake tasks](#rake-tasks)
   - [Contributors](#contributors)
   - [Deploy](#deploy)
@@ -37,6 +39,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v.3.2.2
+- Big code clean up by [sho918](https://github.com/sho918), thanks a lot to him.
+- Added docker file for development purposes. Done by sho918 as well.
 
 ### v.3.2.1
 - Added Plane Smelter recipe and renamed Smelter to Arc Smelter
@@ -128,7 +134,8 @@ The main thing you'll need to setup is to create a `Mod` for the blueprints. Cur
 You can also go in lib/tasks/mod.rake and have a look at the tasks, those tasks were used to seed the mods in staging and production:
 
 ```
-noglob rake 'mod:fetch_base_game_latest[0.8.19.7662]'
+noglob rake 'mod:fetch_base_game_latest[0.8.19.7662]' # Forces a game version to be added
+noglob rake 'mod:fetch_base_game_latest' # Fetches the latest game versions from the Steam News API
 noglob rake 'mod:flag_breaking[Dyson Sphere Program, 0.8.19.7662]'
 ```
 The task rake mod:fetch_latest used to be to retrieve MultiBuild version from the Thunderstore API but we don't need it anymore.
@@ -146,12 +153,13 @@ AWS_S3_BUCKET=dyson-sphere-blueprints
 AWS_CLOUDFRONT_URL=https://XYZ.cloudfront.net
 ```
 Most of those are not needed to be able to work on most features, but if you want images to display and be able to upload images for instance you will need to setup an AWS S3 and Cloudfront.
+An example can be found in `.env.sample`
 
 ### Build development environment
 
-You can build a development environment with docker compose.
+You can also build a development environment with docker compose.
 
-following services will start:
+Using the `docker-compose.yml`, will start the following services:
 - PostgreSQL
 - Redis
 - AWS S3 (localstack)
@@ -179,11 +187,11 @@ to connect each service, use these credentials:
   - SMTP Server: `localhost:1025`
   - HTTP Server: `localhost:8025` (You can see the emails you have sent with WebUI)
 
-The above configuration is written in `.envrc.sample`.
-You can copy it and set it easily.
+The above configuration is written in `.env.sample`.
+You can simply copy it and it should be enough.
 
 ```bash
-$ cp .envrc.sample .envrc
+$ cp .env.sample .env
 ```
 
 ### Rake tasks
@@ -201,12 +209,12 @@ rake blueprint:recompute_data # updates all blueprints summary if you have made 
 - [LRFalk01](https://github.com/LRFalk01), DSP Blueprint Parser library and integration in the project
 - [RandyCarrero](https://github.com/randycarrero), Help page and new tags for Mass construction
 - [Glouel](https://github.com/glouel), Fixed some typos
+- [Sho918](https://github.com/sho918), code cleanup and docker setup
 
 ## Deploy
 
 This project is currently hosted on Heroku.
-Notes to self:
-
+*Notes to self:*
 Make sure the Gemfile has the proper platforms set:
 
 ```

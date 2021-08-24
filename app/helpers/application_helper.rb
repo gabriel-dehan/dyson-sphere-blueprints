@@ -5,8 +5,11 @@ module ApplicationHelper
     Rails.configuration.upload_server
   end
 
+  def additional_tags
+    @@tags ||= JSON.parse(File.read(GAME_TAGS_PATH)).transform_keys(&:capitalize)
+  end
+
   def get_game_tag_icon_by_name(name)
-    additional_tags = JSON.parse(File.read(GAME_TAGS_PATH)).transform_keys(&:capitalize)
     tag_name = name.capitalize
 
     if additional_tags.key?(tag_name)
