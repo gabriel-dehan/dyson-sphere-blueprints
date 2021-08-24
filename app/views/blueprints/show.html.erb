@@ -94,7 +94,7 @@
             <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
           </li>
           <li>
-            <% compatibility_status, compatibility_message = compatibility_recap(@blueprint) %>
+            <% compatibility_status, compatibility_message = compatibility_recap(@mods, @blueprint) %>
             <strong>Version:</strong>
             <span class="t-blueprint__info-mod tooltip-trigger <%= compatibility_status %>"
                 data-tippy-content="<%= compatibility_message %>"

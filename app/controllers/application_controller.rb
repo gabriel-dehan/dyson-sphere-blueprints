@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
@@ -23,9 +24,9 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:username, :email, :password)}
-    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:username, :email, :password, :current_password)}
-  end
 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:username, :email, :password) }
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:username, :email, :password, :current_password) }
+  end
 end

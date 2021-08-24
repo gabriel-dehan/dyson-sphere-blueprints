@@ -1,4 +1,4 @@
-class Picture < ActiveRecord::Base
+class Picture < ApplicationRecord
   include PictureUploader::Attachment(:picture)
 
   belongs_to :blueprint

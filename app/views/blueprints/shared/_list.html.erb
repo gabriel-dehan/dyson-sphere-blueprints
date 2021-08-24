@@ -46,7 +46,7 @@
         <div class="o-blueprint-card__version">
           <span class="o-blueprint-card__version-tag">
              <%#= blueprint.mod.name %>
-             <%= formatted_mod_compatibility_range(blueprint) %>
+             <%= formatted_mod_compatibility_range(@mods, blueprint) %>
           </span>
         </div>
       </li>

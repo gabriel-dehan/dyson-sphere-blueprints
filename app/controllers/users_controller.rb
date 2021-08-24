@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include BlueprintsFilters
-  skip_before_action :authenticate_user!, only: [ :blueprints ]
+  skip_before_action :authenticate_user!, only: [:blueprints]
 
   def blueprints
     @user = User.find(params[:user_id])
@@ -34,13 +34,13 @@ class UsersController < ApplicationController
   end
 
   def my_collections
-    @type = params[:type] || 'All'
+    @type = params[:type] || "All"
     @collections = current_user.collections
 
-    if @type == 'Public'
-      @collections = @collections.where(type: 'Public')
-    elsif @type == 'Private'
-      @collections = @collections.where(type: 'Private')
+    if @type == "Public"
+      @collections = @collections.where(type: "Public")
+    elsif @type == "Private"
+      @collections = @collections.where(type: "Private")
     end
 
     @collections = @collections

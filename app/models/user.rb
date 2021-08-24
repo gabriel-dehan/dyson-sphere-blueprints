@@ -7,7 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:discord]
 
-
   has_many :collections, dependent: :destroy
   has_many :blueprints, through: :collections
 
@@ -16,7 +15,7 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
 
   def admin?
-    role == 'admin'
+    role == "admin"
   end
 
   def self.find_for_discord_oauth(auth)
@@ -25,7 +24,7 @@ class User < ApplicationRecord
     user_params[:username] = auth.info.name
     user_params[:discord_avatar_url] = auth.info.image
     user_params[:token] = auth.credentials.token
-    user_params[:token_expiry] = Time.at(auth.credentials.expires_at)
+    user_params[:token_expiry] = Time.zone.at(auth.credentials.expires_at)
     user_params = user_params.to_h
 
     user = User.find_by(provider: auth.provider, uid: auth.uid)
@@ -36,17 +35,17 @@ class User < ApplicationRecord
       user.update(user_params)
     else
       user = User.new(user_params)
-      user.password = Devise.friendly_token[0,20]  # Fake password for validation
+      user.password = Devise.friendly_token[0, 20]  # Fake password for validation
       user.save
     end
 
-    return user
+    user
   end
 
   private
 
   def create_default_collections
-    self.collections.new(name: "Public", type: "Public")
-    self.collections.new(name: "Private", type: "Private")
+    collections.new(name: "Public", type: "Public")
+    collections.new(name: "Private", type: "Private")
   end
 end

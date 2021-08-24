@@ -1,7 +1,7 @@
 class BlueprintsController < ApplicationController
   include BlueprintsFilters
 
-  skip_before_action :authenticate_user!, only: [ :index, :show ]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     set_filters
@@ -23,18 +23,17 @@ class BlueprintsController < ApplicationController
 
   def new
     @collection = params[:blueprint] && params[:blueprint][:collection] ?
-      current_user.collections.friendly.find(params[:blueprint][:collection]) :
-      current_user.collections.where(type: "Public").first
+                    current_user.collections.friendly.find(params[:blueprint][:collection]) :
+                    current_user.collections.where(type: "Public").first
 
-    if !@collection
+    if @collection
+      @blueprint = @collection.blueprints.new
+      authorize @blueprint
+    else
       flash[:alert] = "You don't seem to have any collection, please create one before adding a blueprint."
       redirect_to collections_users_path
       authorize Blueprint.new
-    else
-      @blueprint = @collection.blueprints.new
-      authorize @blueprint
     end
-
   end
 
   def create
@@ -48,7 +47,7 @@ class BlueprintsController < ApplicationController
       flash[:notice] = "Blueprint successfully created."
       redirect_to blueprint_path(@blueprint)
     else
-      render 'blueprints/new'
+      render "blueprints/new"
     end
   end
 
@@ -73,7 +72,7 @@ class BlueprintsController < ApplicationController
       flash[:notice] = "Blueprint successfully updated."
       redirect_to blueprint_path(@blueprint)
     else
-      render 'blueprints/edit'
+      render "blueprints/edit"
     end
   end
 

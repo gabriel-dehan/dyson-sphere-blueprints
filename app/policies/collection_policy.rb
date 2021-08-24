@@ -6,7 +6,7 @@ class CollectionPolicy < ApplicationPolicy
   end
 
   def show?
-    if (record.type == "Private")
+    if record.type == "Private"
       record.user == user
     else
       true
@@ -14,7 +14,7 @@ class CollectionPolicy < ApplicationPolicy
   end
 
   def create?
-    return true
+    true
   end
 
   def update?

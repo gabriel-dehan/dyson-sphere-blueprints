@@ -1,42 +1,145 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
 AllCops:
   NewCops: enable
+  TargetRubyVersion: 3.0
+  TargetRailsVersion: 6.1
   Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'node_modules/**/*'
-    - 'script/**/*'
-    - 'support/**/*'
-    - 'tmp/**/*'
-    - 'test/**/*'
+    - "node_modules/**/*" # Default setting
+    - "vendor/**/*"       # Default setting
+    - ".git/**/*"         # Default setting
+    - "bin/*"
+    - "db/schema.rb"
 
-Style/ConditionalAssignment:
-  Enabled: false
+# https://docs.rubocop.org/rubocop/cops_style.html#stylestringliterals
 Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# https://docs.rubocop.org/rubocop/cops_style.html#styleemptymethod
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+# https://docs.rubocop.org/rubocop/cops_style.html#styleclassandmodulechildren
+Style/ClassAndModuleChildren:
   Enabled: false
-Style/RedundantReturn:
-  Enabled: false
-Style/Documentation:
-  Enabled: false
-Style/WordArray:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-Style/MutableConstant:
-  Enabled: false
-Style/SignalException:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Style/MissingRespondToMissing:
-  Enabled: false
-Lint/MissingSuper:
-  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_style.html#stylefrozenstringliteralcomment
 Style/FrozenStringLiteralComment:
   Enabled: false
-Layout/LineLength:
-  Max: 120
-Style/EmptyMethod:
+
+# https://docs.rubocop.org/rubocop/cops_style.html#stylefrozenstringliteralcomment
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# https://docs.rubocop.org/rubocop/cops_style.html#stylenegatedif
+Style/NegatedIf:
   Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_style.html#stylecommandliteral
+Style/CommandLiteral:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_style.html#styletrailingcommainhashliteral
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+# https://docs.rubocop.org/rubocop/cops_style.html#styleconditionalassignment
+Style/ConditionalAssignment:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_style.html#styleguardclause
+Style/GuardClause:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_style.html#styledocumentation
+Style/Documentation:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_style.html#stylemultilineternaryoperator
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_style.html#stylecaselikeif
+Style/CaseLikeIf:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_lint.html#lintduplicatebranch
+Lint/DuplicateBranch:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_metrics.html#metricsblocklength
+Metrics/BlockLength:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_metrics.html#metricsmethodlength
+Metrics/MethodLength:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_metrics.html#metricsabcsize
+Metrics/AbcSize:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_metrics.html#metricsperceivedcomplexity
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_metrics.html#metricscyclomaticcomplexity
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_layout.html#layoutlinelength
+Layout/LineLength:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/cops_layout.html#layouthashalignment
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+
+# https://docs.rubocop.org/rubocop/cops_layout.html#layoutmultilinemethodcallindentation
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# https://docs.rubocop.org/rubocop/cops_naming.html#namingvariablename
+Naming/VariableName:
+  Exclude:
+    - lib/parsers/multibuild_beta_blueprint.rb
+
+# https://docs.rubocop.org/rubocop/cops_naming.html#namingmethodname
+Naming/MethodName:
+  Exclude:
+    - lib/parsers/multibuild_beta_blueprint.rb
+
+# https://docs.rubocop.org/rubocop/cops_naming.html#namingpredicatename
+Naming/PredicateName:
+  Exclude:
+    - app/models/blueprint.rb
+    - lib/engine/entities.rb
+
+# https://docs.rubocop.org/rubocop/cops_naming.html#namingmethodparametername
+Naming/MethodParameterName:
+  Exclude:
+    - lib/parsers/multibuild_beta_blueprint.rb
+
+# https://docs.rubocop.org/rubocop/cops_bundler.html#bundlerorderedgems
 Bundler/OrderedGems:
   Enabled: false
+
+# https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsoutput
+Rails/Output:
+  Exclude:
+    - db/seeds.rb
+    - app/jobs/base_game_manager_job.rb
+    - app/jobs/mod_manager_job.rb
+    - app/jobs/attachment/promote_job.rb
+    - lib/parsers/multibuild_beta_blueprint.rb
+    - lib/parsers/dyson_sphere_program_blueprint.rb
+
+# https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsunknownenv
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - staging
+    - production

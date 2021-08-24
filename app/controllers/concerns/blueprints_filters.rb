@@ -8,12 +8,12 @@ module BlueprintsFilters
         tags: (params[:tags] || "").split(", "),
         author: params[:author],
         order: params[:order] || "recent",
-        max_structures: params[:max_structures] || 'Any',
-        mod_id: params[:mod_id].blank? ? @mods.first.id : params[:mod_id],
-        mod_version: params[:mod_version].blank? ? 'Any' : params[:mod_version],
+        max_structures: params[:max_structures] || "Any",
+        mod_id: params[:mod_id].presence || @mods.first.id,
+        mod_version: params[:mod_version].presence || "Any",
       }
 
-      if @filters[:mod_id] && @filters[:mod_id] != 'Any'
+      if @filters[:mod_id] && @filters[:mod_id] != "Any"
         @filter_mod = @mods.find { |mod| mod.id == @filters[:mod_id].to_i }
       else
         @filter_mod = @mods.last
@@ -23,23 +23,15 @@ module BlueprintsFilters
     def filter(blueprints)
       # TODO: At some point when we have hundreds of thousands of blueprints, this will need to be optimized
 
-      if !@filters[:tags].blank?
-        blueprints = blueprints.tagged_with(@filters[:tags], :any => true)
-      end
+      blueprints = blueprints.tagged_with(@filters[:tags], any: true) if @filters[:tags].present?
 
-      if @filters[:search] && !@filters[:search].blank?
-        blueprints = blueprints.search_by_title(@filters[:search])
-      end
+      blueprints = blueprints.search_by_title(@filters[:search]) if @filters[:search]&.present?
 
-      if @filters[:author] && !@filters[:author].blank?
-        blueprints = blueprints.references(:user).where('users.username ILIKE ?', "%#{@filters[:author]}%")
-      end
+      blueprints = blueprints.references(:user).where("users.username ILIKE ?", "%#{@filters[:author]}%") if @filters[:author]&.present?
 
-      if @filters[:mod_id] && @filters[:mod_id] != 'Any'
-        blueprints = blueprints.where(mod_id: @filters[:mod_id])
-      end
+      blueprints = blueprints.where(mod_id: @filters[:mod_id]) if @filters[:mod_id] && @filters[:mod_id] != "Any"
 
-      if @filters[:mod_version] && @filters[:mod_version] != 'Any'
+      if @filters[:mod_version] && @filters[:mod_version] != "Any"
         if @filters[:mod_id]
           mod = Mod.find(@filters[:mod_id])
           compat_list = mod.compatibility_list_for(@filters[:mod_version])
@@ -50,21 +42,18 @@ module BlueprintsFilters
       end
 
       # Mass 5 is infinity so we can return any blueprint
-      if @filters[:max_structures] && @filters[:max_structures] != 'Any' && @filters[:max_structures] != 'mass-5'
+      if @filters[:max_structures] && @filters[:max_structures] != "Any" && @filters[:max_structures] != "mass-5"
         limit = Engine::Researches::MASS_CONSTRUCTION_LIMITS[@filters[:max_structures]]
-        if limit
-          blueprints = blueprints.where("(summary ->> 'total_structures')::int <= ?", limit)
-        end
+        blueprints = blueprints.where("(summary ->> 'total_structures')::int <= ?", limit) if limit
       end
 
-      if @filters[:order] === 'recent'
+      if @filters[:order] == "recent"
         blueprints = blueprints.reorder(created_at: :desc)
-      elsif @filters[:order] === 'popular'
+      elsif @filters[:order] == "popular"
         blueprints = blueprints.reorder(cached_votes_total: :desc)
       end
 
       blueprints
     end
   end
-
 end

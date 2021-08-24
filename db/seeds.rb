@@ -13,7 +13,11 @@ puts "Cleaning up..."
 # Blueprint.destroy_all
 
 puts "Creating admin..."
-user = User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", password: "password", role: "admin")
+User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", password: "password", role: "admin")
+
+puts "Creating mods..."
+BaseGameManagerJob.perform_now("0.8.19.7662")
+
 # puts "Creating collections..."
 # user = User.last
 # puts "Creating blueprints..."

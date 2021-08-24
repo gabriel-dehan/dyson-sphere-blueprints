@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :index, :show ]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @collections = policy_scope(Collection)
@@ -7,7 +7,7 @@ class CollectionsController < ApplicationController
       .joins(:blueprints)
       .where.not(blueprints: { id: nil })
       .where(blueprints: { mod_id: @mods.first.id }) # TODO: Remove when Multibuild is removed
-      .group('collections.id')
+      .group("collections.id")
       .order("sum(blueprints.cached_votes_total) DESC")
       .page(params[:page])
   end
@@ -36,7 +36,7 @@ class CollectionsController < ApplicationController
       flash[:notice] = "Collection successfully created."
       redirect_to collection_path(@collection)
     else
-      render 'collection/new'
+      render "collection/new"
     end
   end
 
@@ -55,7 +55,7 @@ class CollectionsController < ApplicationController
       flash[:notice] = "Collection successfully updated."
       redirect_to collection_path(@collection)
     else
-      render 'collection/edit'
+      render "collection/edit"
     end
   end
 

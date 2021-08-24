@@ -1,9 +1,11 @@
 class AddOmniauthToUsers < ActiveRecord::Migration[6.1]
   def change
-    add_column :users, :provider, :string
-    add_column :users, :uid, :string
-    add_column :users, :discord_avatar_url, :string
-    add_column :users, :token, :string
-    add_column :users, :token_expiry, :datetime
+    change_table :users, bulk: true do |t|
+      t.string :provider
+      t.string :uid
+      t.string :discord_avatar_url
+      t.string :token
+      t.datetime :token_expiry
+    end
   end
 end

@@ -3,7 +3,7 @@ class Collection < ApplicationRecord
   extend FriendlyId
   paginates_per 20
 
-  enum type: ["Public", "Private"]
+  enum type: { "Public" => 0, "Private" => 1 }
 
   belongs_to :user
   has_many :blueprints, dependent: :destroy

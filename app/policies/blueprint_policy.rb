@@ -6,8 +6,8 @@ class BlueprintPolicy < ApplicationPolicy
   end
 
   def show?
-    if (record.collection.type == "Private")
-      if user && user.admin?
+    if record.collection.type == "Private"
+      if user&.admin?
         true
       else
         record.user == user
@@ -18,7 +18,7 @@ class BlueprintPolicy < ApplicationPolicy
   end
 
   def create?
-    return true
+    true
   end
 
   def update?

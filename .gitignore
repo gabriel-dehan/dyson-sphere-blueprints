@@ -43,3 +43,11 @@ yarn-debug.log*
 
 # Ignore Jetbrains IDE config
 /.idea/
+
+# Ignore localstack data
+localstack/.localstack
+localstack/server.*
+localstack/data
+
+# Do not ignore .env.sample
+!.env.sample
