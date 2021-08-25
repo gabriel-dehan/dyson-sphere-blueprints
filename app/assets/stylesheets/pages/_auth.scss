@@ -1,6 +1,11 @@
-.p-registration, .p-registration-edit, .p-login {
+.p-registration, .p-registration-edit, .p-login, .p-password {
   form {
     margin-bottom: 0;
+
+    input[type=submit] {
+      margin-top: 1em;
+      margin-bottom: 1.8em;
+    }
   }
 }
 
@@ -9,6 +14,13 @@
   margin-top: 20px;
   padding-top: 25px;
   border-top: 1px solid var(--midnight-blue);
+}
+
+.m-links {
+  &__register, &__login {
+    a { color: var(--light-blue); }
+    a:hover { color: var(--blue); }
+  }
 }
 
 .a-discord-auth-button {
