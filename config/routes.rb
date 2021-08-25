@@ -31,5 +31,9 @@ Rails.application.routes.draw do
       put "unlike", to: "blueprints#unlike"
     end
   end
-  resources :collections, only: [:new, :show, :index, :edit, :create, :update, :destroy]
+  resources :collections, only: [:new, :show, :index, :edit, :create, :update, :destroy] do
+    member do
+      get "bulk_download", to: "collections#bulk_download"
+    end
+  end
 end

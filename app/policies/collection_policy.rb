@@ -24,4 +24,8 @@ class CollectionPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
+
+  def bulk_download?
+    true
+  end
 end

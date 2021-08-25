@@ -4,6 +4,7 @@
       <span class="p-page__header-title-main" target="_blank" rel="noopener noreferrer"><%= @collection.name %> <span class="author">collection by <%= @collection.user.username %></span> </span>
     </h1>
     <br />
+    <%= link_to 'Download all as ZIP', bulk_download_collection_path(@collection), class: 'a-button', download: "#{@collection.name}.zip" %>
   </div>
   <% if @blueprints.any? %>
     <%= render "blueprints/shared/list", blueprints: @blueprints %>

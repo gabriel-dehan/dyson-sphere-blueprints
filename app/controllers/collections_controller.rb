@@ -1,5 +1,6 @@
 class CollectionsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  require "zip"
+  skip_before_action :authenticate_user!, only: [:index, :show, :bulk_download]
 
   def index
     @collections = policy_scope(Collection)
@@ -65,6 +66,36 @@ class CollectionsController < ApplicationController
     @collection.destroy
     flash[:notice] = "Collection successfully deleted."
     redirect_to collections_users_path
+  end
+
+  def bulk_download
+    @collection = Collection.friendly.find(params[:id])
+    authorize @collection
+    filename = "#{@collection.name}.zip"
+    temp_file = Tempfile.new(filename)
+
+    begin
+      # Zip::OutputStream.open(temp_file) { |zos| }
+
+      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
+        titles = []
+        mod_id = @mods.first.id
+        @collection.blueprints.select([:mod_id, :collection_id, :title, :encoded_blueprint]).where(mod_id: mod_id).each do |blueprint|
+          title = blueprint.title
+          title += "_#{titles.count(title)}" if titles.count(title).positive?
+          titles += [blueprint.title]
+          blueprint_file = Tempfile.new("#{title}.txt")
+          blueprint_file.write(blueprint.encoded_blueprint)
+          zipfile.add("#{@collection.name}/#{title}.txt", blueprint_file.path)
+        end
+      end
+
+      zip_data = File.read(temp_file.path)
+      send_data(zip_data, type: "application/zip", disposition: "attachment", filename: filename)
+    ensure # important steps below
+      temp_file.close
+      temp_file.unlink
+    end
   end
 
   private
