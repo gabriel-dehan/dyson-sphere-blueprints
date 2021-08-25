@@ -448,6 +448,7 @@ DEPENDENCIES
   rubocop (= 1.19.1)
   rubocop-performance (= 1.11.5)
   rubocop-rails (= 2.11.3)
+  rubyzip
   sass-rails (>= 6)
   selenium-webdriver
   sentry-rails

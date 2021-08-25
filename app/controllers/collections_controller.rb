@@ -1,5 +1,4 @@
 class CollectionsController < ApplicationController
-  require "zip"
   skip_before_action :authenticate_user!, only: [:index, :show, :bulk_download]
 
   def index
@@ -75,8 +74,6 @@ class CollectionsController < ApplicationController
     temp_file = Tempfile.new(filename)
 
     begin
-      # Zip::OutputStream.open(temp_file) { |zos| }
-
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
         titles = []
         mod_id = @mods.first.id
