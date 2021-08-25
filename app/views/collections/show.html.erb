@@ -1,9 +1,8 @@
-<div class="p-user-blueprints">
-  <div class="p-page__header">
+<div class="p-collections-show">
+  <div class="p-page__header inline">
     <h1 class="p-page__header-title">
-      <span class="p-page__header-title-main" target="_blank" rel="noopener noreferrer"><%= @collection.name %> <span class="author">collection by <%= @collection.user.username %></span> </span>
+      <span class="p-page__header-title-main"><%= @collection.name %> <span class="author">collection by <%= @collection.user.username %></span> </span>
     </h1>
-    <br />
     <%= link_to 'Download all as ZIP', bulk_download_collection_path(@collection), class: 'a-button', download: "#{@collection.name}.zip" %>
   </div>
   <% if @blueprints.any? %>

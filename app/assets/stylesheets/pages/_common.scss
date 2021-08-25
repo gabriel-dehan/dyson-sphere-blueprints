@@ -3,6 +3,12 @@
   &__header {
     margin: 5px 0 10px 0;
 
+    &.inline {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
     .a-logo {
       font-size: 48px;
     }
