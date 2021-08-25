@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v.3.2.3](#v323)
     - [v.3.2.2](#v322)
     - [v.3.2.1](#v321)
     - [v.3.2.0](#v320)
@@ -39,6 +40,11 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v.3.2.3
+- Add ability to bulk download blueprint collections as zip. Thanks to [David Westerink](https://github.com/davidakachaos)
+- SMTP Setup
+- Add back the "Forgot my password" page
 
 ### v.3.2.2
 - Big code clean up by [sho918](https://github.com/sho918), thanks a lot to him.
@@ -210,6 +216,7 @@ rake blueprint:recompute_data # updates all blueprints summary if you have made 
 - [RandyCarrero](https://github.com/randycarrero), Help page and new tags for Mass construction
 - [Glouel](https://github.com/glouel), Fixed some typos
 - [Sho918](https://github.com/sho918), code cleanup and docker setup
+- [David Westerink](https://github.com/davidakachaos), blueprint collections bulk download
 
 ## Deploy
 
