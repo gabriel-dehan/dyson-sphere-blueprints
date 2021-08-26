@@ -144,6 +144,10 @@
     flex-flow: wrap;
     margin-bottom: 6px;
 
+    a:hover .o-blueprint-card__tags-tag {
+      background: var(--darker-blue);
+    }
+
     &-tag {
       box-sizing: border-box;
       max-width: 100%;
