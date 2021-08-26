@@ -33,9 +33,17 @@
         </div>
         <ul class="o-blueprint-card__tags">
           <% blueprint.tags_without_mass_construction.limit(4).each do |tag| %>
-            <li class="o-blueprint-card__tags-tag">
-              <%= tag.name.capitalize %>
-            </li>
+            <% if local_assigns[:filters] %>
+              <%= link_to blueprints_path(filters.merge(tags: ((filters[:tags][0]&.split(",").presence || []) << tag.name.capitalize).uniq.join(","))) do %>
+                <li class="o-blueprint-card__tags-tag">
+                  <%= tag.name.capitalize %>
+                </li>
+              <% end %>
+            <% else %>
+                <li class="o-blueprint-card__tags-tag">
+                  <%= tag.name.capitalize %>
+                </li>
+            <% end %>
           <% end %>
           <% if blueprint.summary && blueprint.summary["research"] %>
             <li class="o-blueprint-card__tags-tag research">
