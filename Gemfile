@@ -49,6 +49,7 @@ gem "fastimage"
 gem "marcel"
 gem "dsp_blueprint_parser", "~> 0.1"
 gem "rubyzip", require: "zip"
+gem "scout_apm"
 
 group :development, :test do
   gem "pry-byebug"
