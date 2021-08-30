@@ -18,7 +18,7 @@ class PagesController < ApplicationController
       .joins(:collection)
       .where(collection: { type: "Public" })
       .where(mod_id: @filters[:mod_id]) # TODO: Probably remove all other mods than basegame
-      .includes(:collection)
+      .includes(:collection, collection: :user)
       .order(created_at: :desc)
       .page(params[:page])
   end

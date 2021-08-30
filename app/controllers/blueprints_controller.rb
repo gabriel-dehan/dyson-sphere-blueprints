@@ -8,7 +8,7 @@ class BlueprintsController < ApplicationController
     @blueprints = policy_scope(Blueprint)
       .joins(:collection)
       .where(collection: { type: "Public" })
-      .includes(:collection)
+      .includes(:collection, collection: :user)
 
     @blueprints = filter(@blueprints)
 

@@ -34,14 +34,14 @@ class Blueprint < ApplicationRecord
                     tsearch: { prefix: true },
                   }
 
-  default_scope { with_rich_text_description.includes(:tags, :mod, :user, :additional_pictures) }
+  default_scope { with_rich_text_description.includes(:tags, :tag_taggings, :mod, :user, :additional_pictures) }
 
   def formatted_mod_version
     "#{mod.name} - #{mod_version}"
   end
 
   def tags_without_mass_construction
-    tags.where.not("name ILIKE ?", "%mass construction%")
+    tags.reject { |tag| tag.name =~ /mass construction/i }
   end
 
   def is_mod_version_latest?

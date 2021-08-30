@@ -71,6 +71,7 @@ group :development do
   gem "spring"
   gem "memory_profiler"
   gem "derailed_benchmarks"
+  gem 'bullet'
 
   # Static code analyzer
   gem "rubocop", "1.19.1"

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @blueprints = @user.blueprints
       .joins(:collection)
       .where(collection: { type: "Public" })
-      .includes(:collection)
+      .includes(:collection, collection: :user)
       .order(cached_votes_total: :desc)
       .page(params[:page])
   end
