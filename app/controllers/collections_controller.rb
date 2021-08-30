@@ -3,8 +3,9 @@ class CollectionsController < ApplicationController
 
   def index
     @collections = policy_scope(Collection)
-      .where(type: "Public")
+      .includes(:user)
       .joins(:blueprints)
+      .where(type: "Public")
       .where.not(blueprints: { id: nil })
       .where(blueprints: { mod_id: @mods.first.id }) # TODO: Remove when Multibuild is removed
       .group("collections.id")

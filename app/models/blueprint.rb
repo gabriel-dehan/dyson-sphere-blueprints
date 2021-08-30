@@ -34,7 +34,8 @@ class Blueprint < ApplicationRecord
                     tsearch: { prefix: true },
                   }
 
-  default_scope { with_rich_text_description.includes(:tags, :tag_taggings, :mod, :user, :additional_pictures) }
+  # scope :with_relations, -> { with_rich_text_description.includes(:tags, :tag_taggings, :mod, :user, :additional_pictures) }
+  default_scope { includes(:tags, :tag_taggings, :user) }
 
   def formatted_mod_version
     "#{mod.name} - #{mod_version}"

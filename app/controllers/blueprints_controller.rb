@@ -6,7 +6,6 @@ class BlueprintsController < ApplicationController
   def index
     set_filters
     @blueprints = policy_scope(Blueprint)
-      .joins(:collection)
       .where(collection: { type: "Public" })
       .includes(:collection, collection: :user)
 

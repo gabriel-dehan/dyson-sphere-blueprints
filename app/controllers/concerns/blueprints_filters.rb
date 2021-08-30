@@ -22,7 +22,6 @@ module BlueprintsFilters
 
     def filter(blueprints)
       # TODO: At some point when we have hundreds of thousands of blueprints, this will need to be optimized
-
       blueprints = blueprints.tagged_with(@filters[:tags], any: true) if @filters[:tags].present?
       blueprints = blueprints.search_by_title(@filters[:search]) if @filters[:search].present?
       blueprints = blueprints.references(:user).where("users.username ILIKE ?", "%#{@filters[:author]}%") if @filters[:author].present?
