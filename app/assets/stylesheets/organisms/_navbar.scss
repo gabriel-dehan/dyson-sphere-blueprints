@@ -9,7 +9,7 @@
   -moz-box-shadow: -1px 7px 11px -5px rgba(0,0,0,0.15);
 
   &__button {
-    border: 0.1rem solid #9b4dca;
+    border: 0.1rem solid var(--purple);
     border-radius: .4rem;
     cursor: pointer;
     display: inline-block;
@@ -48,7 +48,57 @@
     border-bottom: 2px solid transparent;
 
     &.active, .nav-link:hover {
-      border-bottom: 2px solid var(--purple);
+      border-bottom: 2px solid #b474db;
+    }
+
+    &.support {
+      border-bottom: none;
+
+      span {
+        height: 1.8em;
+        line-height: 2em;
+        background: image-url('support/donation_icon.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        padding-right: 2.6em;
+      }
+      img {
+        height: 1.8em;
+        margin-left: 0.8em;
+      }
+
+      &.active {
+        border-bottom: none;
+
+        .o-navbar__button {
+          background: transparent;
+          color: var(--dark-purple);
+
+          span {
+            background-image: image-url('support/donation_icon_hover.png');
+          }
+        }
+
+      }
+      .o-navbar__button {
+        max-height: 35px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--dark-purple);
+        border-color: var(--dark-purple);
+        color: var(--white);
+
+        &:hover {
+          background: transparent;
+          color: var(--dark-purple);
+
+          span {
+            background-image: image-url('support/donation_icon_hover.png');
+          }
+        }
+      }
     }
   }
 }

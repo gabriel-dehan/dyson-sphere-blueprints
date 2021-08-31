@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "help", to: "pages#help"
+  get "supportus", to: "pages#support"
+  get "walloffame", to: "pages#wall_of_fame"
 
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations" }
 

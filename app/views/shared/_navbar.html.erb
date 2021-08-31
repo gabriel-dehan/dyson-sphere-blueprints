@@ -16,6 +16,11 @@
       <li class="o-navbar__nav-item <%= 'active' if current_page?(help_path) %>">
         <%= link_to "Help", help_path, class: "nav-link" %>
       </li>
+      <li class="o-navbar__nav-item support <%= 'active' if current_page?(supportus_path) %>">
+        <%= link_to supportus_path, class: "o-navbar__button" do %>
+          <span>Support Us</span>
+        <% end %>
+      </li>
     <% if user_signed_in? %>
       <li class="o-navbar__nav-item o-dropdown">
         <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :help]
+  skip_before_action :authenticate_user!, only: [:home, :help, :support, :wall_of_fame]
 
   def home
     @filters = {
@@ -24,5 +24,11 @@ class PagesController < ApplicationController
   end
 
   def help
+  end
+
+  def support
+  end
+
+  def wall_of_fame
   end
 end

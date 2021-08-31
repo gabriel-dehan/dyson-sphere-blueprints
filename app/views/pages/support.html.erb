@@ -1,0 +1,149 @@
+<div class="p-staticPage">
+  <h1>
+    Support Dyson Sphere Blueprints
+    <%= link_to "★ Go to the wall of fame ★", walloffame_path, class: "p-staticPage__button" %>
+  </h1>
+  <h2>Why do we need your support? The short version</h2>
+  <p>
+    First of all, thank you for using this application and being part of the community.
+    <br />
+    <strong>You are amazing</strong>.
+  </p>
+  <p>
+    As some of you might be aware, <strong>hosting a decently popular web application such as Dyson Sphere Blueprints has a cost</strong>, and a pretty substiantial one at that:
+    one needs to pay for web hosting, database hosting, image storage space and other things like a CDN to improve loading times.
+    <br />
+    This can add up quickly and <strong>we are reaching a tipping point where it's starting to cost a bit too much money</strong> and it's gonna cost even more if I want the website to continue working properly with the traffic increase.
+    <br />
+    The website is stretching thin on its current "cheap" web hosting plan and upgrading it would be the next sensible step. A sensible yet expensive step.
+  </p>
+  <p>
+    <strong>There will never be any ads on Dyson Sphere Blueprint</strong> but, at the same time, I need help covering the costs, and am thus making this page to <strong>ask for your help</strong> in maintaining Dyson Sphere Program up and running properly.
+    <br />
+    If you wish to support Dyson Sphere Blueprints, may it be by <strong>tipping me</strong> a beer (the only fuel a developer needs) once or sponsoring Dyson Sphere Blueprints through a <strong>monthly donation</strong>, know that your contribution <em>whatever the amount</em> will be of great help, and <strong>I would be most grateful</strong>.
+  </p>
+
+  <div class="m-supportButtons">
+    <a href="https://github.com/sponsors/gabriel-dehan" target="_blank" rel="noopener noreferrer">
+      <%= image_tag 'support/github_button.png', alt: 'Support me on Github' %>
+    </a>
+    <a href="https://www.buymeacoffee.com/gabrieldehan" target="_blank" rel="noopener noreferrer">
+      <%= image_tag 'support/beer_button.png', alt: 'Buy me a beer' %>
+    </a>
+    <a href="https://www.patreon.com/user?u=7061909" target="_blank" rel="noopener noreferrer">
+      <%= image_tag 'support/patreon_button.png', alt: 'Support me on Patreon' %>
+    </a>
+  </div>
+
+  <h2>Why do we need your support? The long version (with some numbers!)</h2>
+  <p>Hello there!<br />
+    My name is Gabriel. I have been a developer for the past 15 years and working in the web industry for the past 8.<br />
+    I am also a gamer through and through, which is why most of my projects are video game related and I am really passionate about those.
+  </p>
+  <p>
+    Dyson Sphere Blueprints is a labor of heart and I am really happy to see so many people enjoying it.
+    <strong>I am so grateful for that. Thank you.</strong>
+    <br />
+    But the thing is: I am working on this project in my spare time and covering all the hosting expenses by myself.
+    Although this is something I am glad I am doing and don't mind at all, I didn't expect the success of Dyson Sphere Blueprints.
+  </p>
+  <p>Currently, <strong>Dyson Sphere Blueprints boasts:</strong></p>
+  <ul>
+    <li><strong>1350</strong> Users created</li>
+    <li><strong>4200</strong> Blueprints (2676 Public blueprints)</li>
+    <li><strong>3008</strong> Unique Visitors a day</li>
+    <li>On average <strong>80</strong> users per minute</li>
+    <li><strong>161k</strong> Requests served per day</li>
+    <li><strong>150GB</strong> of data served per day</li>
+  </ul>
+  <p>These are <strong>amazing numbers</strong> and I am very grateful to the community for that ❤️<br>
+    But those numbers also mean extra hosting expenses that are starting to get out of hand.<br>
+    One of the big factors is that the website is truly international, we have users from all around the world, and
+    more than half of our users are from China, the other (little-less-than) half coming mostly from the US and
+    Europe. This means that there isn't ever any downtime for our servers that'd help to reduce the cost and it also
+    means that to be able to provide as best an experience as I could for our asians brethren I've had to setup CDNs
+    around the world to try and reduce their loading times (the servers are closer to the US/Europe).</p>
+  <p>I've tried to optimise the code as much as I could to reduce the footprint on our servers, and even though I know
+    I can do better and will try to continue to improve on that, I feel like <strong>it's time to move to a more
+      expensive hosting plan</strong>.<br>
+    We are currently stretching the one we use very thin, especially in the RAM department. This is what I am waking to every morning:
+  </p>
+  <div>
+    <%= image_tag 'support/ram_usage.png' %>
+    <figcaption>(As you can see 3k memory errors in 24h is not what I'd call super optimal)</figcaption>
+    <br />
+  </div>
+  <p><strong>I am not planning on adding any form of ads to the website nor will I ever do so</strong>, and I know the
+    site has been getting quite slow for the past week or so because of the heavy traffic we are experiencing. If I
+    want the website experience to remain pleasant (a.k.a: not slow) I'll need to bump the hosting up and this will
+    definitely be more expensive.</p>
+  <p>As a reference here are the costs I am currently covering by myself for the current website:</p>
+  <table>
+    <caption>Current server and hosting costs</caption>
+    <tr>
+      <td><strong>Application Hosting</strong></td>
+      <td><strong>14€</strong> / month</td>
+    </tr>
+    <tr>
+      <td><strong>Database Hosting</strong></td>
+      <td><strong>9€</strong> / month</td>
+    </tr>
+    <tr>
+      <td><strong>Image Hosting</strong></td>
+      <td><strong>1-10€</strong> / month (depending on traffic)</td>
+    </tr>
+    <tr>
+      <td><strong>Content Delivery Network (CDN) and Cache</strong></td>
+      <td><strong>50-60€</strong> / month (depending on traffic)</td>
+    </tr>
+  </table>
+  <p>This amounts to about <strong>80€ / month</strong> that I have to expend. I could cut back and remove the CDN which
+    would make the experience worse for anyone not in Europe (longer loading times), but even without it that'd still
+    be around 30€ / month.</p>
+  <p>And that's just now. If I want to be able to handle the traffic reliably I have to change my <strong>Application
+      Hosting</strong> plan and it'd cost 70€ / month just for that.<br>
+    The projected costs would then be:</p>
+    <table>
+      <caption>Future server and hosting costs</caption>
+      <tr>
+        <td><strong>Application Hosting</strong></td>
+        <td><strong>70€</strong> / month</td>
+      </tr>
+      <tr>
+        <td><strong>Database Hosting</strong></td>
+        <td><strong>9€</strong> / month</td>
+      </tr>
+      <tr>
+        <td><strong>Image Hosting</strong></td>
+        <td><strong>1-10€</strong> / month (depending on traffic)</td>
+      </tr>
+      <tr>
+        <td><strong>Content Delivery Network (CDN) and Cache</strong></td>
+        <td><strong>50-60€</strong> / month (depending on traffic)</td>
+      </tr>
+    </table>
+  <p>This would bring the cost of running DSB to about <strong>150€ / month</strong> which is... quite expensive. Even
+    if I removed the CDN as I said, it'd still be too much.<br>
+    At the time I am barely able to cover the current costs without it hindering my life too much but I don't know
+    what the future holds.</p>
+  <p>And <strong>this is why I need your help</strong>. If even 2% of our users gave 2€ a month it would pretty much cover most of the
+    costs which would be amazing.</p>
+  <p>If you've read up to here, I thank you a lot and hope some of you will be able to help even the tiniest bit.</p>
+  <p>Cheers and love ❤️
+  </p>
+  <div class="m-supportButtons">
+    <a href="https://github.com/sponsors/gabriel-dehan" target="_blank" rel="noopener noreferrer">
+      <%= image_tag 'support/github_button.png', alt: 'Support me on Github' %>
+    </a>
+    <a href="https://www.buymeacoffee.com/gabrieldehan" target="_blank" rel="noopener noreferrer">
+      <%= image_tag 'support/beer_button.png', alt: 'Buy me a beer' %>
+    </a>
+    <a href="https://www.patreon.com/user?u=7061909" target="_blank" rel="noopener noreferrer">
+      <%= image_tag 'support/patreon_button.png', alt: 'Support me on Patreon' %>
+    </a>
+  </div>
+</div>
+
+<div class="a-credit">
+  <div>Donation Button icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+</div>

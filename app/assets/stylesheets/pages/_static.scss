@@ -1,0 +1,140 @@
+.p-staticPage {
+  background: var(--night-blue);
+  padding: 3em 4em;
+  border-radius: 8px;
+
+  .m-supportButtons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.8em;
+
+    a {
+      margin-right: 30px;
+      display: inline-flex;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    img {
+      max-height: 50px;
+    }
+
+    .bmc-btn-container {
+      display: inline-block;
+
+      .bmc-btn {
+        max-height: 50px;
+      }
+    }
+  }
+
+  strong {
+    color: #d38fff;
+    font-weight: 600;
+  }
+
+  figcaption {
+    text-align: center;
+    font-style: italic;
+  }
+
+  table {
+    max-width: 60%;
+    border: 1px solid var(--dark-blue);
+
+    strong {
+      color: white;
+      font-weight: bold;
+    }
+
+    caption {
+      color: #d38fff;
+      font-size: 1.2em;
+      text-align: left;
+      margin-bottom: 1em;
+    }
+
+    tr {
+      background: #151829;
+      td {
+        border-bottom: 1px solid var(--dark-blue);
+        border-right: 1px solid var(--dark-blue);
+      }
+
+      td:first-child {
+        padding-left: 1em;
+      }
+    }
+  }
+
+  h1 {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+
+    img {
+      max-width: 150px;
+    }
+  }
+
+  h2 {
+    font-size: $font-size-header;
+    width: 100%;
+    border-bottom: 2px solid var(--blue);
+    color: var(--grey65);
+    margin-bottom: 0.6em;
+
+    strong {
+      font-weight: 400;
+    }
+  }
+
+  ol {
+    margin-bottom: 30px;
+  }
+
+  li {
+    img {
+      margin-top: 10px;
+      max-width: 760px;
+      border: 3px solid var(--blue);
+      border-radius: 4px;
+    }
+  }
+
+  &__button {
+    font-family: $body-font;
+    border: 0.1rem solid transparent;
+    border-radius: .4rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.36em;
+    align-items: center;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-bottom: 0;
+    padding: 12px 22px;
+    background: var(--dark-red);
+    color: var(--white);
+
+    &:hover {
+      color: var(--dark-red);
+      background: transparent;
+      border: 0.1rem solid var(--dark-red);
+    }
+  }
+}
+
+.a-credit {
+  font-size: 1em;
+  padding-top: 1em;
+  padding-left: 0.4em;
+  color: var(--grey50);
+}
