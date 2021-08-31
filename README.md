@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v.3.3.0](#v330)
     - [v.3.2.4](#v324)
     - [v.3.2.3](#v323)
     - [v.3.2.2](#v322)
@@ -41,6 +42,12 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v.3.3.0
+- You can now support Dyson Sphere Blueprint via Github Sponsor / Patreon, a new page has been added to the website
+- Fixed n+1 query issue introduced in 3.2.0
+- Moved from malloc to jemalloc to optimise RAM consumption
+- SQL optimisations
 
 ### v.3.2.4
 - Fix issue with bulk blueprint download - [David Westerink](https://github.com/davidakachaos)
