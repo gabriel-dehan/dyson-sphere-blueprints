@@ -145,7 +145,7 @@
         margin: 0 0 8px 0;
         padding: 0;
         position: relative;
-        border-bottom: dashed var(--blue);
+        border-bottom: 1px dashed var(--blue);
 
         img {
           width: 32px;
@@ -168,12 +168,6 @@
           list-style: none;
         }
       }
-    }
-
-    &-preview {
-      background: var(--dark-blue);
-      padding: 12px 12px 6px 12px;
-      margin-bottom: 12px;
     }
 
     &-error {
@@ -439,6 +433,77 @@
 
     .t-blueprint__copy {
       float: right;
+    }
+  }
+
+  &__requirements-preview {
+    background: var(--darker-blue);
+    padding: 0;
+    margin-bottom: 2em;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--midnight-blue);
+      }
+    }
+
+    h3 {
+      display: flex;
+      align-items: center;
+      padding: 14px 12px 0 12px;
+      margin-bottom: 0.5em;
+    }
+
+    .t-blueprint__requirements {
+      &-more {
+        display: flex;
+        align-items: center;
+        padding: 0 1em;
+        color: var(--grey50);
+        font-size: $font-size-small;
+
+        span {
+          padding-right: 5px;
+        }
+
+        i {
+          font-size: 1.45em;
+          color: white;
+        }
+      }
+
+      &-total {
+        padding: 0 0 0 4px;
+        margin: 0;
+        display: inline-block;
+        color: white;
+
+        strong {
+          font-weight: normal;
+        }
+      }
+
+      &-data {
+        background-color: var(--darker-blue);
+        padding: 12px 12px 6px 12px;
+      }
+    }
+
+    &__sizeWarning {
+      h3 {
+        color: var(--red);
+      }
+      p {
+        padding: 0 12px 0 12px;
+        margin-bottom: 1.2em;
+      }
     }
   }
 }

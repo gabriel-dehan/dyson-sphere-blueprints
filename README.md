@@ -9,6 +9,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v.3.4.0](#v340)
+    - [v.3.3.1](#v331)
     - [v.3.3.0](#v330)
     - [v.3.2.4](#v324)
     - [v.3.2.3](#v323)
@@ -42,6 +44,14 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v.3.4.0
+- Blueprint breakdown preview - [sho918](https://github.com/sho918)
+- Added a blueprint size warning for large blueprints
+
+### v.3.3.1
+- Added new supporters to the wall of fame page
+- Fixed Mass Construction (2) to be 150 structures instead of 120
 
 ### v.3.3.0
 - You can now support Dyson Sphere Blueprint via Github Sponsor / Patreon, a new page has been added to the website
