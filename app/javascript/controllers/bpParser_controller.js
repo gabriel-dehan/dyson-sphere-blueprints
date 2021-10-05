@@ -33,7 +33,7 @@ export default class extends Controller {
     if ('content' in document.createElement('template')) {
       // Customize message based on size, needs improvements, this is just quick and dirty
       let sizeHumanizedCounter = 'quite big';
-      if (size >= 400000) {
+      if (size >= 1000000) {
         sizeHumanizedCounter = 'too big';
       }
 
