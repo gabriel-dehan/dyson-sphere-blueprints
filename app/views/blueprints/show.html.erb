@@ -29,11 +29,16 @@
       </div>
       <div class="t-blueprint__title" data-controller="blueprintCopyButton">
         <h2><%= @blueprint.title %></h2>
-        <button
-          class="t-blueprint__copy"
-          data-blueprintCopyButton-target="copy">
-          <i class="fas fa-copy"></i>Copy to clipboard
-        </button>
+        <% if @blueprint.large_bp? %>
+          <%= link_to blueprint_path(@blueprint, format: :text), class: "button", target: :_blank, rel: :noopener do %>
+            <i class="fas fa-external-link-alt"></i>
+            Open Blueprint
+          <% end %>
+      <% else %>
+          <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
+            <i class="fas fa-copy"></i>Copy to clipboard
+          </button>
+        <% end %>
       </div>
 
       <div class="m-tabs" data-controller="tabs">
@@ -73,12 +78,22 @@
 
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
         <h3>Blueprint</h3>
-        <textarea data-preview-target="data" data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
-        <button
-          class="t-blueprint__copy"
-          data-blueprintCopyButton-target="copy">
-          <i class="fas fa-copy"></i>Copy to clipboard
-        </button>
+        <% if @blueprint.large_bp? %>
+          <p>
+            Disabled the copy function due to blueprint size too large. <br />
+            To view the blueprint on the following page.
+          </p>
+          <%= link_to blueprint_path(@blueprint, format: :text), class: "button t-blueprint__open", target: :_blank, rel: :noopener do %>
+            <i class="fas fa-external-link-alt"></i>
+            Open Blueprint
+          <% end %>
+          <p>You can select all string with <kbd>Ctrl+A</kbd>, then <kbd>Ctrl+C</kbd> to copy.</p>
+        <% else %>
+          <textarea data-preview-target="data" data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
+          <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
+            <i class="fas fa-copy"></i>Copy to clipboard
+          </button>
+        <% end %>
       </div>
     </div>
     <div class="t-blueprint-sidebar">

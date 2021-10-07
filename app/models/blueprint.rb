@@ -61,6 +61,12 @@ class Blueprint < ApplicationRecord
     end
   end
 
+  def large_bp?
+    return false unless encoded_blueprint
+
+    encoded_blueprint.size > 1_000_000
+  end
+
   private
 
   def decode_blueprint

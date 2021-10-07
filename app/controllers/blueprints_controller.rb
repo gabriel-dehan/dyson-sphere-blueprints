@@ -18,6 +18,11 @@ class BlueprintsController < ApplicationController
   def show
     @blueprint = Blueprint.friendly.find(params[:id])
     authorize @blueprint
+
+    respond_to do |format|
+      format.html
+      format.text { render plain: @blueprint.encoded_blueprint }
+    end
   end
 
   def new
