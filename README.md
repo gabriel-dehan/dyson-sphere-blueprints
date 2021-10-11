@@ -239,11 +239,11 @@ rake blueprint:recompute_data # updates all blueprints summary if you have made 
 
 ## Contributors
 
+- [Sho918](https://github.com/sho918), code cleanup, docker setup and many incredible features and improvements
 - [Brokenmass](https://github.com/brokenmass), Wrote the 3D Preview renderer (as well as the original blueprint mod).
 - [LRFalk01](https://github.com/LRFalk01), DSP Blueprint Parser library and integration in the project
 - [RandyCarrero](https://github.com/randycarrero), Help page and new tags for Mass construction
 - [Glouel](https://github.com/glouel), Fixed some typos
-- [Sho918](https://github.com/sho918), code cleanup and docker setup
 - [David Westerink](https://github.com/davidakachaos), blueprint collections bulk download
 
 ## Deploy
