@@ -15,8 +15,13 @@ module BlueprintsFilters
 
       if @filters[:mod_id] && @filters[:mod_id] != "Any"
         @filter_mod = @mods.find { |mod| mod.id == @filters[:mod_id].to_i }
+
+        if !@filter_mod
+          @filter_mod = @mods.first
+          @filters[:mod_id] = @filter_mod.id
+        end
       else
-        @filter_mod = @mods.last
+        @filter_mod = @mods.first
       end
     end
 
