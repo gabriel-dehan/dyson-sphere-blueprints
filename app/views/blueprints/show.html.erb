@@ -80,14 +80,14 @@
         <h3>Blueprint</h3>
         <% if @blueprint.large_bp? %>
           <p>
-            Disabled the copy function due to blueprint size too large. <br />
-            To view the blueprint on the following page.
+            The <strong>copy function has been disabled</strong> due to the blueprint being too large.<br />
+            You can view the blueprint's code on the following page:
           </p>
           <%= link_to blueprint_path(@blueprint, format: :text), class: "button t-blueprint__open", target: :_blank, rel: :noopener do %>
             <i class="fas fa-external-link-alt"></i>
             Open Blueprint
           <% end %>
-          <p>You can select all string with <kbd>Ctrl+A</kbd>, then <kbd>Ctrl+C</kbd> to copy.</p>
+          <p>On this page, you can select the whole blueprint with <kbd>Ctrl+A</kbd>, then use <kbd>Ctrl+C</kbd> to copy.</p>
         <% else %>
           <textarea data-preview-target="data" data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
           <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">

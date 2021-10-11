@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v.3.4.1](#v341)
     - [v.3.4.0](#v340)
     - [v.3.3.1](#v331)
     - [v.3.3.0](#v330)
@@ -44,6 +45,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v.3.4.1
+- If a blueprint is too large, a link to open the blueprint's code in a new page will be displayed instead of the copy button. - [sho918](https://github.com/sho918)
+- Fixes a small bug that made some specific search crash
 
 ### v.3.4.0
 - Blueprint breakdown preview - [sho918](https://github.com/sho918)
