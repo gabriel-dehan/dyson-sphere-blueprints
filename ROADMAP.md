@@ -1,24 +1,25 @@
 ### Dev
-- [ ] Setup cache
-- [ ] Handle password recovey emails
-- [ ] Add tests
-- [~] Optimize, add includes, check for n+1 queries...
-- [~] Seo, sitemap...
+- [ ] Setup cache to relieve the dynos
+- [x] Handle password recovey emails
+- [x] Optimize, add includes, check for n+1 queries...
+- [x] Seo, sitemap...
 
 ### Features / Bugs
+- [ ] Downvote feature or comment system
+- [ ] Add power needed
+- [ ] Add filters and search to all blueprint related pages
 - [ ] Find and fix memory leak
 - [ ] Optimize bundle size
-- [ ] Add preview in blueprint creation form
 - [ ] Preview editor
-- [ ] Add power needed
-- [ ] Downvote feature or Comments
-- [ ] Clicking on a tag on the blueprints index will search for this tag
-- [ ] Add filters and search to all blueprint related pages
+- [x] Add preview in blueprint creation form
+- [x] Clicking on a tag on the blueprints index will search for this tag
+
+### Maybe one day
 - [ ] Bring back blueprint preview
+- [ ] Add tests
 - [ ] Localisation chinese
 
 ## Done
-
 - [x] Setup staging pipeline
 - [x] Move image hosting to S3
 - [x] Move database to new host
