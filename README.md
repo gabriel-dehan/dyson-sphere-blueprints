@@ -35,6 +35,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
     - [Environment](#environment)
     - [Build development environment](#build-development-environment)
     - [Rake tasks](#rake-tasks)
+  - [Our lovely sponsors](#our-lovely-sponsors)
   - [Contributors](#contributors)
   - [Deploy](#deploy)
     - [Staging](#staging)
@@ -236,6 +237,12 @@ rake mod:fetch_latest # currently legacy, but fetches the latest versions of all
 rake mod:fetch_base_game_latest[PATCH] # creates a new version in the DB, use like this: rake 'mod:fetch_base_game_latest[0.8.19.7662]'
 rake blueprint:recompute_data # updates all blueprints summary if you have made any changes to it
 ```
+
+## Our lovely sponsors
+
+- [Waylon](https://www.wecaretucson.org) - Checkout Waylon's project, [We Care Tucson](https://www.wecaretucson.org), a non-profit organization that refurbishes donated computers to resell at discounted prices to the community!
+- [Sho918](https://github.com/sho918)
+- Juo Nuevo
 
 ## Contributors
 
