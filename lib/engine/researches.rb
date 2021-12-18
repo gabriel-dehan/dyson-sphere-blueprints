@@ -3,10 +3,10 @@ class Engine::Researches
 
   GAME_RESEARCHES_PATH = Rails.root.join("app/javascript/data/gameResearches.json")
   MASS_CONSTRUCTION_LIMITS = {
-    "mass-1" => 60,
-    "mass-2" => 150,
-    "mass-3" => 600,
-    "mass-4" => 3000,
+    "mass-1" => 150,
+    "mass-2" => 300,
+    "mass-3" => 900,
+    "mass-4" => 3600,
     "mass-5" => Float::INFINITY,
   }.freeze
 
