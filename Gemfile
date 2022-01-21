@@ -50,6 +50,7 @@ gem "marcel"
 gem "dsp_blueprint_parser", "~> 0.1"
 gem "rubyzip", require: "zip"
 gem "scout_apm"
+gem "barnes"
 
 group :development, :test do
   gem "pry-byebug"
