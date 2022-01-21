@@ -1,18 +1,21 @@
+### Next releases
+- [x] Add new items
+- [x] Update the game version on live
+- [x] Update the bp limits on live
+- [ ] Icarus blueprints sharing
+- [ ] Dyson Spheres blueprints sharing
+- [ ] Blueprint copy count / sort by copy count
+- [ ] Remove multibuild mods from home page research
+
 ### Dev
 - [ ] Setup cache to relieve the dynos
-- [x] Handle password recovey emails
-- [x] Optimize, add includes, check for n+1 queries...
-- [x] Seo, sitemap...
 
 ### Features / Bugs
 - [ ] Downvote feature or comment system
+- [ ] Preview editor
 - [ ] Add power needed
 - [ ] Add filters and search to all blueprint related pages
-- [ ] Find and fix memory leak
 - [ ] Optimize bundle size
-- [ ] Preview editor
-- [x] Add preview in blueprint creation form
-- [x] Clicking on a tag on the blueprints index will search for this tag
 
 ### Maybe one day
 - [ ] Bring back blueprint preview
@@ -20,6 +23,11 @@
 - [ ] Localisation chinese
 
 ## Done
+- [x] Handle password recovey emails
+- [x] Optimize, add includes, check for n+1 queries...
+- [x] Seo, sitemap...
+- [x] Add preview in blueprint creation form
+- [x] Clicking on a tag on the blueprints index will search for this tag
 - [x] Setup staging pipeline
 - [x] Move image hosting to S3
 - [x] Move database to new host

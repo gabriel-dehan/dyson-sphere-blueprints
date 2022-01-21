@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v3.5.0](#v350)
     - [v.3.4.1](#v341)
     - [v.3.4.0](#v340)
     - [v.3.3.1](#v331)
@@ -46,6 +47,11 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v3.5.0
+- Added game version: 0.9.24.11182
+- Added new entities: Traffic monitor, Spray coater, Geothermal power station, Advanced mining machine and Automatic piler
+- Added new recipes: Traffic monitor, Spray coater, Proliferator, Geothermal power station, Advanced mining machine and Automatic piler
 
 ### v.3.4.1
 - If a blueprint is too large, a link to open the blueprint's code in a new page will be displayed instead of the copy button. - [sho918](https://github.com/sho918)
@@ -233,9 +239,9 @@ $ cp .env.sample .env
 
 There are a few rake tasks that you can use:
 ```
-rake mod:fetch_latest # currently legacy, but fetches the latest versions of all mods handled (MultiBuild and MultiBuildBeta)
 rake mod:fetch_base_game_latest[PATCH] # creates a new version in the DB, use like this: rake 'mod:fetch_base_game_latest[0.8.19.7662]'
 rake blueprint:recompute_data # updates all blueprints summary if you have made any changes to it
+rake mod:fetch_latest # currently legacy, but fetches the latest versions of all mods handled (MultiBuild and MultiBuildBeta)
 ```
 
 ## Our lovely sponsors
