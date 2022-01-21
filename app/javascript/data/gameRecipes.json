@@ -103,9 +103,9 @@
   "102": "Gravity matrix",
   "103": "Super-magnetic ring",
   "104": "Strange matter",
-  "106": "Accelerant Mk.I",
-  "107": "Accelerant Mk.II",
-  "108": "Accelerant Mk.III",
+  "106": "Proliferator Mk.I",
+  "107": "Proliferator Mk.II",
+  "108": "Proliferator Mk.III",
   "109": "Spray coater",
   "110": "Fractionator",
   "111": "Orbital Collector",
@@ -113,5 +113,9 @@
   "113": "Mini fusion power station",
   "114": "Storage tank",
   "115": "Deuterium fractionation",
-  "116": "Plane Smelter"
+  "116": "Plane Smelter",
+  "117": "Traffic monitor",
+  "118": "Geothermal power station",
+  "119": "Advanced Mining Machine",
+  "120": "Automatic Piler"
 }
