@@ -21,8 +21,8 @@ class PNGExtractor
   class NotFound < StandardError; end
 
   class << self
-    def extract_as_base64(input_path, verbose: true)
-      output_file = extract(input_path, nil, verbose: verbose, tmp: true)
+    def extract_as_base64(file, verbose: true)
+      output_file = extract(file, nil, verbose: verbose, tmp: true)
       output_file.rewind
 
       base64_string = Base64.encode64(output_file.read)
@@ -34,9 +34,8 @@ class PNGExtractor
       base64_string
     end
 
-    def extract(input_path, output_path, verbose: true, tmp: false)
-      file = File.new(input_path, "rb")
-
+    # File should be in `rb` mode
+    def extract(file, output_path, verbose: true, tmp: false)
       file_beginning = file.pos
       # Find PNG data in file
       png_data = Regexp.new("\211PNG".force_encoding("BINARY")).match(file.read)
@@ -50,7 +49,7 @@ class PNGExtractor
       file.seek(file_beginning + png_data_position)
 
       if tmp
-        output_file = Tempfile.new(["#{File.basename(input_path)}-#{SecureRandom.uuid}", ".png"], binmode: true)
+        output_file = Tempfile.new(["#{File.basename(file.path.split('/').last)}-#{SecureRandom.uuid}", ".png"], binmode: true)
       else
         output_file = File.new("#{output_path}.png", "wb")
       end

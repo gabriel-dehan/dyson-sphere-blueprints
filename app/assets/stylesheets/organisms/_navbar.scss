@@ -12,7 +12,6 @@
     border: 0.1rem solid var(--purple);
     border-radius: .4rem;
     cursor: pointer;
-    display: inline-block;
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: .1rem;
@@ -22,12 +21,37 @@
     white-space: nowrap;
     margin-bottom: 0;
     padding: 8px 12px;
-    background: transparent;
-    color: var(--purple);
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--dark-purple);
+    border-color: var(--dark-purple);
+    color: var(--white);
 
     &:hover {
-      background: var(--purple);
-      color: var(--white);
+      background: transparent;
+      color: var(--dark-purple);
+    }
+
+    &.add-blueprints {
+      --base-color: var(--dark-red);
+      align-items: flex-start;
+      line-height: 1.8rem;
+      max-height: 35px;
+      font-size: 1.2rem;
+      background: var(--base-color);
+      border-color: var(--base-color);
+
+      i {
+        font-size: 1.8rem;
+        margin-left: 1rem;
+      }
+
+      &:hover {
+        background: var(--base-color);
+        color: var(--white);
+      }
     }
   }
 
@@ -38,7 +62,7 @@
     align-items: center;
 
     a {
-      color: var(--purple);
+      color: var(--light-purple);
     }
   }
 
@@ -86,12 +110,9 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        background: var(--dark-purple);
-        border-color: var(--dark-purple);
-        color: var(--white);
+        color: white;
 
         &:hover {
-          background: transparent;
           color: var(--dark-purple);
 
           span {

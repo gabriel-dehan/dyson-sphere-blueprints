@@ -5,7 +5,26 @@
 
   <ul class="o-navbar-block">
     <li class="o-navbar__nav-item">
-      <%= link_to "Add your blueprint", new_blueprint_path, class: "o-navbar__button" %>
+      <li class="o-navbar__nav-item o-dropdown">
+          <div class="o-navbar__button add-blueprints">
+            <strong>Blueprint</strong>
+            <i class="fas fa-plus-circle"></i>
+          </div>
+          <div class="o-dropdown__content left red">
+            <%= link_to new_blueprint_factory_path, class: "o-dropdown__item" do %>
+              <%= image_tag get_category_icon('factory') %>
+              Add a Factory
+            <% end %>
+            <%= link_to new_blueprint_dyson_sphere_path, class: "o-dropdown__item" do %>
+              <%= image_tag get_category_icon('dyson_sphere') %>
+              Add a Dyson Sphere
+            <% end %>
+            <%= link_to new_blueprint_mecha_path, class: "o-dropdown__item" do %>
+              <%= image_tag get_category_icon('mecha') %>
+              Add a Mecha
+            <% end %>
+          </div>
+        </li>
     </li>
     <li class="o-navbar__nav-item <%= 'active' if current_page?(blueprints_path) %>">
         <%= link_to "Blueprints", blueprints_path, class: "nav-link" %>

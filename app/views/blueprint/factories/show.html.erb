@@ -42,7 +42,7 @@
       </div>
 
       <div class="m-tabs" data-controller="tabs">
-        <ul class="m-tabs-select-container" data-tabs-target="select">
+        <%# <ul class="m-tabs-select-container" data-tabs-target="select">
           <li
             class="m-tabs-select active"
             data-tab-select="description"
@@ -55,7 +55,7 @@
             data-action="click->tabs#select">
             3D Preview
           </li>
-        </ul>
+        </ul> %>
         <div class="m-tabs-tab active" data-tabs-target="tab" data-tabs-id="description">
           <div class="t-blueprint__description">
             <% if @blueprint.description.blank? %>
@@ -140,7 +140,7 @@
         <div class="t-blueprint__actions">
           <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
           <div class="t-blueprint__actions-buttons">
-            <%= button_to edit_blueprint_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
+            <%= button_to edit_blueprint_factory_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
               <span
                 class="tooltip-trigger"
                 data-tippy-content="Edit"

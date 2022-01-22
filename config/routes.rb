@@ -27,7 +27,14 @@ Rails.application.routes.draw do
       get :favorites, to: "users#my_favorites"
     end
   end
-  resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
+
+  namespace :blueprint do
+    resources :factories, only: [:new, :edit, :create, :update]
+    resources :dyson_spheres, only: [:new, :edit, :create, :update]
+    resources :mechas, only: [:new, :edit, :create, :update]
+  end
+
+  resources :blueprints, only: [:index, :show, :destroy] do
     member do
       put "like", to: "blueprints#like"
       put "unlike", to: "blueprints#unlike"

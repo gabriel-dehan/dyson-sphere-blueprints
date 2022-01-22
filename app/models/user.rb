@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_many :collections, dependent: :destroy
   has_many :blueprints, through: :collections
+  has_many :factory_blueprints, through: :collections, dependent: :destroy, class_name: "Blueprint::Factory"
+  has_many :dyson_sphere_blueprints, through: :collections, dependent: :destroy, class_name: "Blueprint::DysonSphere"
+  has_many :mecha_blueprints, through: :collections, dependent: :destroy, class_name: "Blueprint::Mecha"
 
   before_create :create_default_collections
 

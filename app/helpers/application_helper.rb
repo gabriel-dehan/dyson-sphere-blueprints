@@ -57,4 +57,8 @@ module ApplicationHelper
     end
     text
   end
+
+  def get_category_icon(category)
+    image_path "game_icons/categories/#{category}.png"
+  end
 end

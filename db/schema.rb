@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_22_230011) do
+ActiveRecord::Schema.define(version: 2022_01_22_152544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_230011) do
 
   create_table "blueprints", force: :cascade do |t|
     t.string "title", null: false
-    t.text "encoded_blueprint", null: false
+    t.text "encoded_blueprint"
     t.bigint "collection_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2021_03_22_230011) do
     t.float "cached_weighted_average", default: 0.0
     t.json "summary"
     t.text "cover_picture_data"
+    t.string "type", null: false
+    t.text "blueprint_file_data"
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
     t.index ["mod_id"], name: "index_blueprints_on_mod_id"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true
