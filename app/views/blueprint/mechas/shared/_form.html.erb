@@ -1,32 +1,21 @@
 <div class="m-form">
   <% blueprint.errors.full_messages %>
-  <div class="m-form__container" data-controller="dysonSphereBlueprintParser">
+  <div class="m-form__container">
     <h1 class="m-form__title">
-      <%= image_tag get_category_icon('dyson_sphere'), class: "m-form__title-icon dyson-sphere" %>
+      <%= image_tag get_category_icon('mecha'), class: "m-form__title-icon mecha" %>
       <div><%= form_title %></div>
     </h1>
 
     <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
       <%= f.input :title, required: true %>
-      <%= f.input :description, as: :rich_text_area, placeholder: "Describe your blueprint here. If you are using mods that modify how Dyson Spheres edition works, list them here." %>
+      <%= f.input :description, as: :rich_text_area, placeholder: "Describe your mecha blueprint here. If you are using mods that modify how Mecha edition works, list them here." %>
       <%= f.input :collection,
         collection: current_user.collections,
         label_method: :name,
         value_method: :id,
         label: "Collection",
         selected: @collection.id %>
-
-      <% if @old_mod_support %>
-        <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
-          <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
-          <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.first.version_list, selected: blueprint.mod_version || @mods.first.version_list.first, include_blank: false %>
-        </div>
-      <% end %>
-      <div class="m-form__important">
-        <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true, input_html: { data: { dysonSphereBlueprintParser_target: "value", action: "input->dysonSphereBlueprintParser#parseDysonSphere" } } %>
-        <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(anchor: "copy-dyson-sphere"), target: '_blank' %></div>
-      </div>
-      <div class="m-form__tags freeTags" data-controller="freeTags" data-freeTags-category-value="dyson_sphere">
+      <div class="m-form__tags freeTags" data-controller="freeTags" data-freeTags-category-value="mecha">
         <label for="tag_list">
           <abbr title="required">*</abbr>
           Tags <em>(optional - 10 maximum)</em>
@@ -34,48 +23,58 @@
         <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'freeTags-target': 'input' } %>
         <span class="error-container tags">
           <% if blueprint.errors[:tag_list].length > 0 %>
-            <span class="error">
-              <%= blueprint.errors[:tag_list].first %>
-            </span>
+              <span class="error">
+                <%= blueprint.errors[:tag_list].first %>
+              </span>
           <% end %>
           <span data-freeTags-target="error"></span>
         </span>
       </div>
-
-      <div class="m-form__picture">
-        <label for="cover_picture">
+      <div class="m-form__file">
+        <label for="blueprint_file">
           <abbr title="required">*</abbr>
-          Cover picture
+          Mecha file
         </label>
-        <div class="m-form__uploader">
-          <%= f.file_field :cover_picture,
-            accept: PictureUploader::ALLOWED_TYPES.join(","),
+        <div class="m-form__uploader uppy-blue">
+          <%= f.file_field :blueprint_file,
+            accept: ".mecha",
             data: {
+              mecha_plugin: true,
+              max_file_size: MechaUploader::MAX_SIZE,
+              title: 'Drop your mecha file here, or %{browse}',
+              description: 'Mecha blueprint file. 2 MB maximum',
+              error_message: 'Invalid mecha file',
               upload_server: upload_server,
-              preview_element: "m-form__picture-preview-cover",
-              upload_result_element: "m-form__picture-cover-upload-result",
+              upload_result_element: "m-form__blueprint-file-upload-result"
             } %>
         </div>
-        <%= f.hidden_field :cover_picture, value: blueprint.cached_cover_picture_data, id: "m-form__picture-cover-upload-result" %>
+        <%= f.hidden_field :blueprint_file, value: blueprint.cached_blueprint_file_data, id: "m-form__blueprint-file-upload-result" %>
         <span class="error-container">
-          <% if blueprint.errors[:cover_picture].length > 0 %>
+          <% if blueprint.errors[:blueprint_file].length > 0 %>
             <span class="error">
-              <%= blueprint.errors[:cover_picture].first %>
+              <%= blueprint.errors[:blueprint_file].first %>
             </span>
           <% end %>
         </span>
 
-        <div class="m-form__picture-preview">
-          <% if blueprint.cover_picture %>
-            <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
-            <%= image_tag blueprint.cover_picture_url(:small), height: 100, width: 100 %>
+        <div class="m-form__file-preview">
+          <% if blueprint.blueprint_file %>
+            <span class="m-form__file-preview__warning">*Uploading a new mecha file will overwrite the existing one.</span>
+            <%#= image_tag blueprint.blueprint_file_url(:small), height: 100, width: 100 %>
           <% end %>
         </div>
       </div>
 
+      <% if @old_mod_support %>
+        <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
+          <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
+          <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.first.version_list, selected: blueprint.mod_version || @mods.first.version_list.first, include_blank: false %>
+        </div>
+      <% end %>
       <div class="m-form__pictures">
         <label for="additional_pictures">
-          Additional pictures <em></em>
+          <abbr title="required">*</abbr>
+          Additional pictures <em>(1 minimum - 4 maximum)</em>
         </label>
 
         <div class="m-form__uploader">
@@ -122,14 +121,9 @@
   </div>
 </div>
 
-<template id="bp-size-warning">
-  <div class="t-blueprint__requirements-preview">
-    <div class="t-blueprint__requirements-preview__sizeWarning">
-      <h3>Beware</h3>
-      <p>
-        Your blueprint is <strong id="blueprint-sizeWarning-humanizedCounter">quite big</strong>.<br>
-        You will still be able to publish your blueprint but, if your blueprint is too big, <strong>other users won't be able to copy it directly from the blueprint's page</strong>.
-      </p>
-    </div>
+<template id="bp-preview">
+  <div class="t-blueprint__mecha-preview">
+    <strong class="t-blueprint__mecha-preview-name"></strong>
+    <img class="t-blueprint__mecha-preview-image" src="" alt="Mecha preview">
   </div>
 </template>

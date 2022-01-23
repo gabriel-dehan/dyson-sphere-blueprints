@@ -8,16 +8,16 @@ require "tempfile"
 #
 # Example:
 #
-#   PNGExtractor.extract(
+#   PngExtractor.extract(
 #     File.join(File.dirname(__FILE__), '..', '..', 'test.mecha'),
 #     File.join(File.dirname(__FILE__), '..', '..', 'result.mecha')
 #   )
 #
 #   OR
 #
-#   PNGExtractor.extract_as_base64(File.join(File.dirname(__FILE__), '..', '..', 'test.mecha'))
+#   PngExtractor.extract_as_base64(File.join(File.dirname(__FILE__), '..', '..', 'test.mecha'))
 #
-class PNGExtractor
+class PngExtractor
   class NotFound < StandardError; end
 
   class << self
@@ -41,7 +41,7 @@ class PNGExtractor
       png_data = Regexp.new("\211PNG".force_encoding("BINARY")).match(file.read)
 
       unless png_data
-        verbose ? raise(PNGExtractor::NotFound("Could not find PNG data")) : false
+        verbose ? raise(PngExtractor::NotFound("Could not find PNG data")) : false
       end
 
       png_data_position = png_data.begin(0)

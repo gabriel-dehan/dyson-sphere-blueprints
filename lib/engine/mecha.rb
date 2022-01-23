@@ -4,6 +4,6 @@ class Engine::Mecha
   end
 
   def extract_image
-    PNGExtractor.extract(@mecha_file, nil, tmp: true)
+    PngExtractor.extract(@mecha_file, nil, tmp: true)
   end
 end

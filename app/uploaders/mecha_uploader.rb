@@ -13,6 +13,7 @@ class MechaUploader < Shrine
   end
 
   Attacher.validate do
+    # TODO: Mecha validation here?
     validate_size 0..MAX_SIZE
     validate_mime_type_inclusion ALLOWED_TYPES
   end

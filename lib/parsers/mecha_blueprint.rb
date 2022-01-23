@@ -11,15 +11,14 @@ module Parsers
       @blueprint_file.rewind
     end
 
-    def validate
-      puts "Validating factory blueprint..."
-      # TODO: Validation
-      false
-    end
-
     def parse!(silent_errors: true)
       puts "Analyzing mecha blueprint... #{@blueprint.id}"
       begin
+        preview_file = Parsers::MechaFile.generate_png(@blueprint_file)
+        p "HELLO"
+        p preview_file
+        @blueprint.cover_picture = preview_file.open
+        @blueprint.save!
         # TODO:
         # @blueprint.summary = data
         # @blueprint.save!
@@ -34,12 +33,5 @@ module Parsers
       end
     end
 
-    def generate_base64_image
-      PNGExtractor.extract_as_base64(@blueprint_file)
-    end
-
-    def generate_png
-      PNGExtractor.extract(@blueprint_file, nil, tmp: true)
-    end
   end
 end

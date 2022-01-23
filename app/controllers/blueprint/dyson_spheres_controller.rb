@@ -22,18 +22,7 @@ class Blueprint::DysonSpheresController < ApplicationController
     @dyson_sphere_blueprint = @collection.dyson_sphere_blueprints.new(dyson_sphere_blueprint_params)
     @dyson_sphere_blueprint.mod = mod
     @dyson_sphere_blueprint.mod_version = mod.version_list.first
-
-    # TODO: Should probably not be here
-    # Create tags that don't exist but in the dyson sphere category
-    non_profane_tags = params[:tag_list].split(",").filter do |tag|
-      new_tag = tag.titleize
-      is_profane = profane?(new_tag)
-      ActsAsTaggableOn::Tag.create(name: new_tag, category: "dyson_sphere") if !is_profane
-
-      !is_profane
-    end
-
-    @dyson_sphere_blueprint.tag_list = non_profane_tags
+    @dyson_sphere_blueprint.tag_list = create_tags
 
     authorize @dyson_sphere_blueprint
 
@@ -58,7 +47,7 @@ class Blueprint::DysonSpheresController < ApplicationController
 
     @dyson_sphere_blueprint.collection = @collection
     @dyson_sphere_blueprint.assign_attributes(dyson_sphere_blueprint_params)
-    @dyson_sphere_blueprint.tag_list = params[:tag_list]
+    @dyson_sphere_blueprint.tag_list = create_tags
 
     authorize @dyson_sphere_blueprint
 
@@ -71,6 +60,18 @@ class Blueprint::DysonSpheresController < ApplicationController
   end
 
   private
+
+  def create_tags
+    # TODO: Should probably not be here
+    # Create tags that don't exist but in the mecha category
+    params[:tag_list].split(",").filter do |tag|
+      new_tag = tag.titleize
+      is_profane = profane?(new_tag)
+      ActsAsTaggableOn::Tag.create(name: new_tag, category: "mecha") if !is_profane
+
+      !is_profane
+    end
+  end
 
   def dyson_sphere_blueprint_params
     params.require(:blueprint_dyson_sphere).permit(:title, :description, :encoded_blueprint, :cover_picture, additional_pictures_attributes: {})

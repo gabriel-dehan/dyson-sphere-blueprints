@@ -10,7 +10,10 @@
 
 ### Dev
 - [ ] Refactor blueprints controllers
+- [ ] Refactor form views
 - [ ] Refactor show views (sidebar, etc...)
+- [ ] Update uppy.js to 2.0
+- [ ] New error styles for f.input too
 - [ ] Setup cache to relieve the dynos
 
 ### Features / Bugs

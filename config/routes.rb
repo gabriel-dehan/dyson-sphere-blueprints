@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   namespace :blueprint do
     resources :factories, only: [:new, :edit, :create, :update]
     resources :dyson_spheres, only: [:new, :edit, :create, :update]
-    resources :mechas, only: [:new, :edit, :create, :update]
+    resources :mechas, only: [:new, :edit, :create, :update] do
+      collection { post :analyze, to: "mechas#analyze" }
+    end
   end
 
   resources :blueprints, only: [:index, :show, :destroy] do

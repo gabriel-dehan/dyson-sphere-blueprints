@@ -36,6 +36,6 @@ class Blueprint::Factory < Blueprint
       valid = true
     end
 
-    errors.add(:encoded_blueprint, "Wrong blueprint format for mod version: #{mod.name} - #{mod_version}") if !valid
+    errors.add(:encoded_blueprint, "Wrong blueprint format for game version: #{mod.name} - #{mod_version}") if !valid
   end
 end

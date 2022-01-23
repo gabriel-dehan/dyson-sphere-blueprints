@@ -28,7 +28,7 @@ class Blueprint::DysonSphere < Blueprint
   def encoded_blueprint_parsable
     if saved_change_to_attribute?(:encoded_blueprint)
       valid = Parsers::DysonSphereBlueprint.new(self).validate
-      errors.add(:encoded_blueprint, "Wrong blueprint format for mod version: #{mod.name} - #{mod_version}") if !valid
+      errors.add(:encoded_blueprint, "Wrong blueprint format for game version: #{mod.name} - #{mod_version}") if !valid
     end
   end
 end

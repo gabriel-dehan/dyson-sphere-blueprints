@@ -48,6 +48,14 @@
 }
 
 [data-uppy-theme=dark] {
+  .uppy-StatusBar {
+    background-color: var(--dark-blue);
+  }
+
+  .uppy-StatusBar-actionBtn--retry {
+    background-color: var(--dark-red);
+  }
+
   .uppy-Dashboard {
     &-AddFiles {
       border-color: #89193d;
@@ -138,6 +146,54 @@
 
     &-addMoreCaption {
       line-height: 1em;
+    }
+  }
+}
+
+.uppy-blue [data-uppy-theme=dark] {
+  .uppy-StatusBar.is-error .uppy-StatusBar-progress {
+    background-color: var(--dark-red);
+  }
+
+  .uppy-Dashboard {
+    &-AddFiles {
+      border-color: #0f4a8a;
+    }
+
+    &-inner {
+      border: 3px solid var(--light-blue);
+    }
+
+    &-browse {
+      color: var(--light-blue);
+
+      &:hover {
+        border-color: var(--light-blue);
+      }
+    }
+  }
+
+  .uppy-DashboardContent {
+    &-bar {
+      border-color: var(--medium-blue);
+    }
+
+    &-reset-button, &-addMore {
+      border: 1px solid var(--medium-blue);
+      background-color: var(--medium-blue);
+      color: var(--white);
+
+      &:focus {
+        border: 1px solid var(--medium-blue);
+        background-color: var(--medium-blue);
+        color: var(--white);
+      }
+
+      &:hover {
+        border-color: var(--medium-blue);
+        background-color: transparent;
+        color: var(--medium-blue);
+      }
     }
   }
 }

@@ -539,6 +539,27 @@
       }
     }
   }
+
+  &__mecha-preview {
+    display: flex;
+    flex-direction: column;
+
+    background: var(--darker-blue);
+    padding: 12px;
+    margin-bottom: 2em;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+    width: fit-content;
+
+    &-name {
+      padding: 0px 2px 8px 2px;
+      color: var(--light-blue);
+    }
+
+    &-image {
+      width: 120px !important;
+    }
+  }
 }
 
 .swiper-container {

@@ -23,4 +23,24 @@ export default class extends Controller {
       this.renderSizeWarning(this.valueTarget.value.length);
     }
   }
+
+  renderSizeWarning(size) {
+    if (document.querySelector('.t-blueprint__requirements-preview')) {
+      document.querySelector('.t-blueprint__requirements-preview').remove();
+    }
+
+    if ('content' in document.createElement('template')) {
+      // Customize message based on size, needs improvements, this is just quick and dirty
+      let sizeHumanizedCounter = 'quite big';
+      if (size >= 1000000) {
+        sizeHumanizedCounter = 'too big';
+      }
+
+      const bpElement = document.querySelector('.m-form__important');
+      const bpSizeWarningTemplate = document.querySelector('#bp-size-warning');
+      let bpWarning = bpSizeWarningTemplate.content.cloneNode(true);
+      bpWarning.querySelector("#blueprint-sizeWarning-humanizedCounter").textContent = sizeHumanizedCounter;
+      bpElement.append(bpWarning);
+    }
+  }
 }

@@ -33,7 +33,13 @@
         </label>
         <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
         <% if blueprint.errors[:tag_list].length > 0 %>
-          <span class="error tags"><%= blueprint.errors[:tag_list].first %></span>
+          <span class="error-container tags">
+            <% if blueprint.errors[:tag_list].length > 0 %>
+              <span class="error">
+                <%= blueprint.errors[:tag_list].first %>
+              </span>
+            <% end %>
+          </span>
         <% end %>
       </div>
 
@@ -52,9 +58,11 @@
             } %>
         </div>
         <%= f.hidden_field :cover_picture, value: blueprint.cached_cover_picture_data, id: "m-form__picture-cover-upload-result" %>
-        <span class="error">
+        <span class="error-container">
           <% if blueprint.errors[:cover_picture].length > 0 %>
-            <%= blueprint.errors[:cover_picture].first %>
+            <span class="error">
+              <%= blueprint.errors[:cover_picture].first %>
+            </span>
           <% end %>
         </span>
 
@@ -80,9 +88,11 @@
             } %>
         </div>
 
-        <span class="error">
+        <span class="error-container">
           <% if blueprint.errors[:additional_pictures].length > 0 %>
-            <%= blueprint.errors[:additional_pictures].first %>
+            <span class="error">
+              <%= blueprint.errors[:additional_pictures].first %>
+            </span>
           <% end %>
         </span>
 

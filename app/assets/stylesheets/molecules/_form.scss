@@ -69,6 +69,11 @@
       &.dyson-sphere {
         margin-bottom: 4px;
       }
+
+      &.mecha {
+        width: 34px;
+        margin-bottom: 4px;
+      }
     }
   }
 
@@ -98,7 +103,7 @@
     margin-bottom: 15px;
   }
 
-  &__picture {
+  &__picture, &__file {
     margin-top: 22px;
 
     &-preview {
@@ -197,6 +202,29 @@
 
     &.tags {
       margin-top: 4px;
+    }
+  }
+
+  .error-container {
+    display: block;
+    margin-top: 4px;
+    margin-bottom: 14px;
+
+    & > .error {
+      background: var(--blue);
+      padding: 6px 12px;
+      color: var(--white);
+      border-radius: 4px;
+      width: 100%;
+      margin-left: 0;
+
+      &::before {
+        content: "⚠️"
+      }
+    }
+
+    &.tags {
+      margin-top: 16px;
     }
   }
 }
