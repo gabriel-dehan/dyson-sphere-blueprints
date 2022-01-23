@@ -7,6 +7,7 @@ class Blueprint::DysonSphere < Blueprint
 
   after_save :decode_blueprint
 
+  validates :tag_list, length: { maximum: 10, message: "maximum 10 tags." }
   validates :cover_picture, presence: true
   validates :encoded_blueprint, presence: true
   validate :encoded_blueprint_parsable

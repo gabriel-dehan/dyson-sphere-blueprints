@@ -4,7 +4,7 @@
   --tags-hover-border-color: transparent;
   --tags-focus-border-color: var(--dark-purple);
   --tag-hover: var(--blue);
-  --tag-bg: var(--light-blue);
+  --tag-bg: var(--medium-blue);
   --tag-text-color: var(--white);
   --tag-invalid-bg: var(--red);
   --tag-invalid-color: var(--white);
@@ -28,6 +28,14 @@
     }
   }
 
+}
+
+.freeTags .tagify__tag {
+ --tag-bg: var(--light-blue);
+ }
+
+.tagify__tag.whitelist {
+  --tag-bg: var(--medium-blue);
 }
 
 .tagify__dropdown {

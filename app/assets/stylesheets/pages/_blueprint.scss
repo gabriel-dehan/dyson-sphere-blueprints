@@ -351,6 +351,26 @@
     }
   }
 
+  &__tags.tag-names {
+    ul {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .t-blueprint__tags-name {
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      box-sizing: border-box;
+      max-width: 100%;
+      padding: .25em .5em;
+      background-color: var(--medium-blue);
+      color: var(--white);
+      line-height: inherit;
+      border-radius: 3px;
+    }
+  }
+
   &__title {
     display: flex;
     justify-content: space-between;

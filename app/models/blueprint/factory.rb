@@ -7,13 +7,10 @@ class Blueprint::Factory < Blueprint
 
   after_save :decode_blueprint
 
+  validates :tag_list, length: { minimum: 1, maximum: 10, message: "needs at least one tag, maximum 10." }
   validates :cover_picture, presence: true
   validates :encoded_blueprint, presence: true
   validate :encoded_blueprint_parsable
-
-  def tags_without_mass_construction
-    tags.reject { |tag| tag.name =~ /mass construction/i }
-  end
 
   def large_bp?
     return false unless encoded_blueprint

@@ -45,4 +45,8 @@ Rails.application.routes.draw do
       get "bulk_download", to: "collections#bulk_download"
     end
   end
+
+  resources :tags, only: [:create, :index] do
+    collection { post :profanity_check, to: "tags#profanity_check" }
+  end
 end

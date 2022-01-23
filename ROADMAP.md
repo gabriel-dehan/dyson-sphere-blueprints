@@ -6,8 +6,11 @@
 - [ ] Dyson Spheres blueprints sharing
 - [ ] Blueprint copy count / sort by copy count
 - [ ] Remove multibuild mods from home page research
+- [ ] Update help
 
 ### Dev
+- [ ] Refactor blueprints controllers
+- [ ] Refactor show views (sidebar, etc...)
 - [ ] Setup cache to relieve the dynos
 
 ### Features / Bugs

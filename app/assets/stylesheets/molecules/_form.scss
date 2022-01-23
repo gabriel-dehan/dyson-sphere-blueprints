@@ -50,7 +50,26 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center;
     margin-bottom: 1em;
+
+    span {
+      color: var(--dark-red);
+    }
+
+    &-icon {
+      width: 32px;
+      margin-right: 1rem;
+
+      &.factory {
+        margin-bottom: 10px;
+      }
+
+      &.dyson-sphere {
+        margin-bottom: 4px;
+      }
+    }
   }
 
   &__tags {
@@ -86,6 +105,7 @@
       img {
         border: 2px solid var(--blue);
         border-radius: 6px;
+        width: fit-content;
       }
       &__warning {
         display: block;

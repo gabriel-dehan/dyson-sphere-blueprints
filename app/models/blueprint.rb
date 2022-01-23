@@ -17,7 +17,6 @@ class Blueprint < ApplicationRecord
   has_rich_text :description
 
   validates :title, presence: true
-  validates :tag_list, length: { minimum: 1, maximum: 10, message: "needs at least one tag, maximum 10." }
   validates :additional_pictures, length: { maximum: 4, message: "Too many pictures. Please make sure you don't have too many pictures attached." }
 
   default_scope { includes(:tags, :tag_taggings, :user) }
@@ -27,6 +26,10 @@ class Blueprint < ApplicationRecord
                   using: {
                     tsearch: { prefix: true },
                   }
+
+  def tags_without_mass_construction
+    tags.reject { |tag| tag.name =~ /mass construction/i }
+  end
 
   def formatted_mod_version
     "#{mod.name} - #{mod_version}"

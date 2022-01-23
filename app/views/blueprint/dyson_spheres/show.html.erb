@@ -142,7 +142,7 @@
         <div class="t-blueprint__actions">
           <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
           <div class="t-blueprint__actions-buttons">
-            <%= button_to edit_blueprint_factory_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
+            <%= button_to edit_blueprint_dyson_sphere_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
               <span
                 class="tooltip-trigger"
                 data-tippy-content="Edit"
@@ -162,87 +162,22 @@
         </div>
       <% end %>
       <div class="t-blueprint__requirements">
-        <h3>This blueprint requires</h3>
+        <h3>Dyson Sphere summary</h3>
         <% if @blueprint.summary && @blueprint.summary.any? %>
-          <% if @blueprint.summary["total_structures"] %>
-            <span class="t-blueprint__requirements-total"><strong><%= @blueprint.summary["total_structures"] %></strong> structures</span>
-          <% end %>
-          <ul class="t-blueprint__requirements-data">
-            <% if @blueprint.summary["buildings"] %>
-              <% @blueprint.summary["buildings"].each do |entity_id, data| %>
-                <li class="t-blueprint__requirements-entity">
-                  <div class="t-blueprint__requirements-entity__tally">
-                    <span
-                      class="t-blueprint__requirements-entity__picture tooltip-trigger"
-                      data-tippy-content="<%= data["name"] %>"
-                    >
-                      <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
-                    </span>
-                    <%= data["tally"] %>
-                  </div>
-                  <% if data["recipes"]&.any? %>
-                    <ul class="t-blueprint__requirements-entity__recipes">
-                      <% data["recipes"].each do |recipe_id, recipe| %>
-                        <li
-                          class="t-blueprint__requirements-entity__recipe tooltip-trigger"
-                          data-tippy-content="<%= recipe["name"] %>"
-                          data-tippy-placement="bottom">
-                          <%= recipe["tally"] %> <%= image_tag get_game_recipe_icon_by_uuid(recipe_id) %>
-                        </li>
-                      <% end %>
-                    </ul>
-                  <% end %>
-                </li>
-              <% end %>
-            <%end %>
-            <% if @blueprint.summary["inserters"] %>
-              <% @blueprint.summary["inserters"].each do |entity_id, data| %>
-                <li class="t-blueprint__requirements-entity">
-                  <div class="t-blueprint__requirements-entity__tally">
-                    <span
-                      class="t-blueprint__requirements-entity__picture tooltip-trigger"
-                      data-tippy-content="<%= data["name"] %>"
-                    >
-                      <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
-                    </span>
-                    <%= data["tally"] %>
-                  </div>
-                </li>
-              <% end %>
-            <%end %>
-            <% if @blueprint.summary["belts"] %>
-              <% @blueprint.summary["belts"].each do |entity_id, data| %>
-                <li class="t-blueprint__requirements-entity">
-                  <div class="t-blueprint__requirements-entity__tally">
-                    <span
-                      class="t-blueprint__requirements-entity__picture tooltip-trigger"
-                      data-tippy-content="<%= data["name"] %>"
-                    >
-                      <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
-                    </span>
-                    <%= data["tally"] %>
-                  </div>
-                </li>
-              <% end %>
-            <%end %>
-          </ul>
+          <%#= TODO %>
         <% else %>
           <div class="t-blueprint__requirements-error">
-            Could not decode blueprint data.
+            Not available yet
           </div>
         <% end %>
       </div>
-      <div class="t-blueprint__tags">
+      <div class="t-blueprint__tags tag-names">
         <h3>Tagged with</h3>
         <ul>
           <% @blueprint.tags.each do |tag| %>
             <li class="t-blueprint__tags-tag">
-              <span
-                class="t-blueprint__requirements-tally__picture tooltip-trigger"
-                data-tippy-content="<%= tag.name.capitalize %>"
-                data-tippy-placement="bottom"
-              >
-                <%= image_tag get_game_tag_icon_by_name(tag.name) %>
+              <span class="t-blueprint__tags-name">
+                <%= tag.name %>
               </span>
             </li>
           <% end %>

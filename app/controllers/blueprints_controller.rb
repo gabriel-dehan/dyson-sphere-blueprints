@@ -9,7 +9,7 @@ class BlueprintsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render "blueprint/#{@blueprint.type.downcase.pluralize}/show"
+        render "blueprint/#{@blueprint.type.underscore.pluralize}/show"
       end
       format.text { render plain: @blueprint.encoded_blueprint }
     end

@@ -51,6 +51,7 @@ gem "dsp_blueprint_parser", "~> 0.1"
 gem "rubyzip", require: "zip"
 gem "scout_apm"
 gem "barnes"
+gem 'profanity-filter', '~> 1.0'
 
 group :development, :test do
   gem "pry-byebug"

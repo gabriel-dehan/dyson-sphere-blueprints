@@ -57,8 +57,8 @@
              <%= formatted_mod_compatibility_range(@mods, blueprint) %>
           </span>
         </div>
-         <div class="o-blueprint-card__typeIcon <%= blueprint.type.downcase %>">
-          <%= image_tag get_category_icon(blueprint.type.downcase) %>
+         <div class="o-blueprint-card__typeIcon <%= blueprint.type.underscore %>">
+          <%= image_tag get_category_icon(blueprint.type.underscore) %>
         </div>
       </li>
     <% end %>
