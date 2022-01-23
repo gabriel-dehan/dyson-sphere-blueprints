@@ -41,7 +41,6 @@
         width: 28px;
       }
     }
-
   }
 
   &__cover {
@@ -191,4 +190,16 @@
     }
   }
 
+}
+
+.o-blueprint-card.mecha {
+  .o-blueprint-card__cover {
+    a {
+      width: 100%;
+    }
+
+    img {
+      object-position: top;
+    }
+  }
 }

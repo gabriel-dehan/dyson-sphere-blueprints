@@ -83,6 +83,7 @@
             multiple: true,
             accept: PictureUploader::ALLOWED_TYPES.join(","),
             data: {
+              model_name: blueprint.model_name.singular,
               upload_server: upload_server,
             } %>
         </div>

@@ -28,7 +28,8 @@ class Blueprint::MechasController < ApplicationController
 
     authorize @mecha_blueprint
 
-    p @mecha_blueprint.errors
+    p mecha_blueprint_params
+    p @mecha_blueprint.additional_pictures
 
     if @mecha_blueprint.save
       flash[:notice] = "Mecha blueprint successfully created."

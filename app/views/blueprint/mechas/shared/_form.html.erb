@@ -60,7 +60,9 @@
         <div class="m-form__file-preview">
           <% if blueprint.blueprint_file %>
             <span class="m-form__file-preview__warning">*Uploading a new mecha file will overwrite the existing one.</span>
-            <%#= image_tag blueprint.blueprint_file_url(:small), height: 100, width: 100 %>
+            <% if blueprint.cover_picture_data %>
+              <%= image_tag blueprint.cover_picture_url(:small), height: 100, width: 100 %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -82,6 +84,7 @@
             multiple: true,
             accept: PictureUploader::ALLOWED_TYPES.join(","),
             data: {
+              model_name: blueprint.model_name.singular,
               upload_server: upload_server,
             } %>
         </div>

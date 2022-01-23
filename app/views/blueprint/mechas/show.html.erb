@@ -4,7 +4,7 @@
 <% end %>
 <%= content_for(:meta_image, @blueprint.cover_picture_url(:medium)) %>
 
-<div class="p-blueprint-show">
+<div class="p-blueprint-show <%= @blueprint.type.underscore %>">
   <div class="t-blueprint" data-controller="carousel tooltip preview">
     <div class="t-blueprint-main">
 
@@ -12,7 +12,9 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <a href="<%= @blueprint.cover_picture.url %>" target="_blank" rel="noopener noreferrer">
-              <%= image_tag @blueprint.cover_picture_url(:large), width: 880, height: 495 %>
+              <span class="t-blueprint__cover" >
+                <%= image_tag @blueprint.cover_picture_url(:large), height: 495 %>
+              </span>
             </a>
           </div>
           <% @blueprint.additional_pictures.each do |additional_picture| %>
@@ -27,73 +29,30 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </div>
-      <div class="t-blueprint__title" data-controller="blueprintCopyButton">
+      <div class="t-blueprint__title">
         <h2><%= @blueprint.title %></h2>
-        <% if @blueprint.large_bp? %>
-          <%= link_to blueprint_path(@blueprint, format: :text), class: "button", target: :_blank, rel: :noopener do %>
-            <i class="fas fa-external-link-alt"></i>
-            Open Blueprint
-          <% end %>
-      <% else %>
-          <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
-            <i class="fas fa-copy"></i>Copy to clipboard
-          </button>
-        <% end %>
+
+        <button class="t-blueprint__download">
+          <i class="fas fa-download"></i>Download file
+        </button>
       </div>
 
-      <div class="m-tabs" data-controller="tabs">
-        <%# <ul class="m-tabs-select-container" data-tabs-target="select">
-          <li
-            class="m-tabs-select active"
-            data-tab-select="description"
-            data-action="click->tabs#select">
-            Description
-          </li>
-          <li
-            class="m-tabs-select"
-            data-tab-select="3d-preview"
-            data-action="click->tabs#select">
-            3D Preview
-          </li>
-        </ul> %>
-        <div class="m-tabs-tab active" data-tabs-target="tab" data-tabs-id="description">
-          <div class="t-blueprint__description">
-            <% if @blueprint.description.blank? %>
-              This blueprint doesn't have a description! Instead you can check the <a data-tab-select="3d-preview" data-action="click->tabs#select">3D Preview.</a>
-            <% else %>
-              <%= @blueprint.description %>
-            <% end %>
-          </div>
-        </div>
-        <div class="m-tabs-tab" data-tabs-target="tab" data-tabs-id="3d-preview">
-          <div class="o-preview-warning">The Preview feature is unavailable at the time.</div>
-          <div class="o-preview">
-            <div class="o-preview-container" data-preview-target="output"></div>
-            <div class="o-preview-loader" data-preview-target="loader"><%= image_tag 'loader.svg' %></div>
-            <div class="o-preview-tooltip" data-preview-target="tooltip"></div>
-            <button class="o-preview-action a-button" data-preview-target="action">Animate</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
-        <h3>Blueprint</h3>
-        <% if @blueprint.large_bp? %>
-          <p>
-            The <strong>copy function has been disabled</strong> due to the blueprint being too large.<br />
-            You can view the blueprint's code on the following page:
-          </p>
-          <%= link_to blueprint_path(@blueprint, format: :text), class: "button t-blueprint__open", target: :_blank, rel: :noopener do %>
-            <i class="fas fa-external-link-alt"></i>
-            Open Blueprint
-          <% end %>
-          <p>On this page, you can select the whole blueprint with <kbd>Ctrl+A</kbd>, then use <kbd>Ctrl+C</kbd> to copy.</p>
+      <div class="t-blueprint__description">
+        <% if @blueprint.description.blank? %>
+          This blueprint doesn't have a description!
         <% else %>
-          <textarea data-preview-target="data" data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
-          <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
-            <i class="fas fa-copy"></i>Copy to clipboard
-          </button>
+          <%= @blueprint.description %>
         <% end %>
+      </div>
+
+      <div class="t-blueprint__blueprint">
+        <h3>Name: <%= @blueprint.summary && @blueprint.summary.any? ? @blueprint.summary["name"] : 'Unknown' %></h3>
+        <p>
+          Mecha files data extraction is not yet available.
+        </p>
+        <button class="t-blueprint__download">
+          <i class="fas fa-download"></i>Download file
+        </button>
       </div>
     </div>
     <div class="t-blueprint-sidebar">
@@ -142,7 +101,7 @@
         <div class="t-blueprint__actions">
           <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
           <div class="t-blueprint__actions-buttons">
-            <%= button_to edit_blueprint_dyson_sphere_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
+            <%= button_to edit_blueprint_mecha_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
               <span
                 class="tooltip-trigger"
                 data-tippy-content="Edit"
@@ -162,14 +121,10 @@
         </div>
       <% end %>
       <div class="t-blueprint__requirements">
-        <h3>Dyson Sphere summary</h3>
-        <% if @blueprint.summary && @blueprint.summary.any? %>
-          <%#= TODO %>
-        <% else %>
-          <div class="t-blueprint__requirements-error">
-            Not available yet
-          </div>
-        <% end %>
+        <h3>Mecha requirements</h3>
+        <div class="t-blueprint__requirements-error">
+          Not available yet
+        </div>
       </div>
       <div class="t-blueprint__tags tag-names">
         <h3>Tagged with</h3>

@@ -2,8 +2,11 @@
 - [x] Add new items
 - [x] Update the game version on live
 - [x] Update the bp limits on live
-- [ ] Icarus blueprints sharing
-- [ ] Dyson Spheres blueprints sharing
+- [x] Icarus blueprints sharing
+- [x] Dyson Spheres blueprints sharing
+- [ ] Collections for Dyson Spheres and Icarus
+- [ ] Extract data from dyson spheres
+- [ ] Extract data from icarus + color search
 - [ ] Blueprint copy count / sort by copy count
 - [ ] Remove multibuild mods from home page research
 - [ ] Update help

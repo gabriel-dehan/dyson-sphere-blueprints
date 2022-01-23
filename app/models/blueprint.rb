@@ -55,6 +55,10 @@ class Blueprint < ApplicationRecord
     return false unless encoded_blueprint
   end
 
+  def is_mecha?
+    type == 'Mecha'
+  end
+
   def self.find_sti_class(type_name)
     type_name = "Blueprint::#{type_name}"
     super

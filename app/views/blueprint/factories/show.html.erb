@@ -59,7 +59,7 @@
         <div class="m-tabs-tab active" data-tabs-target="tab" data-tabs-id="description">
           <div class="t-blueprint__description">
             <% if @blueprint.description.blank? %>
-              This blueprint doesn't have a description! Instead you can check the <a data-tab-select="3d-preview" data-action="click->tabs#select">3D Preview.</a>
+              This blueprint doesn't have a description! <!-- Instead you can check the <a data-tab-select="3d-preview" data-action="click->tabs#select">3D Preview.</a> -->
             <% else %>
               <%= @blueprint.description %>
             <% end %>

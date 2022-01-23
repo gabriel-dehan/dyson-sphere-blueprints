@@ -41,39 +41,12 @@
         <% end %>
       </div>
 
-      <div class="m-tabs" data-controller="tabs">
-        <%# <ul class="m-tabs-select-container" data-tabs-target="select">
-          <li
-            class="m-tabs-select active"
-            data-tab-select="description"
-            data-action="click->tabs#select">
-            Description
-          </li>
-          <li
-            class="m-tabs-select"
-            data-tab-select="3d-preview"
-            data-action="click->tabs#select">
-            3D Preview
-          </li>
-        </ul> %>
-        <div class="m-tabs-tab active" data-tabs-target="tab" data-tabs-id="description">
-          <div class="t-blueprint__description">
-            <% if @blueprint.description.blank? %>
-              This blueprint doesn't have a description! Instead you can check the <a data-tab-select="3d-preview" data-action="click->tabs#select">3D Preview.</a>
-            <% else %>
-              <%= @blueprint.description %>
-            <% end %>
-          </div>
-        </div>
-        <div class="m-tabs-tab" data-tabs-target="tab" data-tabs-id="3d-preview">
-          <div class="o-preview-warning">The Preview feature is unavailable at the time.</div>
-          <div class="o-preview">
-            <div class="o-preview-container" data-preview-target="output"></div>
-            <div class="o-preview-loader" data-preview-target="loader"><%= image_tag 'loader.svg' %></div>
-            <div class="o-preview-tooltip" data-preview-target="tooltip"></div>
-            <button class="o-preview-action a-button" data-preview-target="action">Animate</button>
-          </div>
-        </div>
+      <div class="t-blueprint__description">
+        <% if @blueprint.description.blank? %>
+          This blueprint doesn't have a description!
+        <% else %>
+          <%= @blueprint.description %>
+        <% end %>
       </div>
 
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">

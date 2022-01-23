@@ -395,7 +395,7 @@
     }
   }
 
-  &__copy {
+  &__copy, &__download {
     margin-bottom: 0;
     display: inline-flex;
     align-items: center;
@@ -460,7 +460,7 @@
       min-height: 240px;
     }
 
-    .t-blueprint__copy {
+    .t-blueprint__copy, .t-blueprint__download {
       float: right;
     }
 
@@ -593,6 +593,24 @@
 
     &:hover {
       background: linear-gradient(90deg, rgba(0,0,0, 0.62) 0%, rgba(0,0,0,0) 100%);
+    }
+  }
+}
+
+
+.p-blueprint-show.mecha {
+  .t-blueprint {
+
+    &__blueprint {
+        h3 {
+        padding-left: 0;
+      }
+    }
+
+    &__cover {
+      display: flex;
+      background: #171717;
+      justify-content: center;
     }
   }
 }

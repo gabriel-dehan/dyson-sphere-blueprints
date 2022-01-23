@@ -171,7 +171,7 @@ const multipleFileUpload = (fileInput) => {
 
     hiddenField.classList = 'm-form__pictures-additional-pictures-data';
     hiddenField.type = 'hidden'
-    hiddenField.name = `blueprint[additional_pictures_attributes][${randomstring.generate()}][picture]`
+    hiddenField.name = `${data.modelName || 'blueprint'}[additional_pictures_attributes][${randomstring.generate()}][picture]`
     hiddenField.value = uploadedFileData(file, response, fileInput)
 
     document.querySelector('form').appendChild(hiddenField)
