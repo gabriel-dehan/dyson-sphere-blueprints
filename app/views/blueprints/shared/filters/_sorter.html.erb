@@ -1,0 +1,12 @@
+<div class="o-blueprint-filters__order-container">
+  <div class="o-blueprint-filters__order">
+    <div class="o-blueprint-filters__order-choice">
+      <%= f.radio_button :order, "recent", checked: filters[:order] === 'recent' %>
+      <%= f.label :order_recent, "Most recent" %>
+    </div>
+    <div class="o-blueprint-filters__order-choice">
+      <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular' %>
+      <%= f.label :order_popular, "Most Popular" %>
+    </div>
+  </div>
+</div>

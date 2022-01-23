@@ -26,33 +26,49 @@
           </div>
         </li>
     </li>
-    <li class="o-navbar__nav-item <%= 'active' if current_page?(blueprints_path) %>">
-        <%= link_to "Blueprints", blueprints_path, class: "nav-link" %>
-      </li>
-      <li class="o-navbar__nav-item <%= 'active' if current_page?(collections_path) %>">
-        <%= link_to "Collections", collections_path, class: "nav-link" %>
-      </li>
-      <li class="o-navbar__nav-item <%= 'active' if current_page?(help_path) %>">
-        <%= link_to "Help", help_path, class: "nav-link" %>
-      </li>
-      <li class="o-navbar__nav-item support <%= 'active' if current_page?(supportus_path) %>">
-        <%= link_to supportus_path, class: "o-navbar__button" do %>
-          <span>Support Us</span>
+    <li class="o-navbar__nav-item separator"></li>
+    <li class="o-navbar__nav-item <%= 'active' if current_page?(blueprints_path(type: "factory"), check_params: true) %>">
+      <%= link_to blueprints_path(type: "factory"), class: "nav-icon factory" do %>
+        <%= image_tag get_category_icon('factory')%>
+      <% end %>
+    </li>
+     <li class="o-navbar__nav-item <%= 'active' if current_page?(blueprints_path(type: "dyson_sphere"), check_params: true) %>">
+        <%= link_to blueprints_path(type: "dyson_sphere"), class: "nav-icon dyson_sphere" do %>
+          <%= image_tag get_category_icon('dyson_sphere') %>
         <% end %>
-      </li>
+    </li>
+     <li class="o-navbar__nav-item <%= 'active' if current_page?(blueprints_path(type: "mecha"), check_params: true) %>">
+       <%= link_to blueprints_path(type: "mecha"), class: "nav-icon mecha" do %>
+         <%= image_tag get_category_icon('mecha') %>
+        <% end %>
+    </li>
+    <li class="o-navbar__nav-item separator"></li>
+    <li class="o-navbar__nav-item <%= 'active' if current_page?(collections_path) %>">
+      <%= link_to "Collections", collections_path, class: "nav-link" %>
+    </li>
+    <li class="o-navbar__nav-item <%= 'active' if current_page?(help_path) %>">
+      <%= link_to "Help", help_path, class: "nav-link" %>
+    </li>
+    <li class="o-navbar__nav-item separator"></li>
+    <li class="o-navbar__nav-item support <%= 'active' if current_page?(supportus_path) %>">
+      <%= link_to supportus_path, class: "o-navbar__button" do %>
+        <span>Support Us</span>
+      <% end %>
+    </li>
+    <li class="o-navbar__nav-item separator"></li>
     <% if user_signed_in? %>
-      <li class="o-navbar__nav-item o-dropdown">
-        <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>
-        <div class="o-dropdown__content">
-          <%= link_to "My favorites", favorites_users_path, class: "o-dropdown__item" %>
-          <%= link_to "My blueprints", blueprints_users_path, class: "o-dropdown__item" %>
-          <%= link_to "My collections", collections_users_path, class: "o-dropdown__item" %>
-          <%= link_to "Settings", edit_user_registration_path, class: "o-dropdown__item" %>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "o-dropdown__item" %>
-        </div>
-      </li>
+    <li class="o-navbar__nav-item o-dropdown">
+      <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>
+      <div class="o-dropdown__content">
+        <%= link_to "My favorites", favorites_users_path, class: "o-dropdown__item" %>
+        <%= link_to "My blueprints", blueprints_users_path, class: "o-dropdown__item" %>
+        <%= link_to "My collections", collections_users_path, class: "o-dropdown__item" %>
+        <%= link_to "Settings", edit_user_registration_path, class: "o-dropdown__item" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "o-dropdown__item" %>
+      </div>
+    </li>
     <% else %>
-      <li class="o-navbar__nav-item <%= 'active' if current_page?(new_user_session_path) %>">
+    <li class="o-navbar__nav-item <%= 'active' if current_page?(new_user_session_path) %>">
         <%= link_to "Login", new_user_session_path, class: "nav-link" %>
       </li>
     <% end %>

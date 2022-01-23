@@ -1,0 +1,31 @@
+<div class="o-blueprint-filters">
+  <%= form_with url: filter_path, method: :get do |f| %>
+    <div class="o-blueprint-filters__line">
+      <!-- Search -->
+      <%= render 'blueprints/shared/filters/search_filter', f: f, filters: filters %>
+      <!-- Tags -->
+      <div class="o-blueprint-filters__tags" data-controller="entitiesTags">
+        <%= f.text_field :tags, value: filters[:tags].join(', '), data: { 'entitiesTags-target': 'input' } %>
+        <i class="fas fa-tags"></i>
+      </div>
+      <!-- Author -->
+      <%= render 'blueprints/shared/filters/author_filter', f: f, filters: filters %>
+    </div>
+    <div class="o-blueprint-filters__line">
+      <!-- Structures -->
+      <div class="o-blueprint-filters__structuresCount o-blueprint-filters__select">
+        <%= f.label :max_structures, "Max structures" %>
+        <%= f.select :max_structures, Engine::Researches.instance.formatted_mass_construction_with_limits.invert.to_a, selected: filters[:max_structures], include_blank: 'Any' %>
+      </div>
+      <!-- Mod Select -->
+      <%= render 'blueprints/shared/filters/mod_select_filter', f: f, filters: filters %>
+    </div>
+    <div class="o-blueprint-filters__line">
+      <%= render 'blueprints/shared/filters/sorter', f: f, filters: filters %>
+      <div class="o-blueprint-filters__submit">
+        <%= f.submit 'Search' %>
+        <%= link_to 'Reset', filter_path, class: 'a-button' %>
+      </div>
+    </div>
+  <% end %>
+</div>

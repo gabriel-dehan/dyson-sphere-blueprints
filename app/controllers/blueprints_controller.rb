@@ -40,7 +40,7 @@ class BlueprintsController < ApplicationController
     authorize @blueprint
 
     @blueprint.liked_by current_user
-    redirect_to @blueprint
+    redirect_to blueprint_path(@blueprint)
   end
 
   def unlike
@@ -48,6 +48,6 @@ class BlueprintsController < ApplicationController
     authorize @blueprint
 
     @blueprint.unliked_by current_user
-    redirect_to @blueprint
+    redirect_to blueprint_path(@blueprint)
   end
 end

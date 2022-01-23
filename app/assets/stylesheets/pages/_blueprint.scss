@@ -4,6 +4,15 @@
 .p-blueprint-index {
   display: flex;
   flex-direction: column;
+
+  h1 {
+    margin-top: 2rem;
+
+    strong {
+      font-weight: normal;
+      color: var(--red);
+    }
+  }
 }
 
 .t-blueprint-list {

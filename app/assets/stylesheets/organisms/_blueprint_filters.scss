@@ -9,6 +9,13 @@
     margin-bottom: 10px;
     justify-content: space-between;
 
+    &-common-mod_select_filter {
+      width: 46.7%;
+      margin-left: auto;
+      display: flex;
+      justify-content: end;
+    }
+
     input {
       margin-bottom: 0;
     }

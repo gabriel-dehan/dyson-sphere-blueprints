@@ -3,6 +3,7 @@ class Blueprint::Mecha < Blueprint
   def normalize_friendly_id(string); "mecha-#{super}"; end
 
   include MechaUploader::Attachment(:blueprint_file)
+  acts_as_votable
 
   after_save :decode_blueprint
   validate :encoded_blueprint_parsable

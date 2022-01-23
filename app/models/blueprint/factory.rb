@@ -4,6 +4,7 @@ class Blueprint::Factory < Blueprint
 
   # Pictures
   include PictureUploader::Attachment(:cover_picture)
+  acts_as_votable
 
   after_save :decode_blueprint
 
