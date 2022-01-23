@@ -63,11 +63,11 @@ class Blueprint::DysonSpheresController < ApplicationController
 
   def create_tags
     # TODO: Should probably not be here
-    # Create tags that don't exist but in the mecha category
+    # Create tags that don't exist but in the dyson_sphere category
     params[:tag_list].split(",").filter do |tag|
       new_tag = tag.titleize
       is_profane = profane?(new_tag)
-      ActsAsTaggableOn::Tag.create(name: new_tag, category: "mecha") if !is_profane
+      ActsAsTaggableOn::Tag.create(name: new_tag, category: "dyson_sphere") if !is_profane
 
       !is_profane
     end

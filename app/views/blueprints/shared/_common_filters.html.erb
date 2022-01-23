@@ -4,8 +4,8 @@
       <!-- Search -->
       <%= render 'blueprints/shared/filters/search_filter', f: f, filters: filters %>
       <!-- Tags -->
-      <div class="o-blueprint-filters__tags" data-controller="allTags">
-        <%= f.text_field :tags, value: filters[:tags].join(', '), data: { 'entitiesTags-target': 'input' } %>
+      <div class="o-blueprint-filters__tags" data-controller="filterTags">
+        <%= f.text_field :tags, value: filters[:tags].join(', '), data: { 'filterTags-target': 'input' } %>
         <i class="fas fa-tags"></i>
       </div>
       <!-- Author -->

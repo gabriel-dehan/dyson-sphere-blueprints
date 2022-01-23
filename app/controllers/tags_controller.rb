@@ -7,7 +7,11 @@ class TagsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        tags = ActsAsTaggableOn::Tag.where(category: params[:category]).pluck(:name)
+        if params[:category].present?
+          tags = ActsAsTaggableOn::Tag.where(category: params[:category]).pluck(:name)
+        else
+          tags = ActsAsTaggableOn::Tag.pluck(:name)
+        end
         render json: tags
       end
     end
@@ -35,7 +39,7 @@ class TagsController < ApplicationController
   # end
 
   def profanity_check
-    new_tag = params[:tag] || "";
+    new_tag = params[:tag] || ""
 
     respond_to do |format|
       format.json do

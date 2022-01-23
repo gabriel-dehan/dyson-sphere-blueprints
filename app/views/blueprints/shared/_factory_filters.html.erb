@@ -1,5 +1,6 @@
 <div class="o-blueprint-filters">
   <%= form_with url: filter_path, method: :get do |f| %>
+    <%= hidden_field_tag :type, "factory" %>
     <div class="o-blueprint-filters__line">
       <!-- Search -->
       <%= render 'blueprints/shared/filters/search_filter', f: f, filters: filters %>

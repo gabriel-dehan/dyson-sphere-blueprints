@@ -34,7 +34,7 @@ module Parsers
           }
         else
           {
-            name: '',
+            name: "",
             image_b64: nil,
             valid: valid,
           }

@@ -1,11 +1,12 @@
 <div class="o-blueprint-filters">
   <%= form_with url: filter_path, method: :get do |f| %>
+    <%= hidden_field_tag :type, "dyson_sphere" %>
     <div class="o-blueprint-filters__line">
       <!-- Search -->
       <%= render 'blueprints/shared/filters/search_filter', f: f, filters: filters %>
       <!-- Tags -->
-      <div class="o-blueprint-filters__tags" data-controller="dysonSphereTags">
-        <%= f.text_field :tags, value: filters[:tags].join(', '), data: { 'entitiesTags-target': 'input' } %>
+      <div class="o-blueprint-filters__tags" data-controller="filterTags" data-filterTags-category-value="dyson_sphere">
+        <%= f.text_field :tags, value: filters[:tags].join(', '), data: { 'filterTags-target': 'input' } %>
         <i class="fas fa-tags"></i>
       </div>
       <!-- Author -->
