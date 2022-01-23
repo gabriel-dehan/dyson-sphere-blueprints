@@ -5,7 +5,7 @@ module Parsers
         validate_headers(file)
       end
 
-      def extract_data(file)
+      def extract_data(file, with_png: true)
         control_bit = file.read(1).unpack1("C") # 0x12
         header = file.read(18)
         unknown = file.read(16) # 16 bytes, mostly EOSes
@@ -29,7 +29,7 @@ module Parsers
         if valid
           {
             name: name,
-            image_b64: generate_base64_image(file),
+            image_b64: with_png ? generate_base64_image(file) : nil,
             valid: valid,
           }
         else

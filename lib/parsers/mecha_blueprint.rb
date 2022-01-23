@@ -15,13 +15,13 @@ module Parsers
       puts "Analyzing mecha blueprint... #{@blueprint.id}"
       begin
         preview_file = Parsers::MechaFile.generate_png(@blueprint_file)
-        p "HELLO"
-        p preview_file
         @blueprint.cover_picture = preview_file.open
+
+        data = Parsers::MechaFile.extract_data(@blueprint_file)
+        @blueprint.summary = {
+          name: data[:name],
+        }
         @blueprint.save!
-        # TODO:
-        # @blueprint.summary = data
-        # @blueprint.save!
         puts "Done!"
       rescue StandardError => e
         if silent_errors
