@@ -1,4 +1,5 @@
 .o-blueprint-card {
+  position: relative;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -7,7 +8,7 @@
   background: rgba(0, 0, 0, 0.29);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
-  margin: 0 15px 20px 15px;
+  margin: 0 15px 25px 15px;
 
   &:nth-child(4n) {
     margin-right: 0;
@@ -15,6 +16,31 @@
 
   &:nth-child(4n+1), &:first-child {
     margin-left: 0;
+  }
+
+  &__typeIcon {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--blue);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px ​solid var(--white);
+
+    img {
+      width: 22px;
+    }
+
+    &.dyson_sphere {
+      img {
+        width: 28px;
+      }
+    }
   }
 
   &__cover {
@@ -164,4 +190,16 @@
     }
   }
 
+}
+
+.o-blueprint-card.mecha {
+  .o-blueprint-card__cover {
+    a {
+      width: 100%;
+    }
+
+    img {
+      object-position: top;
+    }
+  }
 }

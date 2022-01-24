@@ -27,7 +27,16 @@ Rails.application.routes.draw do
       get :favorites, to: "users#my_favorites"
     end
   end
-  resources :blueprints, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
+
+  namespace :blueprint do
+    resources :factories, only: [:new, :edit, :create, :update]
+    resources :dyson_spheres, only: [:new, :edit, :create, :update]
+    resources :mechas, only: [:new, :edit, :create, :update] do
+      collection { post :analyze, to: "mechas#analyze" }
+    end
+  end
+
+  resources :blueprints, only: [:index, :show, :destroy] do
     member do
       put "like", to: "blueprints#like"
       put "unlike", to: "blueprints#unlike"
@@ -37,5 +46,9 @@ Rails.application.routes.draw do
     member do
       get "bulk_download", to: "collections#bulk_download"
     end
+  end
+
+  resources :tags, only: [:create, :index] do
+    collection { post :profanity_check, to: "tags#profanity_check" }
   end
 end

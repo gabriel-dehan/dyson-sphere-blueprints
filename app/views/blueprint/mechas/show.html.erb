@@ -1,0 +1,152 @@
+<%= content_for(:meta_title, "Dyson Sphere Blueprints - #{@blueprint.title}")%>
+<% if !@blueprint.description.blank? %>
+  <%= content_for(:meta_description, @blueprint.description.to_plain_text.truncate(150)) %>
+<% end %>
+<%= content_for(:meta_image, @blueprint.cover_picture_url(:medium)) %>
+
+<div class="p-blueprint-show <%= @blueprint.type.underscore %>">
+  <div class="t-blueprint" data-controller="carousel tooltip preview">
+    <div class="t-blueprint-main">
+
+      <div class="swiper-container" data-carousel-target="container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="<%= @blueprint.cover_picture.url %>" target="_blank" rel="noopener noreferrer">
+              <span class="t-blueprint__cover" >
+                <%= image_tag @blueprint.cover_picture_url(:large), height: 495 %>
+              </span>
+            </a>
+          </div>
+          <% @blueprint.additional_pictures.each do |additional_picture| %>
+            <div class="swiper-slide">
+              <a href="<%= additional_picture.picture.url %>" target="_blank" rel="noopener noreferrer">
+                <%= image_tag additional_picture.picture_url(:large), width: 880, height: 495 %>
+              </a>
+            </div>
+          <% end %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <% if @blueprint.summary && @blueprint.summary["color_profile"] %>
+        <div class="t-blueprint__color-profile">
+          <ul class="t-blueprint__colors">
+            <% @blueprint.summary["color_profile"]["colors_by_hue"].take(24).map do |color| %>
+              <li class="t-blueprint__colors-color" style="background-color: rgb(<%= color["r"] %>, <%= color["g"] %>, <%= color["b"] %>)"></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="t-blueprint__title">
+        <h2><%= @blueprint.title %></h2>
+
+        <button class="t-blueprint__download">
+          <i class="fas fa-download"></i>Download file
+        </button>
+      </div>
+
+      <div class="t-blueprint__description">
+        <% if @blueprint.description.blank? %>
+          This blueprint doesn't have a description!
+        <% else %>
+          <%= @blueprint.description %>
+        <% end %>
+      </div>
+
+      <div class="t-blueprint__blueprint">
+        <h3>Name: <%= @blueprint.summary && @blueprint.summary.any? ? @blueprint.summary["name"] : 'Unknown' %></h3>
+        <p>
+          Mecha files data extraction is not yet available.
+        </p>
+        <button class="t-blueprint__download">
+          <i class="fas fa-download"></i>Download file
+        </button>
+      </div>
+    </div>
+    <div class="t-blueprint-sidebar">
+      <div class="t-blueprint__info">
+        <ul>
+          <li>
+            <strong>Author:</strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
+          </li>
+          <li>
+            <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
+          </li>
+          <% if @old_mod_support %>
+          <li>
+            <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
+          </li>
+          <% end %>
+          <li>
+            <% compatibility_status, compatibility_message = compatibility_recap(@mods, @blueprint) %>
+            <strong>Game version:</strong>
+            <span class="t-blueprint__info-mod tooltip-trigger <%= compatibility_status %>"
+                data-tippy-content="<%= compatibility_message %>"
+                data-tippy-placement="right">
+              <%= @blueprint.mod_version %>
+            </span>
+          </li>
+          <li>
+            <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
+          </li>
+        </ul>
+        <div class="t-blueprint__info-votes">
+          <strong class="count"><%= @blueprint.cached_votes_total %></strong>
+          <% if !current_user %>
+            <i class="fas fa-heart active"></i>
+          <% elsif current_user.voted_for?(@blueprint) %>
+            <%= button_to unlike_blueprint_path(@blueprint.id), method: :put do %>
+              <i class="fas fa-heart active"></i>
+            <% end %>
+          <% else %>
+            <%= button_to like_blueprint_path(@blueprint.id), method: :put do %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <% if policy(@blueprint).update? %>
+        <div class="t-blueprint__actions">
+          <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
+          <div class="t-blueprint__actions-buttons">
+            <%= button_to edit_blueprint_mecha_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
+              <span
+                class="tooltip-trigger"
+                data-tippy-content="Edit"
+                data-tippy-placement="bottom">
+                <i class="fas fa-edit"></i>
+              </span>
+            <% end %>
+            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: 'Are you sure you want to delete your blueprint?' } do %>
+              <span
+                class="tooltip-trigger"
+                data-tippy-content="Delete"
+                data-tippy-placement="bottom">
+                <i class="fas fa-trash"></i>
+              </span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="t-blueprint__requirements">
+        <h3>Mecha requirements</h3>
+        <div class="t-blueprint__requirements-error">
+          Not available yet
+        </div>
+      </div>
+      <div class="t-blueprint__tags tag-names">
+        <h3>Tagged with</h3>
+        <ul>
+          <% @blueprint.tags.each do |tag| %>
+            <li class="t-blueprint__tags-tag">
+              <span class="t-blueprint__tags-name">
+                <%= tag.name %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

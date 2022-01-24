@@ -2,18 +2,27 @@
 - [x] Add new items
 - [x] Update the game version on live
 - [x] Update the bp limits on live
-- [ ] Icarus blueprints sharing
-- [ ] Dyson Spheres blueprints sharing
+- [x] Icarus blueprints sharing
+- [x] Dyson Spheres blueprints sharing
+- [x] Remove multibuild mods from home page research
+- [ ] Collections for Dyson Spheres and Icarus
+- [ ] Extract data from dyson spheres
+- [ ] Extract data from icarus + color search
 - [ ] Blueprint copy count / sort by copy count
-- [ ] Remove multibuild mods from home page research
+- [ ] Update help
 
 ### Dev
+- [ ] Refactor blueprints controllers
+- [ ] Refactor form views
+- [ ] Refactor show views (sidebar, etc...)
+- [ ] Update uppy.js to 2.0
+- [ ] New error styles for f.input too
 - [ ] Setup cache to relieve the dynos
 
 ### Features / Bugs
 - [ ] Downvote feature or comment system
 - [ ] Preview editor
-- [ ] Add power needed
+- [ ] Add power needed to factories
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Optimize bundle size
 

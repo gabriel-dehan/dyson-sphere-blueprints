@@ -1,11 +1,14 @@
 <div class="m-form">
   <% blueprint.errors.full_messages %>
-  <div class="m-form__container" data-controller="bpParser">
-    <h1 class="m-form__title"><%= form_title %></h1>
+  <div class="m-form__container" data-controller="dysonSphereBlueprintParser">
+    <h1 class="m-form__title">
+      <%= image_tag get_category_icon('dyson_sphere'), class: "m-form__title-icon dyson-sphere" %>
+      <div><%= form_title %></div>
+    </h1>
 
     <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
       <%= f.input :title, required: true %>
-      <%= f.input :description, as: :rich_text_area, placeholder: "Describe your blueprint here. If you are using mods that add items that are not in the base game, don't forget to list them." %>
+      <%= f.input :description, as: :rich_text_area, placeholder: "Describe your blueprint here. If you are using mods that modify how Dyson Spheres edition works, list them here." %>
       <%= f.input :collection,
         collection: current_user.collections,
         label_method: :name,
@@ -13,23 +16,30 @@
         label: "Collection",
         selected: @collection.id %>
 
-      <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
-        <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
-        <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.first.version_list, selected: blueprint.mod_version || @mods.first.version_list.first, include_blank: false %>
-      </div>
+      <% if @old_mod_support %>
+        <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
+          <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
+          <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.first.version_list, selected: blueprint.mod_version || @mods.first.version_list.first, include_blank: false %>
+        </div>
+      <% end %>
       <div class="m-form__important">
-        <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true, input_html: { data: { bpParser_target: "value", action: "input->bpParser#parse" } } %>
-        <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(anchor: "copy"), target: '_blank' %></div>
+        <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true, input_html: { data: { dysonSphereBlueprintParser_target: "value", action: "input->dysonSphereBlueprintParser#parseDysonSphere" } } %>
+        <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(anchor: "copy-dyson-sphere"), target: '_blank' %></div>
       </div>
-      <div class="m-form__tags" data-controller="entitiesTags">
+      <div class="m-form__tags freeTags" data-controller="freeTags" data-freeTags-category-value="dyson_sphere">
         <label for="tag_list">
           <abbr title="required">*</abbr>
-          Tags <em>(1 minimum - 10 maximum)</em>
+          Tags <em>(optional - 10 maximum)</em>
         </label>
-        <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
-        <% if blueprint.errors[:tag_list].length > 0 %>
-          <span class="error tags"><%= blueprint.errors[:tag_list].first %></span>
-        <% end %>
+        <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'freeTags-target': 'input' } %>
+        <span class="error-container tags">
+          <% if blueprint.errors[:tag_list].length > 0 %>
+            <span class="error">
+              <%= blueprint.errors[:tag_list].first %>
+            </span>
+          <% end %>
+          <span data-freeTags-target="error"></span>
+        </span>
       </div>
 
       <div class="m-form__picture">
@@ -47,9 +57,11 @@
             } %>
         </div>
         <%= f.hidden_field :cover_picture, value: blueprint.cached_cover_picture_data, id: "m-form__picture-cover-upload-result" %>
-        <span class="error">
+        <span class="error-container">
           <% if blueprint.errors[:cover_picture].length > 0 %>
-            <%= blueprint.errors[:cover_picture].first %>
+            <span class="error">
+              <%= blueprint.errors[:cover_picture].first %>
+            </span>
           <% end %>
         </span>
 
@@ -71,13 +83,16 @@
             multiple: true,
             accept: PictureUploader::ALLOWED_TYPES.join(","),
             data: {
+              model_name: blueprint.model_name.singular,
               upload_server: upload_server,
             } %>
         </div>
 
-        <span class="error">
+        <span class="error-container">
           <% if blueprint.errors[:additional_pictures].length > 0 %>
-            <%= blueprint.errors[:additional_pictures].first %>
+            <span class="error">
+              <%= blueprint.errors[:additional_pictures].first %>
+            </span>
           <% end %>
         </span>
 
@@ -107,60 +122,6 @@
     <% end %>
   </div>
 </div>
-
-<template id="bp-requirements">
-  <div class="t-blueprint__requirements-preview" data-controller="collapsible">
-    <div class="t-blueprint__requirements-preview__header" data-action="click->collapsible#toggle">
-      <h3>
-        This blueprint requires
-        <span class="t-blueprint__requirements-total">
-          <strong id="totalStructure"></strong> structures
-        </span>
-      </h3>
-      <strong class="t-blueprint__requirements-more">
-        <span>(See the breakdown)</span>
-        <i class="fas fa-caret-down"></i>
-      </strong>
-    </div>
-    <ul class="t-blueprint__requirements-data" id="bp-entity-list" data-collapsible-target="collapsible">
-    </ul>
-  </div>
-</template>
-
-<template id="bp-entity">
-  <li class="t-blueprint__requirements-entity">
-    <div class="t-blueprint__requirements-entity__tally">
-      <span class="t-blueprint__requirements-entity__picture" id="entity-image"></span>
-      <div id="entity-tally"></div>
-    </div>
-  </li>
-</template>
-
-<template id="bp-entity-recipes">
-  <ul class="t-blueprint__requirements-entity__recipes">
-  </ul>
-</template>
-
-<template id="bp-entity-recipe">
-  <li class="t-blueprint__requirements-entity__recipe--fixed-margin" id="entity-recipe-image">
-    <div id="entity-recipe-tally"></div>
-  </li>
-</template>
-
-<template id="bp-entity-params">
-  <ul class="t-blueprint__requirements-entity__params"></ul>
-</template>
-
-<template id="bp-entity-param">
-  <li class="t-blueprint__requirements-entity__param">
-    <div id="entity-recipe-image"></div>
-    <ul>
-      <li id="entity-param-local"></li>
-      <li id="entity-param-remote"></li>
-      <li id="entity-param-max"></li>
-    </ul>
-  </li>
-</template>
 
 <template id="bp-size-warning">
   <div class="t-blueprint__requirements-preview">

@@ -1,0 +1,191 @@
+<div class="m-form">
+  <% blueprint.errors.full_messages %>
+  <div class="m-form__container" data-controller="factoryBlueprintParser">
+    <h1 class="m-form__title">
+      <%= image_tag get_category_icon('factory'), class: "m-form__title-icon factory" %>
+      <div><%= form_title %></div>
+    </h1>
+
+    <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
+      <%= f.input :title, required: true %>
+      <%= f.input :description, as: :rich_text_area, placeholder: "Describe your blueprint here. If you are using mods that add items that are not in the base game, don't forget to list them." %>
+      <%= f.input :collection,
+        collection: current_user.collections,
+        label_method: :name,
+        value_method: :id,
+        label: "Collection",
+        selected: @collection.id %>
+
+      <% if @old_mod_support %>
+        <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
+          <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
+          <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.first.version_list, selected: blueprint.mod_version || @mods.first.version_list.first, include_blank: false %>
+        </div>
+      <% end %>
+      <div class="m-form__important">
+        <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true, input_html: { data: { factoryBlueprintParser_target: "value", action: "input->factoryBlueprintParser#parse" } } %>
+        <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(anchor: "copy"), target: '_blank' %></div>
+      </div>
+      <div class="m-form__tags" data-controller="entitiesTags">
+        <label for="tag_list">
+          <abbr title="required">*</abbr>
+          Tags <em>(1 minimum - 10 maximum)</em>
+        </label>
+        <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'entitiesTags-target': 'input' } %>
+        <% if blueprint.errors[:tag_list].length > 0 %>
+          <span class="error-container tags">
+            <% if blueprint.errors[:tag_list].length > 0 %>
+              <span class="error">
+                <%= blueprint.errors[:tag_list].first %>
+              </span>
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="m-form__picture">
+        <label for="cover_picture">
+          <abbr title="required">*</abbr>
+          Cover picture
+        </label>
+        <div class="m-form__uploader">
+          <%= f.file_field :cover_picture,
+            accept: PictureUploader::ALLOWED_TYPES.join(","),
+            data: {
+              upload_server: upload_server,
+              preview_element: "m-form__picture-preview-cover",
+              upload_result_element: "m-form__picture-cover-upload-result",
+            } %>
+        </div>
+        <%= f.hidden_field :cover_picture, value: blueprint.cached_cover_picture_data, id: "m-form__picture-cover-upload-result" %>
+        <span class="error-container">
+          <% if blueprint.errors[:cover_picture].length > 0 %>
+            <span class="error">
+              <%= blueprint.errors[:cover_picture].first %>
+            </span>
+          <% end %>
+        </span>
+
+        <div class="m-form__picture-preview">
+          <% if blueprint.cover_picture %>
+            <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
+            <%= image_tag blueprint.cover_picture_url(:small), height: 100, width: 100 %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="m-form__pictures">
+        <label for="additional_pictures">
+          Additional pictures <em></em>
+        </label>
+
+        <div class="m-form__uploader">
+          <%= f.file_field :additional_pictures,
+            multiple: true,
+            accept: PictureUploader::ALLOWED_TYPES.join(","),
+            data: {
+              model_name: blueprint.model_name.singular,
+              upload_server: upload_server,
+            } %>
+        </div>
+
+        <span class="error-container">
+          <% if blueprint.errors[:additional_pictures].length > 0 %>
+            <span class="error">
+              <%= blueprint.errors[:additional_pictures].first %>
+            </span>
+          <% end %>
+        </span>
+
+        <div class="m-form__pictures-preview">
+          <% if blueprint.additional_pictures.any? %>
+            <span class="m-form__pictures-preview__warning">*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint.</span>
+            <div class="m-form__pictures-preview-remove">
+              <%= f.fields_for :additional_pictures do |pictures_form| %>
+                <% additional_picture = pictures_form.object %>
+                <% if additional_picture.picture %>
+                  <%= pictures_form.hidden_field :picture, value: additional_picture.cached_picture_data %>
+                  <div class="m-form__pictures-preview-container">
+                    <%= pictures_form.check_box :_destroy %>
+                    <%= pictures_form.label :_destroy do %>
+                      <strong>Remove</strong>
+                      <%= image_tag additional_picture.picture.derivation_url(:thumbnail, 100, 100).to_s %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>
+
+<template id="bp-requirements">
+  <div class="t-blueprint__requirements-preview" data-controller="collapsible">
+    <div class="t-blueprint__requirements-preview__header" data-action="click->collapsible#toggle">
+      <h3>
+        This blueprint requires
+        <span class="t-blueprint__requirements-total">
+          <strong id="totalStructure"></strong> structures
+        </span>
+      </h3>
+      <strong class="t-blueprint__requirements-more">
+        <span>(See the breakdown)</span>
+        <i class="fas fa-caret-down"></i>
+      </strong>
+    </div>
+    <ul class="t-blueprint__requirements-data" id="bp-entity-list" data-collapsible-target="collapsible">
+    </ul>
+  </div>
+</template>
+
+<template id="bp-entity">
+  <li class="t-blueprint__requirements-entity">
+    <div class="t-blueprint__requirements-entity__tally">
+      <span class="t-blueprint__requirements-entity__picture" id="entity-image"></span>
+      <div id="entity-tally"></div>
+    </div>
+  </li>
+</template>
+
+<template id="bp-entity-recipes">
+  <ul class="t-blueprint__requirements-entity__recipes">
+  </ul>
+</template>
+
+<template id="bp-entity-recipe">
+  <li class="t-blueprint__requirements-entity__recipe--fixed-margin" id="entity-recipe-image">
+    <div id="entity-recipe-tally"></div>
+  </li>
+</template>
+
+<template id="bp-entity-params">
+  <ul class="t-blueprint__requirements-entity__params"></ul>
+</template>
+
+<template id="bp-entity-param">
+  <li class="t-blueprint__requirements-entity__param">
+    <div id="entity-recipe-image"></div>
+    <ul>
+      <li id="entity-param-local"></li>
+      <li id="entity-param-remote"></li>
+      <li id="entity-param-max"></li>
+    </ul>
+  </li>
+</template>
+
+<template id="bp-size-warning">
+  <div class="t-blueprint__requirements-preview">
+    <div class="t-blueprint__requirements-preview__sizeWarning">
+      <h3>Beware</h3>
+      <p>
+        Your blueprint is <strong id="blueprint-sizeWarning-humanizedCounter">quite big</strong>.<br>
+        You will still be able to publish your blueprint but, if your blueprint is too big, <strong>other users won't be able to copy it directly from the blueprint's page</strong>.
+      </p>
+    </div>
+  </div>
+</template>

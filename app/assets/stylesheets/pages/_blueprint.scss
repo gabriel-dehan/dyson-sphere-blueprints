@@ -4,6 +4,15 @@
 .p-blueprint-index {
   display: flex;
   flex-direction: column;
+
+  h1 {
+    margin-top: 2rem;
+
+    strong {
+      font-weight: normal;
+      color: var(--red);
+    }
+  }
 }
 
 .t-blueprint-list {
@@ -351,6 +360,26 @@
     }
   }
 
+  &__tags.tag-names {
+    ul {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .t-blueprint__tags-name {
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      box-sizing: border-box;
+      max-width: 100%;
+      padding: .25em .5em;
+      background-color: var(--medium-blue);
+      color: var(--white);
+      line-height: inherit;
+      border-radius: 3px;
+    }
+  }
+
   &__title {
     display: flex;
     justify-content: space-between;
@@ -366,7 +395,7 @@
     }
   }
 
-  &__copy {
+  &__copy, &__download {
     margin-bottom: 0;
     display: inline-flex;
     align-items: center;
@@ -431,7 +460,7 @@
       min-height: 240px;
     }
 
-    .t-blueprint__copy {
+    .t-blueprint__copy, .t-blueprint__download {
       float: right;
     }
 
@@ -510,6 +539,27 @@
       }
     }
   }
+
+  &__mecha-preview {
+    display: flex;
+    flex-direction: column;
+
+    background: var(--darker-blue);
+    padding: 12px;
+    margin-bottom: 2em;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+    width: fit-content;
+
+    &-name {
+      padding: 0px 2px 8px 2px;
+      color: var(--light-blue);
+    }
+
+    &-image {
+      width: 120px !important;
+    }
+  }
 }
 
 .swiper-container {
@@ -543,6 +593,44 @@
 
     &:hover {
       background: linear-gradient(90deg, rgba(0,0,0, 0.62) 0%, rgba(0,0,0,0) 100%);
+    }
+  }
+}
+
+
+.p-blueprint-show.mecha {
+  .t-blueprint {
+
+    &__blueprint {
+        h3 {
+        padding-left: 0;
+      }
+    }
+
+    &__cover {
+      display: flex;
+      background: #171717;
+      justify-content: center;
+    }
+
+    &__color-profile {
+      flex-direction: column;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__colors {
+      border: 8px solid #171717;
+      list-style: none;
+      display: flex;
+      margin: 0;
+
+      &-color {
+        display: inline-block;
+        width: 38px;
+        height: 36px;
+        margin: 0;
+      }
     }
   }
 }

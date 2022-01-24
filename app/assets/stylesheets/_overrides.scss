@@ -4,7 +4,7 @@
   --tags-hover-border-color: transparent;
   --tags-focus-border-color: var(--dark-purple);
   --tag-hover: var(--blue);
-  --tag-bg: var(--light-blue);
+  --tag-bg: var(--medium-blue);
   --tag-text-color: var(--white);
   --tag-invalid-bg: var(--red);
   --tag-invalid-color: var(--white);
@@ -30,6 +30,14 @@
 
 }
 
+.freeTags .tagify__tag {
+ --tag-bg: var(--light-blue);
+ }
+
+.tagify__tag.whitelist {
+  --tag-bg: var(--medium-blue);
+}
+
 .tagify__dropdown {
   --tagify-dd-color-primary: var(--dark-blue);
   --tagify-dd-bg-color: var(--blue);
@@ -40,6 +48,14 @@
 }
 
 [data-uppy-theme=dark] {
+  .uppy-StatusBar {
+    background-color: var(--dark-blue);
+  }
+
+  .uppy-StatusBar-actionBtn--retry {
+    background-color: var(--dark-red);
+  }
+
   .uppy-Dashboard {
     &-AddFiles {
       border-color: #89193d;
@@ -134,6 +150,54 @@
   }
 }
 
+.uppy-blue [data-uppy-theme=dark] {
+  .uppy-StatusBar.is-error .uppy-StatusBar-progress {
+    background-color: var(--dark-red);
+  }
+
+  .uppy-Dashboard {
+    &-AddFiles {
+      border-color: #0f4a8a;
+    }
+
+    &-inner {
+      border: 3px solid var(--light-blue);
+    }
+
+    &-browse {
+      color: var(--light-blue);
+
+      &:hover {
+        border-color: var(--light-blue);
+      }
+    }
+  }
+
+  .uppy-DashboardContent {
+    &-bar {
+      border-color: var(--medium-blue);
+    }
+
+    &-reset-button, &-addMore {
+      border: 1px solid var(--medium-blue);
+      background-color: var(--medium-blue);
+      color: var(--white);
+
+      &:focus {
+        border: 1px solid var(--medium-blue);
+        background-color: var(--medium-blue);
+        color: var(--white);
+      }
+
+      &:hover {
+        border-color: var(--medium-blue);
+        background-color: transparent;
+        color: var(--medium-blue);
+      }
+    }
+  }
+}
+
 trix-toolbar .trix-button {
   background: #e3e3e3;
   border: none;
@@ -187,3 +251,37 @@ trix-editor {
 .trix-button--icon-code,
 .trix-button--icon-increase-nesting-level,
 .trix-button--icon-decrease-nesting-level { display: none; }
+
+.clr-preview {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin: 15px 0 20px 20px;
+  border: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+}
+
+input[type=text].clr-color, input[type=color].clr-color {
+  order: 1;
+  width: calc(100% - 80px);
+  height: 32px;
+  margin: 15px 20px 20px 0;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  color: #444;
+  background-color: #fff;
+  font-family: sans-serif;
+  font-size: 14px;
+  text-align: center;
+
+}
+
+.clr-dark {
+  background-color: #191a1f;
+  -webkit-box-shadow: 1px 12px 17px -2px rgba(0,0,0,0.3);
+  box-shadow: 1px 12px 17px -2px rgba(0,0,0,0.3);
+}

@@ -18,6 +18,12 @@ User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", passwo
 puts "Creating mods..."
 BaseGameManagerJob.perform_now("0.8.19.7662")
 
+User.all.each do |user|
+  user.collections.create!(name: "Mechas", type: "Public", category: "mechas")
+  user.collections.create!(name: "Factories", type: "Public", category: "factories")
+  user.collections.create!(name: "Dyson Spheres", type: "Public", category: "dyson_spheres")
+end
+
 # puts "Creating collections..."
 # user = User.last
 # puts "Creating blueprints..."

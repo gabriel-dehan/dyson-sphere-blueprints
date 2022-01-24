@@ -2,18 +2,20 @@
   <% if blueprints.any? %>
     <ul class="t-blueprint-list__container">
     <% blueprints.each do |blueprint| %>
-      <li class="o-blueprint-card" data-controller="blueprintCopyButton">
+      <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintCopyButton" %>">
         <div class="o-blueprint-card__cover">
           <%= link_to blueprint_path(blueprint) do %>
             <%= image_tag blueprint.cover_picture_url(:medium), height: 200 %>
           <% end %>
-          <button
-            id="bp-card-<%= blueprint.id %>"
-            class="o-blueprint-card__copy"
-            data-blueprintCopyButton-target="copy"
-            data-clipboard-text="<%= blueprint.encoded_blueprint %>">
-            Copy
-          </button>
+          <% if !blueprint.is_mecha? %>
+            <button
+              id="bp-card-<%= blueprint.id %>"
+              class="o-blueprint-card__copy"
+              data-blueprintCopyButton-target="copy"
+              data-clipboard-text="<%= blueprint.encoded_blueprint %>">
+              Copy
+            </button>
+          <% end %>
         </div>
         <div class="o-blueprint-card__content">
           <div>
@@ -56,6 +58,9 @@
              <%#= blueprint.mod.name %>
              <%= formatted_mod_compatibility_range(@mods, blueprint) %>
           </span>
+        </div>
+         <div class="o-blueprint-card__typeIcon <%= blueprint.type.underscore %>">
+          <%= image_tag get_category_icon(blueprint.type.underscore) %>
         </div>
       </li>
     <% end %>

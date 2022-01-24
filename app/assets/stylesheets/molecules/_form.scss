@@ -50,7 +50,31 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center;
     margin-bottom: 1em;
+
+    span {
+      color: var(--dark-red);
+    }
+
+    &-icon {
+      width: 32px;
+      margin-right: 1rem;
+
+      &.factory {
+        margin-bottom: 10px;
+      }
+
+      &.dyson-sphere {
+        margin-bottom: 4px;
+      }
+
+      &.mecha {
+        width: 34px;
+        margin-bottom: 4px;
+      }
+    }
   }
 
   &__tags {
@@ -79,13 +103,14 @@
     margin-bottom: 15px;
   }
 
-  &__picture {
+  &__picture, &__file {
     margin-top: 22px;
 
     &-preview {
       img {
         border: 2px solid var(--blue);
         border-radius: 6px;
+        width: fit-content;
       }
       &__warning {
         display: block;
@@ -177,6 +202,29 @@
 
     &.tags {
       margin-top: 4px;
+    }
+  }
+
+  .error-container {
+    display: block;
+    margin-top: 4px;
+    margin-bottom: 14px;
+
+    & > .error {
+      background: var(--blue);
+      padding: 6px 12px;
+      color: var(--white);
+      border-radius: 4px;
+      width: 100%;
+      margin-left: 0;
+
+      &::before {
+        content: "⚠️"
+      }
+    }
+
+    &.tags {
+      margin-top: 16px;
     }
   }
 }

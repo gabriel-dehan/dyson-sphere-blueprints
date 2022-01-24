@@ -1,5 +1,5 @@
 module Parsers
-  class DysonSphereProgramBlueprint
+  class FactoryBlueprint
     # @param [Blueprint]
     def initialize(blueprint)
       @blueprint = blueprint

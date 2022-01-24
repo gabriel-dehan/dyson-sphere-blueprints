@@ -11,7 +11,14 @@ class BlueprintParserJob < ApplicationJob
     elsif blueprint.mod.name == "MultiBuild"
       Parsers::MultibuildBetaBlueprint.new(blueprint).parse!
     elsif blueprint.mod.name == "Dyson Sphere Program"
-      Parsers::DysonSphereProgramBlueprint.new(blueprint).parse!
+      # Handle 3 different blueprint types
+      if blueprint.type == "Dyson Sphere"
+        Parsers::DysonSphereBlueprint.new(blueprint).parse!
+      elsif blueprint.type == "Mecha"
+        Parsers::MechaBlueprint.new(blueprint).parse!
+      else # Factory
+        Parsers::FactoryBlueprint.new(blueprint).parse!
+      end
     end
   end
 end

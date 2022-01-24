@@ -1,6 +1,6 @@
 require "test_helper"
 
-class BlueprintsControllerTest < ActionDispatch::IntegrationTest
+class StructureBlueprintsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get blueprints_index_url
     assert_response :success

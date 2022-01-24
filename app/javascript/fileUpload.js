@@ -3,9 +3,101 @@ import {
   Core,
   Dashboard,
   AwsS3,
-} from 'uppy'
+} from 'uppy';
+import { Plugin } from '@uppy/core';
 
 import randomstring from 'randomstring';
+
+/* Mecha plugin */
+class MechaValidator extends Plugin {
+  constructor (uppy, opts = {}) {
+    super(uppy, opts)
+    this.id = opts.id || 'MechaValidator';
+    this.type = 'validator'
+    this.csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+    this.previewElement = opts.previewElement;
+  }
+
+  prepareUpload = (fileIDs) => {
+    this.resetPreview();
+
+    const promises = fileIDs.map(async (fileID) => {
+      const file = this.uppy.getFile(fileID)
+      this.uppy.emit('preprocess-progress', file, {
+        mode: 'indeterminate',
+        message: 'Validating file...',
+      });
+
+      const formData = new FormData();
+      formData.append("mecha_file", file.data);
+
+      return fetch('/blueprint/mechas/analyze', {
+        method: 'POST',
+        headers: {
+          'X-CSRF-Token': this.csrf,
+        },
+        body: formData,
+      })
+      .then((response) => response.json())
+      .then(function(data) {
+        if (data) {
+          if (data.error) {
+            throw new Error(data.error);
+          }
+
+          return data;
+        }
+      });
+    })
+
+    const emitPreprocessCompleteForAll = (responses) => {
+      fileIDs.forEach((fileID, index) => {
+        const mechaData = responses[index];
+        const file = this.uppy.getFile(fileID);
+        if (mechaData.valid) {
+          this.displayPreview(mechaData);
+          this.uppy.emit('preprocess-complete', file)
+        }
+      })
+    }
+
+    const handleValidationFailure = (error) => {
+      console.warn('Mecha file validation failure ->', error);
+      this.uppy.cancelAll();
+      this.uppy.emit('cancel-all', file);
+    }
+
+    return Promise.all(promises).then(emitPreprocessCompleteForAll).catch(handleValidationFailure)
+  }
+
+  displayPreview(data) {
+    this.resetPreview();
+
+    if ('content' in document.createElement('template')) {
+      const container = document.querySelector('.m-form__file-preview');
+      const previewTemplate = document.querySelector('#bp-preview').content.cloneNode(true);
+
+      previewTemplate.querySelector(".t-blueprint__mecha-preview-name").textContent = data.name;
+      previewTemplate.querySelector(".t-blueprint__mecha-preview-image").setAttribute('src', `data:image/jpeg;base64,${data.preview}`)
+
+      container.prepend(previewTemplate);
+    }
+  }
+
+  resetPreview() {
+    if (document.querySelector('.t-blueprint__mecha-preview')) {
+      document.querySelector('.t-blueprint__mecha-preview').remove();
+    }
+  }
+
+  install () {
+    this.uppy.addPreProcessor(this.prepareUpload);
+  }
+
+  uninstall () {
+    this.uppy.removePreProcessor(this.prepareUpload);
+  }
+}
 
 const UPPY_DEFAULT_OPTIONS = {
   inline: true,
@@ -21,21 +113,35 @@ const UPPY_DEFAULT_OPTIONS = {
 };
 
 const singleFileUpload = (fileInput) => {
+  const data = fileInput.dataset;
   const container = fileInput.parentNode;
+  const uppy = fileUpload(fileInput, { maximum: 1, maxFileSize: data.maxFileSize || null });;
+
   container.removeChild(fileInput);
-  const uppy = fileUpload(fileInput, { maximum: 1 });
 
   uppy
     .use(Dashboard, {
       ...UPPY_DEFAULT_OPTIONS,
       target: container,
-      note: 'Single cover picture. 3 MB maximum, ideal ratio 16:9. For instance 1920x1080, etc...',
+      locale: {
+        strings: {
+          dropPaste: data.title || null,
+          uploadFailed: data.errorMessage || null,
+        }
+      },
+      note: data.description || 'Single cover picture. 3 MB maximum, ideal ratio 16:9. For instance 1920x1080, etc...',
     });
+
+  if (data.mechaPlugin === 'true') {
+    uppy.use(MechaValidator);
+  }
 
   uppy.on('upload-success', (file, response) => {
     const fileData = uploadedFileData(file, response, fileInput);
-    const hiddenInput = document.getElementById(fileInput.dataset.uploadResultElement);
-    hiddenInput.value = fileData;
+    if (data.uploadResultElement) {
+      const hiddenInput = document.getElementById(data.uploadResultElement);
+      hiddenInput.value = fileData;
+    }
   });
 
   uppy.on('complete', () => {
@@ -44,14 +150,20 @@ const singleFileUpload = (fileInput) => {
 }
 
 const multipleFileUpload = (fileInput) => {
+  const data = fileInput.dataset;
   const container = fileInput.parentNode
-  const uppy = fileUpload(fileInput, { maximum: 4 })
+  const uppy = fileUpload(fileInput, { maximum: 4, maxFileSize: data.maxFileSize || null })
 
   uppy
     .use(Dashboard, {
       ...UPPY_DEFAULT_OPTIONS,
       target: container,
-      note: '4 pictures maximum, 3 MB maximum each, ideal ratio 16:9. For instance 1920x1080, etc...',
+      locale: {
+        strings: {
+          dropPaste: data.title || null,
+        }
+      },
+      note: data.description || '4 pictures maximum, 3 MB maximum each, ideal ratio 16:9. For instance 1920x1080, etc...',
     })
 
   uppy.on('upload-success', (file, response) => {
@@ -59,7 +171,7 @@ const multipleFileUpload = (fileInput) => {
 
     hiddenField.classList = 'm-form__pictures-additional-pictures-data';
     hiddenField.type = 'hidden'
-    hiddenField.name = `blueprint[additional_pictures_attributes][${randomstring.generate()}][picture]`
+    hiddenField.name = `${data.modelName || 'blueprint'}[additional_pictures_attributes][${randomstring.generate()}][picture]`
     hiddenField.value = uploadedFileData(file, response, fileInput)
 
     document.querySelector('form').appendChild(hiddenField)
@@ -94,12 +206,12 @@ const createResetButton = (container, uppy) => {
   }
 }
 
-const fileUpload = (fileInput, { maximum }) => {
+const fileUpload = (fileInput, { maximum, maxFileSize }) => {
   const uppy = Core({
     id: fileInput.id,
     autoProceed: true,
     restrictions: {
-      maxFileSize: 3*1024*1024,
+      maxFileSize: maxFileSize || 3*1024*1024,
       maxNumberOfFiles: maximum,
       allowedFileTypes: fileInput.accept.split(','),
     },
