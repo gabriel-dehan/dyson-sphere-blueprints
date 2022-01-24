@@ -4,11 +4,11 @@
 - [x] Update the bp limits on live
 - [x] Icarus blueprints sharing
 - [x] Dyson Spheres blueprints sharing
+- [x] Remove multibuild mods from home page research
 - [ ] Collections for Dyson Spheres and Icarus
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
 - [ ] Blueprint copy count / sort by copy count
-- [ ] Remove multibuild mods from home page research
 - [ ] Update help
 
 ### Dev
@@ -22,7 +22,7 @@
 ### Features / Bugs
 - [ ] Downvote feature or comment system
 - [ ] Preview editor
-- [ ] Add power needed
+- [ ] Add power needed to factories
 - [ ] Add filters and search to all blueprint related pages
 - [ ] Optimize bundle size
 
