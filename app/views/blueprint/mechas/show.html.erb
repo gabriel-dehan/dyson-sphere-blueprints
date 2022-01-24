@@ -29,6 +29,15 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </div>
+      <% if @blueprint.summary && @blueprint.summary["color_profile"] %>
+        <div class="t-blueprint__color-profile">
+          <ul class="t-blueprint__colors">
+            <% @blueprint.summary["color_profile"]["colors_by_hue"].take(24).map do |color| %>
+              <li class="t-blueprint__colors-color" style="background-color: rgb(<%= color["r"] %>, <%= color["g"] %>, <%= color["b"] %>)"></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="t-blueprint__title">
         <h2><%= @blueprint.title %></h2>
 

@@ -7,6 +7,7 @@ class Blueprint::Mecha < Blueprint
   acts_as_votable
 
   after_save :decode_blueprint
+  after_save :extract_colors
   validates :blueprint_file, presence: true
   validate :blueprint_file_valid
   validates :additional_pictures, length: { minimum: 1, message: "Missing an additional picture, please provide at least one." }
@@ -21,6 +22,10 @@ class Blueprint::Mecha < Blueprint
 
   def decode_blueprint
     BlueprintParserJob.perform_now(id) if saved_change_to_attribute?(:blueprint_file_data)
+  end
+
+  def extract_colors
+    MechaColorExtractJob.perform_later(id) if saved_change_to_attribute?(:blueprint_file_data)
   end
 
   def blueprint_file_valid

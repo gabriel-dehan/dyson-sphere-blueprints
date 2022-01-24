@@ -52,6 +52,7 @@ gem "rubyzip", require: "zip"
 gem "scout_apm"
 gem "barnes"
 gem "profanity-filter", "~> 1.0"
+gem "camalian", "~> 0.2.0"
 
 group :development, :test do
   gem "pry-byebug"

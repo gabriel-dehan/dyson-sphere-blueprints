@@ -612,5 +612,25 @@
       background: #171717;
       justify-content: center;
     }
+
+    &__color-profile {
+      flex-direction: column;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__colors {
+      border: 8px solid #171717;
+      list-style: none;
+      display: flex;
+      margin: 0;
+
+      &-color {
+        display: inline-block;
+        width: 38px;
+        height: 36px;
+        margin: 0;
+      }
+    }
   }
 }
