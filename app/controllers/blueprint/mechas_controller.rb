@@ -4,9 +4,12 @@ class Blueprint::MechasController < ApplicationController
   skip_after_action :verify_authorized, only: [:analyze]
 
   def new
-    @collection = params[:blueprint_mecha] && params[:blueprint_mecha][:collection] ?
-                    current_user.collections.friendly.find(params[:blueprint_mecha][:collection]) :
-                    current_user.collections.where(type: "Public").first
+    if params[:blueprint_mecha] && params[:blueprint_mecha][:collection]
+      @collection = current_user.collections.friendly.find(params[:blueprint_mecha][:collection])
+    else
+      collections = current_user.collections.where(type: "Public", category: "mechas")
+      @collection = collections.first || current_user.collections.where(type: "Public").first
+    end
 
     if @collection
       @mecha_blueprint = @collection.mecha_blueprints.new

@@ -50,5 +50,8 @@ class User < ApplicationRecord
   def create_default_collections
     collections.new(name: "Public", type: "Public")
     collections.new(name: "Private", type: "Private")
+    collections.new(name: "Mechas", type: "Public", category: "mechas")
+    collections.new(name: "Factories", type: "Public", category: "factories")
+    collections.new(name: "Dyson Spheres", type: "Public", category: "dyson_spheres")
   end
 end

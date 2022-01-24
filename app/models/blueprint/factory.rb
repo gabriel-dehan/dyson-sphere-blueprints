@@ -31,7 +31,11 @@ class Blueprint::Factory < Blueprint
     elsif mod.name == "MultiBuild"
       valid = Parsers::MultibuildBetaBlueprint.new(self).validate
     elsif mod.name == "Dyson Sphere Program"
-      valid = Parsers::FactoryBlueprint.new(self).validate
+      if !id || will_save_change_to_attribute?(:encoded_blueprint)
+        valid = Parsers::FactoryBlueprint.new(self).validate
+      else
+        valid = true
+      end
     else
       valid = true
     end

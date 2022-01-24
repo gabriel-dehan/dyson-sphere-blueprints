@@ -1,8 +1,11 @@
 class Blueprint::FactoriesController < ApplicationController
   def new
-    @collection = params[:blueprint_factory] && params[:blueprint_factory][:collection] ?
-                    current_user.collections.friendly.find(params[:blueprint_factory][:collection]) :
-                    current_user.collections.where(type: "Public").first
+    if params[:blueprint_factory] && params[:blueprint_factory][:collection]
+      @collection = current_user.collections.friendly.find(params[:blueprint_factory][:collection])
+    else
+      collections = current_user.collections.where(type: "Public", category: "factories")
+      @collection = collections.first || current_user.collections.where(type: "Public").first
+    end
 
     if @collection
       @factory_blueprint = @collection.factory_blueprints.new

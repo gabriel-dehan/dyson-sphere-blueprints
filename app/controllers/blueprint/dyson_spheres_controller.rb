@@ -2,9 +2,12 @@ class Blueprint::DysonSpheresController < ApplicationController
   include ProfanityChecker
 
   def new
-    @collection = params[:blueprint_dyson_sphere] && params[:blueprint_dyson_sphere][:collection] ?
-                    current_user.collections.friendly.find(params[:blueprint_dyson_sphere][:collection]) :
-                    current_user.collections.where(type: "Public").first
+    if params[:blueprint_factory] && params[:blueprint_factory][:collection]
+      @collection = current_user.collections.friendly.find(params[:blueprint_factory][:collection])
+    else
+      collections = current_user.collections.where(type: "Public", category: "dyson_spheres")
+      @collection = collections.first || current_user.collections.where(type: "Public").first
+    end
 
     if @collection
       @dyson_sphere_blueprint = @collection.dyson_sphere_blueprints.new

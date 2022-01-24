@@ -14,7 +14,7 @@ class Blueprint::Mecha < Blueprint
 
   validates :blueprint_file, presence: true
   validate :blueprint_file_valid
-  validates :additional_pictures, length: { minimum: 1, message: "Missing an additional picture, please provide at least one." }
+  # validates :additional_pictures, length: { minimum: 1, message: "Missing an additional picture, please provide at least one." }
 
   def large_bp?
     return false unless blueprint_file_data
@@ -33,7 +33,7 @@ class Blueprint::Mecha < Blueprint
   end
 
   def blueprint_file_valid
-    if !id || saved_change_to_attribute?(:blueprint_file_data)
+    if !id || will_save_change_to_attribute?(:blueprint_file_data)
       if blueprint_file
         valid = Parsers::MechaFile.validate(blueprint_file.download)
       else
