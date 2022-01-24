@@ -40,19 +40,21 @@ module Parsers
         image = Parsers::MechaFile.generate_png(@blueprint_file)
         image.open
         color_tool = Camalian::load(image.path)
-        colors_mc = color_tool.prominent_colors(24, quantization: Camalian::QUANTIZATION_MEDIAN_CUT)
+        colors = color_tool.prominent_colors(24, quantization: Camalian::QUANTIZATION_MEDIAN_CUT)
 
         summary = @blueprint.summary
-
         summary[:color_profile] = {
-          colors_by_hue: colors_mc.sort_by_hue,
-          colors_light: colors_mc.sort_by_hue.light_colors(50, 120),
-          #colors_by_similarity: colors_mc.sort_similar_colors,
-          # colors_by_lightness: colors_mc.sort_by_lightness,
-          # colors_by_saturation: colors_mc.sort_by_saturation,
+          colors_by_hue: colors.sort_by_hue,
+          colors_light: colors.sort_by_hue.light_colors(50, 120),
+          colors_by_similarity: colors.sort_similar_colors,
+          colors_by_lightness: colors.sort_by_lightness,
+          colors_by_saturation: colors.sort_by_saturation,
         }
-
         @blueprint.summary = summary
+
+        @blueprint.colors = colors.sort_by_hue.map do |extracted_color|
+          Color.find_or_create_by!(r: extracted_color.r, g: extracted_color.g, b: extracted_color.b, h: extracted_color.h, s: extracted_color.s, l: extracted_color.l)
+        end
 
         @blueprint.save!
         puts "Done!"
@@ -65,6 +67,5 @@ module Parsers
         nil
       end
     end
-
   end
 end

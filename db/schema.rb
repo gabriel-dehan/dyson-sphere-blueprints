@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_223447) do
+ActiveRecord::Schema.define(version: 2022_01_24_200459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 2022_01_22_223447) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "blueprint_mecha_colors", force: :cascade do |t|
+    t.bigint "blueprint_id"
+    t.bigint "color_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blueprint_id"], name: "index_blueprint_mecha_colors_on_blueprint_id"
+    t.index ["color_id"], name: "index_blueprint_mecha_colors_on_color_id"
+  end
+
   create_table "blueprints", force: :cascade do |t|
     t.string "title", null: false
     t.text "encoded_blueprint"
@@ -88,6 +97,16 @@ ActiveRecord::Schema.define(version: 2022_01_22_223447) do
     t.index ["slug"], name: "index_collections_on_slug", unique: true
     t.index ["type"], name: "index_collections_on_type"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "r", null: false
+    t.integer "g", null: false
+    t.integer "b", null: false
+    t.float "h", null: false
+    t.float "s", null: false
+    t.float "l", null: false
   end
 
   create_table "mods", force: :cascade do |t|

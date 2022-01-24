@@ -6,8 +6,12 @@ class Blueprint::Mecha < Blueprint
   include MechaUploader::Attachment(:blueprint_file)
   acts_as_votable
 
+  has_many :blueprint_mecha_colors, dependent: :destroy, foreign_key: 'blueprint_id'
+  has_many :colors, through: :blueprint_mecha_colors
+
   after_save :decode_blueprint
   after_save :extract_colors
+
   validates :blueprint_file, presence: true
   validate :blueprint_file_valid
   validates :additional_pictures, length: { minimum: 1, message: "Missing an additional picture, please provide at least one." }

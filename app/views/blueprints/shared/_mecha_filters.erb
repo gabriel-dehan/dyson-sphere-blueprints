@@ -12,11 +12,23 @@
       <!-- Author -->
       <%= render 'blueprints/shared/filters/author_filter', f: f, filters: filters %>
     </div>
-    <div class="o-blueprint-filters__line">
+    <div class="o-blueprint-filters__line mecha_order-container">
       <%= render 'blueprints/shared/filters/sorter', f: f, filters: filters %>
+      <div>
+        <div>
+        <div class="o-blueprint-filters__select">
+          <%= f.label :mod_version, "Filter by color (experimental)" %>
+          <%= f.text_field :color, type: 'text', class: 'color-picker', autocomplete: 'off', value: filters[:color] %>
+        </div>
+        </div>
+        <div>
+          <%= hidden_field_tag :color_similarity, 80 %>
+          <%#= f.select :color_similarity, [['10%', 10], ['20%', 20], ['40%', 40], ['50%', 50],  ['60%', 60], ['80%', 80]], prompt: 'Similarity Threshold', selected: filters[:color_similarity] %>
+        </div>
+      </div>
       <!-- Mod Select -->
-      <div class="o-blueprint-filters__line-common-mod_select_filter">
-      <%= render 'blueprints/shared/filters/mod_select_filter', f: f, filters: filters %>
+      <div class="o-blueprint-filters__line-mecha-mod_select_filter">
+        <%= render 'blueprints/shared/filters/mod_select_filter', f: f, filters: filters %>
       </div>
     </div>
     <div class="o-blueprint-filters__line">

@@ -16,6 +16,28 @@
       justify-content: end;
     }
 
+    &-mecha-mod_select_filter  {
+      margin-left: auto;
+
+      .o-blueprint-filters__mods {
+        width: 100%;
+      }
+
+      .o-blueprint-filters__mods-version {
+        justify-content: flex-end;
+      }
+
+      select {
+        width: auto;
+      }
+    }
+
+    &.mecha_order-container {
+      .o-blueprint-filters__order-container {
+        width: 36.6%;
+      }
+    }
+
     input {
       margin-bottom: 0;
     }

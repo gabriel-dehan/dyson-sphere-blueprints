@@ -7,7 +7,7 @@
     </div>
   <% end %>
   <div class="o-blueprint-filters__mods-version">
-    <%= f.label :mod_version, "Compatible with game version" %>
+    <%= f.label :mod_version, "Game version" %>
     <%= f.select :mod_version, filters[:mod_id] == 'Any' ? [] : @filter_mod.version_list, selected: filters[:mod_version], include_blank: 'Any' %>
   </div>
 </div>

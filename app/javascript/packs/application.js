@@ -5,6 +5,7 @@
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
+import Coloris from "@melloware/coloris";
 // import "channels"
 import "trix"
 import "@rails/actiontext"
@@ -17,6 +18,13 @@ import { singleFileUpload, multipleFileUpload } from 'fileUpload'
 import "controllers"
 
 document.addEventListener('turbolinks:load', () => {
+  Coloris.init();
+  Coloris({
+    theme: 'dark',
+    el: 'input.color-picker',
+    focusInput: false,
+  });
+
   document.querySelectorAll('input[type=file]').forEach(fileInput => {
     if (fileInput.multiple) {
       multipleFileUpload(fileInput)
