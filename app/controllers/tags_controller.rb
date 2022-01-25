@@ -3,6 +3,7 @@ class TagsController < ApplicationController
 
   skip_after_action :verify_policy_scoped, only: [:index]
   skip_after_action :verify_authorized, only: [:profanity_check]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     respond_to do |format|
