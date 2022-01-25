@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v4.0.0](#v400)
     - [v3.5.0](#v350)
     - [v.3.4.1](#v341)
     - [v.3.4.0](#v340)
@@ -47,6 +48,15 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v4.0.0
+- Lots of code reorganization and refactoring
+- Handle new blueprints types: Dyson Spheres and Mechas
+- Validation for Dyson Spheres and Mechas blueprints
+- Mechas preview extraction
+- Ability to color search mechas blueprints
+- New blueprints tags can be added by the users
+- Small UI improvements
 
 ### v3.5.0
 - Added game version: 0.9.24.11182

@@ -5,11 +5,14 @@
 - [x] Icarus blueprints sharing
 - [x] Dyson Spheres blueprints sharing
 - [x] Remove multibuild mods from home page research
-- [ ] Collections for Dyson Spheres and Icarus
+- [x] Collections for Dyson Spheres and Icarus
+- [ ] Fix download as zip for new blueprints
+- [ ] My favorites ability to filter by type
+- [ ] Update help
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
 - [ ] Blueprint copy count / sort by copy count
-- [ ] Update help
+
 
 ### Dev
 - [ ] Refactor blueprints controllers
