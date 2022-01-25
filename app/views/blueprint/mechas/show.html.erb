@@ -41,9 +41,11 @@
       <div class="t-blueprint__title">
         <h2><%= @blueprint.title %></h2>
 
-        <button class="t-blueprint__download">
-          <i class="fas fa-download"></i>Download file
-        </button>
+        <a href="<%= @blueprint.blueprint_file_url %>">
+          <button class="t-blueprint__download">
+            <i class="fas fa-download"></i>Download file
+          </button>
+        </a>
       </div>
 
       <div class="t-blueprint__description">
@@ -59,9 +61,11 @@
         <p>
           Mecha files data extraction is not yet available.
         </p>
-        <button class="t-blueprint__download">
-          <i class="fas fa-download"></i>Download file
-        </button>
+        <a href="<%= @blueprint.blueprint_file_url %>">
+          <button class="t-blueprint__download">
+            <i class="fas fa-download"></i>Download file
+          </button>
+        </a>
       </div>
     </div>
     <div class="t-blueprint-sidebar">
