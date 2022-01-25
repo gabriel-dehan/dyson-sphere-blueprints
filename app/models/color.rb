@@ -23,7 +23,7 @@ class Color < ApplicationRecord
     diff = 100
     similar = :undefined
     COLOR_NAMES.each do |key, val|
-      new_diff = cdiff(color,val)
+      new_diff = cdiff(color, val)
       if new_diff < diff
         diff = new_diff
         similar = key
@@ -33,9 +33,9 @@ class Color < ApplicationRecord
   end
 
   def cdiff(real, guess)
-    r_diff = ((real.r - guess[0]) / real.r).abs / 100.0
-    g_diff = ((real.g - guess[1]) / real.g).abs / 100.0
-    b_diff = ((real.b - guess[2]) / real.b).abs / 100.0
+    r_diff = ((real.r - guess[0]) / (real.r + 1)).abs / 100.0
+    g_diff = ((real.g - guess[1]) / (real.g + 1)).abs / 100.0
+    b_diff = ((real.b - guess[2]) / (real.b + 1)).abs / 100.0
     r_diff + g_diff + b_diff
   end
 

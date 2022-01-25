@@ -34,27 +34,29 @@ module Parsers
       end
     end
 
-    def parse_colors!(silent_errors: true)
+    def parse_colors!(silent_errors: false)
       puts "Analyzing mecha color data... #{@blueprint.id}"
       begin
         image = Parsers::MechaFile.generate_png(@blueprint_file)
         image.open
         color_tool = Camalian::load(image.path)
+
         colors = color_tool.prominent_colors(24, quantization: Camalian::QUANTIZATION_K_MEANS)
 
         summary = @blueprint.summary
         summary[:color_profile] = {
           colors_by_hue: colors.sort_by_hue,
-          colors_light: colors.sort_by_hue.light_colors(50, 120),
           colors_by_similarity: colors.sort_similar_colors,
-          colors_by_lightness: colors.sort_by_lightness,
-          colors_by_saturation: colors.sort_by_saturation,
+          colors_light: colors.sort_by_hue.light_colors(50, 120),
         }
+
         @blueprint.summary = summary
 
         @blueprint.colors = colors.sort_by_hue.map do |extracted_color|
           Color.find_or_create_by!(r: extracted_color.r, g: extracted_color.g, b: extracted_color.b, h: extracted_color.h, s: extracted_color.s, l: extracted_color.l)
         end
+
+        image.close
 
         @blueprint.save!
         puts "Done!"

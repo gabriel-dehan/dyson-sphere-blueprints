@@ -18,6 +18,10 @@ import { singleFileUpload, multipleFileUpload } from 'fileUpload'
 import "controllers"
 
 document.addEventListener('turbolinks:load', () => {
+  if (document.querySelector('#clr-picker')){
+    document.querySelector('#clr-picker').remove();
+  }
+
   Coloris.init();
   Coloris({
     theme: 'dark',
