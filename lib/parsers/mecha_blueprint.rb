@@ -40,7 +40,7 @@ module Parsers
         image = Parsers::MechaFile.generate_png(@blueprint_file)
         image.open
         color_tool = Camalian::load(image.path)
-        colors = color_tool.prominent_colors(24, quantization: Camalian::QUANTIZATION_MEDIAN_CUT)
+        colors = color_tool.prominent_colors(24, quantization: Camalian::QUANTIZATION_K_MEANS)
 
         summary = @blueprint.summary
         summary[:color_profile] = {
