@@ -20,7 +20,7 @@ export default class extends Controller {
       // const data = new DspBpParser(this.valueTarget.value)
       // this.renderPreview(data);
     } else {
-      this.renderSizeWarning(this.valueTarget.value.length);
+      // this.renderSizeWarning(this.valueTarget.value.length);
     }
   }
 
