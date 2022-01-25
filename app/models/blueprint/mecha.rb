@@ -29,7 +29,7 @@ class Blueprint::Mecha < Blueprint
   end
 
   def extract_colors
-    MechaColorExtractJob.perform_now(id) if saved_change_to_attribute?(:blueprint_file_data)
+    # MechaColorExtractJob.perform_later(id) if saved_change_to_attribute?(:blueprint_file_data)
   end
 
   def blueprint_file_valid
