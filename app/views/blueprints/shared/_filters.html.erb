@@ -1,5 +1,20 @@
 <div class="o-blueprint-filters">
   <%= form_with url: filter_path, method: :get do |f| %>
+    <div class="o-blueprint-filters__line custom-filters">
+      <div class="m-tabs">
+        <ul class="m-tabs-select-container">
+          <li class="m-tabs-select">
+            Factories
+          </li>
+          <li class="m-tabs-select">
+            Dyson Spheres
+          </li>
+          <li class="m-tabs-select">
+            Mechas
+          </li>
+        </ul>
+      </div>
+    </div>
     <% if filters[:type] == 'factory' %>
       <%= render 'blueprints/shared/factory_filters', f: f, filters: filters, filter_path: filter_path %>
     <% elsif filters[:type] == 'dyson_sphere' %>

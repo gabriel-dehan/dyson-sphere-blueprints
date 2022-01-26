@@ -284,6 +284,7 @@ rake mod:fetch_latest # currently legacy, but fetches the latest versions of all
 
 This project is currently hosted on Heroku.
 *Notes to self:*
+`rubocop-daemon start`
 Make sure the Gemfile has the proper platforms set:
 
 ```
