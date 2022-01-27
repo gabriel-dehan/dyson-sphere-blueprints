@@ -2,27 +2,27 @@
   <%= form_with url: filter_path, method: :get do |f| %>
     <div class="o-blueprint-filters__line custom-filters">
       <div class="m-tabs">
-        <ul class="m-tabs-select-container">
-          <li class="m-tabs-select">
+        <div class="m-tabs-select-container">
+          <%= link_to typed_path(filter_path, :factory), class:"m-tabs-select" do %>
             Factories
-          </li>
-          <li class="m-tabs-select">
+          <% end %>
+             <%= link_to typed_path(filter_path, :dyson_sphere), class:"m-tabs-select" do %>
             Dyson Spheres
-          </li>
-          <li class="m-tabs-select">
+          <% end %>
+             <%= link_to typed_path(filter_path, :mecha), class:"m-tabs-select" do %>
             Mechas
-          </li>
-        </ul>
+          <% end %>
       </div>
     </div>
-    <% if filters[:type] == 'factory' %>
-      <%= render 'blueprints/shared/factory_filters', f: f, filters: filters, filter_path: filter_path %>
-    <% elsif filters[:type] == 'dyson_sphere' %>
-      <%= render 'blueprints/shared/dyson_sphere_filters', f: f, filters: filters, filter_path: filter_path %>
-    <% elsif filters[:type] == 'mecha' %>
-      <%= render 'blueprints/shared/mecha_filters', f: f, filters: filters, filter_path: filter_path %>
-    <% else %>
-      <%= render 'blueprints/shared/common_filters', f: f, filters: filters, filter_path: filter_path %>
-    <% end %>
+  </div>
+  <% if filters[:type] == 'factory' %>
+    <%= render 'blueprints/shared/factory_filters', f: f, filters: filters, filter_path: filter_path %>
+  <% elsif filters[:type] == 'dyson_sphere' %>
+    <%= render 'blueprints/shared/dyson_sphere_filters', f: f, filters: filters, filter_path: filter_path %>
+  <% elsif filters[:type] == 'mecha' %>
+    <%= render 'blueprints/shared/mecha_filters', f: f, filters: filters, filter_path: filter_path %>
+  <% else %>
+    <%= render 'blueprints/shared/common_filters', f: f, filters: filters, filter_path: filter_path %>
   <% end %>
+<% end %>
 </div>

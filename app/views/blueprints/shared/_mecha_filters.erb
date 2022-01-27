@@ -16,10 +16,10 @@
       <%= render 'blueprints/shared/filters/sorter', f: f, filters: filters %>
       <div>
         <div>
-        <div class="o-blueprint-filters__select">
-          <%= f.label :mod_version, "Filter by color (experimental)" %>
-          <%= f.text_field :color, type: 'text', class: 'color-picker', autocomplete: 'off', value: filters[:color] %>
-        </div>
+          <div class="o-blueprint-filters__select">
+            <%= f.label :mod_version, "Filter by color (experimental)" %>
+            <%= f.text_field :color, type: 'text', class: 'color-picker', autocomplete: 'off', value: filters[:color] %>
+          </div>
         </div>
         <div>
           <%= hidden_field_tag :color_similarity, 80 %>
@@ -34,7 +34,7 @@
     <div class="o-blueprint-filters__line">
       <div class="o-blueprint-filters__submit">
         <%= f.submit 'Search' %>
-        <%= link_to 'Reset', filter_path + "?type=mecha", class: 'a-button' %>
+        <%= link_to 'Reset', typed_path(filter_path, :mecha), class: 'a-button' %>
       </div>
     </div>
   <% end %>

@@ -25,7 +25,7 @@
       <%= render 'blueprints/shared/filters/sorter', f: f, filters: filters %>
       <div class="o-blueprint-filters__submit">
         <%= f.submit 'Search' %>
-        <%= link_to 'Reset', filter_path + "?type=factory", class: 'a-button' %>
+        <%= link_to 'Reset', typed_path(filter_path, :factory), class: 'a-button' %>
       </div>
     </div>
   <% end %>

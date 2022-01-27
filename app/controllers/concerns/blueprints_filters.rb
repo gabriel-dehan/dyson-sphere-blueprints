@@ -83,6 +83,5 @@ module BlueprintsFilters
       level = similarity.to_i
       Color.includes(:blueprint_mecha_colors).where(h: color_range(searched_color, :h, (similarity.to_i * 30 / 100.0)), s: color_range(searched_color, :s, level), l: color_range(searched_color, :l, level))
     end
-
   end
 end

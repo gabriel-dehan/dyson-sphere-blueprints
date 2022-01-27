@@ -1,6 +1,6 @@
 class Blueprint::Factory < Blueprint
-  def self.sti_name; "Factory"; end
-  def normalize_friendly_id(string); "factory-#{super}"; end
+  def self.sti_name() = "Factory"
+  def normalize_friendly_id(string) = "factory-#{super}"
 
   # Pictures
   include PictureUploader::Attachment(:cover_picture)
