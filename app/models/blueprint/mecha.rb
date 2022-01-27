@@ -1,12 +1,12 @@
 class Blueprint::Mecha < Blueprint
-  def self.sti_name; "Mecha"; end
-  def normalize_friendly_id(string); "mecha-#{super}"; end
+  def self.sti_name() = "Mecha"
+  def normalize_friendly_id(string) = "mecha-#{super}"
 
   include MechaThumbnailUploader::Attachment(:cover_picture)
   include MechaUploader::Attachment(:blueprint_file)
   acts_as_votable
 
-  has_many :blueprint_mecha_colors, dependent: :destroy, foreign_key: 'blueprint_id'
+  has_many :blueprint_mecha_colors, dependent: :destroy, foreign_key: "blueprint_id"
   has_many :colors, through: :blueprint_mecha_colors
 
   after_save :decode_blueprint
@@ -24,11 +24,11 @@ class Blueprint::Mecha < Blueprint
 
   private
 
-  def decode_blueprint
-    BlueprintParserJob.perform_now(id) if saved_change_to_attribute?(:blueprint_file_data)
+  def decode_blueprint(force: false)
+    BlueprintParserJob.perform_now(id) if saved_change_to_attribute?(:blueprint_file_data) || force
   end
 
-  def extract_colors(force = false)
+  def extract_colors(force: false)
     MechaColorExtractJob.perform_later(id) if saved_change_to_attribute?(:blueprint_file_data) || force
   end
 
