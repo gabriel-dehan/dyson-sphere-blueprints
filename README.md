@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v4.0.2](#v402)
     - [v4.0.1](#v401)
     - [v4.0.0](#v400)
     - [v3.5.0](#v350)
@@ -50,9 +51,13 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
+### v4.0.2
+- Fixed a bug with mechas pictures not being promoted and instead being purged after 24h
+- Updated "Support us" page with up to date information
+
 ### v4.0.1
-- Fix a few bugs with color extraction for specific colors
-- Fix a bug with the color picker not working when going back one page
+- Fixed a few bugs with color extraction for specific colors
+- Fixed a bug with the color picker not working when going back one page
 - Sorting blueprints now automatically refresh the page, no need to submit the form
 
 ### v4.0.0
