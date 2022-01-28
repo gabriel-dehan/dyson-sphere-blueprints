@@ -23,6 +23,7 @@ module Parsers
           name: data[:name],
         }
         @blueprint.save!
+        @blueprint.cover_picture_attacher.finalize
         puts "Done!"
       rescue StandardError => e
         if silent_errors
@@ -39,7 +40,7 @@ module Parsers
       begin
         image = Parsers::MechaFile.generate_png(@blueprint_file)
         image.open
-        color_tool = Camalian::load(image.path)
+        color_tool = Camalian.load(image.path)
 
         colors = color_tool.prominent_colors(24, quantization: Camalian::QUANTIZATION_K_MEANS)
 

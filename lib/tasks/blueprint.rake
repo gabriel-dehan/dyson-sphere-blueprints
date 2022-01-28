@@ -5,4 +5,22 @@ namespace :blueprint do
       BlueprintParserJob.perform_later(blueprint.id)
     end
   end
+
+  task recompute_mechas: :environment do
+    Blueprint::Mecha.includes(:mod).where(mod: { name: "Dyson Sphere Program" }).each do |blueprint|
+      BlueprintParserJob.perform_later(blueprint.id)
+    end
+  end
+
+  task recompute_factories: :environment do
+    Blueprint::Factory.includes(:mod).where(mod: { name: "Dyson Sphere Program" }).each do |blueprint|
+      BlueprintParserJob.perform_later(blueprint.id)
+    end
+  end
+
+  task recompute_dyson_spheres: :environment do
+    Blueprint::DysonSphere.includes(:mod).where(mod: { name: "Dyson Sphere Program" }).each do |blueprint|
+      BlueprintParserJob.perform_later(blueprint.id)
+    end
+  end
 end
