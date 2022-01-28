@@ -22,13 +22,13 @@
 
 ### Features / Bugs
 - [ ] Localisation chinese
-- [ ] Add power needed to factories
 - [ ] Add filters and search to all blueprint related pages
-- [ ] Preview editor
+- [ ] Blueprint editor
+- [ ] Add power needed to factories
 - [ ] Optimize bundle size
 
 ### Maybe one day
-- [ ] Bring back blueprint preview
+- [ ] Bring back blueprint 3D preview (or 2D)
 - [ ] Add tests
 
 ## Done
