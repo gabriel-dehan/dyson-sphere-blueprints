@@ -1,20 +1,18 @@
 ### Next releases
-- [x] Add new items
-- [x] Update the game version on live
-- [x] Update the bp limits on live
-- [x] Icarus blueprints sharing
-- [x] Dyson Spheres blueprints sharing
-- [x] Remove multibuild mods from home page research
-- [x] Collections for Dyson Spheres and Icarus
+- [ ] Common filters ability to filter by type
 - [ ] Fix download as zip for new blueprints
-- [ ] My favorites ability to filter by type
 - [ ] Update help
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
 - [ ] Blueprint copy count / sort by copy count
-
+- [ ] Comment system
+- [ ] Admin interface
+- [ ] Site wide messaging system
+- [ ] In-site idea box / bug report
+- [ ] Moderators profiles
 
 ### Dev
+- [ ] Prepare for i18n
 - [ ] Refactor blueprints controllers
 - [ ] Refactor form views
 - [ ] Refactor show views (sidebar, etc...)
@@ -23,18 +21,24 @@
 - [ ] Setup cache to relieve the dynos
 
 ### Features / Bugs
-- [ ] Downvote feature or comment system
-- [ ] Preview editor
+- [ ] Localisation chinese
 - [ ] Add power needed to factories
 - [ ] Add filters and search to all blueprint related pages
+- [ ] Preview editor
 - [ ] Optimize bundle size
 
 ### Maybe one day
 - [ ] Bring back blueprint preview
 - [ ] Add tests
-- [ ] Localisation chinese
 
 ## Done
+- [x] Add new items
+- [x] Update the game version on live
+- [x] Update the bp limits on live
+- [x] Icarus blueprints sharing
+- [x] Dyson Spheres blueprints sharing
+- [x] Remove multibuild mods from home page research
+- [x] Collections for Dyson Spheres and Icarus
 - [x] Handle password recovey emails
 - [x] Optimize, add includes, check for n+1 queries...
 - [x] Seo, sitemap...
