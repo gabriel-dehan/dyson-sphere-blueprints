@@ -22,7 +22,6 @@
     <br />
     If you wish to support Dyson Sphere Blueprints, may it be by <strong>tipping me</strong> a beer (the only fuel a developer needs) once or sponsoring Dyson Sphere Blueprints through a <strong>monthly donation</strong>, know that your contribution <em>whatever the amount</em> will be of great help, and <strong>I would be most grateful</strong>.
   </p>
-
   <div class="m-supportButtons">
     <a href="https://github.com/sponsors/gabriel-dehan" target="_blank" rel="noopener noreferrer">
       <%= image_tag 'support/github_button.png', alt: 'Support me on Github' %>
@@ -34,7 +33,6 @@
       <%= image_tag 'support/patreon_button.png', alt: 'Support me on Patreon' %>
     </a>
   </div>
-
   <h2>Why do we need your support? The long version (with some numbers!)</h2>
   <p>Hello there!<br />
     My name is Gabriel. I have been a developer for the past 15 years and working in the web industry for the past 8.<br />
@@ -49,40 +47,35 @@
   </p>
   <p>Currently, <strong>Dyson Sphere Blueprints boasts:</strong></p>
   <ul>
-    <li><strong>1350</strong> Users created</li>
-    <li><strong>4200</strong> Blueprints (2676 Public blueprints)</li>
-    <li><strong>3008</strong> Unique Visitors a day</li>
-    <li>On average <strong>80</strong> users per minute</li>
-    <li><strong>161k</strong> Requests served per day</li>
+    <li><strong>2200</strong> Users created</li>
+    <li><strong>5050</strong> Blueprints (about half are public blueprints)</li>
+    <li><strong>8000</strong> Unique Visitors a day</li>
+    <li>On average <strong>200</strong> users per minute</li>
+    <li><strong>468K</strong> Requests served per day</li>
     <li><strong>150GB</strong> of data served per day</li>
   </ul>
   <p>These are <strong>amazing numbers</strong> and I am very grateful to the community for that ❤️<br>
-    But those numbers also mean extra hosting expenses that are starting to get out of hand.<br>
+    But those numbers also mean extra hosting expenses that are a bit on the... high side.<br>
     One of the big factors is that the website is truly international, we have users from all around the world, and
     more than half of our users are from China, the other (little-less-than) half coming mostly from the US and
     Europe. This means that there isn't ever any downtime for our servers that'd help to reduce the cost and it also
     means that to be able to provide as best an experience as I could for our asians brethren I've had to setup CDNs
     around the world to try and reduce their loading times (the servers are closer to the US/Europe).</p>
   <p>I've tried to optimise the code as much as I could to reduce the footprint on our servers, and even though I know
-    I can do better and will try to continue to improve on that, I feel like <strong>it's time to move to a more
-      expensive hosting plan</strong>.<br>
-    We are currently stretching the one we use very thin, especially in the RAM department. This is what I am waking to every morning:
+    I can do better and will try to continue to improve on that, I have limited time on hand and a migration to a less expensive host would be very arduous at the moment.
   </p>
-  <div>
-    <%= image_tag 'support/ram_usage.png' %>
-    <figcaption>(As you can see 3k memory errors in 24h is not what I'd call super optimal)</figcaption>
-    <br />
-  </div>
-  <p><strong>I am not planning on adding any form of ads to the website nor will I ever do so</strong>, and I know the
-    site has been getting quite slow for the past week or so because of the heavy traffic we are experiencing. If I
-    want the website experience to remain pleasant (a.k.a: not slow) I'll need to bump the hosting up and this will
-    definitely be more expensive.</p>
+  <p><strong>I am not planning on adding any form of ads to the website nor will I ever do so</strong>, but if I
+    want the website experience to remain pleasant (a.k.a: not slow) I need to keep using a decent hosting plan, and this is definitely expensive.</p>
   <p>As a reference here are the costs I am currently covering by myself for the current website:</p>
   <table>
     <caption>Current server and hosting costs</caption>
     <tr>
-      <td><strong>Application Hosting</strong></td>
-      <td><strong>14€</strong> / month</td>
+      <td><strong>Application Dyno</strong></td>
+      <td><strong>50€</strong> / month</td>
+    </tr>
+    <tr>
+      <td><strong>Worker Dyno</strong></td>
+      <td><strong>25€</strong> / month</td>
     </tr>
     <tr>
       <td><strong>Database Hosting</strong></td>
@@ -90,42 +83,14 @@
     </tr>
     <tr>
       <td><strong>Image Hosting</strong></td>
-      <td><strong>1-10€</strong> / month (depending on traffic)</td>
+      <td><strong>1-5€</strong> / month (depending on traffic)</td>
     </tr>
     <tr>
       <td><strong>Content Delivery Network (CDN) and Cache</strong></td>
-      <td><strong>50-60€</strong> / month (depending on traffic)</td>
+      <td><strong>1-5€</strong> / month (depending on traffic)</td>
     </tr>
   </table>
-  <p>This amounts to about <strong>80€ / month</strong> that I have to expend. I could cut back and remove the CDN which
-    would make the experience worse for anyone not in Europe (longer loading times), but even without it that'd still
-    be around 30€ / month.</p>
-  <p>And that's just now. If I want to be able to handle the traffic reliably I have to change my <strong>Application
-      Hosting</strong> plan to one that have enough RAM (1GB), and it'd cost about 70€ / month just for that (50€ for 1GB dyno + 20€ for background job dyno).<br>
-    The projected costs would then be:</p>
-    <table>
-      <caption>Future server and hosting costs</caption>
-      <tr>
-        <td><strong>Application Hosting</strong></td>
-        <td><strong>70€</strong> / month</td>
-      </tr>
-      <tr>
-        <td><strong>Database Hosting</strong></td>
-        <td><strong>9€</strong> / month</td>
-      </tr>
-      <tr>
-        <td><strong>Image Hosting</strong></td>
-        <td><strong>1-10€</strong> / month (depending on traffic)</td>
-      </tr>
-      <tr>
-        <td><strong>Content Delivery Network (CDN) and Cache</strong></td>
-        <td><strong>50-60€</strong> / month (depending on traffic)</td>
-      </tr>
-    </table>
-  <p>This would bring the cost of running DSB to about <strong>150€ / month</strong> which is... quite expensive. Even
-    if I removed the CDN as I said, it'd still be too much.<br>
-    At the time I am barely able to cover the current costs without it hindering my life too much but I don't know
-    what the future holds.</p>
+  <p>This amounts to about <strong>100€ / month</strong> that I have to expend. I could cut back and go back to a less expensive plan, but we all know that would mean a slower site and worse experience for you all.</p>
   <p>And <strong>this is why I need your help</strong>. If even a small number of our users gave 2€ a month it would pretty much cover most of the
     costs, which would be amazing.</p>
   <p>If you've read up to here, I thank you a lot and hope some of you will be able to help even the tiniest bit.</p>
@@ -143,7 +108,6 @@
     </a>
   </div>
 </div>
-
 <div class="a-credit">
   <div>Donation Button icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 </div>
