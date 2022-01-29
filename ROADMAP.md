@@ -5,6 +5,7 @@
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
 - [ ] Blueprint copy count / sort by copy count
+- [ ] RGPD
 - [ ] Comment system
 - [ ] Admin interface
 - [ ] Site wide messaging system
