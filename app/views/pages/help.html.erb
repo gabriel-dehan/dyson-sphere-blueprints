@@ -1,56 +1,29 @@
-<div class="p-staticPage">
+<div class="p-staticPage p-help">
   <h1>In need of help?
     <a href="https://discord.com/invite/sgU8QfZhuB" target="_blank" rel="noopener noreferrer">
       <%= image_tag 'buttons/discord.png', alt: 'Join our discord' %>
     </a>
   </h1>
-
-  <h2 id="multibuild-install">How to use the <strong>blueprint</strong> function.</h2>
-  <ol>
-    <li>
-      First you need to have Mass construction unlocked, you can find it in the upgrades research tab.<br />
-      <%= image_tag 'help/help-1-1.png' %>
-    </li>
-    <li>
-      The research tree has 5 tiers upgrades for the blueprint section. every upgrade increases the number of facilities you can copy at once. Level one you can copy only 60 and level 5 lifts the restriction and gives you unlimited.
-    <%= image_tag 'help/help-1-2.png' %>
-    </li>
-    <li>
-      Once completed, you should see a new icon in your toolbar.
-      <%= image_tag 'help/help-1.png' %>
-    </li>
-  </ol>
-  <h2 id="copy">How to get a blueprint's code?</h2>
-  <ol>
-    <li>
-      You first need to create a blueprint in game. In the <strong>blueprint</strong>'s toolbar, select the first icon:
-      <%= image_tag 'help/help-2-1.png' %><br />
-      And then select your facilities. Once you're satisfied, finish your blueprint by clicking save blueprint.
-    </li>
-    <li>
-      Click the <strong>Copy</strong> button in the blueprint screen.<br />
-      <%= image_tag 'help/help-2-2.png' %><br />
-    </li>
-    <li>
-      You're done, the blueprint is now in your clipboard, and you just need to paste it in the form field when adding <%= link_to "your new blueprint", new_blueprint_factory_path %>.
-    </li>
-  </ol>
-  <h2 id="paste">How to use a blueprint code found on this website?</h2>
-  <ol>
-    <li>
-      Simply click the&nbsp;
-      <button class="t-blueprint__copy">
-        <i class="fas fa-copy"></i>Copy to clipboard
-      </button>
-      &nbsp;button on a blueprint's page.
-    </li>
-    <li>
-      Then, in game, create an empty blueprint and then click on the new created blueprint.
-      <%= image_tag 'help/help-3-1.png' %><br />
-    </li>
-    <li>
-    click the <strong>Paste</strong> button in the blueprint screen, finish by clicking the save changes button.
-    <%= image_tag 'help/help-3-2.png' %><br />
-    </li>
-  </ol>
+  <div class="m-tabs">
+    <div class="m-tabs-select-container">
+      <%= link_to help_path(for: 'factory'), class: "m-tabs-select #{(!params[:for] || params[:for] == 'factory') && 'active'}" do %>
+        <strong>Factory</strong> Help
+      <% end %>
+      <%= link_to help_path(for: 'dyson_sphere'), class: "m-tabs-select #{(params[:for] == 'dyson_sphere') && 'active'}" do %>
+        <strong>Dyson Sphere</strong> Help
+      <% end %>
+      <%= link_to help_path(for: 'mecha'), class: "m-tabs-select #{(params[:for] == 'mecha') && 'active'}" do %>
+        <strong>Mechas</strong> Help
+      <% end %>
+    </div>
+  </div>
+  <div class="p-help__content">
+    <% if params[:for] == 'dyson_sphere' %>
+      <%= render 'pages/help/dyson_sphere_blueprint_help' %>
+    <% elsif params[:for] == 'mecha' %>
+      <%= render 'pages/help/mecha_blueprint_help' %>
+    <% else %>
+      <%= render 'pages/help/factory_blueprint_help' %>
+    <% end %>
+  </div>
 </div>

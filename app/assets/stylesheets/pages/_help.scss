@@ -1,0 +1,34 @@
+.p-help {
+  &__pageTitle {
+    font-size: $font-size-bigtitle !important;
+    color: var(--white) !important;
+    border-bottom: none !important;
+  }
+
+  &__content {
+    margin-top: 3em;
+  }
+
+  &__videos {
+    margin-top: 1em;
+  }
+
+  .m-tabs-select {
+    font-size: 16px;
+    line-height: 1em;
+    padding: 12px 24px;
+
+    strong {
+      font-weight: bold;
+      color: var(--white);
+    }
+
+    &.active {
+      color: var(--white);
+      background-color: var(--purple);
+    }
+    &:hover {
+      color: var(--white);
+    }
+  }
+}

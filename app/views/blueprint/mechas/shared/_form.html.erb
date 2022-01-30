@@ -48,6 +48,9 @@
             } %>
         </div>
         <%= f.hidden_field :blueprint_file, value: blueprint.cached_blueprint_file_data, id: "m-form__blueprint-file-upload-result" %>
+        <div class="hint-help-container">
+          <div class="hint-help"><%= link_to "Need help? Don't know how to find your mecha's file?", help_path(for: "mecha"), target: '_blank' %></div>
+        </div>
         <span class="error-container">
           <% if blueprint.errors[:blueprint_file].length > 0 %>
             <span class="error">

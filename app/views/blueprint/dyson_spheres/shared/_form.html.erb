@@ -22,7 +22,7 @@
       <% end %>
       <div class="m-form__important">
         <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true, input_html: { data: { dysonSphereBlueprintParser_target: "value", action: "input->dysonSphereBlueprintParser#parseDysonSphere" } } %>
-        <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(anchor: "copy-dyson-sphere"), target: '_blank' %></div>
+        <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(for: "dyson_sphere"), target: '_blank' %></div>
       </div>
       <div class="m-form__tags freeTags" data-controller="freeTags" data-freeTags-category-value="dyson_sphere">
         <label for="tag_list">
