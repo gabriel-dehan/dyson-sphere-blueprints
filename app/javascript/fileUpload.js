@@ -129,7 +129,7 @@ const singleFileUpload = (fileInput) => {
           uploadFailed: data.errorMessage || null,
         }
       },
-      note: data.description || 'Single cover picture. 3 MB maximum, ideal ratio 16:9. For instance 1920x1080, etc...',
+      note: data.description || `Single cover picture. ${data.maxFileSize ? data.maxFileSize / (1024 * 1024): '3'} MB maximum, ideal ratio 16:9. For instance 1920x1080, etc...`,
     });
 
   if (data.mechaPlugin === 'true') {
@@ -163,7 +163,7 @@ const multipleFileUpload = (fileInput) => {
           dropPaste: data.title || null,
         }
       },
-      note: data.description || '4 pictures maximum, 3 MB maximum each, ideal ratio 16:9. For instance 1920x1080, etc...',
+      note: data.description || `4 pictures maximum, ${data.maxFileSize ? data.maxFileSize / (1024 * 1024): '3'} MB maximum each, ideal ratio 16:9. For instance 1920x1080, etc...`,
     })
 
   uppy.on('upload-success', (file, response) => {

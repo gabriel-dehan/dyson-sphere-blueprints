@@ -5,20 +5,25 @@
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
 - [ ] Blueprint copy count / sort by copy count
+- [ ] RGPD
 - [ ] Comment system
 - [ ] Admin interface
 - [ ] Site wide messaging system
 - [ ] In-site idea box / bug report
 - [ ] Moderators profiles
 
-### Dev
+### Tech / Chore
+- [ ] Migrate to ComponentView
 - [ ] Prepare for i18n
+- [ ] Redo filter system cleanly
 - [ ] Refactor blueprints controllers
 - [ ] Refactor form views
 - [ ] Refactor show views (sidebar, etc...)
 - [ ] Update uppy.js to 2.0
 - [ ] New error styles for f.input too
-- [ ] Setup cache to relieve the dynos
+- [ ] Use TS instead of JS
+- [ ] Update to Rails 7.0 and update CSS / JS loader
+- [ ] Setup a better cache to relieve the dynos
 
 ### Features / Bugs
 - [ ] Localisation chinese

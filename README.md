@@ -9,6 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
+    - [v4.0.3](#v403)
     - [v4.0.2](#v402)
     - [v4.0.1](#v401)
     - [v4.0.0](#v400)
@@ -50,6 +51,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 [See the roadmap/todo file](ROADMAP.md)
 
 ## Changelog
+
+### v4.0.3
+- Changed minimum image upload size from 3 MB to 5 MB
+- Updated home page filters
 
 ### v4.0.2
 - Fixed a bug with mechas pictures not being promoted and instead being purged after 24h
@@ -284,6 +289,7 @@ rake mod:fetch_latest # currently legacy, but fetches the latest versions of all
 
 This project is currently hosted on Heroku.
 *Notes to self:*
+`rubocop-daemon start`
 Make sure the Gemfile has the proper platforms set:
 
 ```

@@ -75,6 +75,7 @@ group :development do
   gem "memory_profiler"
   gem "derailed_benchmarks"
   gem "bullet"
+  gem "rubocop-daemon", require: false
 
   # Static code analyzer
   gem "rubocop", "1.19.1"

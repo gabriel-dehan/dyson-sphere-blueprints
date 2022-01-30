@@ -39,7 +39,8 @@ Style/NegatedIf:
 
 # https://docs.rubocop.org/rubocop/cops_style.html#stylecommandliteral
 Style/CommandLiteral:
-  Enabled: false
+  EnforcedStyle: mixed
+  Enabled: true
 
 # https://docs.rubocop.org/rubocop/cops_style.html#styletrailingcommainhashliteral
 Style/TrailingCommaInHashLiteral:

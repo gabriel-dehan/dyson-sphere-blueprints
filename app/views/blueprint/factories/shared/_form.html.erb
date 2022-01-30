@@ -5,7 +5,6 @@
       <%= image_tag get_category_icon('factory'), class: "m-form__title-icon factory" %>
       <div><%= form_title %></div>
     </h1>
-
     <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
       <%= f.input :title, required: true %>
       <%= f.input :description, as: :rich_text_area, placeholder: "Describe your blueprint here. If you are using mods that add items that are not in the base game, don't forget to list them." %>
@@ -15,7 +14,6 @@
         value_method: :id,
         label: "Collection",
         selected: @collection.id %>
-
       <% if @old_mod_support %>
         <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
           <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
@@ -42,7 +40,6 @@
           </span>
         <% end %>
       </div>
-
       <div class="m-form__picture">
         <label for="cover_picture">
           <abbr title="required">*</abbr>
@@ -52,6 +49,7 @@
           <%= f.file_field :cover_picture,
             accept: PictureUploader::ALLOWED_TYPES.join(","),
             data: {
+              max_file_size: PictureUploader::MAX_SIZE,
               upload_server: upload_server,
               preview_element: "m-form__picture-preview-cover",
               upload_result_element: "m-form__picture-cover-upload-result",
@@ -65,7 +63,6 @@
             </span>
           <% end %>
         </span>
-
         <div class="m-form__picture-preview">
           <% if blueprint.cover_picture %>
             <span class="m-form__picture-preview__warning">*Uploading a new image will overwrite the existing one.</span>
@@ -73,22 +70,20 @@
           <% end %>
         </div>
       </div>
-
       <div class="m-form__pictures">
         <label for="additional_pictures">
           Additional pictures <em></em>
         </label>
-
         <div class="m-form__uploader">
           <%= f.file_field :additional_pictures,
             multiple: true,
             accept: PictureUploader::ALLOWED_TYPES.join(","),
             data: {
+              max_file_size: PictureUploader::MAX_SIZE,
               model_name: blueprint.model_name.singular,
               upload_server: upload_server,
             } %>
         </div>
-
         <span class="error-container">
           <% if blueprint.errors[:additional_pictures].length > 0 %>
             <span class="error">
@@ -96,7 +91,6 @@
             </span>
           <% end %>
         </span>
-
         <div class="m-form__pictures-preview">
           <% if blueprint.additional_pictures.any? %>
             <span class="m-form__pictures-preview__warning">*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint.</span>
@@ -118,12 +112,10 @@
           <% end %>
         </div>
       </div>
-
       <%= f.submit %>
     <% end %>
   </div>
 </div>
-
 <template id="bp-requirements">
   <div class="t-blueprint__requirements-preview" data-controller="collapsible">
     <div class="t-blueprint__requirements-preview__header" data-action="click->collapsible#toggle">
@@ -142,7 +134,6 @@
     </ul>
   </div>
 </template>
-
 <template id="bp-entity">
   <li class="t-blueprint__requirements-entity">
     <div class="t-blueprint__requirements-entity__tally">
@@ -151,22 +142,18 @@
     </div>
   </li>
 </template>
-
 <template id="bp-entity-recipes">
   <ul class="t-blueprint__requirements-entity__recipes">
   </ul>
 </template>
-
 <template id="bp-entity-recipe">
   <li class="t-blueprint__requirements-entity__recipe--fixed-margin" id="entity-recipe-image">
     <div id="entity-recipe-tally"></div>
   </li>
 </template>
-
 <template id="bp-entity-params">
   <ul class="t-blueprint__requirements-entity__params"></ul>
 </template>
-
 <template id="bp-entity-param">
   <li class="t-blueprint__requirements-entity__param">
     <div id="entity-recipe-image"></div>
@@ -177,7 +164,6 @@
     </ul>
   </li>
 </template>
-
 <template id="bp-size-warning">
   <div class="t-blueprint__requirements-preview">
     <div class="t-blueprint__requirements-preview__sizeWarning">

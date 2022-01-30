@@ -1,0 +1,5 @@
+<!-- Structures -->
+<div class="o-blueprint-filters__structuresCount o-blueprint-filters__select">
+  <%= f.label :max_structures, "Max structures" %>
+  <%= f.select :max_structures, Engine::Researches.instance.formatted_mass_construction_with_limits.invert.to_a, selected: filters[:max_structures], include_blank: 'Any' %>
+</div>

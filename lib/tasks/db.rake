@@ -19,7 +19,7 @@ namespace :db do
   end
 
   desc "Dumps the database to db/APP_NAME.dump"
-  task :dump => :environment do
+  task dump: :environment do
     cmd = nil
     with_config do |app, host, db, user|
       cmd = "pg_dump --host #{host} --username #{user} --verbose --clean --no-owner --no-acl --format=c #{db} > #{Rails.root}/db/#{app}.dump"
@@ -29,7 +29,7 @@ namespace :db do
   end
 
   desc "Restores the database dump at db/APP_NAME.dump."
-  task :restore => :environment do
+  task restore: :environment do
     cmd = nil
     with_config do |app, host, db, user|
       cmd = "pg_restore --verbose --host #{host} --username #{user} --clean --no-owner --no-acl --dbname #{db} #{Rails.root}/db/#{app}.dump"
@@ -41,7 +41,7 @@ namespace :db do
   end
 
   desc "Hides private information in the database"
-  task :privatize => :environment do
+  task privatize: :environment do
     if Rails.env.development? # Don't want that in production whatever the reason
       User.all.each do |u|
         puts "Privatizing User##{u.id} (#{u.username})..."
@@ -63,5 +63,4 @@ namespace :db do
       ActiveRecord::Base.connection_config[:database],
       ActiveRecord::Base.connection_config[:username]
   end
-
 end

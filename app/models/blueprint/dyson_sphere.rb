@@ -1,6 +1,6 @@
 class Blueprint::DysonSphere < Blueprint
-  def self.sti_name; "DysonSphere"; end
-  def normalize_friendly_id(string); "dyson-sphere-#{super}"; end
+  def self.sti_name() = "DysonSphere"
+  def normalize_friendly_id(string) = "dyson-sphere-#{super}"
 
   # Pictures
   include PictureUploader::Attachment(:cover_picture)

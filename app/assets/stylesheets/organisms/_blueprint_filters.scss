@@ -5,6 +5,7 @@
 
   &__line {
     display: flex;
+    width: 100%;
     align-items: center;
     margin-bottom: 10px;
     justify-content: space-between;
@@ -25,6 +26,10 @@
 
       .o-blueprint-filters__mods-version {
         justify-content: flex-end;
+      }
+
+      &.custom-filters {
+        ul { margin-top: 0; }
       }
 
       select {
@@ -65,6 +70,70 @@
     }
   }
 
+  &__custom-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px;
+
+    &-label {
+      font-size: 16px;
+      font-family: $body-font;
+      white-space: nowrap;
+      color: var(--grey50);
+      font-style: italic;
+      margin: 0 1em 0 2px;
+    }
+
+    &-select {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      width: 100%;
+    }
+
+    &-options {
+      margin: 0;
+    }
+
+    &-option {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      margin: 0 0.8em 0 0;
+      border-radius: 6px;
+      background-color: var(--night-blue);
+
+      img {
+        max-height: 20px;
+        margin-right: 0.5em;
+      }
+
+      &:hover {
+        background-color: var(--blue);
+      }
+
+      &.active {
+        background-color: var(--dark-red);
+      }
+    }
+
+    &-tabs {
+      width: 100%;
+    }
+
+    &-tab {
+      display: none;
+      width: 100%;
+      margin-top: 0.8em;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
   &__search, &__author, &__tags {
     position: relative;
     width: 50%;
@@ -100,6 +169,10 @@
       top: 10px;
       right: 10px;
     }
+  }
+
+  &__structuresCount {
+    select { width: initial; }
   }
 
   &__order-container {
@@ -157,7 +230,7 @@
     display: flex;
 
     label {
-      margin: 0 8px 0 0;
+      margin: 0 8px 0 2px;
       white-space: nowrap;
       color: var(--grey50);
       font-style: italic;

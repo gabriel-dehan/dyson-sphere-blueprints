@@ -56,7 +56,7 @@ class Blueprint < ApplicationRecord
   end
 
   def is_mecha?
-    type == 'Mecha'
+    type == "Mecha"
   end
 
   def self.find_sti_class(type_name)
