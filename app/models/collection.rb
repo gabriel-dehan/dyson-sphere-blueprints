@@ -14,7 +14,6 @@ class Collection < ApplicationRecord
   has_many :mecha_blueprints, dependent: :destroy, class_name: "Blueprint::Mecha"
 
   def total_votes
-    # TODO: Remove MB
-    blueprints.where(mod_id: Mod.last.id).distinct.sum(:cached_votes_total)
+    blueprints.distinct.sum(:cached_votes_total)
   end
 end

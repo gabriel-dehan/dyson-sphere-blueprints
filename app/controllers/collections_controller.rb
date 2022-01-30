@@ -21,7 +21,6 @@ class CollectionsController < ApplicationController
     @blueprints = @collection
       .blueprints
       .includes(:collection)
-      .where(mod_id: @mods.first.id) # TODO: Remove when Multibuild is removed
       .order(cached_votes_total: :desc)
       .page(params[:page])
 
