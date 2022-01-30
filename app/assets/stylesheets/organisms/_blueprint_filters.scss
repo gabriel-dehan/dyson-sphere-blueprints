@@ -10,6 +10,10 @@
     margin-bottom: 10px;
     justify-content: space-between;
 
+    &.submit-container {
+      margin-top: 1.2em !important;
+    }
+
     &-common-mod_select_filter {
       width: 46.7%;
       margin-left: auto;
@@ -97,6 +101,7 @@
     }
 
     &-option {
+      user-select: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;

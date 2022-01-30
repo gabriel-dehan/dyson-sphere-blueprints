@@ -3,9 +3,12 @@
     <h1 class="p-page__header-title">
       <span class="p-page__header-title-main"><%= @collection.name %> <span class="author">collection by <%= @collection.user.username %></span> </span>
     </h1>
-    <%= link_to 'Download all as ZIP', bulk_download_collection_path(@collection), class: 'a-button', download: "#{@collection.name}.zip" %>
+    <% if @blueprints.any? %>
+      <%= link_to 'Download all as ZIP', bulk_download_collection_path(@collection), class: 'a-button', download: "#{@collection.name}.zip" %>
+    <% end %>
   </div>
   <% if @blueprints.any? %>
+    <%= render "blueprints/shared/filters", filters: @filters, filter_path: collection_path(@collection) %>
     <%= render "blueprints/shared/list", blueprints: @blueprints %>
   <% else %>
     <div class="t-blueprint-no-result">

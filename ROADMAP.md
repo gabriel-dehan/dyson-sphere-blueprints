@@ -1,10 +1,9 @@
 ### Next releases
-- [ ] Common filters ability to filter by type
-- [ ] Fix download as zip for new blueprints
 - [ ] Update help
+- [ ] Blueprint copy count / sort by copy count
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
-- [ ] Blueprint copy count / sort by copy count
+- [ ] Improve color search
 - [ ] RGPD
 - [ ] Comment system
 - [ ] Admin interface
@@ -25,10 +24,9 @@
 - [ ] Update to Rails 7.0 and update CSS / JS loader
 - [ ] Setup a better cache to relieve the dynos
 
-### Features / Bugs
+### Planned features (probably)
 - [ ] Localisation chinese
-- [ ] Add filters and search to all blueprint related pages
-- [ ] Blueprint editor
+- [ ] Factories blueprints editor
 - [ ] Add power needed to factories
 - [ ] Optimize bundle size
 
@@ -37,6 +35,9 @@
 - [ ] Add tests
 
 ## Done
+- [ ] Common filters ability to filter by type
+- [ ] Fix download as zip for new blueprints
+- [ ] Add filters and search to all blueprint related pages
 - [x] Add new items
 - [x] Update the game version on live
 - [x] Update the bp limits on live

@@ -15,48 +15,43 @@
             <strong><%= collection.type %></strong> collection,
           </span>
           <span class="t-collections-list__collection-meta-count">
-            <%
-=begin%>
- # TODO remove where when removing MB
-<%
-=end%>
-            with <strong><%= collection.blueprints.where(mod_id: @mods.first.id).count %></strong> <%= pluralize_without_count(collection.blueprints.where(mod_id: @mods.first.id).count, 'blueprint') %>
-        </span>
-      </div>
-      <div class="t-collections-list__collection-block">
-        <div class="t-collections-list__collection-info">
-          <span
+            with <strong><%= collection.blueprints.count %></strong> <%= pluralize_without_count(collection.blueprints.count, 'blueprint') %>
+          </span>
+        </div>
+        <div class="t-collections-list__collection-block">
+          <div class="t-collections-list__collection-info">
+            <span
             class="t-collections-list__collection-votes tooltip-trigger"
             data-tippy-content="Sum of all blueprints"
             data-tippy-placement="right"
           >
-            <strong><%= collection.total_votes %></strong><i class="fas fa-heart"></i>&nbsp;
-          </span>
-          <span class="t-collections-list__collection-date">
-            Created <strong><%= time_ago_in_words(collection.created_at) %></strong>
-          </span>
-        </div>
-        <% if policy(collection).update? && with_actions %>
-          <div class="t-collections-list__collection-actions">
-            <%= button_to edit_collection_path(collection), method: :get, class: 't-collections-list__collection-actions-edit' do %>
-              <span
+              <strong><%= collection.total_votes %></strong><i class="fas fa-heart"></i>&nbsp;
+            </span>
+            <span class="t-collections-list__collection-date">
+              Created <strong><%= time_ago_in_words(collection.created_at) %></strong>
+            </span>
+          </div>
+          <% if policy(collection).update? && with_actions %>
+            <div class="t-collections-list__collection-actions">
+              <%= button_to edit_collection_path(collection), method: :get, class: 't-collections-list__collection-actions-edit' do %>
+                <span
                 class="tooltip-trigger"
                 data-tippy-content="Edit"
                 data-tippy-placement="bottom">
-                <i class="fas fa-edit"></i>
-              </span>
-            <% end %>
-            <%= button_to collection_path(collection), method: :delete, class: 't-collections-list__collection-actions-delete', data: { confirm: 'Deleting a collection will delete all your associated blueprints, are you sure?' } do %>
-              <span
+                  <i class="fas fa-edit"></i>
+                </span>
+              <% end %>
+              <%= button_to collection_path(collection), method: :delete, class: 't-collections-list__collection-actions-delete', data: { confirm: 'Deleting a collection will delete all your associated blueprints, are you sure?' } do %>
+                <span
                 class="tooltip-trigger"
                 data-tippy-content="Delete"
                 data-tippy-placement="bottom">
-                <i class="fas fa-trash"></i>
-              </span>
-            <% end %>
-          </div>
-        <% end %>
+                  <i class="fas fa-trash"></i>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>

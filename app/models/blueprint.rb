@@ -19,7 +19,8 @@ class Blueprint < ApplicationRecord
   validates :title, presence: true
   validates :additional_pictures, length: { maximum: 4, message: "Too many pictures. Please make sure you don't have too many pictures attached." }
 
-  default_scope { includes(:tags, :tag_taggings, :user) }
+  # Hides other mods as long as we don't have a need for them
+  default_scope { includes(:mod, :tags, :tag_taggings, :user).where(mod: { name: "Dyson Sphere Program" }) }
 
   pg_search_scope :search_by_title,
                   against: [:title],

@@ -8,6 +8,9 @@ class Mod < ApplicationRecord
     "Dyson Sphere Program"
   ].freeze
 
+  # Hides other mods as long as we don't have a need for them
+  default_scope { where(name: "Dyson Sphere Program") }
+
   def self.to_select
     all.map { |mod| [mod.name, mod.id] }
   end

@@ -70,6 +70,10 @@ Style/CaseLikeIf:
 Lint/DuplicateBranch:
   Enabled: false
 
+# https://docs.rubocop.org/rubocop/cops_metrics.html#metricsclasslength
+Metrics/ClassLength:
+  Max: 200
+
 # https://docs.rubocop.org/rubocop/cops_metrics.html#metricsblocklength
 Metrics/BlockLength:
   Enabled: false
