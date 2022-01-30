@@ -5,7 +5,6 @@
       <%= image_tag get_category_icon('mecha'), class: "m-form__title-icon mecha" %>
       <div><%= form_title %></div>
     </h1>
-
     <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
       <%= f.input :title, required: true %>
       <%= f.input :description, as: :rich_text_area, placeholder: "Describe your mecha blueprint here. If you are using mods that modify how Mecha edition works, list them here." %>
@@ -23,9 +22,9 @@
         <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'freeTags-target': 'input' } %>
         <span class="error-container tags">
           <% if blueprint.errors[:tag_list].length > 0 %>
-              <span class="error">
-                <%= blueprint.errors[:tag_list].first %>
-              </span>
+            <span class="error">
+              <%= blueprint.errors[:tag_list].first %>
+            </span>
           <% end %>
           <span data-freeTags-target="error"></span>
         </span>
@@ -56,7 +55,6 @@
             </span>
           <% end %>
         </span>
-
         <div class="m-form__file-preview">
           <% if blueprint.blueprint_file %>
             <span class="m-form__file-preview__warning">*Uploading a new mecha file will overwrite the existing one.</span>
@@ -66,7 +64,6 @@
           <% end %>
         </div>
       </div>
-
       <% if @old_mod_support %>
         <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
           <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
@@ -78,17 +75,16 @@
           <abbr title="required">*</abbr>
           Additional pictures <em>(4 maximum)</em>
         </label>
-
         <div class="m-form__uploader">
           <%= f.file_field :additional_pictures,
             multiple: true,
             accept: PictureUploader::ALLOWED_TYPES.join(","),
             data: {
+              max_file_size: PictureUploader::MAX_SIZE,
               model_name: blueprint.model_name.singular,
               upload_server: upload_server,
             } %>
         </div>
-
         <span class="error-container">
           <% if blueprint.errors[:additional_pictures].length > 0 %>
             <span class="error">
@@ -96,7 +92,6 @@
             </span>
           <% end %>
         </span>
-
         <div class="m-form__pictures-preview">
           <% if blueprint.additional_pictures.any? %>
             <span class="m-form__pictures-preview__warning">*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint.</span>
@@ -118,12 +113,10 @@
           <% end %>
         </div>
       </div>
-
       <%= f.submit %>
     <% end %>
   </div>
 </div>
-
 <template id="bp-preview">
   <div class="t-blueprint__mecha-preview">
     <strong class="t-blueprint__mecha-preview-name"></strong>

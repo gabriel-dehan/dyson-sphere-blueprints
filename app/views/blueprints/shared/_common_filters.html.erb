@@ -11,14 +11,57 @@
       <!-- Author -->
       <%= render 'blueprints/shared/filters/author_filter', f: f, filters: filters %>
     </div>
-    <div class="o-blueprint-filters__line common_order-container">
-      <%= render 'blueprints/shared/filters/sorter', f: f, filters: filters %>
-      <!-- Mod Select -->
-      <div class="o-blueprint-filters__line-common-mod_select_filter">
-      <%= render 'blueprints/shared/filters/mod_select_filter', f: f, filters: filters %>
+    <div class="o-blueprint-filters__line custom-filters">
+      <div class="o-blueprint-filters__custom-filters" data-controller="toggleableTabs">
+        <div class="o-blueprint-filters__custom-filters-select">
+          <h3 class="o-blueprint-filters__custom-filters-label">Filters for</h3>
+          <ul class="o-blueprint-filters__custom-filters-options" data-toggleableTabs-target="select">
+            <li
+                class="o-blueprint-filters__custom-filters-option <%= (@filters[:filtered_for] == :factories) && 'active' %>"
+                data-toggleableTabs-select="factories"
+                data-action="click->toggleableTabs#select">
+              <%= image_tag get_category_icon('factory') %>
+              Factories
+            </li>
+            <% if @dyson_sphere_filtering_active %>
+              <li
+                class="o-blueprint-filters__custom-filters-option <%= (@filters[:filtered_for] == :dyson_spheres) && 'active' %>"
+                data-toggleableTabs-select="dyson_spheres"
+                data-action="click->toggleableTabs#select">
+                <%= image_tag get_category_icon('dyson_sphere') %>
+                Dyson Spheres
+              </li>
+            <% end %>
+            <li
+                class="o-blueprint-filters__custom-filters-option <%= (@filters[:filtered_for] == :mechas) && 'active' %>"
+                data-toggleableTabs-select="mechas"
+                data-action="click->toggleableTabs#select">
+              <%= image_tag get_category_icon('mecha') %>
+              Mechas
+            </li>
+          </ul>
+        </div>
+        <div class="o-blueprint-filters__custom-filters-tabs">
+          <div class="o-blueprint-filters__custom-filters-tab <%= (@filters[:filtered_for] == :factories) && 'active' %>" data-toggleableTabs-target="tab" data-tabs-id="factories">
+            <div class="o-blueprint-filters__line">
+              <%= render 'blueprints/shared/filters/factories_specific_filters', f: f, filters: filters %>
+            </div>
+          </div>
+          <div class="o-blueprint-filters__custom-filters-tab <%= (@filters[:filtered_for] == :dyson_spheres) && 'active' %>" data-toggleableTabs-target="tab" data-tabs-id="dyson_spheres">
+            <div class="o-blueprint-filters__line">
+              No specific filters for dyson spheres yet
+            </div>
+          </div>
+          <div class="o-blueprint-filters__custom-filters-tab <%= (@filters[:filtered_for] == :mechas) && 'active' %>" data-toggleableTabs-target="tab" data-tabs-id="mechas">
+            <div class="o-blueprint-filters__line">
+              <%= render 'blueprints/shared/filters/mechas_specific_filters', f: f, filters: filters %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="o-blueprint-filters__line">
+      <%= render 'blueprints/shared/filters/sorter', f: f, filters: filters %>
       <div class="o-blueprint-filters__submit">
         <%= f.submit 'Search' %>
         <%= link_to 'Reset', filter_path, class: 'a-button' %>

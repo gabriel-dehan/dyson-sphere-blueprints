@@ -6,6 +6,7 @@ module BlueprintsFilters
       @filters = {
         search: params[:search],
         type: params[:type].presence,
+        filtered_for: nil,
         tags: (params[:tags] || "").split(", "),
         author: params[:author],
         order: params[:order] || "recent",
@@ -47,12 +48,16 @@ module BlueprintsFilters
       end
 
       if @filters[:color].present? && @filters[:color_similarity].present?
+        # TODO: Create real scopes and not this horrible thing
+        @filters[:filtered_for] = :mechas
         blueprint_ids = colors_by_hsl(@filters[:color], @filters[:color_similarity]).pluck("blueprint_mecha_colors.blueprint_id")
         blueprints = blueprints.where(id: blueprint_ids)
       end
 
       # Mass 5 is infinity so we can return any blueprint
-      if @filters[:max_structures] && @filters[:max_structures] != "Any" && @filters[:max_structures] != "mass-5"
+      if @filters[:max_structures].present? && @filters[:max_structures] != "Any" && @filters[:max_structures] != "mass-5"
+        # TODO: Create real scopes and not this horrible thing
+        @filters[:filtered_for] = :factories
         limit = Engine::Researches::MASS_CONSTRUCTION_LIMITS[@filters[:max_structures]]
         blueprints = blueprints.where("(summary ->> 'total_structures')::int <= ?", limit) if limit
       end

@@ -1,28 +1,13 @@
 <div class="o-blueprint-filters">
   <%= form_with url: filter_path, method: :get do |f| %>
-    <div class="o-blueprint-filters__line custom-filters">
-      <div class="m-tabs">
-        <div class="m-tabs-select-container">
-          <%= link_to typed_path(filter_path, :factory), class:"m-tabs-select" do %>
-            Factories
-          <% end %>
-             <%= link_to typed_path(filter_path, :dyson_sphere), class:"m-tabs-select" do %>
-            Dyson Spheres
-          <% end %>
-             <%= link_to typed_path(filter_path, :mecha), class:"m-tabs-select" do %>
-            Mechas
-          <% end %>
-      </div>
-    </div>
-  </div>
-  <% if filters[:type] == 'factory' %>
-    <%= render 'blueprints/shared/factory_filters', f: f, filters: filters, filter_path: filter_path %>
-  <% elsif filters[:type] == 'dyson_sphere' %>
-    <%= render 'blueprints/shared/dyson_sphere_filters', f: f, filters: filters, filter_path: filter_path %>
-  <% elsif filters[:type] == 'mecha' %>
-    <%= render 'blueprints/shared/mecha_filters', f: f, filters: filters, filter_path: filter_path %>
-  <% else %>
-    <%= render 'blueprints/shared/common_filters', f: f, filters: filters, filter_path: filter_path %>
+    <% if filters[:type] == 'factory' %>
+      <%= render 'blueprints/shared/factory_filters', f: f, filters: filters, filter_path: filter_path %>
+    <% elsif filters[:type] == 'dyson_sphere' %>
+      <%= render 'blueprints/shared/dyson_sphere_filters', f: f, filters: filters, filter_path: filter_path %>
+    <% elsif filters[:type] == 'mecha' %>
+      <%= render 'blueprints/shared/mecha_filters', f: f, filters: filters, filter_path: filter_path %>
+    <% else %>
+      <%= render 'blueprints/shared/common_filters', f: f, filters: filters, filter_path: filter_path %>
+    <% end %>
   <% end %>
-<% end %>
 </div>

@@ -2,7 +2,7 @@ require "image_processing/mini_magick"
 
 class PictureUploader < Shrine
   ALLOWED_TYPES  = %w[image/jpeg image/jpg image/png image/webp].freeze
-  MAX_SIZE       = 3.megabyte
+  MAX_SIZE       = 5.megabyte
   MAX_DIMENSIONS = [4000, 4000].freeze
 
   DERIVATIVES = {
@@ -11,7 +11,7 @@ class PictureUploader < Shrine
     large: [880, 495],
   }.freeze
 
-  plugin :remote_url, max_size: 5.megabyte
+  plugin :remote_url, max_size: MAX_SIZE
   plugin :default_url
   plugin :remove_attachment
   plugin :pretty_location
