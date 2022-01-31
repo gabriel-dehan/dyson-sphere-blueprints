@@ -1,7 +1,6 @@
 # Roadmap
 
 ### Next releases
-- [ ] Update help
 - [ ] Blueprint copy count / sort by copy count
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
@@ -37,9 +36,10 @@
 - [ ] Add tests
 
 ## Done
-- [ ] Common filters ability to filter by type
-- [ ] Fix download as zip for new blueprints
-- [ ] Add filters and search to all blueprint related pages
+- [x] Update help
+- [x] Common filters ability to filter by type
+- [x] Fix download as zip for new blueprints
+- [x] Add filters and search to all blueprint related pages
 - [x] Add new items
 - [x] Update the game version on live
 - [x] Update the bp limits on live
