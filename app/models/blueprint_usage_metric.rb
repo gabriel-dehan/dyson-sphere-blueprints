@@ -4,7 +4,7 @@ class BlueprintUsageMetric < ApplicationRecord
 
   validate :can_update?
 
-  before_update :update_last_used_at
+  before_save :update_last_used_at
   after_destroy :reset_blueprint_tally
   after_save :update_blueprint_tally
 
@@ -25,6 +25,6 @@ class BlueprintUsageMetric < ApplicationRecord
   end
 
   def can_update?
-    errors.add(:count, "usage can't be counted more than once per hour") if id && last_used_at && (last_used_at + 0.hours > DateTime.now)
+    errors.add(:count, "usage can't be counted more than once per hour") if id && last_used_at && (last_used_at + 1.hour > DateTime.now)
   end
 end

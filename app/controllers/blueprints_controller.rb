@@ -52,11 +52,16 @@ class BlueprintsController < ApplicationController
   end
 
   def track
-    @blueprint_usage_metric = BlueprintUsageMetric.find_or_initialize_by(blueprint_id: params[:blueprint_id], user_id: current_user.id)
+    @blueprint_usage_metric = BlueprintUsageMetric.find_or_initialize_by(blueprint_id: params[:id], user_id: current_user.id)
 
     authorize @blueprint_usage_metric
 
+    p "HELLO"
+    p @blueprint_usage_metric
+
     @blueprint_usage_metric.increment(:count)
+
+    p @blueprint_usage_metric
 
     if @blueprint_usage_metric.save
       render json: true, status: :ok

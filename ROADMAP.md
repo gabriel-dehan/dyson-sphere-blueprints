@@ -13,6 +13,7 @@
 - [ ] Moderators profiles
 
 ### Tech / Chore
+- [ ] JS Base controller with getController () => this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller*='preview']"), "preview") or https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
 - [ ] Migrate to ComponentView
 - [ ] Prepare for i18n
 - [ ] Redo filter system cleanly

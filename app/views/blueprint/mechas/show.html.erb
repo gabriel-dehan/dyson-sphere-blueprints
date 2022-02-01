@@ -3,11 +3,9 @@
   <%= content_for(:meta_description, @blueprint.description.to_plain_text.truncate(150)) %>
 <% end %>
 <%= content_for(:meta_image, @blueprint.cover_picture_url(:medium)) %>
-
 <div class="p-blueprint-show <%= @blueprint.type.underscore %>">
   <div class="t-blueprint" data-controller="carousel tooltip preview">
     <div class="t-blueprint-main">
-
       <div class="swiper-container" data-carousel-target="container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -38,16 +36,14 @@
           </ul>
         </div>
       <% end %>
-      <div class="t-blueprint__title">
+      <div class="t-blueprint__title" data-controller="usageTracker" data-blueprint-id="<%= @blueprint.id %>">
         <h2><%= @blueprint.title %></h2>
-
-        <a href="<%= @blueprint.blueprint_file_url %>">
+        <a href="<%= @blueprint.blueprint_file_url %>" data-action="click->usageTracker#track">
           <button class="t-blueprint__download">
             <i class="fas fa-download"></i>Download file
           </button>
         </a>
       </div>
-
       <div class="t-blueprint__description">
         <% if @blueprint.description.blank? %>
           This blueprint doesn't have a description!
@@ -55,7 +51,6 @@
           <%= @blueprint.description %>
         <% end %>
       </div>
-
       <div class="t-blueprint__blueprint">
         <h3>Name: <%= @blueprint.summary && @blueprint.summary.any? ? @blueprint.summary["name"] : 'Unknown' %></h3>
         <p>
@@ -78,9 +73,9 @@
             <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
           <% if @old_mod_support %>
-          <li>
-            <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
-          </li>
+            <li>
+              <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
+            </li>
           <% end %>
           <li>
             <% compatibility_status, compatibility_message = compatibility_recap(@mods, @blueprint) %>
