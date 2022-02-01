@@ -56,12 +56,7 @@ class BlueprintsController < ApplicationController
 
     authorize @blueprint_usage_metric
 
-    p "HELLO"
-    p @blueprint_usage_metric
-
     @blueprint_usage_metric.increment(:count)
-
-    p @blueprint_usage_metric
 
     if @blueprint_usage_metric.save
       render json: true, status: :ok
