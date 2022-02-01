@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     member do
       put "like", to: "blueprints#like"
       put "unlike", to: "blueprints#unlike"
+      put "track", to: "blueprints#track"
     end
   end
   resources :collections, only: [:new, :show, :index, :edit, :create, :update, :destroy] do

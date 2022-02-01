@@ -1,7 +1,6 @@
 # Roadmap
 
 ### Next releases
-- [ ] Update help
 - [ ] Blueprint copy count / sort by copy count
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
@@ -14,6 +13,7 @@
 - [ ] Moderators profiles
 
 ### Tech / Chore
+- [ ] JS Base controller with getController () => this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller*='preview']"), "preview") or https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
 - [ ] Migrate to ComponentView
 - [ ] Prepare for i18n
 - [ ] Redo filter system cleanly
@@ -37,9 +37,10 @@
 - [ ] Add tests
 
 ## Done
-- [ ] Common filters ability to filter by type
-- [ ] Fix download as zip for new blueprints
-- [ ] Add filters and search to all blueprint related pages
+- [x] Update help
+- [x] Common filters ability to filter by type
+- [x] Fix download as zip for new blueprints
+- [x] Add filters and search to all blueprint related pages
 - [x] Add new items
 - [x] Update the game version on live
 - [x] Update the bp limits on live

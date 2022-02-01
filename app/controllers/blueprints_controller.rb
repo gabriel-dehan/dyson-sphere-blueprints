@@ -50,4 +50,18 @@ class BlueprintsController < ApplicationController
     @blueprint.unliked_by current_user
     redirect_to blueprint_path(@blueprint)
   end
+
+  def track
+    @blueprint_usage_metric = BlueprintUsageMetric.find_or_initialize_by(blueprint_id: params[:id], user_id: current_user.id)
+
+    authorize @blueprint_usage_metric
+
+    @blueprint_usage_metric.increment(:count)
+
+    if @blueprint_usage_metric.save
+      render json: true, status: :ok
+    else
+      render json: { errors: @blueprint_usage_metric.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 end

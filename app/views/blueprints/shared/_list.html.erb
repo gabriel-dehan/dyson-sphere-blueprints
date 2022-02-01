@@ -2,7 +2,7 @@
   <% if blueprints.any? %>
     <ul class="t-blueprint-list__container">
       <% blueprints.each do |blueprint| %>
-        <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintCopyButton" %>">
+        <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintCopyButton usageTracker" %>" data-blueprint-id="<%= blueprint.id %>">
           <div class="o-blueprint-card__cover">
             <%= link_to blueprint_path(blueprint) do %>
               <%= image_tag blueprint.cover_picture_url(:medium), height: 200 %>
@@ -13,7 +13,7 @@
               class="o-blueprint-card__copy"
               data-blueprintCopyButton-target="copy"
               data-clipboard-text="<%= blueprint.encoded_blueprint %>">
-                Copy
+                <i class="fas fa-copy"></i>
               </button>
             <% end %>
           </div>

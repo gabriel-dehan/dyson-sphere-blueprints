@@ -69,9 +69,13 @@
     left: 3px;
     background-color: rgba(0, 0, 0, 0.70);
     border: none;
-    padding: 9px 18px;
+    padding: 8px 10px;
     line-height: initial;
     height: initial;
+
+    i {
+      font-size: 1.5em;
+    }
 
     &:hover {
       background-color: var(--dark-red);

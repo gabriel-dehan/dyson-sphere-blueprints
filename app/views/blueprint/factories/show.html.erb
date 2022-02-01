@@ -3,11 +3,9 @@
   <%= content_for(:meta_description, @blueprint.description.to_plain_text.truncate(150)) %>
 <% end %>
 <%= content_for(:meta_image, @blueprint.cover_picture_url(:medium)) %>
-
 <div class="p-blueprint-show">
   <div class="t-blueprint" data-controller="carousel tooltip preview">
     <div class="t-blueprint-main">
-
       <div class="swiper-container" data-carousel-target="container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -27,20 +25,19 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </div>
-      <div class="t-blueprint__title" data-controller="blueprintCopyButton">
+      <div class="t-blueprint__title" data-controller="blueprintCopyButton usageTracker" data-blueprint-id="<%= @blueprint.id %>">
         <h2><%= @blueprint.title %></h2>
         <% if @blueprint.large_bp? %>
           <%= link_to blueprint_path(@blueprint, format: :text), class: "button", target: :_blank, rel: :noopener do %>
             <i class="fas fa-external-link-alt"></i>
             Open Blueprint
           <% end %>
-      <% else %>
+        <% else %>
           <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
             <i class="fas fa-copy"></i>Copy to clipboard
           </button>
         <% end %>
       </div>
-
       <div class="m-tabs" data-controller="tabs">
         <%# <ul class="m-tabs-select-container" data-tabs-target="select">
           <li
@@ -75,7 +72,6 @@
           </div>
         </div>
       </div>
-
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
         <h3>Blueprint</h3>
         <% if @blueprint.large_bp? %>
@@ -106,9 +102,9 @@
             <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
           <% if @old_mod_support %>
-          <li>
-            <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
-          </li>
+            <li>
+              <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
+            </li>
           <% end %>
           <li>
             <% compatibility_status, compatibility_message = compatibility_recap(@mods, @blueprint) %>

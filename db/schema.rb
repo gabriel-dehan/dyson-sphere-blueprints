@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_224438) do
+ActiveRecord::Schema.define(version: 2022_01_31_225409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 2022_01_24_224438) do
     t.index ["color_id"], name: "index_blueprint_mecha_colors_on_color_id"
   end
 
+  create_table "blueprint_usage_metrics", force: :cascade do |t|
+    t.bigint "blueprint_id"
+    t.bigint "user_id"
+    t.integer "count", default: 0, null: false
+    t.datetime "last_used_at", default: "2022-01-31 23:45:55"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blueprint_id"], name: "index_blueprint_usage_metrics_on_blueprint_id"
+    t.index ["user_id"], name: "index_blueprint_usage_metrics_on_user_id"
+  end
+
   create_table "blueprints", force: :cascade do |t|
     t.string "title", null: false
     t.text "encoded_blueprint"
@@ -82,6 +93,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_224438) do
     t.text "cover_picture_data"
     t.string "type", null: false
     t.text "blueprint_file_data"
+    t.integer "usage_count", default: 0
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
     t.index ["mod_id"], name: "index_blueprints_on_mod_id"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true

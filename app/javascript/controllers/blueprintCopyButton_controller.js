@@ -26,6 +26,7 @@ export default class extends Controller {
       });
 
       tooltip.show();
+      this.usageTrackerController.track(null, this.element.dataset.blueprintId);
 
       setTimeout(() => {
         tooltip.hide();
@@ -36,5 +37,9 @@ export default class extends Controller {
 
   disconnect() {
     this.clipboard.destroy();
+  }
+
+  get usageTrackerController() {
+    return this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller*='usageTracker']"), "usageTracker")
   }
 }
