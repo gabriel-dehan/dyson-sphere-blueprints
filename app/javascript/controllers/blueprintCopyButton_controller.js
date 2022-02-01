@@ -4,9 +4,6 @@ import tippy from 'tippy.js';
 
 export default class extends Controller {
   static targets = [ "copy" ]
-  static values = {
-    id: String
-  }
 
   connect() {
     this.clipboard = new ClipboardJS(this.copyTarget, {
