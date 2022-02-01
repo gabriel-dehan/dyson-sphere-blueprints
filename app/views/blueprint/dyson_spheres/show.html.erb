@@ -27,7 +27,8 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </div>
-      <div class="t-blueprint__title" data-controller="blueprintCopyButton">
+
+      <div class="t-blueprint__title" data-controller="blueprintCopyButton" data-blueprintCopyButton-id="<%= blueprintCopyButton.id %>">
         <h2><%= @blueprint.title %></h2>
         <% if @blueprint.large_bp? %>
           <%= link_to blueprint_path(@blueprint, format: :text), class: "button", target: :_blank, rel: :noopener do %>
