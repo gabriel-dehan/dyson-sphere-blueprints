@@ -6,7 +6,7 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.1.3",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "5.4.3",
     "@yaireo/tagify": "^3.23.1",
     "brokenmass3dpreview": "https://github.com/gabriel-dehan/brokenmass-3d-preview#1.1.1",
     "clipboard": "^2.0.8",
