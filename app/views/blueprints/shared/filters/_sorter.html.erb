@@ -8,5 +8,9 @@
       <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular', data: { 'action': "change->submitOnClick#submit" } %>
       <%= f.label :order_popular, "Most Popular" %>
     </div>
+    <div class="o-blueprint-filters__order-choice">
+      <%= f.radio_button :order, "usage", checked: filters[:order] === 'usage', data: { 'action': "change->submitOnClick#submit" } %>
+      <%= f.label :order_usage, "Most used" %>
+    </div>
   </div>
 </div>
