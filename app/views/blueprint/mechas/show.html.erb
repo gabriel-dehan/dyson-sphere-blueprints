@@ -87,6 +87,9 @@
             </span>
           </li>
           <li>
+            <strong>Downloaded:</strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%=  "time".pluralize(@blueprint.usage_count) %></span>
+          </li>
+          <li>
             <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
           </li>
         </ul>

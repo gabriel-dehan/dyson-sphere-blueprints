@@ -5,8 +5,8 @@
   flex-direction: column;
   flex: 0 1 23%;
   background: var(--night-blue);
-  background: rgba(0, 0, 0, 0.29);
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.40);
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
   border-radius: 5px;
   margin: 0 15px 25px 15px;
 
@@ -45,17 +45,34 @@
 
   &__cover {
     position: relative;
+    // border-bottom: 1px solid var(--darker-blue);
+
+    &-meta {
+
+      &-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        background: rgb(10,12,22);
+        background: linear-gradient(0deg, rgba(10, 12, 22, 1) 15%, rgba(10, 12, 22, 0) 100%);
+        padding: 32px 6px 6px 6px;
+      }
+    }
 
     img {
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       width: 100%;
-      height: 200px;
+      height: 225px;
       object-fit: cover;
     }
 
-    a {
-      display: inline-flex;
+    & > a {
+      display: flex;
     }
 
     &:hover + .o-blueprint-card__content h2 a {
@@ -63,21 +80,46 @@
     }
   }
 
-  &__copy {
-    position: absolute;
-    bottom: 0px;
-    left: 3px;
+  &__download {
+    font-family: "Nunito Sans", "Helvetica", "Arial", "sans-serif";
+    background-color: #9b4dca;
+    border: 0.1rem solid #9b4dca;
+    border-radius: 0.4rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    height: 3.8rem;
+    letter-spacing: .1rem;
+    line-height: 3.8rem;
+    padding: 0 3rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &__copy, &__download {
+    margin-bottom: 0;
     background-color: rgba(0, 0, 0, 0.70);
     border: none;
     padding: 8px 10px;
     line-height: initial;
     height: initial;
 
+    strong {
+      margin-left: 0.2em;
+      font-weight: normal;
+      font-size: 1.4em;
+    }
+
     i {
       font-size: 1.5em;
     }
 
     &:hover {
+      color: var(--white);
       background-color: var(--dark-red);
     }
   }
@@ -122,11 +164,9 @@
   }
 
   &__votes {
-    font-size: 18px;
-    position: absolute;
-    right: 12px;
-    top: -29px;
-    background: var(--blue);
+    margin-left: auto;
+
+    color: var(--white);
     border-radius: 15px;
     min-width: 45px;
     padding: 6px 8px;
@@ -136,16 +176,14 @@
     justify-content: center;
 
     .count {
-      font-size: 20px;
+      font-size: 1.4em;
       font-weight: normal;
       cursor: default;
     }
 
     i {
-      position: absolute;
-      top: -4px;
-      right: -3px;
-      margin-left: 5px;
+      font-size: 1.4em;
+      margin-left: 7px;
       color: var(--dark-red);
     }
   }
@@ -198,7 +236,7 @@
 
 .o-blueprint-card.mecha {
   .o-blueprint-card__cover {
-    a {
+    & > a {
       width: 100%;
     }
 

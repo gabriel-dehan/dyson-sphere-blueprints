@@ -2,19 +2,45 @@
   <% if blueprints.any? %>
     <ul class="t-blueprint-list__container">
       <% blueprints.each do |blueprint| %>
-        <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintCopyButton usageTracker" %>" data-blueprint-id="<%= blueprint.id %>">
+        <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintCopyButton" %> usageTracker" data-blueprint-id="<%= blueprint.id %>">
           <div class="o-blueprint-card__cover">
             <%= link_to blueprint_path(blueprint) do %>
               <%= image_tag blueprint.cover_picture_url(:medium), height: 200 %>
-            <% end %>
-            <% if !blueprint.is_mecha? %>
-              <button
-              id="bp-card-<%= blueprint.id %>"
-              class="o-blueprint-card__copy"
-              data-blueprintCopyButton-target="copy"
-              data-clipboard-text="<%= blueprint.encoded_blueprint %>">
-                <i class="fas fa-copy"></i>
-              </button>
+              <div class="o-blueprint-card__cover-meta">
+                <div class="o-blueprint-card__cover-meta-content">
+                  <% if blueprint.is_mecha? %>
+                    <a
+                      id="bp-card-<%= blueprint.id %>"
+                      class="o-blueprint-card__download"
+                      href="<%= blueprint.blueprint_file_url %>"
+                      data-action="click->usageTracker#track">
+                      <i class="fas fa-download"></i>
+                      <% if blueprint.usage_count > 0 %>
+                        <strong>
+                          <%= number_to_human(blueprint.usage_count, format: "%n%u", units: { thousand: 'K' }) %>
+                        </strong>
+                      <% end %>
+                    </a>
+                  <% else %>
+                    <button
+                      id="bp-card-<%= blueprint.id %>"
+                      class="o-blueprint-card__copy"
+                      data-blueprintCopyButton-target="copy"
+                      data-clipboard-text="<%= blueprint.encoded_blueprint %>">
+                      <i class="fas fa-copy"></i>
+                      <% if blueprint.usage_count > 0 %>
+                        <strong>
+                          <%= number_to_human(blueprint.usage_count, format: "%n%u", units: { thousand: 'K' }) %>
+                        </strong>
+                      <% end %>
+                    </button>
+                  <% end %>
+                  <div class="o-blueprint-card__votes">
+                    <strong class="count"><%= blueprint.cached_votes_total %></strong>
+                    <i class="fas fa-heart"></i>
+                  </div>
+                </div>
+              </div>
             <% end %>
           </div>
           <div class="o-blueprint-card__content">
@@ -27,10 +53,6 @@
               <p>
                 by <%= link_to blueprint.user.username, user_blueprints_path(blueprint.user) %>
               </p>
-            </div>
-            <div class="o-blueprint-card__votes">
-              <strong class="count"><%= blueprint.cached_votes_total %></strong>
-              <i class="fas fa-heart"></i>
             </div>
           </div>
           <ul class="o-blueprint-card__tags">
