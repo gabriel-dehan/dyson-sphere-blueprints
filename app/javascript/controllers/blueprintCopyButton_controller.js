@@ -17,6 +17,8 @@ export default class extends Controller {
       }
     });
 
+    this.copyTarget.addEventListener('click', (e) => e.preventDefault());
+
     this.clipboard.on('success', (e) => {
       const tooltip = tippy(e.trigger, {
         content: 'Copied !',
@@ -37,6 +39,7 @@ export default class extends Controller {
 
   disconnect() {
     this.clipboard.destroy();
+    this.copyTarget.removeEventListener('click', (e) => e.preventDefault());
   }
 
   get usageTrackerController() {
