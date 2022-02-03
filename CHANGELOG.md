@@ -1,6 +1,7 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [v4.1.0](#v410)
   - [v4.0.4](#v404)
   - [v4.0.3](#v403)
   - [v4.0.2](#v402)
@@ -28,6 +29,13 @@
   - [v.1.0.7](#v107)
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
+
+## v4.1.0
+- Track blueprint usage (copies and downloads).
+- Tracking is only counted once per hour when a user copies or downloads a blueprint ("cooldown" is per blueprint)
+- Display usage on blueprints' cards
+- Display usage on blueprints pages
+- Add a filter to sort by "Most used"
 
 ## v4.0.4
 - Updated Help page

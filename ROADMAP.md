@@ -1,7 +1,6 @@
 # Roadmap
 
 ### Next releases
-- [ ] Blueprint copy count / sort by copy count
 - [ ] Extract data from dyson spheres
 - [ ] Extract data from icarus + color search
 - [ ] Improve color search
@@ -13,6 +12,7 @@
 - [ ] Moderators profiles
 
 ### Tech / Chore
+- [ ] Fix memory leak, it's getting problematic
 - [ ] JS Base controller with getController () => this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller*='preview']"), "preview") or https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
 - [ ] Migrate to ComponentView
 - [ ] Prepare for i18n
@@ -37,6 +37,7 @@
 - [ ] Add tests
 
 ## Done
+- [x] Blueprint copy count / sort by copy count
 - [x] Update help
 - [x] Common filters ability to filter by type
 - [x] Fix download as zip for new blueprints

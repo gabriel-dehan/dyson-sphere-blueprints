@@ -9,7 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
-    - [Latest: 4.0.4](#latest-404)
+    - [Latest: 4.1.0](#latest-410)
     - [Previous versions](#previous-versions)
   - [Contribute](#contribute)
     - [Seeding](#seeding)
@@ -28,11 +28,12 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.0.4
-- Updated Help page
-- Updated collection's "Download as ZIP" to work with mechas blueprints
-- Fixed a bug with the "Download as ZIP" when a collection name or blueprint name contained a `\`
-- Added filters to collections' pages
+### Latest: 4.1.0
+- Track blueprint usage (copies and downloads).
+- Tracking is only counted once per hour when a user copies or downloads a blueprint ("cooldown" is per blueprint)
+- Display usage on blueprints' cards
+- Display usage on blueprints pages
+- Add a filter to sort by "Most used"
 
 ### Previous versions
 
