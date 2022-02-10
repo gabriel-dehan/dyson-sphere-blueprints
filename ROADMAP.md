@@ -13,6 +13,8 @@
 
 ### Tech / Chore
 - [ ] Fix memory leak, it's getting problematic
+  - https://pawelurbanek.com/2018/01/15/limit-rails-memory-usage-fix-R14-and-save-money-on-heroku/
+- [ ] Upgrade turbolink to turbo (https://gorails.com/episodes/upgrade-from-turbolinks-to-hotwire-and-turbo)
 - [ ] JS Base controller with getController () => this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller*='preview']"), "preview") or https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
 - [ ] Migrate to ComponentView
 - [ ] Prepare for i18n

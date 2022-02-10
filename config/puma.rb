@@ -41,5 +41,8 @@ preload_app!
 plugin :tmp_restart
 
 before_fork do
+  require "puma_worker_killer"
+
   Barnes.start # Must have enabled worker mode for this to block to be called
+  PumaWorkerKiller.enable_rolling_restart # Default is every 6 hours
 end
