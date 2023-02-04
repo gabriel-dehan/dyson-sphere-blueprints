@@ -22,13 +22,13 @@ class BaseGameManagerJob < ApplicationJob
     else
       puts "Fetching base game versions..."
       # TODO: Actually fetch from steam API or something
-      api_url = URI("https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=1366540&count=3&maxlength=300&format=json")
+      api_url = URI("https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=1366540&count=5&maxlength=300&format=json")
       response = Net::HTTP.get(api_url)
 
       if response&.present?
         mod_list = JSON.parse(response)
         fetched_patches = mod_list["appnews"]["newsitems"].reverse.map do |news|
-          match = news["title"].match(/Patch Notes (\d+\.\d+\.\d+\.\d+)|\[Version (\d+\.\d+\.\d+\.\d+)\]/i).to_a.compact
+          match = news["title"].match(/Patch Notes (\d+\.\d+\.\d+\.\d+)|\[Version (\d+\.\d+\.\d+\.\d+)\]|Version (\d+\.\d+\.\d+\.\d+)/i).to_a.compact
           match ? match[1] : nil
         end
         unregistered_versions = fetched_patches.filter { |fetched_patch| !registered_versions[fetched_patch] }

@@ -7,6 +7,7 @@ https://stackoverflow.com/questions/43544804/memory-exceeds-in-rails-app-in-prod
 https://stackoverflow.com/questions/29384403/profile-memory-between-requests-in-rails-to-find-leaks
 https://schneems.com/2017/06/22/a-tale-of-slow-pagination/
 https://www.speedshop.co/2015/08/05/rack-mini-profiler-the-secret-weapon.html
+https://book.scoutapm.com/memory-bloat.html#what-you-need-to-know-about-memory-bloat
 
 --------------------
 There is an issue in a commit between the 30 JAN and the 3rd of February 2022
