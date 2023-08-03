@@ -137,6 +137,7 @@
       font-weight: bold;
       margin: 0;
       font-family: $body-font;
+      word-break: break-word;
 
       a {
         color: var(--white);
