@@ -1,6 +1,7 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [v4.2.0](#v420)
   - [v4.1.0](#v410)
   - [v4.0.4](#v404)
   - [v4.0.3](#v403)
@@ -29,6 +30,11 @@
   - [v.1.0.7](#v107)
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
+
+## v4.2.0
+- Added ETag caching to alleviate server load
+- Fixed a bug where the cards layout would break when blueprints titles were too long (by Martin-Pitt [#55](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/55))
+- Updated gameEntities and gameRecipes (by Martin-Pitt [#57](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/57), [#58](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/58))
 
 ## v4.1.0
 - Track blueprint usage (copies and downloads).

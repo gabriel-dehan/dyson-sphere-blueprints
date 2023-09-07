@@ -9,7 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
-    - [Latest: 4.1.0](#latest-410)
+    - [Latest: 4.2.0](#latest-420)
     - [Previous versions](#previous-versions)
   - [Contribute](#contribute)
     - [Setting up](#setting-up)
@@ -29,12 +29,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.1.0
-- Track blueprint usage (copies and downloads).
-- Tracking is only counted once per hour when a user copies or downloads a blueprint ("cooldown" is per blueprint)
-- Display usage on blueprints' cards
-- Display usage on blueprints pages
-- Add a filter to sort by "Most used"
+### Latest: 4.2.0
+- Added ETag caching to alleviate server load
+- Fixed a bug where the cards layout would break when blueprints titles were too long (by Martin-Pitt [#55](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/55))
+- Updated gameEntities and gameRecipes (by Martin-Pitt [#57](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/57), [#58](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/58))
 
 ### Previous versions
 
