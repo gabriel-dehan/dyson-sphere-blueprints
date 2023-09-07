@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :help, :support, :wall_of_fame]
+  before_action :set_cache_headers, only: [:home]
 
   def home
     @filters = {
@@ -14,13 +15,23 @@ class PagesController < ApplicationController
 
     @filter_mod = @mods.first
 
-    @blueprints = policy_scope(Blueprint)
+    # Define the general scope
+    general_scope = policy_scope(Blueprint)
       .joins(:collection)
       .where(collection: { type: "Public" })
-      .where(mod_id: @filters[:mod_id]) # TODO: Probably remove all other mods than basegame
-      .includes(:collection, collection: :user)
-      .order(created_at: :desc)
-      .page(params[:page])
+      .where(mod_id: @filters[:mod_id])
+
+    # Fetch the latest updated_at timestamp based on the general scope
+    last_modified = general_scope.maximum(:updated_at)
+
+    # Use the general scope and current_user to check if the response would be stale
+    if stale?(etag: [general_scope, current_user], last_modified: last_modified, public: true)
+      # Apply further criteria and fetch the actual records only if necessary
+      @blueprints = general_scope
+        .includes(:collection, collection: :user)
+        .order(created_at: :desc)
+        .page(params[:page])
+    end
   end
 
   def help

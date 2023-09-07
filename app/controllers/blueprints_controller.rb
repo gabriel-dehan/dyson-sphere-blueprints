@@ -2,29 +2,38 @@ class BlueprintsController < ApplicationController
   include BlueprintsFilters
 
   skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_cache_headers, only: [:index, :show]
 
   def show
     @blueprint = Blueprint.friendly.find(params[:id])
     authorize @blueprint
 
-    respond_to do |format|
-      format.html do
-        render "blueprint/#{@blueprint.type.underscore.pluralize}/show"
+    if stale?(etag: [@blueprint, current_user], last_modified: @blueprint.updated_at, public: true)
+      respond_to do |format|
+        format.html do
+          render "blueprint/#{@blueprint.type.underscore.pluralize}/show"
+        end
+        format.text { render plain: @blueprint.encoded_blueprint }
       end
-      format.text { render plain: @blueprint.encoded_blueprint }
     end
   end
 
   def index
     set_filters
-    @blueprints = policy_scope(Blueprint)
+    general_scope = policy_scope(Blueprint)
+      .joins(:collection)
       .where(collection: { type: "Public" })
-      .includes(:collection, collection: :user)
 
-    @blueprints = filter(@blueprints)
+    # Fetch the latest updated_at timestamp for the relevant records
+    last_modified = general_scope.maximum(:updated_at)
 
-    # Paginate
-    @blueprints = @blueprints.page(params[:page])
+    # Generate an ETag based on the general_scope and current_user
+    if stale?(etag: [general_scope, current_user], last_modified: last_modified, public: true)
+      # Apply filters and paginate only if the request is not cached
+      @blueprints = filter(general_scope.includes(:collection, collection: :user))
+
+      @blueprints = @blueprints.page(params[:page])
+    end
   end
 
   def destroy

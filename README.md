@@ -12,6 +12,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
     - [Latest: 4.1.0](#latest-410)
     - [Previous versions](#previous-versions)
   - [Contribute](#contribute)
+    - [Setting up](#setting-up)
     - [Seeding](#seeding)
     - [Environment](#environment)
     - [Build development environment](#build-development-environment)
@@ -42,6 +43,33 @@ Find the rest in the [CHANGELOG](CHANGELOG.md)
 ## Contribute
 
 Pull requests are always welcome, if you want a copy of the production or staging database for development purposes (meaning all emails and passwords will be randomized, I am not just gonna give away personal information to whoever wants them), just send me an email or open a ticket and we'll see to that.
+
+### Setting up
+
+Install ruby dependencies
+```
+bundle install
+```
+
+Install node dependencies
+```
+yarn
+```
+
+Then set up the database, either using docker or your own postgresql instance.
+Once done, you can run the migrations and create the database:
+
+```
+rails db:create db:migrate db:seed
+```
+
+If migrations are failing the first time, just re-run them again.
+
+You should then be able to run the application:
+
+```
+rails s
+```
 
 ### Seeding
 
