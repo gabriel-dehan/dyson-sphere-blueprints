@@ -25,7 +25,7 @@ class PagesController < ApplicationController
     last_modified = general_scope.maximum(:updated_at)
 
     # Use the general scope and current_user to check if the response would be stale
-    if stale?(etag: [general_scope, current_user], public: true)
+    if stale?(etag: [general_scope, current_user], last_modified: last_modified, public: true)
       # Apply further criteria and fetch the actual records only if necessary
       @blueprints = general_scope
         .includes(:collection, collection: :user)
