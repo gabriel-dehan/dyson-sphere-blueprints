@@ -1,6 +1,7 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [v4.3.0](#v430)
   - [v4.2.0](#v420)
   - [v4.1.0](#v410)
   - [v4.0.4](#v404)
@@ -30,6 +31,11 @@
   - [v.1.0.7](#v107)
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
+
+## v4.3.0
+- Added missing assets for items and recipes (by LRFalk01 [#61](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/61))
+- Added new Dark Fog items and recipes (by LRFalk01 [#61](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/61))
+- Added a node script to easily diff game extracted files and the website's data files
 
 ## v4.2.0
 - Added ETag caching to alleviate server load
