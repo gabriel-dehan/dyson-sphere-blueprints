@@ -20,7 +20,7 @@ services:
       - "6379:6379"
 
   localstack:
-    image: localstack/localstack:latest
+    image: localstack/localstack:0.13.0
     environment:
       - SERVICES=s3
       - DEFAULT_REGION=eu-west-1
