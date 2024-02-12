@@ -28,7 +28,7 @@ class BaseGameManagerJob < ApplicationJob
       if response&.present?
         mod_list = JSON.parse(response)
         fetched_patches = mod_list["appnews"]["newsitems"].reverse.map do |news|
-          match = news["title"].match(/Patch Notes (\d+\.\d+\.\d+\.\d+)|\[Version (\d+\.\d+\.\d+\.\d+)\]|Version (\d+\.\d+\.\d+\.\d+)/i).to_a.compact
+          match = news["title"].match(/Patch Notes V?(\d+\.\d+\.\d+\.\d+)|\[Version (\d+\.\d+\.\d+\.\d+)\]|Version (\d+\.\d+\.\d+\.\d+)/i).to_a.compact
           match ? match[1] : nil
         end
         unregistered_versions = fetched_patches.filter { |fetched_patch| !registered_versions[fetched_patch] }
