@@ -4,7 +4,7 @@ class Engine::Entities
   GAME_ENTITIES_PATH = Rails.root.join("app/javascript/data/gameEntities.json")
 
   BELTS = [2001, 2002, 2003].freeze
-  SORTERS = [2011, 2012, 2013].freeze
+  SORTERS = [2011, 2012, 2013, 2014].freeze
   STORAGES = [2101, 2102, 2106].freeze
   BUILDERS = [2303, 2304, 2305, 2302, 2308, 2309, 2310, 2901].freeze
   ASSEMBLERS = [2303, 2304, 2305].freeze
