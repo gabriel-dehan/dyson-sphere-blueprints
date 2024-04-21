@@ -33,7 +33,7 @@ class Mod < ApplicationRecord
   # Returns a range of version strings compatible with check_version, e.g ["2.0.0", "3.0.0"]
   def compatibility_range_for(check_version)
     # Generates a version matrix [[version, breaking]], e.g: [["2.0.1", true], ["2.0.2", false], ...]
-    version_list = versions.sort.map { |v, data| [v, data["breaking"]] }
+    version_list = versions.sort.reverse.map { |v, data| [v, data["breaking"]] }.select { |v, data| !v.blank? }
 
     # Find the first version <= to the blueprint.mod_version that is breaking
     lower_breaking_index = version_list.rindex { |version, breaking| version <= check_version && breaking } || 0
