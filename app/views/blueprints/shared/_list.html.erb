@@ -2,7 +2,7 @@
   <% if blueprints.any? %>
     <ul class="t-blueprint-list__container">
       <% blueprints.each do |blueprint| %>
-        <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintCopyButton" %> usageTracker" data-blueprint-id="<%= blueprint.id %>">
+        <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintIndexCopyButton" %> usageTracker" data-blueprint-id="<%= blueprint.id %>">
           <div class="o-blueprint-card__cover">
             <%= link_to blueprint_path(blueprint) do %>
               <%= image_tag blueprint.cover_picture_url(:medium), height: 200 %>
@@ -25,9 +25,9 @@
                     <button
                       id="bp-card-<%= blueprint.id %>"
                       class="o-blueprint-card__copy"
-                      data-blueprintCopyButton-target="copy"
-                      data-clipboard-text="<%= blueprint.encoded_blueprint %>">
-                      <i class="fas fa-copy"></i>
+                      data-blueprintIndexCopyButton-target="copy"
+                      data-blueprint-id="<%= blueprint.id %>">
+                      <i class="fas fa-copy" data-blueprintIndexCopyButton-target="icon"></i>
                       <% if blueprint.usage_count > 0 %>
                         <strong>
                           <%= number_to_human(blueprint.usage_count, format: "%n%u", units: { thousand: 'K' }) %>

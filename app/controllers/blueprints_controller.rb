@@ -73,4 +73,11 @@ class BlueprintsController < ApplicationController
       render json: { errors: @blueprint_usage_metric.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
+  def code
+    @blueprint = Blueprint.find(params[:id])
+    authorize @blueprint
+
+    render plain: @blueprint.encoded_blueprint
+  end
 end

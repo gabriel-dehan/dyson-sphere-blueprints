@@ -36,4 +36,8 @@ class BlueprintPolicy < ApplicationPolicy
   def unlike?
     true
   end
+
+  def code?
+    true
+  end
 end
