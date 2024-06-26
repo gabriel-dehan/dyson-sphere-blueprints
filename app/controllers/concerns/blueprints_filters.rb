@@ -50,7 +50,7 @@ module BlueprintsFilters
       if @filters[:color].present? && @filters[:color_similarity].present?
         # TODO: Create real scopes and not this horrible thing
         @filters[:filtered_for] = :mechas
-        blueprint_ids = colors_by_hsl(@filters[:color], @filters[:color_similarity]).pluck("blueprint_mecha_colors.blueprint_id")
+        blueprint_ids = colors_by_hsl(@filters[:color], @filters[:color_similarity]).joins(:blueprint_mecha_colors).select("blueprint_mecha_colors.blueprint_id")
         blueprints = blueprints.where(id: blueprint_ids)
       end
 
