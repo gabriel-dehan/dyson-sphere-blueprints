@@ -20,7 +20,7 @@ class BlueprintsController < ApplicationController
 
   def index
     set_filters
-    general_scope = policy_scope(Blueprint.light_query_scope)
+    general_scope = policy_scope(Blueprint.light_query)
       .joins(:collection)
       .where(collection: { type: "Public" })
 
