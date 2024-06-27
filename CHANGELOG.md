@@ -1,7 +1,8 @@
 # Changelog
 
 - [Changelog](#changelog)
-    - [Latest: 4.3.1](#latest-431)
+    - [Latest: 4.4.0](#latest-440)
+  - [v4.3.1](#v431)
   - [v4.3.0](#v430)
   - [v4.2.0](#v420)
   - [v4.1.0](#v410)
@@ -33,7 +34,10 @@
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
 
-### Latest: 4.3.1
+### Latest: 4.4.0
+- Query and filters optimisations to fix the performance issues
+
+## v4.3.1
 - Removed blueprint code from index pages to make the loading faster
 - Fixed a bug where new version number of the game were ignored
 

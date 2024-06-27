@@ -9,7 +9,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
-    - [Latest: 4.3.1](#latest-431)
+    - [Latest: 4.4.0](#latest-440)
     - [Previous versions](#previous-versions)
   - [Contribute](#contribute)
     - [Setting up](#setting-up)
@@ -29,9 +29,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.3.1
-- Removed blueprint code from index pages to make the loading faster
-- Fixed a bug where new version number of the game were ignored
+### Latest: 4.4.0
+- Query and filters optimisations to fix the performance issues
 
 ### Previous versions
 
