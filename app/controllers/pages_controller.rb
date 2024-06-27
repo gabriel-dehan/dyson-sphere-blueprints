@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     @filter_mod = @mods.first
 
     # Define the general scope
-    general_scope = policy_scope(Blueprint)
+    general_scope = policy_scope(Blueprint.light_query)
       .joins(:collection)
       .where(collection: { type: "Public" })
       .where(mod_id: @filters[:mod_id])
