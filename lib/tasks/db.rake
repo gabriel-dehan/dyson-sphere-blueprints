@@ -63,4 +63,13 @@ namespace :db do
       ActiveRecord::Base.connection_config[:database],
       ActiveRecord::Base.connection_config[:username]
   end
+
+  desc "Analyze and reindex the database"
+  task analyze_and_reindex: :environment do
+    puts "Analyzing database..."
+    ActiveRecord::Base.connection.execute("ANALYZE;")
+    puts "Reindexing database..."
+    ActiveRecord::Base.connection.execute("REINDEX DATABASE #{ActiveRecord::Base.connection.current_database};")
+    puts "Done!"
+  end
 end

@@ -33,6 +33,7 @@ class BlueprintsController < ApplicationController
       @blueprints = filter(general_scope.includes(:collection, collection: :user))
 
       @blueprints = @blueprints.page(params[:page])
+      @blueprints.load
     end
   end
 

@@ -31,14 +31,18 @@ module BlueprintsFilters
 
     def filter(blueprints)
       # TODO: At some point when we have hundreds of thousands of blueprints, this will need to be optimized
-      blueprints = blueprints.where(type: params[:type].classify) if @filters[:type].present?
-      blueprints = blueprints.tagged_with(@filters[:tags]) if @filters[:tags].present?
+      # CHECK IF WE NEED CLASSIFY
+      blueprints = blueprints.where(type: @filters[:type]) if @filters[:type].present?
       blueprints = blueprints.search_by_title(@filters[:search]) if @filters[:search].present?
-      blueprints = blueprints.references(:user).where("users.username ILIKE ?", "%#{@filters[:author]}%") if @filters[:author].present?
-      blueprints = blueprints.where(mod_id: @filters[:mod_id]) if @filters[:mod_id] && @filters[:mod_id] != "Any"
 
-      if @filters[:mod_version] && @filters[:mod_version] != "Any"
-        if @filters[:mod_id]
+      if @filters[:author].present?
+        blueprints = blueprints.joins(:user).where("users.username ILIKE ?", "%#{@filters[:author]}%")
+      end
+
+      blueprints = blueprints.where(mod_id: @filters[:mod_id]) if @filters[:mod_id].present? && @filters[:mod_id] != "Any"
+
+      if @filters[:mod_version].present? && @filters[:mod_version] != "Any"
+        if @filters[:mod_id].present?
           mod = Mod.find(@filters[:mod_id])
           compat_list = mod.compatibility_list_for(@filters[:mod_version])
           blueprints = blueprints.where(mod_version: compat_list)
@@ -60,6 +64,27 @@ module BlueprintsFilters
         @filters[:filtered_for] = :factories
         limit = Engine::Researches::MASS_CONSTRUCTION_LIMITS[@filters[:max_structures]]
         blueprints = blueprints.where("(summary ->> 'total_structures')::int <= ?", limit) if limit
+      end
+
+      # OLD: Remove if it works properly now
+      # blueprints = blueprints.tagged_with(@filters[:tags]) if @filters[:tags].present?
+
+      # Optimised tag search code
+      if @filters[:tags].present?
+        blueprints = blueprints.where(
+          parse_tags(params[:tags]).map do |tag|
+            "EXISTS (
+              SELECT 1
+              FROM taggings t
+              JOIN tags tg ON tg.id = t.tag_id
+              WHERE t.taggable_id = blueprints.id
+                AND t.taggable_type = 'Blueprint'
+                AND t.context = 'tags'
+                AND lower(tg.name) = ?
+            )"
+          end.join(' AND '),
+          *parse_tags(params[:tags]).map(&:downcase)
+        )
       end
 
       if @filters[:order] == "recent"
@@ -89,6 +114,16 @@ module BlueprintsFilters
     def colors_by_hsl(searched_color, similarity)
       level = similarity.to_i
       Color.includes(:blueprint_mecha_colors).where(h: color_range(searched_color, :h, (similarity.to_i * 30 / 100.0)), s: color_range(searched_color, :s, level), l: color_range(searched_color, :l, level))
+    end
+
+    def parse_tags(tags_param)
+      return [] if tags_param.blank?
+
+      if tags_param.is_a?(Array)
+        tags_param.flat_map { |t| t.split(/\s*,\s*/) }
+      else
+        tags_param.split(/\s*,\s*/)
+      end
     end
   end
 end

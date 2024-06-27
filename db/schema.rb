@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_31_225409) do
+ActiveRecord::Schema.define(version: 2024_06_27_101830) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -66,7 +67,7 @@ ActiveRecord::Schema.define(version: 2022_01_31_225409) do
     t.bigint "blueprint_id"
     t.bigint "user_id"
     t.integer "count", default: 0, null: false
-    t.datetime "last_used_at", default: "2022-01-31 23:45:55"
+    t.datetime "last_used_at", default: "2022-02-01 23:53:45"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["blueprint_id"], name: "index_blueprint_usage_metrics_on_blueprint_id"
@@ -94,9 +95,15 @@ ActiveRecord::Schema.define(version: 2022_01_31_225409) do
     t.string "type", null: false
     t.text "blueprint_file_data"
     t.integer "usage_count", default: 0
+    t.index "((summary ->> 'total_structures'::text))", name: "index_blueprints_on_summary_total_structures"
+    t.index ["cached_votes_total"], name: "index_blueprints_on_cached_votes_total"
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
+    t.index ["created_at"], name: "index_blueprints_on_created_at", order: :desc
     t.index ["mod_id"], name: "index_blueprints_on_mod_id"
+    t.index ["mod_version"], name: "index_blueprints_on_mod_version"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true
+    t.index ["type"], name: "index_blueprints_on_type"
+    t.index ["usage_count"], name: "index_blueprints_on_usage_count"
   end
 
   create_table "collections", force: :cascade do |t|
@@ -129,6 +136,7 @@ ActiveRecord::Schema.define(version: 2022_01_31_225409) do
     t.json "versions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_mods_on_name"
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -164,7 +172,9 @@ ActiveRecord::Schema.define(version: 2022_01_31_225409) do
     t.datetime "updated_at"
     t.integer "taggings_count", default: 0
     t.string "category"
+    t.index "lower((name)::text)", name: "index_tags_on_LOWER_name"
     t.index ["name"], name: "index_tags_on_name", unique: true
+    t.index ["name"], name: "index_tags_on_name_trigram", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "users", force: :cascade do |t|
@@ -189,6 +199,7 @@ ActiveRecord::Schema.define(version: 2022_01_31_225409) do
     t.datetime "token_expiry"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role"], name: "index_users_on_role"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
