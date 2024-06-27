@@ -1,5 +1,5 @@
 <div class="t-blueprint-list">
-  <% if blueprints.any? %>
+  <% if blueprints.exists? %>
     <ul class="t-blueprint-list__container">
       <% blueprints.each do |blueprint| %>
         <li class="o-blueprint-card <%= blueprint.type.underscore %>" data-controller="<%= blueprint.is_mecha? ? '' : "blueprintIndexCopyButton" %> usageTracker" data-blueprint-id="<%= blueprint.id %>">
