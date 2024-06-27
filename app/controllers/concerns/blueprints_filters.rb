@@ -31,8 +31,7 @@ module BlueprintsFilters
 
     def filter(blueprints)
       # TODO: At some point when we have hundreds of thousands of blueprints, this will need to be optimized
-      # CHECK IF WE NEED CLASSIFY
-      blueprints = blueprints.where(type: @filters[:type]) if @filters[:type].present?
+      blueprints = blueprints.where(type: @filters[:type].classify) if @filters[:type].present?
       blueprints = blueprints.search_by_title(@filters[:search]) if @filters[:search].present?
 
       if @filters[:author].present?
