@@ -127,7 +127,7 @@ GEM
     connection_pool (2.2.3)
     content_disposition (1.0.0)
     crass (1.0.6)
-    dead_end (1.1.6)
+    dead_end (4.0.0)
     derailed_benchmarks (2.0.1)
       benchmark-ips (~> 2)
       dead_end
