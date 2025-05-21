@@ -97,7 +97,7 @@ module BlueprintsFilters
               (
                 COALESCE((SELECT COUNT(*) FROM votes WHERE votes.votable_id = blueprints.id AND votes.created_at >= '#{7.days.ago}'), 0) * 2.0 +
                 COALESCE((SELECT COUNT(*) FROM comments WHERE comments.blueprint_id = blueprints.id AND comments.created_at >= '#{7.days.ago}'), 0) * 3.0 +
-                COALESCE((SELECT COUNT(*) FROM blueprint_usages WHERE blueprint_usages.blueprint_id = blueprints.id AND blueprint_usages.created_at >= '#{7.days.ago}'), 0) * 4.0
+                blueprints.usage_count * 4.0  -- Using usage_count directly
               ) * 2.0 +  -- Double weight for recent activity
               -- Total engagement
               (blueprints.cached_votes_total * 1.0 + 

@@ -2,23 +2,23 @@
   <div class="o-blueprint-filters__order" data-controller="submitOnClick">
     <div class="o-blueprint-filters__order-choice" >
       <%= f.radio_button :order, "recent", checked: filters[:order] === 'recent', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_recent, "Most recent" %>
+      <%= f.label :order_recent, "New" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "trending", checked: filters[:order] === 'trending', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_trending, "Recently Trending" %>
+      <%= f.label :order_trending, "Trending" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_popular, "Most Popular" %>
+      <%= f.label :order_popular, "Popular" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "usage", checked: filters[:order] === 'usage', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_usage, "Most used" %>
+      <%= f.label :order_usage, "Used" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "comments", checked: filters[:order] === 'comments', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_comments, "Most comments" %>
+      <%= f.label :order_comments, "Discussed" %>
     </div>
   </div>
 </div>
