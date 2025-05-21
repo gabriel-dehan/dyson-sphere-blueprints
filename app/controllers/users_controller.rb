@@ -16,7 +16,14 @@ class UsersController < ApplicationController
 
   def my_favorites
     set_filters
-    @blueprints = filter(current_user.get_voted(Blueprint))
+    @blueprints = current_user.get_voted(Blueprint)
+      .joins(:collection)
+      .where(collection: { type: "Public" })
+      .includes(:collection, :mod, :tags, :tag_taggings, collection: :user)
+
+    # Apply filters
+    @blueprints = filter(@blueprints)
+    
     # Paginate
     @blueprints = @blueprints.page(params[:page])
 
