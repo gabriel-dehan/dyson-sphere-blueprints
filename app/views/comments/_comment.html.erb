@@ -2,7 +2,7 @@
   <div class="d-flex align-items-start mb-3">
     <div class="flex-grow-1">
       <div class="d-flex justify-content-between align-items-center">
-        <div class="fw-bold"><%= comment.user.username %></div>
+        <div class="fw-bold"><%= link_to comment.user.username, user_blueprints_path(comment.user), class: "text-white" %></div>
         <small class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
       </div>
       <div class="comment-content mt-1">

@@ -4,7 +4,9 @@
       <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "Write a comment..." %>
     </div>
     <div class="mt-2">
-      <%= f.submit "Post Comment", class: "btn btn-primary" %>
+      <%= f.submit class: "btn btn-primary" do %>
+        <i class="fas fa-comment"></i>Post Comment
+      <% end %>
     </div>
   <% end %>
 <% else %>

@@ -47,7 +47,10 @@
     margin-left: 20px;
   }
 
-  &__info, &__requirements, &__tags, &__actions {
+  &__info,
+  &__requirements,
+  &__tags,
+  &__actions {
     padding: 20px;
     background-color: var(--night-blue);
     border-radius: 6px;
@@ -55,7 +58,6 @@
   }
 
   &__requirements {
-
     h3 {
       margin-bottom: 8px;
     }
@@ -129,7 +131,8 @@
 
         margin: 0 0 4px 10px;
 
-        &:first-child, &:nth-child(3n+1) {
+        &:first-child,
+        &:nth-child(3n + 1) {
           margin: 0 0 4px 0;
         }
       }
@@ -250,7 +253,7 @@
         color: var(--red);
 
         &:hover {
-          color: var(--grey50);;
+          color: var(--grey50);
         }
       }
     }
@@ -377,7 +380,7 @@
       display: inline-block;
       box-sizing: border-box;
       max-width: 100%;
-      padding: .25em .5em;
+      padding: 0.25em 0.5em;
       background-color: var(--medium-blue);
       color: var(--white);
       line-height: inherit;
@@ -390,7 +393,7 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 20px 24px;
-    background-color: rgba(0, 0, 0, 0.20);
+    background-color: rgba(0, 0, 0, 0.2);
 
     h2 {
       font-size: $font-size-bigtitle;
@@ -400,7 +403,8 @@
     }
   }
 
-  &__copy, &__download {
+  &__copy,
+  &__download {
     margin-bottom: 0;
     display: inline-flex;
     align-items: center;
@@ -433,7 +437,10 @@
       margin-top: 10px;
     }
 
-    .trix-content > div, ul, ol, blockquote {
+    .trix-content > div,
+    ul,
+    ol,
+    blockquote {
       margin: 10px 0;
     }
 
@@ -446,7 +453,7 @@
       color: var(--red);
 
       &:hover {
-        color: var(--grey50);;
+        color: var(--grey50);
       }
     }
   }
@@ -465,7 +472,8 @@
       min-height: 240px;
     }
 
-    .t-blueprint__copy, .t-blueprint__download {
+    .t-blueprint__copy,
+    .t-blueprint__download {
       float: right;
     }
 
@@ -565,6 +573,116 @@
       width: 120px !important;
     }
   }
+
+  &__comments {
+    padding: 20px 28px;
+    border-top: 1px solid var(--blue);
+    margin-top: 8rem;
+
+    h3 {
+      font-size: $font-size-title;
+      font-weight: 400;
+      padding-left: 5px;
+      margin-bottom: 1.5rem;
+    }
+
+    .comment {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: var(--night-blue);
+      border: 1px solid var(--blue);
+      border-radius: 4px;
+      position: relative;
+      min-height: 100px;
+
+      &-content {
+        color: #ffffff !important;
+        margin-top: 1rem;
+        margin-left: 0.5rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+      }
+
+      .fw-bold {
+        color: #ffffff !important;
+        font-size: 1.8rem !important;
+        font-weight: 600;
+      }
+
+      .fw-bold a {
+        font-size: inherit;
+      }
+
+      .text-muted {
+        color: var(--grey50);
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+
+      .btn-outline-danger {
+        color: var(--red);
+        border-color: var(--red);
+        background: transparent;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;
+        transition: all 0.15s ease-in-out;
+        position: absolute;
+        bottom: 0rem;
+        right: 1rem;
+
+        &:hover {
+          color: var(--white);
+          background-color: var(--red);
+          border-color: var(--red);
+        }
+      }
+    }
+
+    .comment-form {
+      margin-bottom: 5rem;
+
+      .form-control {
+        background-color: var(--darker-blue);
+        border: 1px solid var(--blue);
+        color: var(--white);
+        border-radius: 4px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+
+        &:focus {
+          background-color: var(--darker-blue);
+          border-color: var(--red);
+          color: var(--white);
+          box-shadow: none;
+        }
+      }
+
+      .btn-primary {
+        margin-bottom: 0;
+        display: inline-flex;
+        align-items: center;
+        background: var(--dark-red);
+        border-color: var(--dark-red);
+        line-height: 1em;
+        float: right;
+        border: none;
+
+        i {
+          font-size: 14px;
+          margin-right: 8px;
+        }
+
+        &:hover {
+          background: transparent;
+          color: var(--dark-red);
+          border: 1px solid var(--dark-red);
+        }
+      }
+    }
+  }
 }
 
 .swiper-container {
@@ -585,7 +703,11 @@
     width: 70px;
 
     &:hover {
-      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.62) 100%);
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.62) 100%
+      );
     }
   }
 
@@ -597,17 +719,19 @@
     width: 70px;
 
     &:hover {
-      background: linear-gradient(90deg, rgba(0,0,0, 0.62) 0%, rgba(0,0,0,0) 100%);
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.62) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
     }
   }
 }
 
-
 .p-blueprint-show.mecha {
   .t-blueprint {
-
     &__blueprint {
-        h3 {
+      h3 {
         padding-left: 0;
       }
     }
