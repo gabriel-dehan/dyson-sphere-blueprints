@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_21_110311) do
+ActiveRecord::Schema.define(version: 2025_05_21_131232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -135,7 +135,10 @@ ActiveRecord::Schema.define(version: 2025_05_21_110311) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "parent_id"
+    t.datetime "deleted_at"
     t.index ["blueprint_id"], name: "index_comments_on_blueprint_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -235,6 +238,7 @@ ActiveRecord::Schema.define(version: 2025_05_21_110311) do
   add_foreign_key "blueprints", "mods"
   add_foreign_key "collections", "users"
   add_foreign_key "comments", "blueprints"
+  add_foreign_key "comments", "comments", column: "parent_id", on_delete: :cascade
   add_foreign_key "comments", "users"
   add_foreign_key "pictures", "blueprints"
   add_foreign_key "taggings", "tags"

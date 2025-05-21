@@ -13,11 +13,15 @@
         </div>
       </div>
       <div class="comment-content mt-1">
-        <%= simple_format(comment.content) %>
+        <% if comment.deleted? %>
+          <em class="text-muted">This comment was deleted by the author</em>
+        <% else %>
+          <%= simple_format(comment.content) %>
+        <% end %>
       </div>
       <div class="comment-actions d-flex justify-content-between align-items-end">
         <div>
-          <% if user_signed_in? %>
+          <% if user_signed_in? && !comment.deleted? %>
             <button class="btn btn-sm btn-outline-primary reply-button" 
                     data-comments-target="replyButton"
                     data-action="click->comments#toggleReply"
@@ -27,7 +31,7 @@
           <% end %>
         </div>
         <div>
-          <% if current_user == comment.user %>
+          <% if current_user == comment.user && !comment.deleted? %>
             <%= button_to blueprint_comment_path(@blueprint, comment), 
                 method: :delete, 
                 class: "btn btn-sm btn-outline-danger",
@@ -42,7 +46,9 @@
            class="reply-form" 
            data-comments-target="replyForm"
            style="display: none;">
-        <%= form_with(model: [@blueprint, Comment.new], url: blueprint_comments_path(@blueprint), class: "reply-form-content") do |f| %>
+        <%= form_with(model: [@blueprint, Comment.new], 
+                    url: @blueprint.is_a?(Blueprint::Factory) ? factory_comments_path(@blueprint) : blueprint_comments_path(@blueprint),
+                    class: "comment-form") do |f| %>
           <%= f.hidden_field :parent_id, value: comment.id %>
           <div class="form-group">
             <%= f.text_area :content, class: "form-control", rows: 2, placeholder: "Write a reply..." %>

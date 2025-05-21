@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
   def destroy
     authorize @comment
-    @comment.destroy
+    @comment.update(deleted_at: Time.current)
     respond_to do |format|
       format.html { redirect_to blueprint_path(@blueprint), notice: 'Comment was successfully deleted.' }
       format.turbo_stream
