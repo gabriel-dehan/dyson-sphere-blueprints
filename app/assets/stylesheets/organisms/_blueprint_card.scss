@@ -202,6 +202,22 @@
     }
   }
 
+  &__usage {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    .count {
+      margin-right: 5px;
+      font-size: 16px;
+    }
+
+    i {
+      font-size: 18px;
+      color: var(--grey50);
+    }
+  }
+
   &__version {
     margin: auto 16px 16px 16px;
     display: inline-block;
