@@ -615,6 +615,13 @@
 
       .text-muted {
         color: var(--grey50);
+      }
+
+      .comment-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
