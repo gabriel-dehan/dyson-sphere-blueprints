@@ -1,4 +1,4 @@
-<div class="comment" id="comment-<%= comment.id %>">
+<div class="comment" id="comment-<%= comment.id %>" data-controller="comments">
   <div class="d-flex align-items-start mb-3">
     <div class="flex-grow-1">
       <div class="d-flex justify-content-between align-items-start">
@@ -15,14 +15,54 @@
       <div class="comment-content mt-1">
         <%= simple_format(comment.content) %>
       </div>
-      <% if current_user == comment.user %>
-        <%= button_to blueprint_comment_path(@blueprint, comment), 
-            method: :delete, 
-            class: "btn btn-sm btn-outline-danger mt-2",
-            form: { data: { turbo_confirm: "Are you sure you want to delete this comment?" } } do %>
-          Delete
+      <div class="comment-actions mt-2">
+        <% if user_signed_in? %>
+          <button class="btn btn-sm btn-outline-primary reply-button" 
+                  data-comments-target="replyButton"
+                  data-action="click->comments#toggleReply"
+                  data-comment-id="<%= comment.id %>">
+            <i class="fas fa-reply"></i> Reply
+          </button>
         <% end %>
-      <% end %>
+        <% if current_user == comment.user %>
+          <%= button_to blueprint_comment_path(@blueprint, comment), 
+              method: :delete, 
+              class: "btn btn-sm btn-outline-danger",
+              form: { data: { turbo_confirm: "Are you sure you want to delete this comment?" } } do %>
+            Delete
+          <% end %>
+        <% end %>
+      </div>
+      
+      <div id="reply-form-<%= comment.id %>" 
+           class="reply-form mt-3" 
+           data-comments-target="replyForm"
+           style="display: none;">
+        <%= form_with(model: [@blueprint, Comment.new], url: blueprint_comments_path(@blueprint), class: "comment-form") do |f| %>
+          <%= f.hidden_field :parent_id, value: comment.id %>
+          <div class="form-group">
+            <%= f.text_area :content, class: "form-control", rows: 2, placeholder: "Write a reply..." %>
+          </div>
+          <div class="mt-2">
+            <%= f.submit class: "btn btn-primary" do %>
+              <i class="fas fa-reply"></i> Post Reply
+            <% end %>
+            <button type="button" 
+                    class="btn btn-outline-secondary cancel-reply" 
+                    data-comments-target="cancelReply"
+                    data-action="click->comments#toggleReply"
+                    data-comment-id="<%= comment.id %>">
+              Cancel
+            </button>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
+
+  <% if comment.replies.any? %>
+    <div class="replies ms-4 mt-3">
+      <%= render comment.replies %>
+    </div>
+  <% end %>
 </div> 

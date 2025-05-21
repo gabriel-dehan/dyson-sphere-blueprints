@@ -3,7 +3,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import "@hotwired/turbo-rails";
+import Turbolinks from "turbolinks";
 import Coloris from "@melloware/coloris";
 // import "channels"
 import "trix";
@@ -13,7 +13,7 @@ import "../config.js.erb";
 import { singleFileUpload, multipleFileUpload } from "fileUpload";
 import "controllers";
 
-document.addEventListener("turbo:load", () => {
+document.addEventListener("turbolinks:load", () => {
   if (document.querySelector("#clr-picker")) {
     document.querySelector("#clr-picker").remove();
   }

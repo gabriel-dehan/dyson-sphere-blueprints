@@ -97,7 +97,7 @@
           <%= render "comments/form", blueprint: @blueprint %>
         </div>
         <div id="comments">
-          <%= render @blueprint.comments.order(created_at: :desc) %>
+          <%= render @blueprint.comments.includes(:user, replies: :user).roots %>
         </div>
       </div>
     </div>

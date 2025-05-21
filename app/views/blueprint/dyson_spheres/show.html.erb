@@ -155,6 +155,15 @@
           <% end %>
         </ul>
       </div>
+      <div class="t-blueprint__comments">
+        <h3>Comments</h3>
+        <div id="new_comment">
+          <%= render "comments/form", blueprint: @blueprint %>
+        </div>
+        <div id="comments">
+          <%= render @blueprint.comments.includes(:user, replies: :user).roots %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

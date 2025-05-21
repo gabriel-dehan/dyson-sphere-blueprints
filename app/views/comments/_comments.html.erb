@@ -6,8 +6,8 @@
   </div>
   
   <div id="comments">
-    <% if @blueprint.comments.any? %>
-      <%= render @blueprint.comments %>
+    <% if @blueprint.comments.roots.includes(:user, replies: :user).any? %>
+      <%= render @blueprint.comments.roots.includes(:user, replies: :user) %>
     <% else %>
       <p class="text-muted">No comments yet. Be the first to comment!</p>
     <% end %>
