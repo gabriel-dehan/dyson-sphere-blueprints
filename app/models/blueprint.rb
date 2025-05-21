@@ -10,6 +10,7 @@ class Blueprint < ApplicationRecord
   belongs_to :collection
   belongs_to :mod
   has_one :user, through: :collection
+  has_many :comments, dependent: :destroy
 
   # Pictures
   has_many :additional_pictures, dependent: :destroy, class_name: "Picture"

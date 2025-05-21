@@ -1,0 +1,7 @@
+<%= turbo_stream.append "comments" do %>
+  <%= render "comments/comment", comment: @comment %>
+<% end %>
+
+<%= turbo_stream.update "new_comment" do %>
+  <%= render "comments/form", blueprint: @blueprint %>
+<% end %> 

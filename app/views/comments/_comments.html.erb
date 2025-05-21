@@ -1,0 +1,13 @@
+<div class="comments-section mt-4">
+  <h3 class="mb-4">Comments</h3>
+  
+  <%= render "comments/form" %>
+  
+  <div class="comments-list mt-4">
+    <% if @blueprint.comments.any? %>
+      <%= render @blueprint.comments %>
+    <% else %>
+      <p class="text-muted">No comments yet. Be the first to comment!</p>
+    <% end %>
+  </div>
+</div> 

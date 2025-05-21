@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :blueprints, only: [:index, :show, :destroy] do
+    resources :comments, only: [:create, :destroy]
     member do
       put "like", to: "blueprints#like"
       put "unlike", to: "blueprints#unlike"

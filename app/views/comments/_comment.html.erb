@@ -1,0 +1,21 @@
+<div class="comment" id="comment-<%= comment.id %>">
+  <div class="d-flex align-items-start mb-3">
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="fw-bold"><%= comment.user.username %></div>
+        <small class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
+      </div>
+      <div class="comment-content mt-1">
+        <%= simple_format(comment.content) %>
+      </div>
+      <% if current_user == comment.user %>
+        <%= button_to blueprint_comment_path(@blueprint, comment), 
+            method: :delete, 
+            class: "btn btn-sm btn-outline-danger mt-2",
+            form: { data: { turbo_confirm: "Are you sure you want to delete this comment?" } } do %>
+          Delete
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div> 

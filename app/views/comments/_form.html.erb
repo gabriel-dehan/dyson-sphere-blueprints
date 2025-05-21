@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <%= form_with(model: [@blueprint, Comment.new], url: blueprint_comments_path(@blueprint), class: "comment-form") do |f| %>
+    <div class="form-group">
+      <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "Write a comment..." %>
+    </div>
+    <div class="mt-2">
+      <%= f.submit "Post Comment", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="alert alert-info">
+    Please <%= link_to "sign in", new_user_session_path %> to leave a comment.
+  </div>
+<% end %> 
