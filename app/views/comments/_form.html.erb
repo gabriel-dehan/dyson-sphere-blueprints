@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= form_with(model: [@blueprint, Comment.new], url: blueprint_comments_path(@blueprint), class: "comment-form") do |f| %>
+  <%= form_with(model: [@blueprint, Comment.new], url: @blueprint.is_a?(Blueprint::Factory) ? factory_comments_path(@blueprint) : blueprint_comments_path(@blueprint), class: "comment-form") do |f| %>
     <div class="form-group">
       <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "Write a comment..." %>
     </div>
