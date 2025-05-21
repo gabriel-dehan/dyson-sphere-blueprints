@@ -5,8 +5,8 @@
   flex-direction: column;
   flex: 0 1 23%;
   background: var(--night-blue);
-  background: rgba(0, 0, 0, 0.40);
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   margin: 0 15px 25px 15px;
 
@@ -14,7 +14,8 @@
     margin-right: 0;
   }
 
-  &:nth-child(4n+1), &:first-child {
+  &:nth-child(4n + 1),
+  &:first-child {
     margin-left: 0;
   }
 
@@ -48,7 +49,6 @@
     // border-bottom: 1px solid var(--darker-blue);
 
     &-meta {
-
       &-content {
         position: absolute;
         bottom: 0;
@@ -57,8 +57,12 @@
         display: flex;
         align-items: center;
 
-        background: rgb(10,12,22);
-        background: linear-gradient(0deg, rgba(10, 12, 22, 1) 15%, rgba(10, 12, 22, 0) 100%);
+        background: rgb(10, 12, 22);
+        background: linear-gradient(
+          0deg,
+          rgba(10, 12, 22, 1) 15%,
+          rgba(10, 12, 22, 0) 100%
+        );
         padding: 32px 6px 6px 6px;
       }
     }
@@ -91,7 +95,7 @@
     font-size: 1.1rem;
     font-weight: 700;
     height: 3.8rem;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     line-height: 3.8rem;
     padding: 0 3rem;
     text-align: center;
@@ -100,9 +104,10 @@
     white-space: nowrap;
   }
 
-  &__copy, &__download {
+  &__copy,
+  &__download {
     margin-bottom: 0;
-    background-color: rgba(0, 0, 0, 0.70);
+    background-color: rgba(0, 0, 0, 0.7);
     border: none;
     padding: 8px 10px;
     line-height: initial;
@@ -124,7 +129,7 @@
     }
   }
 
-  &__content{
+  &__content {
     padding: 16px 16px 10px 16px;
     display: flex;
     flex-direction: column;
@@ -155,7 +160,7 @@
 
     p {
       font-size: 14px;
-      opacity: .8;
+      opacity: 0.8;
       margin: 0px 0 0 0;
 
       a {
@@ -165,27 +170,35 @@
   }
 
   &__votes {
-    margin-left: auto;
-
-    color: var(--white);
-    border-radius: 15px;
-    min-width: 45px;
-    padding: 6px 8px;
-    height: 44px;
-    align-items: center;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10px;
 
     .count {
-      font-size: 1.4em;
-      font-weight: normal;
-      cursor: default;
+      margin-right: 5px;
+      font-size: 16px;
     }
 
     i {
-      font-size: 1.4em;
-      margin-left: 7px;
-      color: var(--dark-red);
+      font-size: 18px;
+      color: var(--red);
+    }
+  }
+
+  &__comments {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    .count {
+      margin-right: 5px;
+      font-size: 16px;
+    }
+
+    i {
+      font-size: 18px;
+      color: var(--grey50);
     }
   }
 
@@ -197,7 +210,7 @@
       font-size: 90%;
       box-sizing: border-box;
       max-width: 100%;
-      padding: .25em .5em;
+      padding: 0.25em 0.5em;
       background-color: var(--dark-red);
       color: var(--white);
       line-height: inherit;
@@ -220,7 +233,7 @@
     &-tag {
       box-sizing: border-box;
       max-width: 100%;
-      padding: .25em .5em;
+      padding: 0.25em 0.5em;
       background-color: var(--dark-blue);
       color: var(--white);
       line-height: inherit;
@@ -232,7 +245,6 @@
       }
     }
   }
-
 }
 
 .o-blueprint-card.mecha {
