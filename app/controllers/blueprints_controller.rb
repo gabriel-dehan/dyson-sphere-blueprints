@@ -11,6 +11,7 @@ class BlueprintsController < ApplicationController
     if stale?(etag: [@blueprint, current_user], last_modified: @blueprint.updated_at, public: true)
       respond_to do |format|
         format.html do
+          @blueprint = Blueprint.includes(comments: { user: {}, replies: { user: {} } }).find(@blueprint.id)
           render "blueprint/#{@blueprint.type.underscore.pluralize}/show"
         end
         format.text { render plain: @blueprint.encoded_blueprint }
