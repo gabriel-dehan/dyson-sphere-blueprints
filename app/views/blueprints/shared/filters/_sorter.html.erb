@@ -13,8 +13,8 @@
       <%= f.label :order_popular, "Popular" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
-      <%= f.radio_button :order, "usage", checked: filters[:order] === 'usage', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_usage, "Used" %>
+      <%= f.radio_button :order, "used", checked: filters[:order] === 'used', data: { 'action': "change->submitOnClick#submit" } %>
+      <%= f.label :order_used, "Copied" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "comments", checked: filters[:order] === 'comments', data: { 'action': "change->submitOnClick#submit" } %>
