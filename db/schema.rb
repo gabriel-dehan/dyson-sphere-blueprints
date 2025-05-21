@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_21_131232) do
+ActiveRecord::Schema.define(version: 2025_05_21_131518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -142,6 +142,18 @@ ActiveRecord::Schema.define(version: 2025_05_21_131232) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "likes_count", default: 0
+    t.string "likable_type", null: false
+    t.bigint "likable_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["likable_type", "likable_id", "user_id"], name: "index_likes_on_likable_type_and_likable_id_and_user_id", unique: true
+    t.index ["likable_type", "likable_id"], name: "index_likes_on_likable"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "mods", force: :cascade do |t|
     t.string "name", null: false
     t.string "author", null: false
@@ -240,6 +252,7 @@ ActiveRecord::Schema.define(version: 2025_05_21_131232) do
   add_foreign_key "comments", "blueprints"
   add_foreign_key "comments", "comments", column: "parent_id", on_delete: :cascade
   add_foreign_key "comments", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "pictures", "blueprints"
   add_foreign_key "taggings", "tags"
 end

@@ -22,6 +22,21 @@
       <div class="comment-actions d-flex justify-content-between align-items-end">
         <div>
           <% if user_signed_in? && !comment.deleted? %>
+            <% if comment.liked_by?(current_user) %>
+              <%= button_to unlike_blueprint_comment_path(@blueprint, comment), 
+                  method: :delete,
+                  class: "btn btn-sm btn-outline-primary",
+                  form: { data: { turbo: true } } do %>
+                <i class="fas fa-heart"></i> <%= comment.like_count %>
+              <% end %>
+            <% else %>
+              <%= button_to like_blueprint_comment_path(@blueprint, comment),
+                  method: :post,
+                  class: "btn btn-sm btn-outline-primary",
+                  form: { data: { turbo: true } } do %>
+                <i class="far fa-heart"></i> <%= comment.like_count %>
+              <% end %>
+            <% end %>
             <button class="btn btn-sm btn-outline-primary reply-button" 
                     data-comments-target="replyButton"
                     data-action="click->comments#toggleReply"
