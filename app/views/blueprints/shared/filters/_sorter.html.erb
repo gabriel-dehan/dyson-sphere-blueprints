@@ -5,12 +5,20 @@
       <%= f.label :order_recent, "Most recent" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
+      <%= f.radio_button :order, "trending", checked: filters[:order] === 'trending', data: { 'action': "change->submitOnClick#submit" } %>
+      <%= f.label :order_trending, "Recently Trending" %>
+    </div>
+    <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular', data: { 'action': "change->submitOnClick#submit" } %>
       <%= f.label :order_popular, "Most Popular" %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "usage", checked: filters[:order] === 'usage', data: { 'action': "change->submitOnClick#submit" } %>
       <%= f.label :order_usage, "Most used" %>
+    </div>
+    <div class="o-blueprint-filters__order-choice">
+      <%= f.radio_button :order, "comments", checked: filters[:order] === 'comments', data: { 'action': "change->submitOnClick#submit" } %>
+      <%= f.label :order_comments, "Most comments" %>
     </div>
   </div>
 </div>
