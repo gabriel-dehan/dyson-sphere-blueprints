@@ -3,12 +3,16 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
 import Coloris from "@melloware/coloris";
 // import "channels"
 import "trix";
 import "@rails/actiontext";
 import "../config.js.erb";
+
+Rails.start();
+Turbolinks.start();
 
 import { singleFileUpload, multipleFileUpload } from "fileUpload";
 import "controllers";
