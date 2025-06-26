@@ -89,49 +89,13 @@ module BlueprintsFilters
       if @filters[:order] == "recent"
         blueprints = blueprints.reorder(created_at: :desc)
       elsif @filters[:order] == "trending"
-        # Get blueprints from the last 30 days and calculate trending score
-        trending_query = <<-SQL
-          WITH blueprint_scores AS (
-            SELECT blueprints.id,
-              (
-                -- Recent engagement (last 7 days weighted more heavily)
-                (
-                  COALESCE((SELECT COUNT(*) FROM votes WHERE votes.votable_id = blueprints.id AND votes.created_at >= '#{7.days.ago}'), 0) * 2.0 +
-                  COALESCE((SELECT COUNT(*) FROM comments WHERE comments.blueprint_id = blueprints.id AND comments.created_at >= '#{7.days.ago}'), 0) * 3.0 +
-                  blueprints.usage_count * 4.0  -- Using usage_count directly
-                ) * 2.0 +  -- Double weight for recent activity
-                -- Total engagement
-                (blueprints.cached_votes_total * 1.0 + 
-                 COALESCE((SELECT COUNT(*) FROM comments WHERE comments.blueprint_id = blueprints.id), 0) * 2.0 +
-                 blueprints.usage_count * 3.0)
-              ) * 
-              -- Time boost: newer blueprints get a small boost
-              (1.0 + (1.0 - (EXTRACT(EPOCH FROM (blueprints.created_at - '#{30.days.ago}'::timestamp)) / 2592000.0)) * 0.5)
-              as trending_score
-            FROM blueprints
-            WHERE blueprints.created_at >= '#{30.days.ago}'
-          )
-          SELECT blueprints.*, COALESCE(blueprint_scores.trending_score, 0) as trending_score
-          FROM blueprints
-          LEFT JOIN blueprint_scores ON blueprint_scores.id = blueprints.id
-        SQL
-
-        blueprints = blueprints.from("(#{trending_query}) AS blueprints")
-          .includes(:mod, :tags, :tag_taggings, :user)
-          .order('trending_score DESC')
+        blueprints = blueprints.trending
       elsif @filters[:order] == "popular"
         blueprints = blueprints.reorder(cached_votes_total: :desc)
       elsif @filters[:order] == "used"
         blueprints = blueprints.reorder(usage_count: :desc)
       elsif @filters[:order] == "discussed"
-        comment_counts = Comment.unscoped
-          .select('blueprint_id, COUNT(*) as comments_count')
-          .group('blueprint_id')
-          .to_sql
-        
-        blueprints = blueprints.joins("LEFT JOIN (#{comment_counts}) AS comment_counts ON comment_counts.blueprint_id = blueprints.id")
-          .select('blueprints.*, COALESCE(comment_counts.comments_count, 0) as comments_count')
-          .reorder('comments_count DESC')
+        blueprints = BlueprintQueries.discussed(blueprints)
       end
 
       blueprints

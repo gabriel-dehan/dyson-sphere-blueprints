@@ -30,6 +30,39 @@ class Blueprint < ApplicationRecord
                     tsearch: { prefix: true },
                   }
 
+  def self.trending
+    # Get blueprints from the last 30 days and calculate trending score
+    trending_query = <<-SQL
+      WITH blueprint_scores AS (
+        SELECT blueprints.id,
+          (
+            -- Recent engagement (last 7 days weighted more heavily)
+            (
+              COALESCE((SELECT COUNT(*) FROM votes WHERE votes.votable_id = blueprints.id AND votes.created_at >= '#{7.days.ago}'), 0) * 2.0 +
+              COALESCE((SELECT COUNT(*) FROM comments WHERE comments.blueprint_id = blueprints.id AND comments.created_at >= '#{7.days.ago}'), 0) * 3.0 +
+              blueprints.usage_count * 4.0  -- Using usage_count directly
+            ) * 2.0 +  -- Double weight for recent activity
+            -- Total engagement
+            (blueprints.cached_votes_total * 1.0 + 
+             COALESCE((SELECT COUNT(*) FROM comments WHERE comments.blueprint_id = blueprints.id), 0) * 2.0 +
+             blueprints.usage_count * 3.0)
+          ) * 
+          -- Time boost: newer blueprints get a small boost
+          (1.0 + (1.0 - (EXTRACT(EPOCH FROM (blueprints.created_at - '#{30.days.ago}'::timestamp)) / 2592000.0)) * 0.5)
+          as trending_score
+        FROM blueprints
+        WHERE blueprints.created_at >= '#{30.days.ago}'
+      )
+      SELECT blueprints.*, COALESCE(blueprint_scores.trending_score, 0) as trending_score
+      FROM blueprints
+      LEFT JOIN blueprint_scores ON blueprint_scores.id = blueprints.id
+    SQL
+
+    from("(#{trending_query}) AS blueprints")
+      .includes(:mod, :tags, :tag_taggings, :user)
+      .order('trending_score DESC')
+  end
+
   def tags_without_mass_construction
     tags.reject { |tag| tag.name =~ /mass construction/i }
   end
