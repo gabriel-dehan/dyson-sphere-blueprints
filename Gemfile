@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 3.0.0"
+ruby "~> 3.1.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 6.1.3"
@@ -24,6 +24,9 @@ gem "redis", "~> 4.0"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
+
+# Lock to psych < 4 until we can update to Rails 7
+gem "psych", "< 4"
 
 gem "devise", github: "heartcombo/devise", branch: "master"
 gem "pundit"
