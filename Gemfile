@@ -61,6 +61,9 @@ group :development, :test do
 
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+
+  gem "bullet"
+  gem "net-smtp"
 end
 
 group :development do
@@ -74,7 +77,6 @@ group :development do
   gem "spring"
   gem "memory_profiler"
   gem "derailed_benchmarks"
-  gem "bullet"
   gem "rubocop-daemon", require: false
 
   # Static code analyzer
