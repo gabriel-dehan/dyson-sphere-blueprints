@@ -37,6 +37,12 @@ Rails.application.routes.draw do
   end
 
   resources :blueprints, only: [:index, :show, :destroy] do
+    resources :comments, only: [:create, :destroy] do
+      member do
+        post :like
+        delete :unlike
+      end
+    end
     member do
       put "like", to: "blueprints#like"
       put "unlike", to: "blueprints#unlike"
@@ -44,6 +50,17 @@ Rails.application.routes.draw do
       get "code", to: "blueprints#code"
     end
   end
+
+  # Add direct routes for factory blueprints
+  resources :factories, controller: 'blueprint/factories', only: [:show] do
+    resources :comments, only: [:create, :destroy] do
+      member do
+        post :like
+        delete :unlike
+      end
+    end
+  end
+
   resources :collections, only: [:new, :show, :index, :edit, :create, :update, :destroy] do
     member do
       get "bulk_download", to: "collections#bulk_download"

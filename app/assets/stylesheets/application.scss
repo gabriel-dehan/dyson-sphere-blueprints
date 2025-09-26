@@ -11,7 +11,7 @@
 @import "tippy.js/dist/tippy";
 @import "trix/dist/trix";
 @import "swiper/swiper-bundle";
-@import 'uppy/dist/uppy.min';
+@import "uppy/dist/uppy.min";
 @import "@melloware/coloris/dist/coloris";
 
 // Your CSS partials
@@ -19,6 +19,7 @@
 @import "molecules/index";
 @import "organisms/index";
 @import "pages/index";
+@import "components/comments";
 @import "overrides";
 
 // Layout
@@ -31,7 +32,10 @@ body {
   color: $body-color;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: $headers-font;
   letter-spacing: initial;
 }
@@ -41,7 +45,7 @@ h1 {
 }
 
 h2 {
-font-size: $font-size-title;
+  font-size: $font-size-title;
 }
 
 h3 {
@@ -56,21 +60,47 @@ a {
   color: var(--red);
 }
 
-input[type='color'], input[type='date'], input[type='datetime'], input[type='datetime-local'], input[type='email'], input[type='month'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], input[type='week'], input:not([type]), textarea {
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"],
+input[type="week"],
+input:not([type]),
+textarea {
   color: var(--white);
-  background-color: rgba(0, 0, 0, 0.20);
+  background-color: rgba(0, 0, 0, 0.2);
   border-color: var(--darker-blue);
   font-family: $body-font;
 }
 
-input[type='color'], input[type='date'], input[type='datetime'], input[type='datetime-local'], input[type='email'], input[type='month'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], input[type='week'] {
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"],
+input[type="week"] {
   &::placeholder {
     color: var(--grey50);
     font-size: 14px;
   }
 }
 
-input[type='submit'] {
+input[type="submit"] {
   background-color: var(--purple);
   border-color: var(--purple);
 

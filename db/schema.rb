@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_27_101830) do
+ActiveRecord::Schema.define(version: 2025_05_21_131518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2024_06_27_101830) do
     t.bigint "blueprint_id"
     t.bigint "user_id"
     t.integer "count", default: 0, null: false
-    t.datetime "last_used_at", default: "2022-02-01 23:53:45"
+    t.datetime "last_used_at", default: "2025-05-21 10:52:53"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["blueprint_id"], name: "index_blueprint_usage_metrics_on_blueprint_id"
@@ -127,6 +127,31 @@ ActiveRecord::Schema.define(version: 2024_06_27_101830) do
     t.float "h", null: false
     t.float "s", null: false
     t.float "l", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "blueprint_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "parent_id"
+    t.datetime "deleted_at"
+    t.index ["blueprint_id"], name: "index_comments_on_blueprint_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "likes_count", default: 0
+    t.string "likable_type", null: false
+    t.bigint "likable_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["likable_type", "likable_id", "user_id"], name: "index_likes_on_likable_type_and_likable_id_and_user_id", unique: true
+    t.index ["likable_type", "likable_id"], name: "index_likes_on_likable"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "mods", force: :cascade do |t|
@@ -224,6 +249,10 @@ ActiveRecord::Schema.define(version: 2024_06_27_101830) do
   add_foreign_key "blueprints", "collections"
   add_foreign_key "blueprints", "mods"
   add_foreign_key "collections", "users"
+  add_foreign_key "comments", "blueprints"
+  add_foreign_key "comments", "comments", column: "parent_id", on_delete: :cascade
+  add_foreign_key "comments", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "pictures", "blueprints"
   add_foreign_key "taggings", "tags"
 end

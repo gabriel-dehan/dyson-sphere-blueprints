@@ -28,16 +28,19 @@
                       data-blueprintIndexCopyButton-target="copy"
                       data-blueprint-id="<%= blueprint.id %>">
                       <i class="fas fa-copy" data-blueprintIndexCopyButton-target="icon"></i>
-                      <% if blueprint.usage_count > 0 %>
-                        <strong>
-                          <%= number_to_human(blueprint.usage_count, format: "%n%u", units: { thousand: 'K' }) %>
-                        </strong>
-                      <% end %>
                     </button>
                   <% end %>
                   <div class="o-blueprint-card__votes">
                     <strong class="count"><%= blueprint.cached_votes_total %></strong>
                     <i class="fas fa-heart"></i>
+                  </div>
+                  <div class="o-blueprint-card__comments">
+                    <strong class="count"><%= blueprint.comments.count %></strong>
+                    <i class="fas fa-comments"></i>
+                  </div>
+                  <div class="o-blueprint-card__usage">
+                    <strong class="count"><%= blueprint.usage_count %></strong>
+                    <i class="fas fa-copy"></i>
                   </div>
                 </div>
               </div>

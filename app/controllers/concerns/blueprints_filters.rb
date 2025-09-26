@@ -88,10 +88,14 @@ module BlueprintsFilters
 
       if @filters[:order] == "recent"
         blueprints = blueprints.reorder(created_at: :desc)
+      elsif @filters[:order] == "trending"
+        blueprints = blueprints.trending
       elsif @filters[:order] == "popular"
         blueprints = blueprints.reorder(cached_votes_total: :desc)
-      elsif @filters[:order] == "usage"
+      elsif @filters[:order] == "used"
         blueprints = blueprints.reorder(usage_count: :desc)
+      elsif @filters[:order] == "discussed"
+        blueprints = BlueprintQueries.discussed(blueprints)
       end
 
       blueprints

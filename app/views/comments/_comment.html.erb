@@ -1,0 +1,93 @@
+<div class="comment" id="comment-<%= comment.id %>" data-controller="comments">
+  <div class="d-flex align-items-start mb-3">
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between align-items-start">
+        <div class="fw-bold">
+          <%= link_to comment.user.username, user_blueprints_path(comment.user), class: "text-white" %>
+          <% if comment.user == @blueprint.user %>
+            <span class="text-muted" style="font-size: 0.9rem; margin-left: 0.5rem;">Original Creator</span>
+          <% end %>
+        </div>
+        <div class="comment-meta">
+          <small class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
+        </div>
+      </div>
+      <div class="comment-content mt-1">
+        <% if comment.deleted? %>
+          <em class="text-muted">This comment was deleted by the author</em>
+        <% else %>
+          <%= simple_format(comment.content) %>
+        <% end %>
+      </div>
+      <div class="comment-actions d-flex justify-content-between align-items-end">
+        <div>
+          <% if user_signed_in? && !comment.deleted? %>
+            <% if comment.liked_by?(current_user) %>
+              <%= button_to unlike_blueprint_comment_path(@blueprint, comment), 
+                  method: :delete,
+                  class: "btn btn-sm btn-outline-primary",
+                  form: { data: { turbo: true } } do %>
+                <i class="fas fa-heart"></i> <%= comment.like_count %>
+              <% end %>
+            <% else %>
+              <%= button_to like_blueprint_comment_path(@blueprint, comment),
+                  method: :post,
+                  class: "btn btn-sm btn-outline-primary",
+                  form: { data: { turbo: true } } do %>
+                <i class="far fa-heart"></i> <%= comment.like_count %>
+              <% end %>
+            <% end %>
+            <button class="btn btn-sm btn-outline-primary reply-button" 
+                    data-comments-target="replyButton"
+                    data-action="click->comments#toggleReply"
+                    data-comment-id="<%= comment.id %>">
+              <i class="fas fa-reply"></i> Reply
+            </button>
+          <% end %>
+        </div>
+        <div>
+          <% if current_user == comment.user && !comment.deleted? %>
+            <%= button_to blueprint_comment_path(@blueprint, comment), 
+                method: :delete, 
+                class: "btn btn-sm btn-outline-danger",
+                form: { data: { turbo_confirm: "Are you sure you want to delete this comment?" } } do %>
+              Delete
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      
+      <div id="reply-form-<%= comment.id %>" 
+           class="reply-form" 
+           data-comments-target="replyForm"
+           style="display: none;">
+        <%= form_with(model: [@blueprint, Comment.new], 
+                    url: @blueprint.is_a?(Blueprint::Factory) ? factory_comments_path(@blueprint) : blueprint_comments_path(@blueprint),
+                    class: "comment-form") do |f| %>
+          <%= f.hidden_field :parent_id, value: comment.id %>
+          <div class="form-group">
+            <%= f.text_area :content, class: "form-control", rows: 2, placeholder: "Write a reply..." %>
+          </div>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-reply"></i> Create Reply
+            </button>
+            <button type="button" 
+                    class="btn btn-outline-secondary cancel-reply" 
+                    data-comments-target="cancelReply"
+                    data-action="click->comments#toggleReply"
+                    data-comment-id="<%= comment.id %>">
+              Cancel
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if comment.replies.any? %>
+    <div class="replies ms-4 mt-3">
+      <%= render comment.replies %>
+    </div>
+  <% end %>
+</div> 
