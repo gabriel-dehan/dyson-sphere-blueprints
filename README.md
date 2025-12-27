@@ -9,18 +9,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
-    - [Latest: 4.4.0](#latest-440)
-    - [Previous versions](#previous-versions)
   - [Contribute](#contribute)
-    - [Setting up](#setting-up)
-    - [Seeding](#seeding)
-    - [Environment](#environment)
-    - [Build development environment](#build-development-environment)
-    - [Rake tasks](#rake-tasks)
   - [Our lovely sponsors](#our-lovely-sponsors)
   - [Contributors](#contributors)
   - [Deploy](#deploy)
-    - [Staging](#staging)
 - [License](#license)
 
 ## Roadmap
@@ -29,8 +21,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.4.0
-- Query and filters optimisations to fix the performance issues
+### Latest: 4.4.3
+- Updated dsp_blueprint_parser gem dependency ([#82](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/82))
 
 ### Previous versions
 
