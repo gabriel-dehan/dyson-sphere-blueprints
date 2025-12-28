@@ -27,6 +27,7 @@ jobs:
 
     env:
       RAILS_ENV: test
+      DISABLE_SPRING: 1
       PG_USER: dev
       PG_PASS: password
       PG_HOST: localhost
