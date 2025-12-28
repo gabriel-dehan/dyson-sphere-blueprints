@@ -36,6 +36,8 @@ yarn-debug.log*
 .yarn-integrity
 # Ignore .env file containing credentials.
 .env*
+# Ignore local development notes
+CLAUDE.local.md
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
@@ -51,3 +53,7 @@ localstack/data
 
 # Do not ignore .env.sample
 !.env.sample
+
+.claude/plans
+.claude/investigations
+*.dump
