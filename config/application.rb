@@ -1,5 +1,8 @@
 require_relative "boot"
 
+# Ruby 3.2+ compatibility: Logger must be required before Rails
+require "logger"
+
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
