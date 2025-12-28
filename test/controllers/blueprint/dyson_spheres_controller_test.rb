@@ -51,22 +51,81 @@ class Blueprint::DysonSpheresControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_path
   end
 
+  test "create with valid data saves blueprint and redirects" do
+    sign_in_as(:member)
+
+    assert_difference("Blueprint::DysonSphere.count", 1) do
+      post blueprint_dyson_spheres_path, params: {
+        blueprint_dyson_sphere: {
+          title: "My New Dyson Sphere",
+          collection: collections(:member_public).id,
+          encoded_blueprint: sample_dyson_sphere_code,
+          cover_picture: sample_cover_picture,
+        },
+        tag_list: "sphere,dense",
+      }
+    end
+
+    blueprint = Blueprint::DysonSphere.last
+    assert_redirected_to blueprint_path(blueprint)
+    assert_equal "My New Dyson Sphere", blueprint.title
+    assert_equal users(:member), blueprint.user
+  end
+
+  test "create assigns mod and version automatically" do
+    sign_in_as(:member)
+
+    post blueprint_dyson_spheres_path, params: {
+      blueprint_dyson_sphere: {
+        title: "Auto Mod Dyson Sphere",
+        collection: collections(:member_public).id,
+        encoded_blueprint: sample_dyson_sphere_code,
+        cover_picture: sample_cover_picture,
+      },
+      tag_list: "sphere",
+    }
+
+    blueprint = Blueprint::DysonSphere.last
+    assert_equal "Dyson Sphere Program", blueprint.mod.name
+    assert_not_nil blueprint.mod_version
+  end
+
   test "create with invalid data renders errors" do
     sign_in_as(:member)
 
     # Missing required fields
-    post blueprint_dyson_spheres_path, params: {
-      blueprint_dyson_sphere: {
-        title: "",
-        collection: collections(:member_public).id,
-        encoded_blueprint: "",
-      },
-      tag_list: "",
-    }
+    assert_no_difference("Blueprint::DysonSphere.count") do
+      post blueprint_dyson_spheres_path, params: {
+        blueprint_dyson_sphere: {
+          title: "",
+          collection: collections(:member_public).id,
+          encoded_blueprint: "",
+        },
+        tag_list: "",
+      }
+    end
 
     # Should re-render the form with errors
     assert_response :success
     assert_select ".field_with_errors", minimum: 1
+  end
+
+  test "create with invalid blueprint code renders error" do
+    sign_in_as(:member)
+
+    assert_no_difference("Blueprint::DysonSphere.count") do
+      post blueprint_dyson_spheres_path, params: {
+        blueprint_dyson_sphere: {
+          title: "Invalid Dyson Sphere",
+          collection: collections(:member_public).id,
+          encoded_blueprint: "INVALID_DYSON_CODE",
+          cover_picture: sample_cover_picture,
+        },
+        tag_list: "sphere",
+      }
+    end
+
+    assert_response :success
   end
 
   # ============================================

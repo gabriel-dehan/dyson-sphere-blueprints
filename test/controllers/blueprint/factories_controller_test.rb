@@ -51,24 +51,82 @@ class Blueprint::FactoriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_path
   end
 
-  # NOTE: Full create tests with valid blueprint/image are complex
-  # They require proper Shrine file uploads which we skip in Phase A
+  test "create with valid data saves blueprint and redirects" do
+    sign_in_as(:member)
+
+    assert_difference("Blueprint::Factory.count", 1) do
+      post blueprint_factories_path, params: {
+        blueprint_factory: {
+          title: "My New Factory Blueprint",
+          collection: collections(:member_public).id,
+          encoded_blueprint: sample_factory_code,
+          cover_picture: sample_cover_picture,
+        },
+        tag_list: "production,logistics",
+      }
+    end
+
+    blueprint = Blueprint::Factory.last
+    assert_redirected_to blueprint_path(blueprint)
+    assert_equal "My New Factory Blueprint", blueprint.title
+    assert_equal users(:member), blueprint.user
+  end
+
+  test "create assigns mod and version automatically" do
+    sign_in_as(:member)
+
+    post blueprint_factories_path, params: {
+      blueprint_factory: {
+        title: "Auto Mod Blueprint",
+        collection: collections(:member_public).id,
+        encoded_blueprint: sample_factory_code,
+        cover_picture: sample_cover_picture,
+      },
+      tag_list: "power",
+    }
+
+    blueprint = Blueprint::Factory.last
+    assert_equal "Dyson Sphere Program", blueprint.mod.name
+    assert_not_nil blueprint.mod_version
+  end
+
   test "create with invalid data renders errors" do
     sign_in_as(:member)
 
     # Missing required fields
-    post blueprint_factories_path, params: {
-      blueprint_factory: {
-        title: "",
-        collection: collections(:member_public).id,
-        encoded_blueprint: "",
-      },
-      tag_list: "",
-    }
+    assert_no_difference("Blueprint::Factory.count") do
+      post blueprint_factories_path, params: {
+        blueprint_factory: {
+          title: "",
+          collection: collections(:member_public).id,
+          encoded_blueprint: "",
+        },
+        tag_list: "",
+      }
+    end
 
     # Should re-render the form with errors
     assert_response :success
     assert_select ".field_with_errors", minimum: 1
+  end
+
+  test "create with invalid blueprint code renders error" do
+    sign_in_as(:member)
+
+    assert_no_difference("Blueprint::Factory.count") do
+      post blueprint_factories_path, params: {
+        blueprint_factory: {
+          title: "Invalid Blueprint",
+          collection: collections(:member_public).id,
+          encoded_blueprint: "INVALID_BLUEPRINT_CODE",
+          cover_picture: sample_cover_picture,
+        },
+        tag_list: "test",
+      }
+    end
+
+    assert_response :success
+    # Should show error about invalid blueprint format
   end
 
   # ============================================

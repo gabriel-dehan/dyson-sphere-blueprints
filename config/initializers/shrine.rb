@@ -1,22 +1,32 @@
 require "shrine"
-require "shrine/storage/s3"
 
-s3_options = {
-  bucket: ENV["AWS_S3_BUCKET"],
-  access_key_id: ENV["AWS_S3_ACCESS_ID_KEY"],
-  secret_access_key: ENV["AWS_S3_ACCESS_SECRET_KEY"],
-  region: ENV["AWS_S3_REGION"],
-}
+if Rails.env.test?
+  require "shrine/storage/memory"
 
-if Rails.env.development? && ENV["AWS_S3_ENDPOINT"]
-  s3_options[:endpoint] = ENV["AWS_S3_ENDPOINT"]
-  s3_options[:force_path_style] = true
+  Shrine.storages = {
+    cache: Shrine::Storage::Memory.new,
+    store: Shrine::Storage::Memory.new,
+  }
+else
+  require "shrine/storage/s3"
+
+  s3_options = {
+    bucket: ENV["AWS_S3_BUCKET"],
+    access_key_id: ENV["AWS_S3_ACCESS_ID_KEY"],
+    secret_access_key: ENV["AWS_S3_ACCESS_SECRET_KEY"],
+    region: ENV["AWS_S3_REGION"],
+  }
+
+  if Rails.env.development? && ENV["AWS_S3_ENDPOINT"]
+    s3_options[:endpoint] = ENV["AWS_S3_ENDPOINT"]
+    s3_options[:force_path_style] = true
+  end
+
+  Shrine.storages = {
+    cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
+    store: Shrine::Storage::S3.new(**s3_options),
+  }
 end
-
-Shrine.storages = {
-  cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
-  store: Shrine::Storage::S3.new(**s3_options),
-}
 
 Shrine.plugin :activerecord
 Shrine.plugin :instrumentation

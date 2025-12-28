@@ -26,7 +26,7 @@ class ActiveSupport::TestCase
 
   # Helper to get a sample cover picture for uploads
   def sample_cover_picture
-    fixture_file_upload("files/cover.png", "image/png")
+    fixture_file_upload(Rails.root.join("test/fixtures/files/cover.png"), "image/png")
   end
 
   # Helper to get sample factory blueprint code
