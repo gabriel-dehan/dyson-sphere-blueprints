@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_27_101830) do
+ActiveRecord::Schema.define(version: 2025_12_28_182358) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 2024_06_27_101830) do
     t.bigint "color_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["blueprint_id", "color_id"], name: "index_mecha_colors_on_blueprint_and_color"
     t.index ["blueprint_id"], name: "index_blueprint_mecha_colors_on_blueprint_id"
     t.index ["color_id"], name: "index_blueprint_mecha_colors_on_color_id"
   end
@@ -97,6 +99,7 @@ ActiveRecord::Schema.define(version: 2024_06_27_101830) do
     t.integer "usage_count", default: 0
     t.index "((summary ->> 'total_structures'::text))", name: "index_blueprints_on_summary_total_structures"
     t.index ["cached_votes_total"], name: "index_blueprints_on_cached_votes_total"
+    t.index ["collection_id", "cached_votes_total"], name: "index_blueprints_on_collection_id_and_cached_votes_total"
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
     t.index ["created_at"], name: "index_blueprints_on_created_at", order: :desc
     t.index ["mod_id"], name: "index_blueprints_on_mod_id"
@@ -114,6 +117,7 @@ ActiveRecord::Schema.define(version: 2024_06_27_101830) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.string "category"
+    t.index ["created_at"], name: "index_collections_on_created_at"
     t.index ["slug"], name: "index_collections_on_slug", unique: true
     t.index ["type"], name: "index_collections_on_type"
     t.index ["user_id"], name: "index_collections_on_user_id"

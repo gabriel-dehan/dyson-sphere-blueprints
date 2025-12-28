@@ -20,9 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_mods
-    @mods = Rails.cache.fetch("mods_list", expires_in: 1.hour) do
-      Mod.all.order(created_at: :desc).to_a
-    end
+    @mods = Mod.all.order(created_at: :desc).to_a
   end
 
   protected

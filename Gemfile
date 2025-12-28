@@ -8,6 +8,8 @@ gem "rails", "~> 6.1.3"
 # Ruby 3.2 compatibility
 gem "logger"
 gem "digest"
+# Pin minitest to 5.x for Rails 6.1 compatibility
+gem "minitest", "~> 5.0"
 # Pin concurrent-ruby to 1.3.4 to avoid Rails 6.1 logger incompatibility
 # See: https://github.com/ruby-concurrency/concurrent-ruby/issues/1078
 gem "concurrent-ruby", "1.3.4"

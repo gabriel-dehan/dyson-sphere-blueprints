@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def my_favorites
     set_filters
-    @blueprints = filter(current_user.get_voted(Blueprint).with_associations)
+    @blueprints = filter(current_user.get_voted(Blueprint).light_query.with_associations)
     # Paginate
     @blueprints = @blueprints.page(params[:page])
 
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def my_blueprints
     set_filters
-    @blueprints = filter(current_user.blueprints.with_associations)
+    @blueprints = filter(current_user.blueprints.light_query.with_associations)
 
     # Paginate
     @blueprints = @blueprints.page(params[:page])
@@ -44,6 +44,9 @@ class UsersController < ApplicationController
     end
 
     @collections = @collections
+      .left_joins(:blueprints)
+      .group("collections.id")
+      .select("collections.*, COUNT(blueprints.id) as blueprints_count, COALESCE(SUM(blueprints.cached_votes_total), 0) as total_votes_sum")
       .order(created_at: :desc)
       .page(params[:page])
 

@@ -34,9 +34,7 @@ module BlueprintsFilters
       blueprints = blueprints.where(type: @filters[:type].classify) if @filters[:type].present?
       blueprints = blueprints.search_by_title(@filters[:search]) if @filters[:search].present?
 
-      if @filters[:author].present?
-        blueprints = blueprints.joins(:user).where("users.username ILIKE ?", "%#{@filters[:author]}%")
-      end
+      blueprints = blueprints.joins(:user).where("users.username ILIKE ?", "%#{@filters[:author]}%") if @filters[:author].present?
 
       blueprints = blueprints.where(mod_id: @filters[:mod_id]) if @filters[:mod_id].present? && @filters[:mod_id] != "Any"
 
@@ -71,7 +69,7 @@ module BlueprintsFilters
       # Optimised tag search code
       if @filters[:tags].present?
         blueprints = blueprints.where(
-          parse_tags(params[:tags]).map do |tag|
+          parse_tags(params[:tags]).map do |_tag|
             "EXISTS (
               SELECT 1
               FROM taggings t
@@ -81,7 +79,7 @@ module BlueprintsFilters
                 AND t.context = 'tags'
                 AND lower(tg.name) = ?
             )"
-          end.join(' AND '),
+          end.join(" AND "),
           *parse_tags(params[:tags]).map(&:downcase)
         )
       end
@@ -107,12 +105,12 @@ module BlueprintsFilters
 
     def colors_by_rgb(searched_color, similarity)
       level = similarity.to_i * 255 / 100.0
-      Color.includes(:blueprint_mecha_colors).where(r: color_range(searched_color, :r, level), g: color_range(searched_color, :g, level), b: color_range(searched_color, :b, level))
+      Color.where(r: color_range(searched_color, :r, level), g: color_range(searched_color, :g, level), b: color_range(searched_color, :b, level))
     end
 
     def colors_by_hsl(searched_color, similarity)
       level = similarity.to_i
-      Color.includes(:blueprint_mecha_colors).where(h: color_range(searched_color, :h, (similarity.to_i * 30 / 100.0)), s: color_range(searched_color, :s, level), l: color_range(searched_color, :l, level))
+      Color.where(h: color_range(searched_color, :h, (similarity.to_i * 30 / 100.0)), s: color_range(searched_color, :s, level), l: color_range(searched_color, :l, level))
     end
 
     def parse_tags(tags_param)

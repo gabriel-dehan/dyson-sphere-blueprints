@@ -46,7 +46,7 @@ class BlueprintsController < ApplicationController
   end
 
   def like
-    @blueprint = Blueprint.light_query.find(params[:id])
+    @blueprint = Blueprint.find(params[:id])
     authorize @blueprint
 
     @blueprint.liked_by current_user
@@ -54,7 +54,7 @@ class BlueprintsController < ApplicationController
   end
 
   def unlike
-    @blueprint = Blueprint.light_query.find(params[:id])
+    @blueprint = Blueprint.find(params[:id])
     authorize @blueprint
 
     @blueprint.unliked_by current_user
