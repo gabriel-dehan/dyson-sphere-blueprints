@@ -1,5 +1,6 @@
 class Blueprint::DysonSphere < Blueprint
   def self.sti_name() = "DysonSphere"
+
   def normalize_friendly_id(string) = "dyson-sphere-#{super}"
 
   # Pictures
@@ -22,7 +23,7 @@ class Blueprint::DysonSphere < Blueprint
   private
 
   def decode_blueprint
-    BlueprintParserJob.perform_now(id) if saved_change_to_attribute?(:encoded_blueprint)
+    BlueprintParserJob.perform_later(id) if saved_change_to_attribute?(:encoded_blueprint)
   end
 
   def encoded_blueprint_parsable

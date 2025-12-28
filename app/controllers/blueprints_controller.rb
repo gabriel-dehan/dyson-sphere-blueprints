@@ -30,7 +30,7 @@ class BlueprintsController < ApplicationController
     # Generate an ETag based on the general_scope and current_user
     if stale?(etag: [general_scope, current_user], last_modified: last_modified, public: true)
       # Apply filters and paginate only if the request is not cached
-      @blueprints = filter(general_scope.includes(:collection, collection: :user))
+      @blueprints = filter(general_scope.includes(:mod, :tags, :user, :collection, collection: :user))
 
       @blueprints = @blueprints.page(params[:page])
       @blueprints.load
@@ -46,7 +46,7 @@ class BlueprintsController < ApplicationController
   end
 
   def like
-    @blueprint = Blueprint.find(params[:id])
+    @blueprint = Blueprint.light_query.find(params[:id])
     authorize @blueprint
 
     @blueprint.liked_by current_user
@@ -54,7 +54,7 @@ class BlueprintsController < ApplicationController
   end
 
   def unlike
-    @blueprint = Blueprint.find(params[:id])
+    @blueprint = Blueprint.light_query.find(params[:id])
     authorize @blueprint
 
     @blueprint.unliked_by current_user

@@ -6,17 +6,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
     authorize @user
 
-    @blueprints = @user.blueprints
+    @blueprints = @user.blueprints.light_query
       .joins(:collection)
       .where(collection: { type: "Public" })
-      .includes(:collection, collection: :user)
+      .includes(:mod, :tags, :user, :collection, collection: :user)
       .order(cached_votes_total: :desc)
       .page(params[:page])
   end
 
   def my_favorites
     set_filters
-    @blueprints = filter(current_user.get_voted(Blueprint))
+    @blueprints = filter(current_user.get_voted(Blueprint).includes(:mod, :tags, :user, :collection, collection: :user))
     # Paginate
     @blueprints = @blueprints.page(params[:page])
 
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def my_blueprints
     set_filters
-    @blueprints = filter(current_user.blueprints)
+    @blueprints = filter(current_user.blueprints.includes(:mod, :tags, :user, :collection, collection: :user))
 
     # Paginate
     @blueprints = @blueprints.page(params[:page])
