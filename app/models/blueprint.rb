@@ -22,6 +22,7 @@ class Blueprint < ApplicationRecord
   # Hides other mods as long as we don't have a need for them
   default_scope { joins(:mod).where(mod: { name: "Dyson Sphere Program" }) }
   scope :light_query, -> { select(column_names - ['encoded_blueprint']) }
+  scope :with_associations, -> { includes(:mod, :tags, :user, :collection, collection: :user) }
 
   pg_search_scope :search_by_title,
                   against: [:title],

@@ -21,7 +21,7 @@ class CollectionsController < ApplicationController
     @collection = Collection.friendly.find(params[:id])
     @blueprints = @collection
       .blueprints
-      .includes(:mod, :tags, :user, :collection)
+      .with_associations
       .order(cached_votes_total: :desc)
       .page(params[:page])
 
