@@ -5,7 +5,7 @@
 admin_public:
   id: 1
   name: Admin Public Collection
-  type: 0  # Public
+  type: Public
   user_id: 1
   slug: admin-public-collection
   created_at: <%= 1.year.ago %>
@@ -14,7 +14,7 @@ admin_public:
 admin_private:
   id: 2
   name: Admin Private Collection
-  type: 1  # Private
+  type: Private
   user_id: 1
   slug: admin-private-collection
   created_at: <%= 1.year.ago %>
@@ -24,7 +24,7 @@ admin_private:
 member_public:
   id: 3
   name: Member Public Collection
-  type: 0  # Public
+  type: Public
   user_id: 2
   slug: member-public-collection
   created_at: <%= 6.months.ago %>
@@ -33,7 +33,7 @@ member_public:
 member_private:
   id: 4
   name: Member Private Collection
-  type: 1  # Private
+  type: Private
   user_id: 2
   slug: member-private-collection
   created_at: <%= 6.months.ago %>
@@ -43,7 +43,7 @@ member_private:
 other_public:
   id: 5
   name: Other Public Collection
-  type: 0  # Public
+  type: Public
   user_id: 3
   slug: other-public-collection
   created_at: <%= 3.months.ago %>
@@ -52,7 +52,7 @@ other_public:
 other_private:
   id: 6
   name: Other Private Collection
-  type: 1  # Private
+  type: Private
   user_id: 3
   slug: other-private-collection
   created_at: <%= 3.months.ago %>

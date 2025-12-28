@@ -55,7 +55,7 @@ public_dyson_sphere:
   type: DysonSphere
   encoded_blueprint: 'DYBP:0,637790444891173226,0.9.24.11286,3,0"H4sIAAAAAAAAC/v/HwIYGYDAQcaNAQU02DMyoUmIvT+8L645x56RGSrxmcXUHoj3Jx9gMQbizYwsUAmgSjugyv0FG/qN9hbpbmZkGAWDCgAA1Fa3jvwBAAA="D6D62579044FF1FFA85A8E20F7796DE3'
   cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
-  collection_id: 1
+  collection_id: 3
   mod_id: 1
   mod_version: "0.9.24.11286"
   slug: dyson-sphere-public-dyson-sphere
@@ -79,12 +79,13 @@ private_dyson_sphere:
   created_at: <%= 1.month.ago %>
   updated_at: <%= 2.weeks.ago %>
 
-# Mecha blueprint (minimal - no file for now, tests will skip file-dependent features)
+# Mecha blueprint (minimal - no blueprint_file for now, tests will skip file-dependent features)
 public_mecha:
   id: 6
   title: Public Mecha Blueprint
   type: Mecha
-  collection_id: 1
+  cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
+  collection_id: 3
   mod_id: 1
   mod_version: "0.10.29.22015"
   slug: mecha-public-mecha-blueprint

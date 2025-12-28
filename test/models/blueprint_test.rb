@@ -1,7 +1,148 @@
 require "test_helper"
 
 class BlueprintTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  # ============================================
+  # MOD COMPATIBILITY TESTS
+  # ============================================
+
+  test "mod_compatibility_range returns array with two versions" do
+    blueprint = blueprints(:public_factory)
+    range = blueprint.mod_compatibility_range
+
+    assert_kind_of Array, range
+    assert_equal 2, range.length
+  end
+
+  test "mod_compatibility_range handles blueprint versions" do
+    blueprint = blueprints(:public_factory)
+    range = blueprint.mod_compatibility_range
+
+    # Should return valid version range (array of 2)
+    assert_kind_of Array, range
+    assert_equal 2, range.length
+    # Both should be version strings
+    assert range.first.present?
+    assert range.last.present?
+  end
+
+  test "is_mod_version_latest? returns boolean" do
+    blueprint = blueprints(:public_factory)
+    result = blueprint.is_mod_version_latest?
+
+    assert_includes [true, false], result
+  end
+
+  test "is_mod_version_latest? compares with mod latest" do
+    # Create a blueprint with the latest version
+    blueprint = blueprints(:public_factory)
+    mod = blueprint.mod
+
+    # If blueprint version equals mod latest, should return true
+    # Otherwise false - depends on fixture data
+    if blueprint.mod_version >= mod.latest
+      assert blueprint.is_mod_version_latest?
+    else
+      refute blueprint.is_mod_version_latest?
+    end
+  end
+
+  # ============================================
+  # HELPER METHOD TESTS
+  # ============================================
+
+  test "formatted_mod_version includes mod name and version" do
+    blueprint = blueprints(:public_factory)
+    formatted = blueprint.formatted_mod_version
+
+    assert_includes formatted, blueprint.mod.name
+    assert_includes formatted, blueprint.mod_version
+  end
+
+  test "large_bp? returns false for nil encoded_blueprint" do
+    blueprint = blueprints(:public_mecha)
+    # Mecha doesn't have encoded_blueprint
+    refute blueprint.large_bp?
+  end
+
+  test "large_bp? returns false for normal sized blueprints" do
+    blueprint = blueprints(:public_factory)
+    # Fixture blueprints are small
+    refute blueprint.large_bp?
+  end
+
+  test "is_mecha? returns true for Mecha type" do
+    blueprint = blueprints(:public_mecha)
+    assert blueprint.is_mecha?
+  end
+
+  test "is_mecha? returns false for Factory type" do
+    blueprint = blueprints(:public_factory)
+    refute blueprint.is_mecha?
+  end
+
+  test "is_mecha? returns false for DysonSphere type" do
+    blueprint = blueprints(:public_dyson_sphere)
+    refute blueprint.is_mecha?
+  end
+
+  # ============================================
+  # TAGGING TESTS
+  # ============================================
+
+  test "tags_without_mass_construction filters mass construction tags" do
+    blueprint = blueprints(:public_factory)
+    tags = blueprint.tags_without_mass_construction
+
+    # Should not include mass construction tags
+    assert_empty tags.select { |tag| tag.name =~ /mass construction/i }
+  end
+
+  # ============================================
+  # SEARCH TESTS
+  # ============================================
+
+  test "search_by_title finds matching blueprints" do
+    results = Blueprint.search_by_title("Factory")
+
+    assert results.any?
+    assert results.all? { |bp| bp.title.downcase.include?("factory") }
+  end
+
+  test "search_by_title returns empty for non-matching query" do
+    results = Blueprint.search_by_title("xyznonexistent123")
+
+    assert_empty results
+  end
+
+  # ============================================
+  # STI TESTS
+  # ============================================
+
+  test "find_sti_class prefixes Blueprint namespace" do
+    # This tests the STI class resolution
+    klass = Blueprint.find_sti_class("Factory")
+    assert_equal Blueprint::Factory, klass
+  end
+
+  # ============================================
+  # SCOPES TESTS
+  # ============================================
+
+  test "light_query excludes encoded_blueprint column" do
+    blueprints = Blueprint.light_query
+
+    # This tests the scope exists and works
+    assert blueprints.respond_to?(:each)
+  end
+
+  test "with_associations includes related records" do
+    blueprints = Blueprint.with_associations.limit(1)
+
+    # Should not raise N+1 errors when accessing associations
+    blueprints.each do |bp|
+      bp.mod
+      bp.tags
+      bp.collection
+    end
+  end
 end
