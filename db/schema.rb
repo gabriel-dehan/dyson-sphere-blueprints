@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_12_28_182358) do
+ActiveRecord::Schema.define(version: 2025_12_28_191732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2025_12_28_182358) do
     t.index ["mod_version"], name: "index_blueprints_on_mod_version"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true
     t.index ["type"], name: "index_blueprints_on_type"
+    t.index ["updated_at"], name: "index_blueprints_on_updated_at"
     t.index ["usage_count"], name: "index_blueprints_on_usage_count"
   end
 
