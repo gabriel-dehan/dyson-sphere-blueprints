@@ -114,7 +114,6 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    childprocess (4.1.0)
     chunky_png (1.4.0)
     coderay (1.1.3)
     concurrent-ruby (1.3.4)
@@ -394,10 +393,12 @@ GEM
       tilt
     scout_apm (6.0.2)
       parser
-    selenium-webdriver (4.1.0)
-      childprocess (>= 0.5, < 5.0)
+    selenium-webdriver (4.39.0)
+      base64 (~> 0.2)
+      logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2)
+      rubyzip (>= 1.2.2, < 4.0)
+      websocket (~> 1.0)
     semantic_range (3.1.0)
     sentry-rails (6.2.0)
       railties (>= 5.2.0)
@@ -454,10 +455,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.3.1)
-      nokogiri (~> 1.6)
-      rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0, < 4.11)
     webpacker (5.4.4)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
@@ -465,6 +462,7 @@ GEM
       semantic_range (>= 2.3.0)
     webpurify (1.0.2)
       json
+    websocket (1.2.11)
     websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
@@ -530,7 +528,7 @@ DEPENDENCIES
   rubyzip
   sass-rails (>= 6)
   scout_apm
-  selenium-webdriver
+  selenium-webdriver (>= 4.11)
   sentry-rails
   sentry-ruby
   sentry-sidekiq
@@ -543,7 +541,6 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
-  webdrivers
   webpacker (~> 5.0)
   webrick
 

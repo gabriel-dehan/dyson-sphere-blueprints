@@ -1,0 +1,20 @@
+# Usage metrics for tracking blueprint usage
+# Note: using explicit IDs
+
+member_used_public_factory:
+  id: 1
+  blueprint_id: 1  # public_factory
+  user_id: 2       # member
+  count: 3
+  last_used_at: <%= 1.day.ago %>
+  created_at: <%= 1.week.ago %>
+  updated_at: <%= 1.day.ago %>
+
+admin_used_public_dyson:
+  id: 2
+  blueprint_id: 4  # public_dyson_sphere
+  user_id: 1       # admin
+  count: 5
+  last_used_at: <%= 2.hours.ago %>
+  created_at: <%= 2.weeks.ago %>
+  updated_at: <%= 2.hours.ago %>

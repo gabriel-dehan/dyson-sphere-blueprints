@@ -1,0 +1,58 @@
+# Taggings - connect tags to blueprints
+# Note: Using tag_id directly since acts-as-taggable-on doesn't use standard associations
+
+public_factory_production:
+  id: 1
+  tag_id: 1
+  taggable_type: Blueprint
+  taggable_id: 1
+  context: tags
+  created_at: <%= 1.month.ago %>
+
+public_factory_logistics:
+  id: 2
+  tag_id: 2
+  taggable_type: Blueprint
+  taggable_id: 1
+  context: tags
+  created_at: <%= 1.month.ago %>
+
+other_factory_production:
+  id: 3
+  tag_id: 1
+  taggable_type: Blueprint
+  taggable_id: 3
+  context: tags
+  created_at: <%= 3.weeks.ago %>
+
+public_dyson_sphere:
+  id: 4
+  tag_id: 4
+  taggable_type: Blueprint
+  taggable_id: 4
+  context: tags
+  created_at: <%= 2.months.ago %>
+
+public_dyson_dense:
+  id: 5
+  tag_id: 5
+  taggable_type: Blueprint
+  taggable_id: 4
+  context: tags
+  created_at: <%= 2.months.ago %>
+
+private_dyson_sphere:
+  id: 6
+  tag_id: 4
+  taggable_type: Blueprint
+  taggable_id: 5
+  context: tags
+  created_at: <%= 1.month.ago %>
+
+public_mecha_colorful:
+  id: 7
+  tag_id: 6
+  taggable_type: Blueprint
+  taggable_id: 6
+  context: tags
+  created_at: <%= 3.weeks.ago %>

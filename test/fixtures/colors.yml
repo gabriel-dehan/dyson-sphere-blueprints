@@ -1,0 +1,31 @@
+# Test colors for mecha blueprints
+
+red:
+  id: 1
+  name: Red
+  r: 255
+  g: 0
+  b: 0
+  h: 0.0
+  s: 100.0
+  l: 50.0
+
+green:
+  id: 2
+  name: Green
+  r: 0
+  g: 255
+  b: 0
+  h: 120.0
+  s: 100.0
+  l: 50.0
+
+blue:
+  id: 3
+  name: Blue
+  r: 0
+  g: 0
+  b: 255
+  h: 240.0
+  s: 100.0
+  l: 50.0

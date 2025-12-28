@@ -1,0 +1,95 @@
+# Test blueprints - using STI types
+# Note: mod_id: 1 matches the dsp fixture id
+
+# Factory blueprints
+public_factory:
+  id: 1
+  title: Public Factory Blueprint
+  type: Factory
+  encoded_blueprint: 'BLUEPRINT:0,10,2203,0,0,0,0,0,638229688703249448,0.9.27.15466,Wind%20Turbine%20Row,"H4sIAAAAAAAAC2NkYGAQYkAAVSBmhLIZGf4zMJyACjMysMLU/P/P7wSWnyBpjsyGyc/mMAWqgQAkoyHmsjDccARzLC5vR2YT0swEIpgZBBxhtiGzCWlmhhATIBoOSG5DZhPSzAIiVqnPN4PZhswmpBkAVTZYlGABAAA="69A8C019EDC4ADACB9B4D802E0D4248A'
+  cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
+  collection_id: 3
+  mod_id: 1
+  mod_version: "0.9.27.15466"
+  slug: factory-public-factory-blueprint
+  cached_votes_total: 10
+  cached_votes_up: 10
+  usage_count: 5
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 1.day.ago %>
+
+private_factory:
+  id: 2
+  title: Private Factory Blueprint
+  type: Factory
+  encoded_blueprint: 'BLUEPRINT:0,10,2203,0,0,0,0,0,638229688703249448,0.9.27.15466,Wind%20Turbine%20Row,"H4sIAAAAAAAAC2NkYGAQYkAAVSBmhLIZGf4zMJyACjMysMLU/P/P7wSWnyBpjsyGyc/mMAWqgQAkoyHmsjDccARzLC5vR2YT0swEIpgZBBxhtiGzCWlmhhATIBoOSG5DZhPSzAIiVqnPN4PZhswmpBkAVTZYlGABAAA="69A8C019EDC4ADACB9B4D802E0D4248A'
+  cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
+  collection_id: 4
+  mod_id: 1
+  mod_version: "0.9.27.15466"
+  slug: factory-private-factory-blueprint
+  cached_votes_total: 0
+  usage_count: 0
+  created_at: <%= 2.weeks.ago %>
+  updated_at: <%= 1.week.ago %>
+
+other_user_factory:
+  id: 3
+  title: Other User Factory
+  type: Factory
+  encoded_blueprint: 'BLUEPRINT:0,10,2203,0,0,0,0,0,638229688703249448,0.9.27.15466,Wind%20Turbine%20Row,"H4sIAAAAAAAAC2NkYGAQYkAAVSBmhLIZGf4zMJyACjMysMLU/P/P7wSWnyBpjsyGyc/mMAWqgQAkoyHmsjDccARzLC5vR2YT0swEIpgZBBxhtiGzCWlmhhATIBoOSG5DZhPSzAIiVqnPN4PZhswmpBkAVTZYlGABAAA="69A8C019EDC4ADACB9B4D802E0D4248A'
+  cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
+  collection_id: 5
+  mod_id: 1
+  mod_version: "0.9.27.15466"
+  slug: factory-other-user-factory
+  cached_votes_total: 5
+  usage_count: 2
+  created_at: <%= 3.weeks.ago %>
+  updated_at: <%= 2.days.ago %>
+
+# Dyson Sphere blueprints
+public_dyson_sphere:
+  id: 4
+  title: Public Dyson Sphere
+  type: DysonSphere
+  encoded_blueprint: 'DYBP:0,637790444891173226,0.9.24.11286,3,0"H4sIAAAAAAAAC/v/HwIYGYDAQcaNAQU02DMyoUmIvT+8L645x56RGSrxmcXUHoj3Jx9gMQbizYwsUAmgSjugyv0FG/qN9hbpbmZkGAWDCgAA1Fa3jvwBAAA="D6D62579044FF1FFA85A8E20F7796DE3'
+  cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
+  collection_id: 3
+  mod_id: 1
+  mod_version: "0.9.24.11286"
+  slug: dyson-sphere-public-dyson-sphere
+  cached_votes_total: 25
+  usage_count: 15
+  created_at: <%= 2.months.ago %>
+  updated_at: <%= 1.week.ago %>
+
+private_dyson_sphere:
+  id: 5
+  title: Private Dyson Sphere
+  type: DysonSphere
+  encoded_blueprint: 'DYBP:0,637790444891173226,0.9.24.11286,3,0"H4sIAAAAAAAAC/v/HwIYGYDAQcaNAQU02DMyoUmIvT+8L645x56RGSrxmcXUHoj3Jx9gMQbizYwsUAmgSjugyv0FG/qN9hbpbmZkGAWDCgAA1Fa3jvwBAAA="D6D62579044FF1FFA85A8E20F7796DE3'
+  cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
+  collection_id: 6
+  mod_id: 1
+  mod_version: "0.9.24.11286"
+  slug: dyson-sphere-private-dyson-sphere
+  cached_votes_total: 0
+  usage_count: 0
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 2.weeks.ago %>
+
+# Mecha blueprint (minimal - no blueprint_file for now, tests will skip file-dependent features)
+public_mecha:
+  id: 6
+  title: Public Mecha Blueprint
+  type: Mecha
+  cover_picture_data: '{"id":"test/cover.png","storage":"store","metadata":{"filename":"cover.png","size":100,"mime_type":"image/png","width":100,"height":100}}'
+  collection_id: 3
+  mod_id: 1
+  mod_version: "0.10.29.22015"
+  slug: mecha-public-mecha-blueprint
+  cached_votes_total: 8
+  usage_count: 3
+  created_at: <%= 3.weeks.ago %>
+  updated_at: <%= 5.days.ago %>
