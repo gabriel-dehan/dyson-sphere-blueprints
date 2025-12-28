@@ -15,7 +15,7 @@
             <strong><%= collection.type %></strong> collection,
           </span>
           <span class="t-collections-list__collection-meta-count">
-            with <strong><%= collection.blueprints.count %></strong> <%= pluralize_without_count(collection.blueprints.count, 'blueprint') %>
+            with <strong><%= collection.blueprints_count %></strong> <%= pluralize_without_count(collection.blueprints_count, 'blueprint') %>
           </span>
         </div>
         <div class="t-collections-list__collection-block">
@@ -25,7 +25,7 @@
             data-tippy-content="Sum of all blueprints"
             data-tippy-placement="right"
           >
-              <strong><%= collection.total_votes %></strong><i class="fas fa-heart"></i>&nbsp;
+              <strong><%= collection.total_votes_sum %></strong><i class="fas fa-heart"></i>&nbsp;
             </span>
             <span class="t-collections-list__collection-date">
               Created <strong><%= time_ago_in_words(collection.created_at) %></strong>

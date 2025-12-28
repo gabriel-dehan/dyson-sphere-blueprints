@@ -1,5 +1,6 @@
 class Blueprint::Mecha < Blueprint
   def self.sti_name() = "Mecha"
+
   def normalize_friendly_id(string) = "mecha-#{super}"
 
   include MechaThumbnailUploader::Attachment(:cover_picture)
@@ -25,7 +26,7 @@ class Blueprint::Mecha < Blueprint
   private
 
   def decode_blueprint(force: false)
-    BlueprintParserJob.perform_now(id) if saved_change_to_attribute?(:blueprint_file_data) || force
+    BlueprintParserJob.perform_later(id) if saved_change_to_attribute?(:blueprint_file_data) || force
   end
 
   def extract_colors(force: false)

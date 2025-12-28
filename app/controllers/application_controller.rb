@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_mods
-    @mods = Mod.all.order(created_at: :desc)
+    @mods = Mod.all.order(created_at: :desc).to_a
   end
 
   protected

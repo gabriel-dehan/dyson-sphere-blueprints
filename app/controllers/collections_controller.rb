@@ -11,7 +11,8 @@ class CollectionsController < ApplicationController
       .where.not(blueprints: { id: nil })
       .where(blueprints: { mod_id: @mods.first.id }) # TODO: Remove when Multibuild is removed
       .group("collections.id")
-      .order("sum(blueprints.cached_votes_total) DESC")
+      .select("collections.*, COUNT(blueprints.id) as blueprints_count, COALESCE(SUM(blueprints.cached_votes_total), 0) as total_votes_sum")
+      .order("total_votes_sum DESC")
       .page(params[:page])
   end
 
@@ -20,7 +21,8 @@ class CollectionsController < ApplicationController
     @collection = Collection.friendly.find(params[:id])
     @blueprints = @collection
       .blueprints
-      .includes(:collection)
+      .light_query
+      .with_associations
       .order(cached_votes_total: :desc)
       .page(params[:page])
 
@@ -87,7 +89,7 @@ class CollectionsController < ApplicationController
       File.open(temp_file.path, "wb") do |f|
         zip = Zip::OutputStream.write_buffer(f) do |io|
           titles = []
-          @collection.blueprints.each do |blueprint|
+          @collection.blueprints.find_each(batch_size: 10) do |blueprint|
             is_mecha = blueprint.type == Blueprint::Mecha.sti_name
             title = blueprint.title.truncate(100)
             title += "_#{titles.count(title)}" if titles.count(title).positive?
@@ -108,8 +110,7 @@ class CollectionsController < ApplicationController
         end
         zip.flush
       end
-      zip_data = File.read(temp_file.path)
-      send_data(zip_data, type: "application/zip", disposition: "attachment", filename: filename)
+      send_file(temp_file.path, type: "application/zip", disposition: "attachment", filename: filename)
     rescue StandardError => e
       puts e # Still log an error if there is one
     ensure # important steps below

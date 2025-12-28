@@ -28,7 +28,7 @@ class PagesController < ApplicationController
     if stale?(etag: [general_scope, current_user], last_modified: last_modified, public: true)
       # Apply further criteria and fetch the actual records only if necessary
       @blueprints = general_scope
-        .includes(:collection, collection: :user)
+        .with_associations
         .order(created_at: :desc)
         .page(params[:page])
     end
