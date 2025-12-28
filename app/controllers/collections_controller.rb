@@ -11,7 +11,7 @@ class CollectionsController < ApplicationController
       .where.not(blueprints: { id: nil })
       .where(blueprints: { mod_id: @mods.first.id }) # TODO: Remove when Multibuild is removed
       .group("collections.id")
-      .select("collections.*, COUNT(blueprints.id) as blueprints_count, SUM(blueprints.cached_votes_total) as total_votes_sum")
+      .select("collections.*, COUNT(blueprints.id) as blueprints_count, COALESCE(SUM(blueprints.cached_votes_total), 0) as total_votes_sum")
       .order("total_votes_sum DESC")
       .page(params[:page])
   end
