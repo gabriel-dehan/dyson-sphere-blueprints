@@ -1,10 +1,13 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 3.0.0"
+ruby "~> 3.2.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 6.1.3"
+# Ruby 3.2 compatibility
+gem "logger"
+gem "digest"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use Puma as the app server
@@ -25,7 +28,7 @@ gem "redis", "~> 4.0"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 
-gem "devise", github: "heartcombo/devise", branch: "master"
+gem "devise", "~> 4.9"
 gem "pundit"
 
 gem "autoprefixer-rails"
@@ -47,7 +50,7 @@ gem "shrine", "~> 3.3"
 gem "image_processing", "~> 1.10"
 gem "fastimage"
 gem "marcel"
-gem "dsp_blueprint_parser", "~> 0.2"
+gem "dsp_blueprint_parser", "0.2.0"
 gem "rubyzip", require: "zip"
 gem "scout_apm"
 gem "barnes"
