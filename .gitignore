@@ -53,3 +53,7 @@ localstack/data
 
 # Do not ignore .env.sample
 !.env.sample
+
+.claude/plans
+.claude/investigations
+*.dump
