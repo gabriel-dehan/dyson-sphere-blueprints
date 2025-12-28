@@ -1,2 +1,6 @@
 production:
   auto_instruments: true
+
+test:
+  # Disable Scout APM in test environment
+  enabled: false

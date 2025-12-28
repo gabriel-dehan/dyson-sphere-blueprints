@@ -1,0 +1,24 @@
+# Votes for testing like/unlike functionality
+# Note: votable_id and voter_id use explicit fixture IDs
+
+member_votes_public_factory:
+  id: 1
+  votable_type: Blueprint
+  votable_id: 1  # public_factory
+  voter_type: User
+  voter_id: 2    # member
+  vote_flag: true
+  vote_weight: 1
+  created_at: <%= 2.weeks.ago %>
+  updated_at: <%= 2.weeks.ago %>
+
+admin_votes_public_dyson:
+  id: 2
+  votable_type: Blueprint
+  votable_id: 4  # public_dyson_sphere
+  voter_type: User
+  voter_id: 1    # admin
+  vote_flag: true
+  vote_weight: 1
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 1.month.ago %>

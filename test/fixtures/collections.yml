@@ -1,0 +1,59 @@
+# Test collections for users
+# Note: user_id matches the users fixture ids
+
+# Admin's collections
+admin_public:
+  id: 1
+  name: Admin Public Collection
+  type: 0  # Public
+  user_id: 1
+  slug: admin-public-collection
+  created_at: <%= 1.year.ago %>
+  updated_at: <%= 1.day.ago %>
+
+admin_private:
+  id: 2
+  name: Admin Private Collection
+  type: 1  # Private
+  user_id: 1
+  slug: admin-private-collection
+  created_at: <%= 1.year.ago %>
+  updated_at: <%= 1.day.ago %>
+
+# Member's collections
+member_public:
+  id: 3
+  name: Member Public Collection
+  type: 0  # Public
+  user_id: 2
+  slug: member-public-collection
+  created_at: <%= 6.months.ago %>
+  updated_at: <%= 1.day.ago %>
+
+member_private:
+  id: 4
+  name: Member Private Collection
+  type: 1  # Private
+  user_id: 2
+  slug: member-private-collection
+  created_at: <%= 6.months.ago %>
+  updated_at: <%= 1.day.ago %>
+
+# Other user's collections
+other_public:
+  id: 5
+  name: Other Public Collection
+  type: 0  # Public
+  user_id: 3
+  slug: other-public-collection
+  created_at: <%= 3.months.ago %>
+  updated_at: <%= 1.week.ago %>
+
+other_private:
+  id: 6
+  name: Other Private Collection
+  type: 1  # Private
+  user_id: 3
+  slug: other-private-collection
+  created_at: <%= 3.months.ago %>
+  updated_at: <%= 1.week.ago %>

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  include Pundit
+  include Pundit::Authorization
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_mods
 

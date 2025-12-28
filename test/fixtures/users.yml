@@ -1,0 +1,31 @@
+# Test users for the application
+
+admin:
+  id: 1
+  username: admin_user
+  email: admin@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  role: admin
+  sign_in_count: 1
+  created_at: <%= 1.year.ago %>
+  updated_at: <%= 1.day.ago %>
+
+member:
+  id: 2
+  username: test_member
+  email: member@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  role: member
+  sign_in_count: 5
+  created_at: <%= 6.months.ago %>
+  updated_at: <%= 1.day.ago %>
+
+other_user:
+  id: 3
+  username: other_member
+  email: other@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  role: member
+  sign_in_count: 2
+  created_at: <%= 3.months.ago %>
+  updated_at: <%= 1.week.ago %>
