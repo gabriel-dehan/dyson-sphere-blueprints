@@ -1,7 +1,8 @@
 # Changelog
 
 - [Changelog](#changelog)
-    - [Latest: 4.4.3](#latest-443)
+    - [Latest: 4.5.0](#latest-450)
+  - [v4.4.3](#v443)
   - [v4.4.2](#v442)
   - [v4.4.1](#v441)
   - [v4.4.0](#v440)
@@ -37,7 +38,15 @@
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
 
-### Latest: 4.4.3
+### Latest: 4.5.0
+- Upgraded Ruby from 3.0.0 to 3.2.9 for improved performance and security
+- Updated Rails from 6.1.3 to 6.1.7.10 with security patches
+- Migrated Devise from git source to stable version 4.9.4
+- Added Ruby 3.2 compatibility fixes (logger, digest gems)
+- Added workaround for dsp_blueprint_parser compatibility with Ruby 3.2
+- Updated numerous dependencies (AWS SDK, Puma, Sidekiq, and more)
+
+## v4.4.3
 - Updated dsp_blueprint_parser gem dependency ([#82](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/82))
 
 ## v4.4.2
