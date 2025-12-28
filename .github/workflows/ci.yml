@@ -60,6 +60,9 @@ jobs:
       - name: Setup database
         run: bin/rails db:schema:load
 
+      - name: Compile assets
+        run: bin/rails webpacker:compile
+
       - name: Run tests
         run: bin/rails test
 
