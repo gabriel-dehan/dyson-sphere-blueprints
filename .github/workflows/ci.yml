@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main, feature/*]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: dev
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: dspblueprints_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      PG_USER: dev
+      PG_PASS: password
+      PG_HOST: localhost
+      DATABASE_URL: postgres://dev:password@localhost:5432/dspblueprints_test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Setup database
+        run: bin/rails db:schema:load
+
+      - name: Run tests
+        run: bin/rails test
+
+      - name: Run system tests
+        run: bin/rails test:system
