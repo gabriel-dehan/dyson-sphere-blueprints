@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/gabriel-dehan/DSP-Blueprint-Parser
+  revision: f1c37a34c81479820d4e454a285cfe5047bd6e24
+  branch: fix-ruby-32-compatibility
+  specs:
+    dsp_blueprint_parser (0.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -154,7 +161,6 @@ GEM
     down (5.4.2)
       addressable (~> 2.8)
     drb (2.2.3)
-    dsp_blueprint_parser (0.2.1)
     erubi (1.13.1)
     execjs (2.10.0)
     faraday (2.14.0)
@@ -498,7 +504,7 @@ DEPENDENCIES
   devise (~> 4.9)
   digest
   dotenv-rails
-  dsp_blueprint_parser (= 0.2.1)
+  dsp_blueprint_parser!
   fastimage
   font-awesome-sass
   friendly_id (~> 5.4.0)
