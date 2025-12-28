@@ -21,13 +21,11 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.5.0
-- Upgraded Ruby from 3.0.0 to 3.2.9 for improved performance and security
-- Updated Rails from 6.1.3 to 6.1.7.10 with security patches
-- Migrated Devise from git source to stable version 4.9.4
-- Added Ruby 3.2 compatibility fixes (logger, digest gems)
-- Added workaround for dsp_blueprint_parser compatibility with Ruby 3.2
-- Updated numerous dependencies (AWS SDK, Puma, Sidekiq, and more)
+### Latest: 4.6.0
+- Added comprehensive test suite with model, controller, policy, and system tests
+- Added GitHub Actions CI workflow for automated testing
+- Memory optimizations and performance improvements to reduce RAM consumption
+- Added database indexes for better query performance
 
 ### Previous versions
 

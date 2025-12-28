@@ -1,6 +1,9 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [v4.6.0](#v460)
+  - [v4.5.0](#v450)
+  - [v4.4.0](#v440)
   - [v4.3.1](#v431)
   - [v4.3.0](#v430)
   - [v4.2.0](#v420)
@@ -33,7 +36,22 @@
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
 
-### Latest: 4.4.0
+### Latest: 4.6.0
+- Added comprehensive test suite with model, controller, policy, and system tests ([#90](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/90))
+- Added GitHub Actions CI workflow for automated testing
+- Memory optimizations and performance improvements to reduce RAM consumption ([#86](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/86))
+- Added database indexes for better query performance
+
+## v4.5.0
+- Upgraded Ruby from 3.0.0 to 3.2.6 for improved performance and security ([#84](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/84))
+- Updated Rails from 6.1.3 to 6.1.7.10 with security patches
+- Migrated Devise from git source to stable version 4.9.4
+- Added Ruby 3.2 compatibility fixes (logger, digest gems)
+- Updated numerous dependencies (AWS SDK, Puma, Sidekiq, and more)
+- Updated dsp_blueprint_parser gem to 0.2.2 to handle recent game changes to building encoding ([#82](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/82))
+- Fixed authenticated banner to properly cover all UI elements ([#81](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/81))
+
+## v4.4.0
 - Query and filters optimisations to fix the performance issues
 
 ## v4.3.1
