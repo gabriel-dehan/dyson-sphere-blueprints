@@ -9,18 +9,10 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Table of content](#table-of-content)
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
-    - [Latest: 4.4.0](#latest-440)
-    - [Previous versions](#previous-versions)
   - [Contribute](#contribute)
-    - [Setting up](#setting-up)
-    - [Seeding](#seeding)
-    - [Environment](#environment)
-    - [Build development environment](#build-development-environment)
-    - [Rake tasks](#rake-tasks)
   - [Our lovely sponsors](#our-lovely-sponsors)
   - [Contributors](#contributors)
   - [Deploy](#deploy)
-    - [Staging](#staging)
 - [License](#license)
 
 ## Roadmap
@@ -29,8 +21,13 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.4.0
-- Query and filters optimisations to fix the performance issues
+### Latest: 4.5.0
+- Upgraded Ruby from 3.0.0 to 3.2.9 for improved performance and security
+- Updated Rails from 6.1.3 to 6.1.7.10 with security patches
+- Migrated Devise from git source to stable version 4.9.4
+- Added Ruby 3.2 compatibility fixes (logger, digest gems)
+- Added workaround for dsp_blueprint_parser compatibility with Ruby 3.2
+- Updated numerous dependencies (AWS SDK, Puma, Sidekiq, and more)
 
 ### Previous versions
 
@@ -143,6 +140,43 @@ You can simply copy it and it should be enough.
 ```bash
 $ cp .env.sample .env
 ```
+
+### Restoring Production Data
+
+If you have access to a production database dump, you can restore it to your local development environment for testing with real data.
+
+**Prerequisites:**
+- Docker compose services must be running (`docker compose up -d`)
+- You have a PostgreSQL dump file (e.g., `latest.dump`)
+
+**Steps:**
+
+1. Copy the dump file into the PostgreSQL container:
+```bash
+docker cp latest.dump dyson-sphere-blueprints-postgres-1:/tmp/
+```
+
+2. Drop the existing development database:
+```bash
+docker exec dyson-sphere-blueprints-postgres-1 dropdb -U dev dspblueprints_development
+```
+
+3. Create a fresh database:
+```bash
+docker exec dyson-sphere-blueprints-postgres-1 createdb -U dev dspblueprints_development
+```
+
+4. Restore the dump:
+```bash
+docker exec dyson-sphere-blueprints-postgres-1 pg_restore --verbose --no-acl --no-owner -U dev -d dspblueprints_development /tmp/latest.dump
+```
+
+5. Verify the restore (optional):
+```bash
+docker exec dyson-sphere-blueprints-postgres-1 psql -U dev -d dspblueprints_development -c "SELECT COUNT(*) FROM blueprints;"
+```
+
+**Note:** You do NOT need to run `rails db:migrate` after restoring a dump, as the dump already contains the complete schema and data. Just start your Rails server with `rails s`.
 
 ### Rake tasks
 
