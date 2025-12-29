@@ -9,6 +9,7 @@ development:
   username: <%= ENV["PG_USER"] %>
   password: <%= ENV["PG_PASS"] %>
   host:     <%= ENV["PG_HOST"] %>
+  gssencmode: disable # Prevents ARM Mac fork segfaults (issue #89)
 
 test:
   <<: *default
@@ -16,6 +17,7 @@ test:
   username: <%= ENV["PG_USER"] %>
   password: <%= ENV["PG_PASS"] %>
   host:     <%= ENV["PG_HOST"] %>
+  gssencmode: disable # Prevents ARM Mac fork segfaults (issue #89)
 
 production:
   <<: *default

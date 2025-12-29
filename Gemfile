@@ -14,7 +14,7 @@ gem "minitest", "~> 5.0"
 # See: https://github.com/ruby-concurrency/concurrent-ruby/issues/1078
 gem "concurrent-ruby", "1.3.4"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.6"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
 # Use SCSS for stylesheets
