@@ -1,18 +1,8 @@
-class Mod < ApplicationRecord
+class GameVersion < ApplicationRecord
   has_many :blueprints, dependent: :restrict_with_error
 
-  # Used to decide which mods are automaticaly fetched from the thunderstore API
-  MANAGED_MODS = [
-    "MultiBuild",
-    "MultiBuildBeta",
-    "Dyson Sphere Program"
-  ].freeze
-
-  # Hides other mods as long as we don't have a need for them
-  default_scope { where(name: "Dyson Sphere Program") }
-
   def self.to_select
-    all.map { |mod| [mod.name, mod.id] }
+    all.map { |gv| [gv.name, gv.id] }
   end
 
   def latest
@@ -33,7 +23,6 @@ class Mod < ApplicationRecord
     versions.keys.reject(&:blank?).sort_by { |v| Gem::Version.new(v) }.reverse
   end
 
-  # TODO: Handle backward compatible and non compatible versions
   # Returns a range of version strings compatible with check_version, e.g ["2.0.0", "3.0.0"]
   def compatibility_range_for(check_version)
     # Generates a version matrix [[version, breaking]], e.g: [["2.0.1", true], ["2.0.2", false], ...]
@@ -45,12 +34,12 @@ class Mod < ApplicationRecord
 
     check_gem_version = Gem::Version.new(check_version)
 
-    # Find the last version <= to the blueprint.mod_version that is breaking (searching from end)
+    # Find the last version <= to the blueprint.game_version_string that is breaking (searching from end)
     lower_breaking_index = version_list.rindex { |version, breaking| Gem::Version.new(version) <= check_gem_version && breaking } || 0
 
     # The lowbound range is everything from the lower_breaking_index (not included) up to the latest version
     lowbound_range = version_list[(lower_breaking_index + 1)..version_list.length - 1]
-    # Find the first version > to the blueprint.mod_version that is breaking
+    # Find the first version > to the blueprint.game_version_string that is breaking
     upper_breaking_index = lowbound_range.find_index { |_version, breaking| breaking }
 
     # Lowest version possible (the breaking version that started the compatible range)

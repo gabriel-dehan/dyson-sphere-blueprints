@@ -9,7 +9,7 @@ class CollectionsController < ApplicationController
       .joins(:blueprints)
       .where(type: "Public")
       .where.not(blueprints: { id: nil })
-      .where(blueprints: { mod_id: @mods.first.id }) # TODO: Remove when Multibuild is removed
+      .where(blueprints: { game_version_id: @game_versions.first.id })
       .group("collections.id")
       .select("collections.*, COUNT(blueprints.id) as blueprints_count, COALESCE(SUM(blueprints.cached_votes_total), 0) as total_votes_sum")
       .order("total_votes_sum DESC")

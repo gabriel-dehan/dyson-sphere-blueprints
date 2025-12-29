@@ -3,7 +3,7 @@ module Parsers
     # @param [Blueprint]
     def initialize(blueprint)
       @blueprint = blueprint
-      @version = blueprint.mod_version
+      @version = blueprint.game_version_string
     end
 
     # DYBP:0,637783100277796003,0.9.24.11192,4,0"H4sIAAAAAAA...

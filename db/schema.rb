@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_12_28_191732) do
+ActiveRecord::Schema.define(version: 2025_12_29_013518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2025_12_28_191732) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
-    t.bigint "mod_id"
-    t.string "mod_version", null: false
+    t.bigint "game_version_id"
+    t.string "game_version_string", null: false
     t.integer "cached_votes_total", default: 0
     t.integer "cached_votes_score", default: 0
     t.integer "cached_votes_up", default: 0
@@ -102,8 +102,8 @@ ActiveRecord::Schema.define(version: 2025_12_28_191732) do
     t.index ["collection_id", "cached_votes_total"], name: "index_blueprints_on_collection_id_and_cached_votes_total"
     t.index ["collection_id"], name: "index_blueprints_on_collection_id"
     t.index ["created_at"], name: "index_blueprints_on_created_at", order: :desc
-    t.index ["mod_id"], name: "index_blueprints_on_mod_id"
-    t.index ["mod_version"], name: "index_blueprints_on_mod_version"
+    t.index ["game_version_id"], name: "index_blueprints_on_game_version_id"
+    t.index ["game_version_string"], name: "index_blueprints_on_game_version_string"
     t.index ["slug"], name: "index_blueprints_on_slug", unique: true
     t.index ["type"], name: "index_blueprints_on_type"
     t.index ["updated_at"], name: "index_blueprints_on_updated_at"
@@ -134,14 +134,14 @@ ActiveRecord::Schema.define(version: 2025_12_28_191732) do
     t.float "l", null: false
   end
 
-  create_table "mods", force: :cascade do |t|
+  create_table "game_versions", force: :cascade do |t|
     t.string "name", null: false
     t.string "author", null: false
     t.string "uuid4", null: false
     t.json "versions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_mods_on_name"
+    t.index ["name"], name: "index_game_versions_on_name"
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -227,7 +227,7 @@ ActiveRecord::Schema.define(version: 2025_12_28_191732) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blueprints", "collections"
-  add_foreign_key "blueprints", "mods"
+  add_foreign_key "blueprints", "game_versions"
   add_foreign_key "collections", "users"
   add_foreign_key "pictures", "blueprints"
   add_foreign_key "taggings", "tags"

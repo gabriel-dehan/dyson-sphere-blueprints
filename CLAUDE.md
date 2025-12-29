@@ -48,13 +48,10 @@ rails db:rollback
 ### Rake Tasks
 ```bash
 # Add a new game version (forces specific version)
-rake 'mod:fetch_base_game_latest[0.8.19.7662]'
-
-# Fetch latest game versions from Steam News API
-rake mod:fetch_latest
+noglob rake 'game_version:fetch_latest[0.8.19.7662]'
 
 # Flag a version as breaking (use noglob in zsh)
-noglob rake 'mod:flag_breaking[Dyson Sphere Program, 0.8.19.7662]'
+noglob rake 'game_version:flag_breaking[0.8.19.7662]'
 
 # Recompute all blueprint data (useful when entities are added/changed)
 rake blueprint:recompute_data
@@ -76,18 +73,17 @@ rake blueprint:recompute_dyson_spheres
   - `Blueprint::Mecha` - Mecha blueprints
 
 All blueprints:
-- Belong to a `Collection` and `Mod`
+- Belong to a `Collection` and `GameVersion`
 - Use `friendly_id` for slugs
 - Support voting via `acts_as_votable`
 - Support tagging via `acts_as_taggable_on`
 - Have rich text descriptions and multiple pictures
-- Default scope filters to "Dyson Sphere Program" mod only
 
-**Mod System**
-- `Mod` model manages game versions and compatibility
+**Game Version System**
+- `GameVersion` model manages game versions and compatibility
 - Stores version data as JSON with breaking change flags
 - `compatibility_range_for(version)` returns compatible version range
-- Only "Dyson Sphere Program" mod is actively used (legacy mods exist but are hidden)
+- Shows users which game versions a blueprint is compatible with
 
 ### Blueprint Parsing
 
@@ -101,7 +97,6 @@ Parser classes:
 - `Parsers::FactoryBlueprint`
 - `Parsers::DysonSphereBlueprint`
 - `Parsers::MechaBlueprint`
-- `Parsers::MultibuildBetaBlueprint` (legacy)
 
 ### Frontend Architecture
 
@@ -128,7 +123,6 @@ Uses Stimulus controllers (not React - Stimulus is a lightweight JS framework):
 Sidekiq jobs in `app/jobs/`:
 - `BlueprintParserJob` - Parses and extracts blueprint data
 - `BaseGameManagerJob` - Fetches game versions from Steam
-- `ModManagerJob` - Manages mod versions
 - `MechaColorExtractJob` - Extracts color data from mecha blueprints
 
 ## Important Patterns
@@ -141,9 +135,9 @@ The codebase uses Single Table Inheritance for blueprints. When working with blu
 - `find_sti_class` is overridden to prefix with `Blueprint::`
 - Each type has its own controller in `app/controllers/blueprint/`
 
-### Mod Version Compatibility
+### Game Version Compatibility
 
-The `Mod#compatibility_range_for` method is complex but critical:
+The `GameVersion#compatibility_range_for` method is complex but critical:
 - Takes a version string and returns `[min_version, max_version]`
 - Considers "breaking" flags in version JSON
 - Blueprint compatibility is shown based on this range
@@ -156,12 +150,6 @@ Blueprints over 700KB are considered "large":
 - Large blueprints may have special handling for performance
 - The `light_query` scope excludes `encoded_blueprint` column to reduce data transfer
 
-### Default Scopes
-
-Both `Blueprint` and `Mod` have default scopes filtering to "Dyson Sphere Program". This hides legacy MultiBuild data. Be aware when:
-- Writing migrations
-- Using `unscoped` to bypass filters
-- Debugging why certain records don't appear
 
 ## Testing
 

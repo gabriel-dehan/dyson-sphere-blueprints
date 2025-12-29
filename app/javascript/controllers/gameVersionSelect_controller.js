@@ -4,18 +4,18 @@ export default class extends Controller {
   static targets = [ "container" ]
 
   connect() {
-    const modsData = JSON.parse(this.containerTarget.dataset.mods);
+    const gameVersionsData = JSON.parse(this.containerTarget.dataset.gameVersions);
     const includeBlank = this.containerTarget.dataset.includeBlank === 'true';
-    const idSelect = this.containerTarget.querySelector('#blueprint_mod_id, #mod_id');
-    const versionSelect = this.containerTarget.querySelector('#blueprint_mod_version, #mod_version');
+    const idSelect = this.containerTarget.querySelector('#blueprint_game_version_id, #game_version_id');
+    const versionSelect = this.containerTarget.querySelector('#blueprint_game_version_string, #game_version_string');
 
     idSelect.addEventListener('change', () => {
       const selectedId = idSelect.value;
-      const selectedMod = modsData.find((mod) => selectedId == mod['id'])
+      const selectedGameVersion = gameVersionsData.find((gv) => selectedId == gv['id'])
 
       let options = [];
-      if (selectedMod) {
-        options = selectedMod
+      if (selectedGameVersion) {
+        options = selectedGameVersion
           .versions
           .sort()
           .reverse()

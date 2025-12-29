@@ -8,7 +8,7 @@ class Blueprint < ApplicationRecord
   paginates_per 32
 
   belongs_to :collection
-  belongs_to :mod
+  belongs_to :game_version
   has_one :user, through: :collection
 
   # Pictures
@@ -19,10 +19,8 @@ class Blueprint < ApplicationRecord
   validates :title, presence: true
   validates :additional_pictures, length: { maximum: 4, message: "Too many pictures. Please make sure you don't have too many pictures attached." }
 
-  # Hides other mods as long as we don't have a need for them
-  default_scope { joins(:mod).where(mod: { name: "Dyson Sphere Program" }) }
   scope :light_query, -> { select(column_names - ['encoded_blueprint']) }
-  scope :with_associations, -> { includes(:mod, :tags, :user, :collection, collection: :user) }
+  scope :with_associations, -> { includes(:game_version, :tags, :user, :collection, collection: :user) }
 
   pg_search_scope :search_by_title,
                   against: [:title],
@@ -34,23 +32,23 @@ class Blueprint < ApplicationRecord
     tags.reject { |tag| tag.name =~ /mass construction/i }
   end
 
-  def formatted_mod_version
-    "#{mod.name} - #{mod_version}"
+  def formatted_game_version
+    "#{game_version.name} - #{game_version_string}"
   end
 
-  def is_mod_version_latest?
-    mod_version >= mod.latest
+  def is_game_version_latest?
+    game_version_string >= game_version.latest
   end
 
-  def mod_compatibility_range
+  def game_version_compatibility_range
     # Handle retro compatibility only for <= 2.0.6
-    if mod_version <= "2.0.6"
+    if game_version_string <= "2.0.6"
       [
-        mod.compatibility_range_for(mod_version).first,
-        mod.compatibility_range_for(mod.latest).last
+        game_version.compatibility_range_for(game_version_string).first,
+        game_version.compatibility_range_for(game_version.latest).last
       ]
     else
-      mod.compatibility_range_for(mod_version)
+      game_version.compatibility_range_for(game_version_string)
     end
   end
 

@@ -2,20 +2,20 @@ require "test_helper"
 
 class BlueprintTest < ActiveSupport::TestCase
   # ============================================
-  # MOD COMPATIBILITY TESTS
+  # GAME VERSION COMPATIBILITY TESTS
   # ============================================
 
-  test "mod_compatibility_range returns array with two versions" do
+  test "game_version_compatibility_range returns array with two versions" do
     blueprint = blueprints(:public_factory)
-    range = blueprint.mod_compatibility_range
+    range = blueprint.game_version_compatibility_range
 
     assert_kind_of Array, range
     assert_equal 2, range.length
   end
 
-  test "mod_compatibility_range handles blueprint versions" do
+  test "game_version_compatibility_range handles blueprint versions" do
     blueprint = blueprints(:public_factory)
-    range = blueprint.mod_compatibility_range
+    range = blueprint.game_version_compatibility_range
 
     # Should return valid version range (array of 2)
     assert_kind_of Array, range
@@ -25,24 +25,24 @@ class BlueprintTest < ActiveSupport::TestCase
     assert range.last.present?
   end
 
-  test "is_mod_version_latest? returns boolean" do
+  test "is_game_version_latest? returns boolean" do
     blueprint = blueprints(:public_factory)
-    result = blueprint.is_mod_version_latest?
+    result = blueprint.is_game_version_latest?
 
     assert_includes [true, false], result
   end
 
-  test "is_mod_version_latest? compares with mod latest" do
+  test "is_game_version_latest? compares with game version latest" do
     # Create a blueprint with the latest version
     blueprint = blueprints(:public_factory)
-    mod = blueprint.mod
+    game_version = blueprint.game_version
 
-    # If blueprint version equals mod latest, should return true
+    # If blueprint version equals game version latest, should return true
     # Otherwise false - depends on fixture data
-    if blueprint.mod_version >= mod.latest
-      assert blueprint.is_mod_version_latest?
+    if blueprint.game_version_string >= game_version.latest
+      assert blueprint.is_game_version_latest?
     else
-      refute blueprint.is_mod_version_latest?
+      refute blueprint.is_game_version_latest?
     end
   end
 
@@ -50,12 +50,12 @@ class BlueprintTest < ActiveSupport::TestCase
   # HELPER METHOD TESTS
   # ============================================
 
-  test "formatted_mod_version includes mod name and version" do
+  test "formatted_game_version includes game version name and version" do
     blueprint = blueprints(:public_factory)
-    formatted = blueprint.formatted_mod_version
+    formatted = blueprint.formatted_game_version
 
-    assert_includes formatted, blueprint.mod.name
-    assert_includes formatted, blueprint.mod_version
+    assert_includes formatted, blueprint.game_version.name
+    assert_includes formatted, blueprint.game_version_string
   end
 
   test "large_bp? returns false for nil encoded_blueprint" do
@@ -140,7 +140,7 @@ class BlueprintTest < ActiveSupport::TestCase
 
     # Should not raise N+1 errors when accessing associations
     blueprints.each do |bp|
-      bp.mod
+      bp.game_version
       bp.tags
       bp.collection
     end

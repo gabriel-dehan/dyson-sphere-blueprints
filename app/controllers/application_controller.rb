@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   include Pundit::Authorization
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_mods
+  before_action :set_game_versions
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 
-  def set_mods
-    @mods = Mod.all.order(created_at: :desc).to_a
+  def set_game_versions
+    @game_versions = GameVersion.all.order(created_at: :desc).to_a
   end
 
   protected

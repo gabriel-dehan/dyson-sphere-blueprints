@@ -1,13 +1,13 @@
-<%# div.data-controller="modSelect" %>
+<%# div.data-controller="gameVersionSelect" %>
 <% if @old_mod_support %>
-  <div class="o-blueprint-filters__mods o-blueprint-filters__select" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys } }.to_json %>" data-include-blank="true">
+  <div class="o-blueprint-filters__mods o-blueprint-filters__select" data-gameVersionSelect-target="container" data-game-versions="<%= @game_versions.map { |gv| { id: gv.id, versions: gv['versions'].keys } }.to_json %>" data-include-blank="true">
     <div class="o-blueprint-filters__mods-mod">
-      <%= f.label :mod_id, "Mod" %>
-      <%= f.select :mod_id, Mod.to_select, selected: filters[:mod_id], include_blank: 'Any' %>
+      <%= f.label :game_version_id, "Game" %>
+      <%= f.select :game_version_id, GameVersion.to_select, selected: filters[:game_version_id], include_blank: 'Any' %>
     </div>
     <div class="o-blueprint-filters__mods-version">
-      <%= f.label :mod_version, "Game version" %>
-      <%= f.select :mod_version, filters[:mod_id] == 'Any' ? [] : @filter_mod.version_list, selected: filters[:mod_version], include_blank: 'Any' %>
+      <%= f.label :game_version_string, "Game version" %>
+      <%= f.select :game_version_string, filters[:game_version_id] == 'Any' ? [] : @filter_game_version.version_list, selected: filters[:game_version_string], include_blank: 'Any' %>
     </div>
   </div>
 <% end %>

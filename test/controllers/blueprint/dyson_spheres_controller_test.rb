@@ -72,12 +72,12 @@ class Blueprint::DysonSpheresControllerTest < ActionDispatch::IntegrationTest
     assert_equal users(:member), blueprint.user
   end
 
-  test "create assigns mod and version automatically" do
+  test "create assigns game version automatically" do
     sign_in_as(:member)
 
     post blueprint_dyson_spheres_path, params: {
       blueprint_dyson_sphere: {
-        title: "Auto Mod Dyson Sphere",
+        title: "Auto Version Dyson Sphere",
         collection: collections(:member_public).id,
         encoded_blueprint: sample_dyson_sphere_code,
         cover_picture: sample_cover_picture,
@@ -86,8 +86,8 @@ class Blueprint::DysonSpheresControllerTest < ActionDispatch::IntegrationTest
     }
 
     blueprint = Blueprint::DysonSphere.last
-    assert_equal "Dyson Sphere Program", blueprint.mod.name
-    assert_not_nil blueprint.mod_version
+    assert_equal "Dyson Sphere Program", blueprint.game_version.name
+    assert_not_nil blueprint.game_version_string
   end
 
   test "create with invalid data renders errors" do

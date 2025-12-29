@@ -9,17 +9,17 @@ class PagesController < ApplicationController
       author: nil,
       order: "recent",
       max_structures: "Any",
-      mod_id: @mods.first.id,
-      mod_version: "Any",
+      game_version_id: @game_versions.first.id,
+      game_version_string: "Any",
     }
 
-    @filter_mod = @mods.first
+    @filter_game_version = @game_versions.first
 
     # Define the general scope
     general_scope = policy_scope(Blueprint.light_query)
       .joins(:collection)
       .where(collection: { type: "Public" })
-      .where(mod_id: @filters[:mod_id])
+      .where(game_version_id: @filters[:game_version_id])
 
     # Fetch the latest updated_at timestamp based on the general scope
     last_modified = general_scope.maximum(:updated_at)
