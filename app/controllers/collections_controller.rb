@@ -83,40 +83,30 @@ class CollectionsController < ApplicationController
 
     safe_collection_name = @collection.name.tr(sanitizer, "")
     filename = "#{safe_collection_name}.zip"
-    temp_file = Tempfile.new(filename)
 
-    begin
-      File.open(temp_file.path, "wb") do |f|
-        zip = Zip::OutputStream.write_buffer(f) do |io|
-          titles = []
-          @collection.blueprints.find_each(batch_size: 10) do |blueprint|
-            is_mecha = blueprint.type == Blueprint::Mecha.sti_name
-            title = blueprint.title.truncate(100)
-            title += "_#{titles.count(title)}" if titles.count(title).positive?
-            titles += [blueprint.title.truncate(100)]
+    zip_buffer = Zip::OutputStream.write_buffer do |io|
+      titles = []
+      @collection.blueprints.find_each(batch_size: 10) do |blueprint|
+        is_mecha = blueprint.type == Blueprint::Mecha.sti_name
+        title = blueprint.title.truncate(100)
+        title += "_#{titles.count(title)}" if titles.count(title).positive?
+        titles += [blueprint.title.truncate(100)]
 
-            safe_title = title.tr(sanitizer, "|")
-            extension = is_mecha ? "mecha" : "txt"
+        safe_title = title.tr(sanitizer, "|")
+        extension = is_mecha ? "mecha" : "txt"
 
-            io.put_next_entry("#{safe_collection_name}/#{blueprint.type.pluralize.underscore}/#{safe_title}.#{extension}")
-            if is_mecha
-              data = blueprint.blueprint_file_data ? blueprint.blueprint_file.open.read : nil
-            else
-              data = blueprint.encoded_blueprint
-            end
-
-            io.write(data) if data
-          end
+        io.put_next_entry("#{safe_collection_name}/#{blueprint.type.pluralize.underscore}/#{safe_title}.#{extension}")
+        if is_mecha
+          data = blueprint.blueprint_file_data ? blueprint.blueprint_file.open.read : nil
+        else
+          data = blueprint.encoded_blueprint
         end
-        zip.flush
+
+        io.write(data) if data
       end
-      send_file(temp_file.path, type: "application/zip", disposition: "attachment", filename: filename)
-    rescue StandardError => e
-      puts e # Still log an error if there is one
-    ensure # important steps below
-      temp_file.close
-      temp_file.unlink
     end
+
+    send_data(zip_buffer.string, type: "application/zip", disposition: "attachment", filename: filename)
   end
 
   private
