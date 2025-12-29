@@ -12,6 +12,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
   - [Contribute](#contribute)
+    - [Testing](#testing)
+    - [Continuous Integration](#continuous-integration)
   - [Our lovely sponsors](#our-lovely-sponsors)
   - [Contributors](#contributors)
   - [Deploy](#deploy)
@@ -186,6 +188,48 @@ rake mod:fetch_base_game_latest[PATCH] # creates a new version in the DB, use li
 rake blueprint:recompute_data # updates all blueprints summary if you have made any changes to it
 rake mod:fetch_latest # currently legacy, but fetches the latest versions of all mods handled (MultiBuild and MultiBuildBeta)
 ```
+
+### Testing
+
+The project has a comprehensive test suite covering models, controllers, policies, and system tests.
+
+**Running tests:**
+```bash
+# Run all tests
+rails test
+
+# Run a specific test file
+rails test test/models/blueprint_test.rb
+
+# Run a specific test by line number
+rails test test/models/blueprint_test.rb:10
+
+# Run system tests (requires Chrome/Chromium)
+rails test:system
+```
+
+**Test structure:**
+- `test/models/` - Model unit tests
+- `test/controllers/` - Controller tests
+- `test/policies/` - Pundit authorization policy tests
+- `test/system/` - End-to-end browser tests
+
+### Continuous Integration
+
+This project uses GitHub Actions for CI. Every push and pull request triggers automated tests.
+
+The CI workflow:
+- Runs on Ubuntu with PostgreSQL and Redis services
+- Executes RuboCop for code style checks
+- Runs the full test suite
+- Compiles assets to catch any frontend issues
+
+**Before submitting a PR:**
+1. Make sure all tests pass locally: `rails test`
+2. Check code style: `rubocop` (or `rubocop -a` to auto-fix)
+3. If you've added new functionality, please add corresponding tests
+
+You can see the CI status on any PR or check the badge at the top of this README.
 
 ## Our lovely sponsors
 
