@@ -31,7 +31,7 @@ class BaseGameManagerJob < ApplicationJob
           match = news["title"].match(/Patch Notes V?(\d+\.\d+\.\d+\.\d+)|\[Version (\d+\.\d+\.\d+\.\d+)\]|Version (\d+\.\d+\.\d+\.\d+)/i).to_a.compact
           match ? match[1] : nil
         end
-        unregistered_versions = fetched_patches.filter { |fetched_patch| !registered_versions[fetched_patch] }
+        unregistered_versions = fetched_patches.compact.filter { |fetched_patch| !registered_versions[fetched_patch] }
       else
         Rails.logger.error "Couldn't get a response from Steam API. Terminating."
         return nil

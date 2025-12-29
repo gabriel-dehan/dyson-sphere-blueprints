@@ -21,31 +21,41 @@ class Mod < ApplicationRecord
 
   # Returns the latest version with a breaking change to blueprint format
   def latest_breaking
-    versions.sort.reverse.find { |_, data| data["breaking"] }&.first
+    versions
+      .reject { |v, _| v.blank? }
+      .sort_by { |v, _| Gem::Version.new(v) }
+      .reverse
+      .find { |_, data| data["breaking"] }&.first
   end
 
-  # Version list sorted DESC
+  # Version list sorted DESC (semantic versioning)
   def version_list
-    versions.keys.sort.reverse
+    versions.keys.reject(&:blank?).sort_by { |v| Gem::Version.new(v) }.reverse
   end
 
   # TODO: Handle backward compatible and non compatible versions
   # Returns a range of version strings compatible with check_version, e.g ["2.0.0", "3.0.0"]
   def compatibility_range_for(check_version)
     # Generates a version matrix [[version, breaking]], e.g: [["2.0.1", true], ["2.0.2", false], ...]
-    version_list = versions.sort.reverse.map { |v, data| [v, data["breaking"]] }.select { |v, data| !v.blank? }
+    # Sorted ASCENDING by semantic version (oldest first) - algorithm expects this order
+    version_list = versions
+      .reject { |v, _| v.blank? }
+      .sort_by { |v, _| Gem::Version.new(v) }
+      .map { |v, data| [v, data["breaking"]] }
 
-    # Find the first version <= to the blueprint.mod_version that is breaking
-    lower_breaking_index = version_list.rindex { |version, breaking| version <= check_version && breaking } || 0
+    check_gem_version = Gem::Version.new(check_version)
+
+    # Find the last version <= to the blueprint.mod_version that is breaking (searching from end)
+    lower_breaking_index = version_list.rindex { |version, breaking| Gem::Version.new(version) <= check_gem_version && breaking } || 0
 
     # The lowbound range is everything from the lower_breaking_index (not included) up to the latest version
     lowbound_range = version_list[(lower_breaking_index + 1)..version_list.length - 1]
-    # Find the last version > to the blueprint.mod_version that is breaking
+    # Find the first version > to the blueprint.mod_version that is breaking
     upper_breaking_index = lowbound_range.find_index { |_version, breaking| breaking }
 
-    # Lowest version possible
+    # Lowest version possible (the breaking version that started the compatible range)
     lowest_version  = version_list[lower_breaking_index]
-    # Highest version possible, if non was found (there is no breaking version in the lowbound range) use the latest version
+    # Highest version possible, if none was found (there is no breaking version in the lowbound range) use the latest version
     highest_version = upper_breaking_index ? lowbound_range[upper_breaking_index - 1] : version_list.last
 
     [lowest_version[0], highest_version[0]]
@@ -54,10 +64,13 @@ class Mod < ApplicationRecord
   # Returns an array of version strings compatible with check_version, e.g ["2.0.0", "2.0.1", "2.0.2"]
   def compatibility_list_for(check_version)
     compatibility_range = compatibility_range_for(check_version)
+    range_min = Gem::Version.new(compatibility_range.first)
+    range_max = Gem::Version.new(compatibility_range.last)
 
     versions
-      .filter { |v, _data| v >= compatibility_range.first && v <= compatibility_range.last }
+      .reject { |v, _| v.blank? }
+      .filter { |v, _data| Gem::Version.new(v) >= range_min && Gem::Version.new(v) <= range_max }
       .keys
-      .sort
+      .sort_by { |v| Gem::Version.new(v) }
   end
 end
