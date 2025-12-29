@@ -67,12 +67,6 @@
           <% end %>
         </div>
       </div>
-      <% if @old_mod_support %>
-        <div class="m-form__inline" data-controller="gameVersionSelect" data-gameVersionSelect-target="container" data-game-versions="<%= @game_versions.map { |gv| { id: gv.id, versions: gv['versions'].keys} }.to_json %>">
-          <%= f.input :game_version_id, label: "Game", as: :select, collection: @game_versions, selected: blueprint.game_version || @game_versions.first.id, include_blank: false %>
-          <%= f.input :game_version_string, as: :select, collection: blueprint.game_version ? blueprint.game_version.version_list : @game_versions.first.version_list, selected: blueprint.game_version_string || @game_versions.first.version_list.first, include_blank: false %>
-        </div>
-      <% end %>
       <div class="m-form__pictures">
         <label for="additional_pictures">
           <abbr title="required">*</abbr>

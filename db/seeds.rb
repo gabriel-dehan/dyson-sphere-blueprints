@@ -15,7 +15,7 @@ puts "Cleaning up..."
 puts "Creating admin..."
 User.create!(email: "admin@dysonsphereblueprints.com", username: "Admin", password: "password", role: "admin")
 
-puts "Creating mods..."
+puts "Creating game versions..."
 BaseGameManagerJob.perform_now("0.8.19.7662")
 
 User.all.each do |user|
@@ -33,16 +33,16 @@ end
 #   bp = user.collections.first.blueprints.new(title: "60 Smelters", description: "Hello world", encoded_blueprint: "//f23fewoifjwfoewjifjw;]fwoeif")
 #   bp.tag_list = tags
 #   bp.cover.attach(io: file, filename: "dsp.jpg", content_type: 'image/jpg')
-#   bp.mod = Mod.last
-#   bp.mod_version = Mod.last.version_list.first
+#   bp.game_version = GameVersion.first
+#   bp.game_version_string = GameVersion.first.version_list.first
 #   bp.save!
 
 #   file = URI.open('http://cdn.mos.cms.futurecdn.net/nUTuo444A3wTqKVQfrxMXL.jpg')
 #   bp2 = user.collections.last.blueprints.new(title: "60 Smelters", description: "Hello world", encoded_blueprint: "//f23fewoifjwfoewjifjw;]fwoeif")
 #   bp2.tag_list = tags
 #   bp2.cover.attach(io: file, filename: "dsp.jpg", content_type: 'image/jpg')
-#   bp2.mod = Mod.last
-#   bp2.mod_version = Mod.last.version_list.first
+#   bp2.game_version = GameVersion.first
+#   bp2.game_version_string = GameVersion.first.version_list.first
 #   bp2.save!
 # end
 

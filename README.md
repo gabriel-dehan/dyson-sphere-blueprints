@@ -79,15 +79,14 @@ The main thing you'll need to setup is to create a `Mod` for the blueprints. Cur
   }
 }
 ```
-`breaking` is used for the display of blueprints compatibility from one version of the mod / game to another.
-You can also go in lib/tasks/mod.rake and have a look at the tasks, those tasks were used to seed the mods in staging and production:
+`breaking` is used for the display of blueprints compatibility from one game version to another.
+You can also go in lib/tasks/game_version.rake and have a look at the tasks, those tasks were used to seed the game versions in staging and production:
 
 ```
-noglob rake 'mod:fetch_base_game_latest[0.8.19.7662]' # Forces a game version to be added
-noglob rake 'mod:fetch_base_game_latest' # Fetches the latest game versions from the Steam News API
-noglob rake 'mod:flag_breaking[Dyson Sphere Program, 0.8.19.7662]'
+noglob rake 'game_version:fetch_latest[0.8.19.7662]' # Forces a game version to be added
+noglob rake 'game_version:fetch_latest' # Fetches the latest game versions from the Steam News API
+noglob rake 'game_version:flag_breaking[0.8.19.7662]'
 ```
-The task rake mod:fetch_latest used to be to retrieve MultiBuild version from the Thunderstore API but we don't need it anymore.
 
 ### Environment
 
@@ -184,9 +183,8 @@ docker exec dyson-sphere-blueprints-postgres-1 psql -U dev -d dspblueprints_deve
 
 There are a few rake tasks that you can use:
 ```
-rake mod:fetch_base_game_latest[PATCH] # creates a new version in the DB, use like this: rake 'mod:fetch_base_game_latest[0.8.19.7662]'
+rake game_version:fetch_latest[PATCH] # creates a new version in the DB, use like this: rake 'game_version:fetch_latest[0.8.19.7662]'
 rake blueprint:recompute_data # updates all blueprints summary if you have made any changes to it
-rake mod:fetch_latest # currently legacy, but fetches the latest versions of all mods handled (MultiBuild and MultiBuildBeta)
 ```
 
 ### Testing

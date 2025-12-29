@@ -101,11 +101,6 @@
           <li>
             <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
-          <% if @old_mod_support %>
-            <li>
-              <strong>Game:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.game_version.name %></span>
-            </li>
-          <% end %>
           <li>
             <% compatibility_status, compatibility_message = compatibility_recap(@game_versions, @blueprint) %>
             <strong>Game version:</strong>
