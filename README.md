@@ -1,5 +1,7 @@
 # DSP Blueprints
 
+[![CI](https://github.com/gabriel-dehan/dyson-sphere-blueprints/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gabriel-dehan/dyson-sphere-blueprints/actions/workflows/ci.yml)
+
 Community website to share Dyson Sphere Program blueprints.
 
 Official website: [https://www.dysonsphereblueprints.com](https://www.dysonsphereblueprints.com/)

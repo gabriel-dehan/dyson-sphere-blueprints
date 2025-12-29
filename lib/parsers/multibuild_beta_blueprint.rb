@@ -5,7 +5,7 @@ class Parsers::MultibuildBetaBlueprint
   end
 
   def validate
-    puts "Validating blueprint..."
+    Rails.logger.debug "Validating blueprint..."
     begin
       json_data = extract_blueprint_data(@blueprint.encoded_blueprint)
 
@@ -15,29 +15,29 @@ class Parsers::MultibuildBetaBlueprint
 
       !(buildingsData.compact.empty? && insertersData.compact.empty? && beltsData.compact.empty?)
     rescue StandardError
-      puts "Blueprint invalid."
+      Rails.logger.warn "Blueprint invalid."
       false
     end
   end
 
   def parse!(silent_errors: true)
-    puts "Analyzing blueprint..."
+    Rails.logger.info "Analyzing blueprint..."
     begin
       json_data = extract_blueprint_data(@blueprint.encoded_blueprint)
 
-      puts "Parsing..."
+      Rails.logger.debug "Parsing..."
       has_data, data = extract_data(json_data)
       raise "No data found in blueprint" if !has_data
 
       @blueprint.summary = data
 
-      puts "Saving..."
+      Rails.logger.debug "Saving..."
       @blueprint.save!
 
-      puts "Done!"
+      Rails.logger.info "Done parsing blueprint"
     rescue StandardError => e
       if silent_errors
-        puts "Couldn't decode blueprint: #{e.message}"
+        Rails.logger.error "Couldn't decode blueprint: #{e.message}"
       else
         raise "Couldn't decode blueprint: #{e.message}"
       end
@@ -48,7 +48,7 @@ class Parsers::MultibuildBetaBlueprint
   private
 
   def extract_blueprint_data(encoded_blueprint)
-    puts "Cleaning blueprint data..."
+    Rails.logger.debug "Cleaning blueprint data..."
     # Blueprints can be prefixed with /\w+:/ so we remove the first part
     split_on_name = encoded_blueprint.split(":")
     if split_on_name.length > 1
@@ -57,7 +57,7 @@ class Parsers::MultibuildBetaBlueprint
       blueprint_without_name = encoded_blueprint
     end
 
-    puts "Decoding..."
+    Rails.logger.debug "Decoding..."
     first_pass = Base64.decode64(blueprint_without_name)
     decoded_blueprint = ActiveSupport::Gzip.decompress(first_pass)
     JSON.parse(decoded_blueprint)

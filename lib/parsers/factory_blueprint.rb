@@ -7,13 +7,13 @@ module Parsers
     end
 
     def validate
-      puts "Validating blueprint..."
+      Rails.logger.debug "Validating blueprint..."
       # TODO: Real validation
       @blueprint.encoded_blueprint.match(/\ABLUEPRINT:\d,(\d+,){6}\d+,\d+,(\d+\.?)+,.+,.+/i)
     end
 
     def parse!(silent_errors: true)
-      puts "Analyzing blueprint... #{@blueprint.id}"
+      Rails.logger.info "Analyzing blueprint... #{@blueprint.id}"
       begin
         @blueprint_data = DspBlueprintParser.parse(@blueprint.encoded_blueprint)
         raise "No data found in blueprint" if !@blueprint_data || @blueprint_data.buildings.size.zero?
@@ -21,13 +21,13 @@ module Parsers
         data = parse_blueprint_data
         @blueprint.summary = data
 
-        puts "Saving..."
+        Rails.logger.debug "Saving blueprint #{@blueprint.id}..."
         @blueprint.save!
 
-        puts "Done!"
+        Rails.logger.info "Done parsing blueprint #{@blueprint.id}"
       rescue StandardError => e
         if silent_errors
-          puts "Couldn't decode blueprint: #{e.message}"
+          Rails.logger.error "Couldn't decode blueprint: #{e.message}"
         else
           raise "Couldn't decode blueprint: #{e.message}"
         end
@@ -38,7 +38,7 @@ module Parsers
     private
 
     def parse_blueprint_data
-      puts "Parsing..."
+      Rails.logger.debug "Parsing blueprint data..."
       data = { total_structures: 0, buildings: {}, inserters: {}, belts: {} }
       @blueprint_data.buildings.reduce(data) { |res, entity| building_summary(res, entity) }
       # Set the current mass construction research depending on the total number of structures

@@ -9,21 +9,21 @@ module Parsers
     # DYBP:0,637783100277796003,0.9.24.11192,4,0"H4sIAAAAAAA...
     # DYBP:0,637782832173123087,0.9.24.11192,1,90"H4sIAAAAAA...
     def validate
-      puts "Validating factory blueprint..."
+      Rails.logger.debug "Validating dyson sphere blueprint..."
       # TODO: Real validation
       @blueprint.encoded_blueprint.match(/\ADYBP:\d,(\d+,)+(\d+\.)+\d+,\d+,\d+".+/i)
     end
 
     def parse!(silent_errors: true)
-      puts "Analyzing blueprint... #{@blueprint.id}"
+      Rails.logger.info "Analyzing blueprint... #{@blueprint.id}"
       begin
         # TODO:
         # @blueprint.summary = data
         # @blueprint.save!
-        puts "Done!"
+        Rails.logger.info "Done parsing blueprint #{@blueprint.id}"
       rescue StandardError => e
         if silent_errors
-          puts "Couldn't decode blueprint: #{e.message}"
+          Rails.logger.error "Couldn't decode blueprint: #{e.message}"
         else
           raise "Couldn't decode blueprint: #{e.message}"
         end

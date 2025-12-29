@@ -65,7 +65,7 @@ class PngExtractor
       hdr = input.read(8)
       hex = hdr.unpack("C8")
       if hex != [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]
-        puts "Not a PNG File: #{hex}"
+        Rails.logger.warn "Not a PNG File: #{hex}"
         return
       end
       output.write(hdr)

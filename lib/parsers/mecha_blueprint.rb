@@ -12,7 +12,7 @@ module Parsers
     end
 
     def parse!(silent_errors: true)
-      puts "Analyzing mecha blueprint... #{@blueprint.id}"
+      Rails.logger.info "Analyzing mecha blueprint... #{@blueprint.id}"
       begin
         preview_file = Parsers::MechaFile.generate_png(@blueprint_file)
         @blueprint.cover_picture = preview_file.open
@@ -24,10 +24,10 @@ module Parsers
         }
         @blueprint.save!
         @blueprint.cover_picture_attacher.finalize
-        puts "Done!"
+        Rails.logger.info "Done parsing mecha blueprint #{@blueprint.id}"
       rescue StandardError => e
         if silent_errors
-          puts "Couldn't decode blueprint: #{e.message}"
+          Rails.logger.error "Couldn't decode blueprint: #{e.message}"
         else
           raise "Couldn't decode blueprint: #{e.message}"
         end
@@ -36,7 +36,7 @@ module Parsers
     end
 
     def parse_colors!(silent_errors: false)
-      puts "Analyzing mecha color data... #{@blueprint.id}"
+      Rails.logger.info "Analyzing mecha color data... #{@blueprint.id}"
       begin
         image = Parsers::MechaFile.generate_png(@blueprint_file)
         image.open
@@ -60,10 +60,10 @@ module Parsers
         image.close
 
         @blueprint.save!
-        puts "Done!"
+        Rails.logger.info "Done parsing mecha colors #{@blueprint.id}"
       rescue StandardError => e
         if silent_errors
-          puts "Couldn't decode blueprint: #{e.message}"
+          Rails.logger.error "Couldn't decode blueprint: #{e.message}"
         else
           raise "Couldn't decode blueprint: #{e.message}"
         end
