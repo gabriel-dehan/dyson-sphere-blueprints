@@ -114,8 +114,8 @@ class GameVersionTest < ActiveSupport::TestCase
     assert_kind_of Array, list
     assert_includes list, "0.9.27.15466"
     assert_includes list, "0.10.29.22015"
-    refute_includes list, "0.9.24.11286"   # Before range
-    refute_includes list, "0.10.30.22292"  # After range (next breaking)
+    assert_not_includes list, "0.9.24.11286"   # Before range
+    assert_not_includes list, "0.10.30.22292"  # After range (next breaking)
   end
 
   test "compatibility_list_for returns versions sorted by semantic version" do
