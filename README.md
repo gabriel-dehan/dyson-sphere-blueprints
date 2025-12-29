@@ -25,11 +25,12 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.6.0
-- Added comprehensive test suite with model, controller, policy, and system tests
-- Added GitHub Actions CI workflow for automated testing
-- Memory optimizations and performance improvements to reduce RAM consumption
-- Added database indexes for better query performance
+### Latest: 4.7.0
+- Renamed `Mod` model to `GameVersion` - simplified architecture by removing legacy mod support ([#93](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/93))
+- Removed MultiBuild/MultiBuildBeta legacy code
+- Updated rake tasks from `mod:` to `game_version:` namespace
+- Simplified blueprint parsing logic
+- Code cleanup and removal of unused components
 
 ### Previous versions
 

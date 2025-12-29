@@ -1,6 +1,7 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [v4.7.0](#v470)
   - [v4.6.0](#v460)
   - [v4.5.0](#v450)
   - [v4.4.0](#v440)
@@ -36,7 +37,14 @@
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
 
-### Latest: 4.6.0
+### Latest: 4.7.0
+- Renamed `Mod` model to `GameVersion` - simplified architecture by removing legacy mod support ([#93](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/93))
+- Removed MultiBuild/MultiBuildBeta legacy code
+- Updated rake tasks from `mod:` to `game_version:` namespace
+- Simplified blueprint parsing logic
+- Code cleanup and removal of unused components
+
+## v4.6.0
 - Added comprehensive test suite with model, controller, policy, and system tests ([#90](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/90))
 - Added GitHub Actions CI workflow for automated testing
 - Memory optimizations and performance improvements to reduce RAM consumption ([#86](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/86))

@@ -1,18 +1,18 @@
-# Roadmap
+# Roadmap 2021 (LEGACY)
 
 ### Next releases
-- [ ] Extract data from dyson spheres
-- [ ] Extract data from icarus + color search
+- [x] Extract data from dyson spheres
+- [x] Extract data from icarus + color search
 - [ ] Improve color search
 - [ ] RGPD
 - [ ] Comment system
-- [ ] Admin interface
 - [ ] Site wide messaging system
 - [ ] In-site idea box / bug report
+- [ ] Admin interface
 - [ ] Moderators profiles
 
 ### Tech / Chore
-- [ ] Fix memory leak, it's getting problematic
+- [x] Fix memory leak, it's getting problematic
   - https://pawelurbanek.com/2018/01/15/limit-rails-memory-usage-fix-R14-and-save-money-on-heroku/
 - [ ] Upgrade turbolink to turbo (https://gorails.com/episodes/upgrade-from-turbolinks-to-hotwire-and-turbo)
 - [ ] JS Base controller with getController () => this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller*='preview']"), "preview") or https://dev.to/leastbad/the-best-one-line-stimulus-power-move-2o90
@@ -26,7 +26,7 @@
 - [ ] New error styles for f.input too
 - [ ] Use TS instead of JS
 - [ ] Update to Rails 7.0 and update CSS / JS loader
-- [ ] Setup a better cache to relieve the dynos
+- [x] Setup a better cache to relieve the dynos
 
 ### Planned features (probably)
 - [ ] Localisation chinese
@@ -36,7 +36,7 @@
 
 ### Maybe one day
 - [ ] Bring back blueprint 3D preview (or 2D)
-- [ ] Add tests
+- [x] Add tests
 
 ## Done
 - [x] Blueprint copy count / sort by copy count
