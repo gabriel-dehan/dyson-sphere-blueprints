@@ -106,15 +106,6 @@ Layout/HashAlignment:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
-# https://docs.rubocop.org/rubocop/cops_naming.html#namingvariablename
-Naming/VariableName:
-  Exclude:
-    - lib/parsers/multibuild_beta_blueprint.rb
-
-# https://docs.rubocop.org/rubocop/cops_naming.html#namingmethodname
-Naming/MethodName:
-  Exclude:
-    - lib/parsers/multibuild_beta_blueprint.rb
 
 # https://docs.rubocop.org/rubocop/cops_naming.html#namingpredicatename
 Naming/PredicateName:
@@ -122,10 +113,6 @@ Naming/PredicateName:
     - app/models/blueprint.rb
     - lib/engine/entities.rb
 
-# https://docs.rubocop.org/rubocop/cops_naming.html#namingmethodparametername
-Naming/MethodParameterName:
-  Exclude:
-    - lib/parsers/multibuild_beta_blueprint.rb
 
 # https://docs.rubocop.org/rubocop/cops_bundler.html#bundlerorderedgems
 Bundler/OrderedGems:
@@ -136,9 +123,7 @@ Rails/Output:
   Exclude:
     - db/seeds.rb
     - app/jobs/base_game_manager_job.rb
-    - app/jobs/mod_manager_job.rb
     - app/jobs/attachment/promote_job.rb
-    - lib/parsers/multibuild_beta_blueprint.rb
     - lib/parsers/dyson_sphere_program_blueprint.rb
 
 # https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsunknownenv

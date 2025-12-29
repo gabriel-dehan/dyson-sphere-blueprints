@@ -22,11 +22,11 @@ class Blueprint::MechasController < ApplicationController
   end
 
   def create
-    mod = @mods.find { |m| m.name == "Dyson Sphere Program" }
+    game_version = @game_versions.first
     @collection = current_user.collections.find(params[:blueprint_mecha][:collection])
     @mecha_blueprint = @collection.mecha_blueprints.new(mecha_blueprint_params)
-    @mecha_blueprint.mod = mod
-    @mecha_blueprint.mod_version = mod.version_list.first
+    @mecha_blueprint.game_version = game_version
+    @mecha_blueprint.game_version_string = game_version.version_list.first
     @mecha_blueprint.tag_list = create_tags
 
     authorize @mecha_blueprint

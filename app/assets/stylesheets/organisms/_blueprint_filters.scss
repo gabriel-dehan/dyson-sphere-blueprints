@@ -14,33 +14,6 @@
       margin-top: 1.2em !important;
     }
 
-    &-common-mod_select_filter {
-      width: 46.7%;
-      margin-left: auto;
-      display: flex;
-      justify-content: end;
-    }
-
-    &-mecha-mod_select_filter  {
-      margin-left: auto;
-
-      .o-blueprint-filters__mods {
-        width: 100%;
-      }
-
-      .o-blueprint-filters__mods-version {
-        justify-content: flex-end;
-      }
-
-      &.custom-filters {
-        ul { margin-top: 0; }
-      }
-
-      select {
-        width: auto;
-      }
-    }
-
     &.mecha_order-container {
       .o-blueprint-filters__order-container {
         width: 36.6%;
@@ -245,24 +218,6 @@
     }
 
     select { margin: 0; }
-  }
-
-  &__mods {
-    display: flex;
-    width: 50%;
-
-    &-mod {
-      display: inline-flex;
-      align-items: center;
-      flex-grow: 1;
-      margin-right: 20px;
-    }
-
-    &-version {
-      display: inline-flex;
-      align-items: center;
-      flex-grow: 1;
-    }
   }
 
   &__submit {

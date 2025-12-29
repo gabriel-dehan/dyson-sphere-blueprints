@@ -77,8 +77,7 @@
           </ul>
           <div class="o-blueprint-card__version">
             <span class="o-blueprint-card__version-tag">
-              <%#= blueprint.mod.name %>
-              <%= formatted_mod_compatibility_range(@mods, blueprint) %>
+              <%= formatted_game_version_compatibility_range(@game_versions, blueprint) %>
             </span>
           </div>
           <div class="o-blueprint-card__typeIcon <%= blueprint.type.underscore %>">

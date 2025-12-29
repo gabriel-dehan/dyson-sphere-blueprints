@@ -14,7 +14,7 @@ class BlueprintUsageMetricTest < ActiveSupport::TestCase
     metric.count += 1
 
     # Should fail validation because last used was within 1 hour
-    refute metric.valid?
+    assert_not metric.valid?
     assert_includes metric.errors[:count], "usage can't be counted more than once per hour"
   end
 

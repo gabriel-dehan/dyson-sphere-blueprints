@@ -26,20 +26,12 @@ class Blueprint::Factory < Blueprint
   end
 
   def encoded_blueprint_parsable
-    if mod.name == "MultiBuildBeta"
-      valid = Parsers::MultibuildBetaBlueprint.new(self).validate
-    elsif mod.name == "MultiBuild"
-      valid = Parsers::MultibuildBetaBlueprint.new(self).validate
-    elsif mod.name == "Dyson Sphere Program"
-      if !id || will_save_change_to_attribute?(:encoded_blueprint)
-        valid = Parsers::FactoryBlueprint.new(self).validate
-      else
-        valid = true
-      end
+    if !id || will_save_change_to_attribute?(:encoded_blueprint)
+      valid = Parsers::FactoryBlueprint.new(self).validate
     else
       valid = true
     end
 
-    errors.add(:encoded_blueprint, "Wrong blueprint format for game version: #{mod.name} - #{mod_version}") if !valid
+    errors.add(:encoded_blueprint, "Wrong blueprint format for game version: #{game_version_string}") if !valid
   end
 end

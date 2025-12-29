@@ -11,21 +11,21 @@ module BlueprintsFilters
         author: params[:author],
         order: params[:order] || "recent",
         max_structures: params[:max_structures] || "Any",
-        mod_id: params[:mod_id].presence || @mods.first.id,
-        mod_version: params[:mod_version].presence || "Any",
+        game_version_id: params[:game_version_id].presence || @game_versions.first.id,
+        game_version_string: params[:game_version_string].presence || "Any",
         color: params[:color].presence,
         color_similarity: params[:color_similarity].presence,
       }
 
-      if @filters[:mod_id] && @filters[:mod_id] != "Any"
-        @filter_mod = @mods.find { |mod| mod.id == @filters[:mod_id].to_i }
+      if @filters[:game_version_id] && @filters[:game_version_id] != "Any"
+        @filter_game_version = @game_versions.find { |gv| gv.id == @filters[:game_version_id].to_i }
 
-        if !@filter_mod
-          @filter_mod = @mods.first
-          @filters[:mod_id] = @filter_mod.id
+        if !@filter_game_version
+          @filter_game_version = @game_versions.first
+          @filters[:game_version_id] = @filter_game_version.id
         end
       else
-        @filter_mod = @mods.first
+        @filter_game_version = @game_versions.first
       end
     end
 
@@ -36,15 +36,15 @@ module BlueprintsFilters
 
       blueprints = blueprints.joins(:user).where("users.username ILIKE ?", "%#{@filters[:author]}%") if @filters[:author].present?
 
-      blueprints = blueprints.where(mod_id: @filters[:mod_id]) if @filters[:mod_id].present? && @filters[:mod_id] != "Any"
+      blueprints = blueprints.where(game_version_id: @filters[:game_version_id]) if @filters[:game_version_id].present? && @filters[:game_version_id] != "Any"
 
-      if @filters[:mod_version].present? && @filters[:mod_version] != "Any"
-        if @filters[:mod_id].present?
-          mod = Mod.find(@filters[:mod_id])
-          compat_list = mod.compatibility_list_for(@filters[:mod_version])
-          blueprints = blueprints.where(mod_version: compat_list)
+      if @filters[:game_version_string].present? && @filters[:game_version_string] != "Any"
+        if @filters[:game_version_id].present?
+          game_version = GameVersion.find(@filters[:game_version_id])
+          compat_list = game_version.compatibility_list_for(@filters[:game_version_string])
+          blueprints = blueprints.where(game_version_string: compat_list)
         else
-          blueprints = blueprints.where(mod_version: @filters[:mod_version])
+          blueprints = blueprints.where(game_version_string: @filters[:game_version_string])
         end
       end
 
@@ -62,9 +62,6 @@ module BlueprintsFilters
         limit = Engine::Researches::MASS_CONSTRUCTION_LIMITS[@filters[:max_structures]]
         blueprints = blueprints.where("(summary ->> 'total_structures')::int <= ?", limit) if limit
       end
-
-      # OLD: Remove if it works properly now
-      # blueprints = blueprints.tagged_with(@filters[:tags]) if @filters[:tags].present?
 
       # Optimised tag search code
       if @filters[:tags].present?

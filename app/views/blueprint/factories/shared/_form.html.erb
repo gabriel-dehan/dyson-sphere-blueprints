@@ -14,12 +14,6 @@
         value_method: :id,
         label: "Collection",
         selected: @collection.id %>
-      <% if @old_mod_support %>
-        <div class="m-form__inline" data-controller="modSelect" data-modSelect-target="container" data-mods="<%= @mods.map { |mod| { id: mod.id, versions: mod['versions'].keys} }.to_json %>">
-          <%= f.input :mod_id, label: "Mod", as: :select, collection: @mods, selected: blueprint.mod || @mods.first.id, include_blank: false %>
-          <%= f.input :mod_version, as: :select, collection: blueprint.mod ? blueprint.mod.version_list : @mods.first.version_list, selected: blueprint.mod_version || @mods.first.version_list.first, include_blank: false %>
-        </div>
-      <% end %>
       <div class="m-form__important">
         <%= f.input :encoded_blueprint, label: "Paste your blueprint here", required: true, input_html: { data: { factoryBlueprintParser_target: "value", action: "input->factoryBlueprintParser#parse" } } %>
         <div class="hint-help"><%= link_to "Need help? Don't know what to put here?", help_path(for: "factory"), target: '_blank' %></div>

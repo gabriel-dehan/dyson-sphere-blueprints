@@ -20,11 +20,11 @@ class Blueprint::DysonSpheresController < ApplicationController
   end
 
   def create
-    mod = @mods.find { |m| m.name == "Dyson Sphere Program" }
+    game_version = @game_versions.first
     @collection = current_user.collections.find(params[:blueprint_dyson_sphere][:collection])
     @dyson_sphere_blueprint = @collection.dyson_sphere_blueprints.new(dyson_sphere_blueprint_params)
-    @dyson_sphere_blueprint.mod = mod
-    @dyson_sphere_blueprint.mod_version = mod.version_list.first
+    @dyson_sphere_blueprint.game_version = game_version
+    @dyson_sphere_blueprint.game_version_string = game_version.version_list.first
     @dyson_sphere_blueprint.tag_list = create_tags
 
     authorize @dyson_sphere_blueprint

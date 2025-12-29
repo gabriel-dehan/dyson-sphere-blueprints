@@ -3,7 +3,7 @@ module Parsers
     # @param [Blueprint]
     def initialize(blueprint)
       @blueprint = blueprint
-      @version = blueprint.mod_version
+      @version = blueprint.game_version_string
 
       @blueprint_file = @blueprint.blueprint_file.download
       @blueprint_binary_data = @blueprint_file.read

@@ -40,7 +40,7 @@ class Blueprint::Mecha < Blueprint
       else
         valid = false
       end
-      errors.add(:blueprint_file, "Wrong mecha blueprint format for game version: #{mod.name} - #{mod_version}") if !valid
+      errors.add(:blueprint_file, "Wrong mecha blueprint format for game version: #{game_version_string}") if !valid
     end
   end
 end

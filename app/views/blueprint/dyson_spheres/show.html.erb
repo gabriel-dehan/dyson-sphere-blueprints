@@ -74,18 +74,13 @@
           <li>
             <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
-          <% if @old_mod_support %>
-            <li>
-              <strong>Mod:</strong> <span class="t-blueprint__info-mod"><%= @blueprint.mod.name %></span>
-            </li>
-          <% end %>
           <li>
-            <% compatibility_status, compatibility_message = compatibility_recap(@mods, @blueprint) %>
+            <% compatibility_status, compatibility_message = compatibility_recap(@game_versions, @blueprint) %>
             <strong>Game version:</strong>
             <span class="t-blueprint__info-mod tooltip-trigger <%= compatibility_status %>"
                 data-tippy-content="<%= compatibility_message %>"
                 data-tippy-placement="right">
-              <%= @blueprint.mod_version %>
+              <%= @blueprint.game_version_string %>
             </span>
           </li>
           <li>

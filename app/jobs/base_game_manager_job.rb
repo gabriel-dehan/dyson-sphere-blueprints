@@ -2,7 +2,7 @@ class BaseGameManagerJob < ApplicationJob
   queue_as :default
 
   def perform(patch)
-    mod_data = {
+    game_version_data = {
       "name"  => "Dyson Sphere Program",
       "owner" => "Youthcat Studio",
       "uuid4" => "dyson-sphere-program",
@@ -10,12 +10,12 @@ class BaseGameManagerJob < ApplicationJob
     Rails.logger.info "Starting base game version update"
 
     Rails.logger.info "Updating Dyson Sphere Program..."
-    mod = Mod.find_by(uuid4: mod_data["uuid4"])
-    # Create the mod in DB if it's not registered
-    mod = Mod.create!(name: mod_data["name"], author: mod_data["owner"], uuid4: mod_data["uuid4"], versions: {}) if !mod
+    game_version = GameVersion.find_by(uuid4: game_version_data["uuid4"])
+    # Create the game version in DB if it's not registered
+    game_version = GameVersion.create!(name: game_version_data["name"], author: game_version_data["owner"], uuid4: game_version_data["uuid4"], versions: {}) if !game_version
 
     date = Time.zone.now
-    registered_versions = mod.versions
+    registered_versions = game_version.versions
 
     if patch
       unregistered_versions = [patch]
@@ -55,7 +55,7 @@ class BaseGameManagerJob < ApplicationJob
         }
 
         # Update the model
-        mod.update!(versions: registered_versions)
+        game_version.update!(versions: registered_versions)
       end
     end
 

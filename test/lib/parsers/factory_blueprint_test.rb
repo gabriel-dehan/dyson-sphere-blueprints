@@ -11,7 +11,7 @@ class Parsers::FactoryBlueprintTest < ActiveSupport::TestCase
   test "validate returns falsy for invalid format" do
     blueprint = Blueprint::Factory.new(
       encoded_blueprint: "INVALID_BLUEPRINT_STRING",
-      mod_version: "0.9.27.15466"
+      game_version_string: "0.9.27.15466"
     )
     parser = Parsers::FactoryBlueprint.new(blueprint)
 
@@ -21,7 +21,7 @@ class Parsers::FactoryBlueprintTest < ActiveSupport::TestCase
   test "validate returns falsy for empty string" do
     blueprint = Blueprint::Factory.new(
       encoded_blueprint: "",
-      mod_version: "0.9.27.15466"
+      game_version_string: "0.9.27.15466"
     )
     parser = Parsers::FactoryBlueprint.new(blueprint)
 
@@ -31,7 +31,7 @@ class Parsers::FactoryBlueprintTest < ActiveSupport::TestCase
   test "validate raises error for nil encoded_blueprint" do
     blueprint = Blueprint::Factory.new(
       encoded_blueprint: nil,
-      mod_version: "0.9.27.15466"
+      game_version_string: "0.9.27.15466"
     )
     parser = Parsers::FactoryBlueprint.new(blueprint)
 
@@ -46,7 +46,7 @@ class Parsers::FactoryBlueprintTest < ActiveSupport::TestCase
     valid_blueprint = 'BLUEPRINT:0,10,2203,0,0,0,0,0,638229688703249448,0.9.27.15466,Test,"base64data"checksum'
     blueprint = Blueprint::Factory.new(
       encoded_blueprint: valid_blueprint,
-      mod_version: "0.9.27.15466"
+      game_version_string: "0.9.27.15466"
     )
     parser = Parsers::FactoryBlueprint.new(blueprint)
 
@@ -70,9 +70,9 @@ class Parsers::FactoryBlueprintTest < ActiveSupport::TestCase
     blueprint = Blueprint::Factory.new(
       title: "Invalid BP",
       encoded_blueprint: "BLUEPRINT:0,1,2,3,4,5,6,7,8,0.9.27.15466,Test,\"invalid_base64\"checksum",
-      mod_version: "0.9.27.15466",
+      game_version_string: "0.9.27.15466",
       collection: collections(:member_public),
-      mod: mods(:dsp)
+      game_version: game_versions(:dsp)
     )
     parser = Parsers::FactoryBlueprint.new(blueprint)
 

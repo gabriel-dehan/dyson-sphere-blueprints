@@ -18,11 +18,11 @@ class Blueprint::FactoriesController < ApplicationController
   end
 
   def create
-    mod = @mods.find { |m| m.name == "Dyson Sphere Program" }
+    game_version = @game_versions.first
     @collection = current_user.collections.find(params[:blueprint_factory][:collection])
     @factory_blueprint = @collection.factory_blueprints.new(factory_blueprint_params)
-    @factory_blueprint.mod = mod
-    @factory_blueprint.mod_version = mod.version_list.first
+    @factory_blueprint.game_version = game_version
+    @factory_blueprint.game_version_string = game_version.version_list.first
     @factory_blueprint.tag_list = params[:tag_list]
 
     authorize @factory_blueprint
