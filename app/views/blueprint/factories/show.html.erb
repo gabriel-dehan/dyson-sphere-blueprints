@@ -155,12 +155,20 @@
           </div>
         </div>
       <% end %>
-      <div class="t-blueprint__requirements">
+      <div class="t-blueprint__requirements"
+           data-controller="powerCalculator"
+           data-powerCalculator-summary-value='<%= @blueprint.summary.to_json %>'>
         <h3>This blueprint requires</h3>
         <% if @blueprint.summary && @blueprint.summary.any? %>
           <% if @blueprint.summary["total_structures"] %>
             <span class="t-blueprint__requirements-total"><strong><%= @blueprint.summary["total_structures"] %></strong> structures</span>
           <% end %>
+          <span class="t-blueprint__requirements-total"
+                data-powerCalculator-target="consumption"
+                style="display: none;"></span>
+          <span class="t-blueprint__requirements-total"
+                data-powerCalculator-target="generation"
+                style="display: none;"></span>
           <ul class="t-blueprint__requirements-data">
             <% if @blueprint.summary["buildings"] %>
               <% @blueprint.summary["buildings"].each do |entity_id, data| %>
