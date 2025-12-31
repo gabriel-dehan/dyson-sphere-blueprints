@@ -189,6 +189,7 @@
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
                       data-tippy-content="<%= data["name"] %>"
+                      data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
                     </span>
@@ -216,6 +217,7 @@
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
                       data-tippy-content="<%= data["name"] %>"
+                      data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
                     </span>
@@ -231,6 +233,7 @@
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
                       data-tippy-content="<%= data["name"] %>"
+                      data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
                     </span>
@@ -246,22 +249,24 @@
           </div>
         <% end %>
       </div>
-      <div class="t-blueprint__tags">
-        <h3>Tagged with</h3>
-        <ul>
-          <% @blueprint.tags.each do |tag| %>
-            <li class="t-blueprint__tags-tag">
-              <span
-                class="t-blueprint__requirements-tally__picture tooltip-trigger"
-                data-tippy-content="<%= tag.name.capitalize %>"
-                data-tippy-placement="bottom"
-              >
-                <%= image_tag get_game_tag_icon_by_name(tag.name) %>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+      <% if @blueprint.tags.any? %>
+        <div class="t-blueprint__tags">
+          <h3>Tagged with</h3>
+          <ul>
+            <% @blueprint.tags.each do |tag| %>
+              <li class="t-blueprint__tags-tag">
+                <span
+                  class="t-blueprint__requirements-tally__picture tooltip-trigger"
+                  data-tippy-content="<%= tag.name.capitalize %>"
+                  data-tippy-placement="bottom"
+                >
+                  <%= image_tag get_game_tag_icon_by_name(tag.name) %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
