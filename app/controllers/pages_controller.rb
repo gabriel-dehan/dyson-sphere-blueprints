@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :help, :support, :wall_of_fame]
+  skip_before_action :authenticate_user!, only: [:home, :help, :support, :wall_of_fame, :privacy, :cookie_policy, :terms]
   before_action :set_cache_headers, only: [:home]
 
   def home
@@ -41,5 +41,14 @@ class PagesController < ApplicationController
   end
 
   def wall_of_fame
+  end
+
+  def privacy
+  end
+
+  def cookie_policy
+  end
+
+  def terms
   end
 end

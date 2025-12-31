@@ -28,9 +28,10 @@
   </head>
 
   <body>
-      <div class="wrapper">
+      <div class="wrapper" data-controller="cookieConsent" >
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
+      <%= render 'shared/cookie_consent_banner' %>
 
       <div class="l-wrapper">
         <%= yield %>
@@ -46,16 +47,21 @@
         <span class="l-footer-item source-code">
           <a target="_blank" rel="noopener noreferrer" href="https://github.com/gabriel-dehan/dyson-sphere-blueprints">Source code</a>
         </span>
+        <span class="l-footer__separator">|</span>
+        <span class="l-footer-item legal">
+          <%= link_to "Privacy", privacy_path %> · <%= link_to "Cookies", cookies_path %> · <%= link_to "Terms", terms_path %>
+        </span>
+        <span class="l-footer__separator">|</span>
+        <span class="l-footer-item cookie-settings">
+          <a href="#" data-action="click->cookieConsent#revokeConsent">Cookie Settings</a>
+        </span>
       </footer>
     </div>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RYPZC6X3B"></script>
     <script>
+      // GA4 initialization stub - actual loading happens after cookie consent
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-2RYPZC6X3B');
+      window.GA_MEASUREMENT_ID = 'G-2RYPZC6X3B';
     </script>
   </body>
 </html>
