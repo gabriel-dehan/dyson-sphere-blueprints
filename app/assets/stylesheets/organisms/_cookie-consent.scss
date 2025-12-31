@@ -1,0 +1,168 @@
+// Cookie Consent Banner
+// Follows BEM methodology and uses existing color variables
+
+.o-cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; // Higher than alerts (z-index: 10)
+  background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--darker-blue) 100%);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  padding: 1.5rem 2rem;
+  animation: slideUp 0.3s ease-out;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  &__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+  }
+
+  &__text {
+    flex: 1;
+  }
+
+  &__title {
+    color: var(--white);
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.5px;
+
+    @media (max-width: 768px) {
+      font-size: 1.2em;
+    }
+  }
+
+  &__description {
+    color: var(--grey65);
+    font-size: 1em;
+    line-height: 1.5;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 1em;
+    }
+  }
+
+  &__link {
+    color: var(--red);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 2px solid var(--red);
+      outline-offset: 2px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      flex-direction: column-reverse;
+      gap: 0.75rem;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-items: anchor-center;
+    justify-content: center;
+
+    padding: 0.75rem 1.75rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    min-width: 120px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 0.875rem;
+      min-width: auto;
+    }
+
+    &:focus {
+      outline: 2px solid var(--white);
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &--accept {
+      background: var(--red);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(242, 43, 107, 0.3);
+
+      &:hover {
+        background: var(--dark-red);
+        box-shadow: 0 4px 12px rgba(242, 43, 107, 0.4);
+      }
+
+      &:active {
+        background: var(--dark-red);
+      }
+    }
+
+    &--reject {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--grey40);
+
+      &:hover {
+        background: var(--darker-blue);
+        border-color: var(--grey65);
+      }
+
+      &:active {
+        background: var(--dark-blue);
+      }
+    }
+  }
+}
+
+// Slide up animation
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Accessibility: Respect reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .o-cookie-consent {
+    animation: none;
+  }
+}

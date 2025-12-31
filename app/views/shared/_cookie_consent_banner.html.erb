@@ -1,0 +1,26 @@
+<div class="o-cookie-consent" data-cookieConsent-target="banner" style="display: none;">
+  <div class="o-cookie-consent__content">
+    <div class="o-cookie-consent__text">
+      <h3 class="o-cookie-consent__title">We use cookies</h3>
+      <p class="o-cookie-consent__description">
+        We use cookies to improve your experience and analyze traffic.
+        By clicking "Accept All", you consent to our use of cookies.
+        Read our <%= link_to "Privacy Policy", privacy_path, class: "o-cookie-consent__link" %> and
+        <%= link_to "Cookie Policy", cookies_path, class: "o-cookie-consent__link" %> for more information.
+      </p>
+    </div>
+
+    <div class="o-cookie-consent__actions">
+      <button
+        class="o-cookie-consent__btn o-cookie-consent__btn--reject"
+        data-action="click->cookieConsent#rejectAll">
+        Reject All
+      </button>
+      <button
+        class="o-cookie-consent__btn o-cookie-consent__btn--accept"
+        data-action="click->cookieConsent#acceptAll">
+        Accept All
+      </button>
+    </div>
+  </div>
+</div>

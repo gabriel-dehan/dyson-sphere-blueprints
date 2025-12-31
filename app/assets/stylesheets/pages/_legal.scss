@@ -1,0 +1,240 @@
+// Legal Pages Styling (Privacy Policy, Cookie Policy, Terms of Service)
+// Follows BEM methodology and uses existing color variables
+
+.p-legal {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 2rem 4rem 2rem;
+  color: var(--white);
+
+  @media (max-width: 768px) {
+    margin: 2rem auto;
+    padding: 0 1rem 3rem 1rem;
+  }
+
+  // Page title
+  &__title {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    border-bottom: 3px solid var(--red);
+    padding-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
+  }
+
+  // Last updated date
+  &__updated {
+    color: var(--grey65);
+    font-size: 1em;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+  }
+
+  // Section container
+  &__section {
+    margin-bottom: 2.5rem;
+
+    h2 {
+      font-size: 1.6em;
+      font-weight: 600;
+      color: var(--white);
+      margin: 2rem 0 1rem 0;
+      border-left: 4px solid var(--red);
+      padding-left: 1rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.6em;
+      }
+    }
+
+    h3 {
+      font-size: 1.4em;
+      font-weight: 600;
+      color: var(--white);
+      margin: 1.5rem 0 0.75rem 0;
+
+      @media (max-width: 768px) {
+        font-size: 1.4em;
+      }
+    }
+
+    h4 {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: var(--grey65);
+      margin: 1.25rem 0 0.75rem 0;
+    }
+
+    p {
+      color: var(--grey65);
+      font-size: 1em;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+
+      strong {
+        color: var(--white);
+        font-weight: 600;
+      }
+    }
+
+    ul, ol {
+      color: var(--grey65);
+      font-size: 1em;
+      line-height: 1.7;
+      margin: 0.75rem 0 1.25rem 1.5rem;
+      padding-left: 1rem;
+
+      li {
+        margin-bottom: 0.5rem;
+
+        strong {
+          color: var(--white);
+          font-weight: 600;
+        }
+      }
+
+      ul, ol {
+        margin: 0.5rem 0 0.5rem 1.5rem;
+      }
+    }
+
+    a {
+      color: var(--red);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--orange);
+      }
+
+      &:focus {
+        outline: 2px solid var(--red);
+        outline-offset: 2px;
+      }
+    }
+
+    code {
+      background: var(--darker-blue);
+      color: var(--cyan);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9em;
+    }
+  }
+
+  // Cookie table styling
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: var(--midnight-blue);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 768px) {
+      font-size: 1em;
+    }
+
+    thead {
+      background: var(--darker-blue);
+
+      tr {
+        border-bottom: 2px solid var(--red);
+      }
+
+      th {
+        color: var(--white);
+        font-weight: 600;
+        padding: 1rem;
+        text-align: left;
+
+        @media (max-width: 768px) {
+          padding: 0.75rem 0.5rem;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--dark-blue);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background: var(--darker-blue);
+        }
+      }
+
+      td {
+        padding: 1rem;
+        color: var(--grey65);
+        vertical-align: top;
+
+        @media (max-width: 768px) {
+          padding: 0.75rem 0.5rem;
+        }
+
+        code {
+          background: var(--dark-blue);
+          color: var(--cyan);
+          padding: 0.2rem 0.5rem;
+          border-radius: 3px;
+          font-family: 'Courier New', Courier, monospace;
+          font-size: 0.9em;
+          white-space: nowrap;
+        }
+
+        strong {
+          color: var(--white);
+        }
+      }
+    }
+  }
+
+  // Footer section
+  &__footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--grey40);
+
+    p {
+      color: var(--grey65);
+      font-size: 1em;
+      text-align: center;
+      margin-bottom: 0.75rem;
+
+      a {
+        color: var(--red);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  // Acknowledgment text
+  &__acknowledgment {
+    font-style: italic;
+    color: var(--grey50) !important;
+    font-size: 1em !important;
+  }
+}
+
+// Responsive table for mobile
+@media (max-width: 640px) {
+  .p-legal__table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

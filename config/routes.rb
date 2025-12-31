@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get "help", to: "pages#help"
   get "supportus", to: "pages#support"
   get "walloffame", to: "pages#wall_of_fame"
+  get "privacy", to: "pages#privacy"
+  get "cookies", to: "pages#cookie_policy"
+  get "terms", to: "pages#terms"
 
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations" }
 
