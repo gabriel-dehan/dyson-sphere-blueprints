@@ -155,20 +155,32 @@
           </div>
         </div>
       <% end %>
-      <div class="t-blueprint__requirements"
+      <% if @blueprint.summary && @blueprint.summary.any? %>
+        <div class="t-blueprint__requirements t-blueprint__requirements-power"
            data-controller="powerCalculator"
            data-powerCalculator-summary-value='<%= @blueprint.summary.to_json %>'>
+          <div class="t-blueprint__requirements-power__consumption">
+            <%= image_tag get_category_icon('power') %>
+            <h3>Power consumption</h3>
+            <span class="t-blueprint__requirements-consumption"
+                  data-powerCalculator-target="consumption"
+                  style="display: none;"></span>
+          </div>
+          <div class="t-blueprint__requirements-power__generation">
+            <h3>Power generation</h3>
+            <span class="t-blueprint__requirements-generation"
+                  data-powerCalculator-target="generation"
+                  style="display: none;"></span>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="t-blueprint__requirements">
         <h3>This blueprint requires</h3>
         <% if @blueprint.summary && @blueprint.summary.any? %>
           <% if @blueprint.summary["total_structures"] %>
             <span class="t-blueprint__requirements-total"><strong><%= @blueprint.summary["total_structures"] %></strong> structures</span>
           <% end %>
-          <span class="t-blueprint__requirements-total"
-                data-powerCalculator-target="consumption"
-                style="display: none;"></span>
-          <span class="t-blueprint__requirements-total"
-                data-powerCalculator-target="generation"
-                style="display: none;"></span>
           <ul class="t-blueprint__requirements-data">
             <% if @blueprint.summary["buildings"] %>
               <% @blueprint.summary["buildings"].each do |entity_id, data| %>

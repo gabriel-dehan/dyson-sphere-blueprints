@@ -285,3 +285,47 @@ input[type=text].clr-color, input[type=color].clr-color {
   -webkit-box-shadow: 1px 12px 17px -2px rgba(0,0,0,0.3);
   box-shadow: 1px 12px 17px -2px rgba(0,0,0,0.3);
 }
+
+.power-tooltip {
+  text-align: left;
+  font-size: 12px;
+
+  &__summary {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #5555553b;
+  }
+
+  &__table {
+    border-collapse: collapse;
+    margin-bottom: 0;
+
+    td {
+      padding: 5px 0;
+      vertical-align: middle;
+      border-bottom: 0.1rem solid #5555553b;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        text-align: right;
+        padding-left: 12px;
+      }
+
+      img {
+        display: block;
+      }
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+
+  }
+}

@@ -71,6 +71,49 @@
       }
     }
 
+    &-power {
+      position: relative;
+
+      h3 {
+        display: flex;
+        align-items: anchor-center;
+        justify-content: space-between;
+        margin-bottom: 0;
+
+      }
+
+      img {
+        position: absolute;
+        top: 1.2em;
+        right: 1em;
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &-consumption, &-generation {
+      display: inline-flex;
+      cursor: pointer;
+      margin-bottom: 4px;
+
+      .power-total {
+        color: var(--cyan);
+        border-bottom: 1px dashed var(--dark-cyan);
+        margin-left: 2px;
+        line-height: 1.2em;
+
+        &.na {
+          color: var(--grey50);
+          border-bottom: none;
+          cursor: default;
+        }
+      }
+    }
+
+    &-consumption {
+      margin-bottom: 8px;
+    }
+
     &-data {
       margin-bottom: 0;
     }
