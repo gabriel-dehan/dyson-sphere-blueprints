@@ -138,18 +138,20 @@
           </div>
         <% end %>
       </div>
-      <div class="t-blueprint__tags tag-names">
-        <h3>Tagged with</h3>
-        <ul>
-          <% @blueprint.tags.each do |tag| %>
-            <li class="t-blueprint__tags-tag">
-              <span class="t-blueprint__tags-name">
-                <%= tag.name %>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+      <% if @blueprint.tags.any? %>
+        <div class="t-blueprint__tags tag-names">
+          <h3>Tagged with</h3>
+          <ul>
+            <% @blueprint.tags.each do |tag| %>
+              <li class="t-blueprint__tags-tag">
+                <span class="t-blueprint__tags-name">
+                  <%= tag.name %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

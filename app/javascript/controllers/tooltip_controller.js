@@ -5,7 +5,6 @@ export default class extends Controller {
   connect() {
     tippy('.tooltip-trigger', {
       duration: 200,
-      placement: 'left',
     });
   }
 }

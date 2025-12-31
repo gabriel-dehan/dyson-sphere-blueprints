@@ -155,6 +155,26 @@
           </div>
         </div>
       <% end %>
+      <% if @blueprint.summary && @blueprint.summary.any? %>
+        <div class="t-blueprint__requirements t-blueprint__requirements-power"
+           data-controller="powerCalculator"
+           data-powerCalculator-summary-value='<%= @blueprint.summary.to_json %>'>
+          <div class="t-blueprint__requirements-power__consumption">
+            <%= image_tag get_category_icon('power') %>
+            <h3>Power consumption</h3>
+            <span class="t-blueprint__requirements-consumption"
+                  data-powerCalculator-target="consumption"
+                  style="display: none;"></span>
+          </div>
+          <div class="t-blueprint__requirements-power__generation">
+            <h3>Power generation</h3>
+            <span class="t-blueprint__requirements-generation"
+                  data-powerCalculator-target="generation"
+                  style="display: none;"></span>
+          </div>
+        </div>
+      <% end %>
+
       <div class="t-blueprint__requirements">
         <h3>This blueprint requires</h3>
         <% if @blueprint.summary && @blueprint.summary.any? %>
@@ -169,6 +189,7 @@
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
                       data-tippy-content="<%= data["name"] %>"
+                      data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
                     </span>
@@ -196,6 +217,7 @@
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
                       data-tippy-content="<%= data["name"] %>"
+                      data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
                     </span>
@@ -211,6 +233,7 @@
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
                       data-tippy-content="<%= data["name"] %>"
+                      data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
                     </span>
@@ -226,22 +249,24 @@
           </div>
         <% end %>
       </div>
-      <div class="t-blueprint__tags">
-        <h3>Tagged with</h3>
-        <ul>
-          <% @blueprint.tags.each do |tag| %>
-            <li class="t-blueprint__tags-tag">
-              <span
-                class="t-blueprint__requirements-tally__picture tooltip-trigger"
-                data-tippy-content="<%= tag.name.capitalize %>"
-                data-tippy-placement="bottom"
-              >
-                <%= image_tag get_game_tag_icon_by_name(tag.name) %>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+      <% if @blueprint.tags.any? %>
+        <div class="t-blueprint__tags">
+          <h3>Tagged with</h3>
+          <ul>
+            <% @blueprint.tags.each do |tag| %>
+              <li class="t-blueprint__tags-tag">
+                <span
+                  class="t-blueprint__requirements-tally__picture tooltip-trigger"
+                  data-tippy-content="<%= tag.name.capitalize %>"
+                  data-tippy-placement="bottom"
+                >
+                  <%= image_tag get_game_tag_icon_by_name(tag.name) %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
