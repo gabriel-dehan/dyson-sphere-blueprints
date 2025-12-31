@@ -1,6 +1,8 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [v4.9.0](#v490)
+  - [v4.8.0](#v480)
   - [v4.7.0](#v470)
   - [v4.6.0](#v460)
   - [v4.5.0](#v450)
@@ -37,7 +39,42 @@
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
 
-### Latest: 4.7.0
+## v4.9.0
+- Added power consumption and generation display for blueprints ([#95](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/95))
+
+## v4.8.0
+
+### GDPR Compliance Implementation
+- **Cookie Consent System**
+  - Added custom-built cookie consent banner with Accept/Reject functionality
+  - Banner styled to match site's dark theme with BEM methodology
+  - Conditional Google Analytics loading based on user consent
+  - Consent stored in localStorage + cookies with 1-year expiration
+  - Automatic consent expiration and re-prompting after 1 year
+  - Analytics cookies deleted when users reject tracking
+  - "Cookie Settings" link in footer allows users to change preferences
+  - Stimulus controller (`cookieConsent_controller.js`) for consent management
+  - Turbolinks-compatible consent persistence
+
+- **Legal Pages**
+  - Added Privacy Policy page with full GDPR Article 13 compliance
+  - Added Cookie Policy page with detailed cookie disclosure tables
+  - Added Terms of Service page with comprehensive legal coverage
+  - All legal pages professionally styled to match dark theme
+  - Legal page links added to footer (Privacy, Cookies, Terms)
+
+- **Privacy Enhancements**
+  - Removed unconditional Google Analytics tracking
+  - IP anonymization enabled for Google Analytics
+  - Consent-based tracking now required for all analytics
+  - Secure consent storage with timestamp for compliance documentation
+
+- **Routes & Controllers**
+  - Added routes: `/privacy`, `/cookies`, `/terms`
+  - Updated PagesController with legal page actions
+  - All legal pages publicly accessible without authentication
+
+## v4.7.0
 - Renamed `Mod` model to `GameVersion` - simplified architecture by removing legacy mod support ([#93](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/93))
 - Removed MultiBuild/MultiBuildBeta legacy code
 - Updated rake tasks from `mod:` to `game_version:` namespace

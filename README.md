@@ -12,8 +12,6 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
   - [Roadmap](#roadmap)
   - [Changelog](#changelog)
   - [Contribute](#contribute)
-    - [Testing](#testing)
-    - [Continuous Integration](#continuous-integration)
   - [Our lovely sponsors](#our-lovely-sponsors)
   - [Contributors](#contributors)
   - [Deploy](#deploy)
@@ -25,12 +23,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.7.0
-- Renamed `Mod` model to `GameVersion` - simplified architecture by removing legacy mod support ([#93](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/93))
-- Removed MultiBuild/MultiBuildBeta legacy code
-- Updated rake tasks from `mod:` to `game_version:` namespace
-- Simplified blueprint parsing logic
-- Code cleanup and removal of unused components
+### Latest: 4.9.0
+- Added power consumption and generation display for blueprints ([#95](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/95))
 
 ### Previous versions
 
