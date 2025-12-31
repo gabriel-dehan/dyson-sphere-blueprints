@@ -63,7 +63,7 @@ rails s
 
 ### Seeding
 
-The main thing you'll need to setup is to create a `Mod` for the blueprints. Currently there are 3 mods in production, 2 are legacy and one is for the base game. A `Mod` contains a field `version` which is a JSON like that:
+The main thing you'll need to setup is to create a `GameVersion` for the blueprints. A `GameVersion` contains a field `versions` which is a JSON like this:
 
 ```ruby
 {
