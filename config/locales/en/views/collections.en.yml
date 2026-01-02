@@ -1,6 +1,7 @@
 ---
 en:
   collections:
+    name: collection
     confirm_delete: Are you sure you want to delete this collection? The blueprints will not be deleted.
     edit:
       title: Edit Collection
@@ -16,12 +17,14 @@ en:
       update: Update Collection
     index:
       blueprints_count:
-        one: "%{count} blueprint"
-        other: "%{count} blueprints"
+        one: "<strong>%{count}</strong> blueprint"
+        other: "<strong>%{count}</strong> blueprints"
       my_collections: My collections
       new_collection: New Collection
       no_collections: No collections found
       title: All public collections
+      created: Created
+      ago: ago
     new:
       title: New Collection
     show:

@@ -111,7 +111,7 @@
             </span>
           </li>
           <li>
-            <strong><%= t('blueprints.show.copied_count') %></strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%= t('blueprints.show.times', count: @blueprint.usage_count) %></span>
+            <strong><%= t('blueprints.show.nb_of_copies') %></strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%= t('blueprints.show.times', count: @blueprint.usage_count) %></span>
           </li>
           <li>
             <strong><%= t('blueprints.show.created_at') %></strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> <%= t('blueprints.show.ago') %></span>

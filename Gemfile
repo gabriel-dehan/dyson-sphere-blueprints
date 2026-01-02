@@ -65,6 +65,8 @@ gem "barnes"
 gem "profanity-filter", "~> 1.0"
 gem "camalian", "~> 0.2.0"
 
+gem 'coloris'
+
 group :development, :test do
   gem "pry-byebug"
   gem "pry-rails"

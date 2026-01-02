@@ -7,9 +7,12 @@ zh-CN:
       factory_title: 编辑<span>工厂</span>蓝图
       mecha_title: 编辑<span>机甲</span>蓝图
     filters:
+      any: 任何
       dyson_spheres: 戴森球
       factories: 工厂
       filters_for: 筛选
+      by_color: 按颜色筛选 (实验性功能)
+      max_structures: 最大建筑数量
       mechas: 机甲
       most_popular: 最热门
       most_recent: 最新
@@ -63,7 +66,7 @@ zh-CN:
       author: 作者：
       blueprint: 蓝图
       collection: 收藏集：
-      copied_count: 复制次数：
+      nb_of_copies: 复制次数：
       copy_to_clipboard: 复制到剪贴板
       could_not_decode: 无法解码蓝图数据。
       created_at: 创建时间：
@@ -92,6 +95,7 @@ zh-CN:
         other: 个建筑
       tagged_with: 标签
       times:
+        one: 次
         other: 次
       visibility: 可见性：
     types:

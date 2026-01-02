@@ -7,9 +7,12 @@ en:
       factory_title: Edit <span>Factory</span> blueprint
       mecha_title: Edit <span>Mecha</span> blueprint
     filters:
+      any: Any
       dyson_spheres: Dyson Spheres
       factories: Factories
       filters_for: Filters for
+      by_color: Filter by color (experimental)
+      max_structures: Max structures
       mechas: Mechas
       most_popular: Most Popular
       most_recent: Most recent
@@ -63,7 +66,7 @@ en:
       author: 'Author:'
       blueprint: Blueprint
       collection: 'Collection:'
-      copied_count: 'Copied:'
+      nb_of_copies: 'Copied:'
       copy_to_clipboard: Copy to clipboard
       could_not_decode: Could not decode blueprint data.
       created_at: 'Created:'

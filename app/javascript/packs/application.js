@@ -5,8 +5,8 @@
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
-import Coloris from "@melloware/coloris";
 // import "channels"
+import "../coloris.js"
 import "trix"
 import "@rails/actiontext"
 import "../config.js.erb";
@@ -18,18 +18,10 @@ import { singleFileUpload, multipleFileUpload } from 'fileUpload'
 import "controllers"
 
 document.addEventListener('turbolinks:load', () => {
-  if (document.querySelector('#clr-picker')){
-    document.querySelector('#clr-picker').remove();
-  }
-
-  Coloris.init();
   Coloris({
     theme: 'dark',
-    // el: 'input.color-picker',
     focusInput: false,
   });
-
-
 
   document.querySelectorAll('input[type=file]').forEach(fileInput => {
     if (fileInput.multiple) {

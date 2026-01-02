@@ -12,10 +12,10 @@
         </h2>
         <span class="t-collections-list__collection-meta">
           <span class="t-collections-list__collection-meta-type">
-            <strong><%= collection.type %></strong> collection,
+            <strong><%= collection.type %></strong> <%= t('collections.name') %>:
           </span>
           <span class="t-collections-list__collection-meta-count">
-            with <strong><%= collection.blueprints_count %></strong> <%= pluralize_without_count(collection.blueprints_count, 'blueprint') %>
+            <%= raw t('collections.index.blueprints_count', count: collection.blueprints_count) %>
           </span>
         </div>
         <div class="t-collections-list__collection-block">
@@ -28,7 +28,7 @@
               <strong><%= collection.total_votes_sum %></strong><i class="fas fa-heart"></i>&nbsp;
             </span>
             <span class="t-collections-list__collection-date">
-              Created <strong><%= time_ago_in_words(collection.created_at) %></strong>
+              <%= t('collections.index.created') %> <strong><%= time_ago_in_words(collection.created_at) %> <%= t('collections.index.ago') %></strong>
             </span>
           </div>
           <% if policy(collection).update? && with_actions %>
