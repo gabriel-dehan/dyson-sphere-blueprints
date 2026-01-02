@@ -1,15 +1,58 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
+  # Devise OmniAuth callbacks must be outside the locale scope
+  devise_for :users, only: :omniauth_callbacks, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-  get "help", to: "pages#help"
-  get "supportus", to: "pages#support"
-  get "walloffame", to: "pages#wall_of_fame"
-  get "privacy", to: "pages#privacy"
-  get "cookies", to: "pages#cookie_policy"
-  get "terms", to: "pages#terms"
+  # Locale scope for all user-facing routes
+  scope "(:locale)", locale: /en|zh-CN/ do
+    root to: "pages#home"
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations" }
+    get "help", to: "pages#help"
+    get "supportus", to: "pages#support"
+    get "walloffame", to: "pages#wall_of_fame"
+    get "privacy", to: "pages#privacy"
+    get "cookies", to: "pages#cookie_policy"
+    get "terms", to: "pages#terms"
 
+    devise_for :users, skip: :omniauth_callbacks, controllers: { registrations: "registrations" }
+
+    resources :users, only: [] do
+      get :blueprints, to: "users#blueprints"
+
+      collection do
+        get :blueprints, to: "users#my_blueprints"
+        get :collections, to: "users#my_collections"
+        get :favorites, to: "users#my_favorites"
+      end
+    end
+
+    namespace :blueprint do
+      resources :factories, only: [:new, :edit, :create, :update]
+      resources :dyson_spheres, only: [:new, :edit, :create, :update]
+      resources :mechas, only: [:new, :edit, :create, :update] do
+        collection { post :analyze, to: "mechas#analyze" }
+      end
+    end
+
+    resources :blueprints, only: [:index, :show, :destroy] do
+      member do
+        put "like", to: "blueprints#like"
+        put "unlike", to: "blueprints#unlike"
+        put "track", to: "blueprints#track"
+        get "code", to: "blueprints#code"
+      end
+    end
+    resources :collections, only: [:new, :show, :index, :edit, :create, :update, :destroy] do
+      member do
+        get "bulk_download", to: "collections#bulk_download"
+      end
+    end
+
+    resources :tags, only: [:create, :index] do
+      collection { post :profanity_check, to: "tags#profanity_check" }
+    end
+  end
+
+  # Non-localized routes (admin/system routes)
   # Sidekiq Web UI, only for admins.
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
@@ -20,40 +63,4 @@ Rails.application.routes.draw do
     mount Shrine.presign_endpoint(:cache) => "/s3/params"
   end
   mount PictureUploader.derivation_endpoint => "/derivations/image"
-
-  resources :users, only: [] do
-    get :blueprints, to: "users#blueprints"
-
-    collection do
-      get :blueprints, to: "users#my_blueprints"
-      get :collections, to: "users#my_collections"
-      get :favorites, to: "users#my_favorites"
-    end
-  end
-
-  namespace :blueprint do
-    resources :factories, only: [:new, :edit, :create, :update]
-    resources :dyson_spheres, only: [:new, :edit, :create, :update]
-    resources :mechas, only: [:new, :edit, :create, :update] do
-      collection { post :analyze, to: "mechas#analyze" }
-    end
-  end
-
-  resources :blueprints, only: [:index, :show, :destroy] do
-    member do
-      put "like", to: "blueprints#like"
-      put "unlike", to: "blueprints#unlike"
-      put "track", to: "blueprints#track"
-      get "code", to: "blueprints#code"
-    end
-  end
-  resources :collections, only: [:new, :show, :index, :edit, :create, :update, :destroy] do
-    member do
-      get "bulk_download", to: "collections#bulk_download"
-    end
-  end
-
-  resources :tags, only: [:create, :index] do
-    collection { post :profanity_check, to: "tags#profanity_check" }
-  end
 end

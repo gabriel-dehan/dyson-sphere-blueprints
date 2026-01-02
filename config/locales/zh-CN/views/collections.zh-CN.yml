@@ -1,0 +1,25 @@
+zh-CN:
+  collections:
+    index:
+      title: "收藏集"
+      new_collection: "新建收藏集"
+      no_collections: "未找到收藏集"
+      blueprints_count:
+        other: "%{count} 个蓝图"
+
+    show:
+      by: "作者"
+      blueprints: "蓝图"
+      edit: "编辑收藏集"
+      delete: "删除收藏集"
+      no_blueprints: "此收藏集还没有蓝图"
+
+    form:
+      title: "标题"
+      title_placeholder: "给你的收藏集取一个名字"
+      description: "描述"
+      description_placeholder: "描述这个收藏集的内容"
+      create: "创建收藏集"
+      update: "更新收藏集"
+
+    confirm_delete: "确定要删除这个收藏集吗？蓝图不会被删除。"

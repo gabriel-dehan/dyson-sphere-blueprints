@@ -14,11 +14,23 @@ class Engine::Researches
     @researches_map = JSON.parse(File.read(GAME_RESEARCHES_PATH))
   end
 
-  def formatted_mass_construction_with_limits
-    @@formatted_mass_construction_with_limits ||= MASS_CONSTRUCTION_LIMITS.map { |key, limit| [key, "#{@researches_map[key]} (#{limit})"] }.to_h # rubocop:disable Style/ClassVars
+  def formatted_mass_construction_with_limits(locale: I18n.locale)
+    MASS_CONSTRUCTION_LIMITS.map { |key, limit| [key, "#{get_name(key, locale: locale)} (#{limit})"] }.to_h
   end
 
-  def get_name(research_uuid)
+  # Locale-aware name lookup
+  def get_name(research_uuid, locale: I18n.locale)
+    # Try i18n translation first
+    i18n_key = "game.researches.#{research_uuid}"
+    translated = I18n.t(i18n_key, locale: locale, default: nil)
+    return translated if translated.present?
+
+    # Fallback to JSON data (English)
+    get_english_name(research_uuid)
+  end
+
+  # Always returns English name (for data storage)
+  def get_english_name(research_uuid)
     research = @researches_map.find { |id, _research_name| id.to_s == research_uuid.to_s }
     research ? research[1] : "Unknown"
   end

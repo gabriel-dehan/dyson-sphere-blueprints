@@ -18,6 +18,7 @@ class User < ApplicationRecord
   before_create :create_default_collections
 
   validates :username, uniqueness: true
+  validates :preferred_locale, inclusion: { in: I18n.available_locales.map(&:to_s) }, allow_nil: true
 
   def admin?
     role == "admin"

@@ -1,0 +1,55 @@
+en:
+  blueprints:
+    show:
+      author: "Author:"
+      collection: "Collection:"
+      game_version: "Game version:"
+      copied_count: "Copied:"
+      created_at: "Created:"
+      requires: "This blueprint requires"
+      structures:
+        one: "structure"
+        other: "structures"
+      times:
+        one: "time"
+        other: "times"
+      power_consumption: "Power consumption"
+      power_generation: "Power generation"
+      tagged_with: "Tagged with"
+      no_description: "This blueprint doesn't have a description"
+      could_not_decode: "Could not decode blueprint data"
+      open_blueprint: "Open Blueprint"
+      download: "Download"
+      favorite: "Favorite"
+      unfavorite: "Unfavorite"
+      report: "Report"
+
+    form:
+      title: "Title"
+      title_placeholder: "Give your blueprint a memorable name"
+      description: "Description"
+      description_placeholder: "Describe what your blueprint does, how to use it, or any special instructions"
+      blueprint_string: "Blueprint string"
+      blueprint_placeholder: "Paste your blueprint string here"
+      collection: "Collection"
+      select_collection: "Select a collection"
+      no_collection: "No collection"
+      cover_picture: "Cover picture"
+      additional_pictures: "Additional pictures"
+      tags: "Tags"
+      tags_help: "Add tags to help others find your blueprint"
+      submit_factory: "Create Factory Blueprint"
+      submit_dyson_sphere: "Create Dyson Sphere Blueprint"
+      submit_mecha: "Create Mecha Blueprint"
+      update: "Update Blueprint"
+
+    index:
+      title: "Blueprints"
+      no_blueprints: "No blueprints found"
+
+    types:
+      factory: "Factory"
+      dyson_sphere: "Dyson Sphere"
+      mecha: "Mecha"
+
+    confirm_delete: "Are you sure you want to delete your blueprint?"

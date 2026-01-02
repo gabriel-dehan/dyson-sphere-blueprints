@@ -1,0 +1,53 @@
+zh-CN:
+  blueprints:
+    show:
+      author: "作者："
+      collection: "收藏集："
+      game_version: "游戏版本："
+      copied_count: "复制次数："
+      created_at: "创建时间："
+      requires: "此蓝图需要"
+      structures:
+        other: "个建筑"
+      times:
+        other: "次"
+      power_consumption: "耗电量"
+      power_generation: "发电量"
+      tagged_with: "标签"
+      no_description: "此蓝图没有描述"
+      could_not_decode: "无法解码蓝图数据"
+      open_blueprint: "打开蓝图"
+      download: "下载"
+      favorite: "收藏"
+      unfavorite: "取消收藏"
+      report: "举报"
+
+    form:
+      title: "标题"
+      title_placeholder: "给你的蓝图取一个好记的名字"
+      description: "描述"
+      description_placeholder: "描述你的蓝图的功能、使用方法或特殊说明"
+      blueprint_string: "蓝图字符串"
+      blueprint_placeholder: "在此粘贴你的蓝图字符串"
+      collection: "收藏集"
+      select_collection: "选择收藏集"
+      no_collection: "无收藏集"
+      cover_picture: "封面图片"
+      additional_pictures: "附加图片"
+      tags: "标签"
+      tags_help: "添加标签帮助他人找到你的蓝图"
+      submit_factory: "创建工厂蓝图"
+      submit_dyson_sphere: "创建戴森球蓝图"
+      submit_mecha: "创建机甲蓝图"
+      update: "更新蓝图"
+
+    index:
+      title: "蓝图"
+      no_blueprints: "未找到蓝图"
+
+    types:
+      factory: "工厂"
+      dyson_sphere: "戴森球"
+      mecha: "机甲"
+
+    confirm_delete: "确定要删除你的蓝图吗？"

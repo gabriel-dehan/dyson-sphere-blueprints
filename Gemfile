@@ -50,6 +50,9 @@ gem "pg_search"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-discord"
 
+# I18n
+gem "http_accept_language"
+
 gem "aws-sdk-s3", "~> 1.14"
 gem "shrine", "~> 3.3"
 gem "image_processing", "~> 1.10"

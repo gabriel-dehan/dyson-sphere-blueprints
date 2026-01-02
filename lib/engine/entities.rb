@@ -20,7 +20,19 @@ class Engine::Entities
     entity ? entity[0] : nil
   end
 
-  def get_name(entity_uuid)
+  # Locale-aware name lookup
+  def get_name(entity_uuid, locale: I18n.locale)
+    # Try i18n translation first
+    i18n_key = "game.entities.#{entity_uuid}"
+    translated = I18n.t(i18n_key, locale: locale, default: nil)
+    return translated if translated.present?
+
+    # Fallback to JSON data (English)
+    get_english_name(entity_uuid)
+  end
+
+  # Always returns English name (for data storage)
+  def get_english_name(entity_uuid)
     entity = @entities_map.find { |id, _entity_name| id.to_s == entity_uuid.to_s }
     entity ? entity[1] : "Unknown"
   end

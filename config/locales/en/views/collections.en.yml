@@ -1,0 +1,26 @@
+en:
+  collections:
+    index:
+      title: "Collections"
+      new_collection: "New Collection"
+      no_collections: "No collections found"
+      blueprints_count:
+        one: "%{count} blueprint"
+        other: "%{count} blueprints"
+
+    show:
+      by: "by"
+      blueprints: "Blueprints"
+      edit: "Edit Collection"
+      delete: "Delete Collection"
+      no_blueprints: "This collection doesn't have any blueprints yet"
+
+    form:
+      title: "Title"
+      title_placeholder: "Give your collection a name"
+      description: "Description"
+      description_placeholder: "Describe what this collection is about"
+      create: "Create Collection"
+      update: "Update Collection"
+
+    confirm_delete: "Are you sure you want to delete this collection? The blueprints will not be deleted."

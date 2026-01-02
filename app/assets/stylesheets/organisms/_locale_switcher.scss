@@ -1,0 +1,25 @@
+.o-locale-switcher {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+
+  &__current {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  &__link {
+    color: var(--light-purple);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--white);
+    }
+  }
+
+  &__separator {
+    color: var(--blue);
+    margin: 0 6px;
+  }
+}
