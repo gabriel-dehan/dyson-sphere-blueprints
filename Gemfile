@@ -52,6 +52,8 @@ gem "omniauth-discord"
 
 # I18n
 gem "http_accept_language"
+gem 'rails-i18n', '~> 6.0'
+gem 'kaminari-i18n'
 
 gem "aws-sdk-s3", "~> 1.14"
 gem "shrine", "~> 3.3"

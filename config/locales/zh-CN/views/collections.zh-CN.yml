@@ -25,6 +25,9 @@ zh-CN:
       title: 所有公开收藏集
       created: 创建时间
       ago: 前
+      edit_tooltip: 编辑
+      delete_tooltip: 删除
+      sum_of_all_blueprints: 所有蓝图的点赞数总和
     new:
       title: 新建收藏集
     show:

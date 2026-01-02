@@ -25,6 +25,9 @@ en:
       title: All public collections
       created: Created
       ago: ago
+      edit_tooltip: Edit
+      delete_tooltip: Delete
+      sum_of_all_blueprints: Sum of all blueprints
     new:
       title: New Collection
     show:

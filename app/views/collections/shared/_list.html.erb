@@ -22,7 +22,7 @@
           <div class="t-collections-list__collection-info">
             <span
             class="t-collections-list__collection-votes tooltip-trigger"
-            data-tippy-content="Sum of all blueprints"
+            data-tippy-content="<%= t('collections.index.sum_of_all_blueprints') %>"
             data-tippy-placement="right"
           >
               <strong><%= collection.total_votes_sum %></strong><i class="fas fa-heart"></i>&nbsp;
@@ -36,7 +36,7 @@
               <%= button_to edit_collection_path(collection), method: :get, class: 't-collections-list__collection-actions-edit' do %>
                 <span
                 class="tooltip-trigger"
-                data-tippy-content="Edit"
+                data-tippy-content="<%= t('collections.index.edit_tooltip') %>"
                 data-tippy-placement="bottom">
                   <i class="fas fa-edit"></i>
                 </span>
@@ -44,7 +44,7 @@
               <%= button_to collection_path(collection), method: :delete, class: 't-collections-list__collection-actions-delete', data: { confirm: 'Deleting a collection will delete all your associated blueprints, are you sure?' } do %>
                 <span
                 class="tooltip-trigger"
-                data-tippy-content="Delete"
+                data-tippy-content="<%= t('collections.index.delete_tooltip') %>"
                 data-tippy-placement="bottom">
                   <i class="fas fa-trash"></i>
                 </span>
