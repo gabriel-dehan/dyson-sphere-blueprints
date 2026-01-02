@@ -18,6 +18,7 @@ en:
       reset: Reset
       search: Search
       search_placeholder: Search for a blueprint...
+      search_by_author_placeholder: Search by author...
     form:
       additional_no_overwrite: "*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint."
       additional_pictures: Additional pictures

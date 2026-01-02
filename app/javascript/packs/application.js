@@ -25,9 +25,11 @@ document.addEventListener('turbolinks:load', () => {
   Coloris.init();
   Coloris({
     theme: 'dark',
-    el: 'input.color-picker',
+    // el: 'input.color-picker',
     focusInput: false,
   });
+
+
 
   document.querySelectorAll('input[type=file]').forEach(fileInput => {
     if (fileInput.multiple) {

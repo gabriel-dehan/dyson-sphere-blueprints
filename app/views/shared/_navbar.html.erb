@@ -56,6 +56,10 @@
       <% end %>
     </li>
     <li class="o-navbar__nav-item separator"></li>
+    <li class="o-navbar__nav-item locale-switcher">
+      <%= render 'shared/locale_switcher' %>
+    </li>
+    <li class="o-navbar__nav-item separator"></li>
     <% if user_signed_in? %>
     <li class="o-navbar__nav-item o-dropdown">
       <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>
@@ -72,9 +76,6 @@
         <%= link_to t('common.login'), new_user_session_path, class: "nav-link" %>
       </li>
     <% end %>
-    <li class="o-navbar__nav-item separator"></li>
-    <li class="o-navbar__nav-item locale-switcher">
-      <%= render 'shared/locale_switcher' %>
-    </li>
+
   </ul>
 </div>

@@ -5,6 +5,7 @@ en:
     add_factory: Add a Factory
     add_mecha: Add a Mecha
     blueprint: Blueprint
+    change_language: Change language
     collections: Collections
     dyson_spheres: Dyson Spheres
     factories: Factories
@@ -19,6 +20,5 @@ en:
     my_collections: My collections
     my_favorites: My favorites
     no_results: Sorry! Couldn't find any blueprint matching those criteria
-    search_placeholder: 'Search for a tag: mall, oil refinery, fractionator...'
     sort_by: Sort by
     support_us: Support Us

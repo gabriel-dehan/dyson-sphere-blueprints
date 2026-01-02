@@ -1,15 +1,23 @@
-<div class="o-locale-switcher" data-controller="localeSwitcher">
-  <% I18n.available_locales.each do |locale| %>
-    <% if locale.to_s == I18n.locale.to_s %>
-      <span class="o-locale-switcher__current"><%= locale_display_name(locale) %></span>
-    <% else %>
-      <%= link_to locale_display_name(locale),
-                  url_for(locale: locale),
-                  class: "o-locale-switcher__link",
-                  data: { action: "click->localeSwitcher#switch", locale: locale } %>
+<div class="o-locale-switcher o-dropdown" data-controller="localeSwitcher">
+  <button class="o-dropdown__button o-locale-switcher__trigger" type="button" aria-label="<%= t('navbar.change_language', default: 'Change language') %>">
+    <span class="o-locale-switcher__flag"><%= locale_flag(I18n.locale) %></span>
+  </button>
+  <div class="o-dropdown__content o-locale-switcher__dropdown">
+    <% I18n.available_locales.each do |locale| %>
+      <% if locale.to_s == I18n.locale.to_s %>
+        <span class="o-dropdown__item o-locale-switcher__item o-locale-switcher__item--active">
+          <span class="o-locale-switcher__flag"><%= locale_flag(locale) %></span>
+          <span class="o-locale-switcher__label"><%= locale_display_name(locale) %></span>
+        </span>
+      <% else %>
+        <%= link_to url_for(locale: locale),
+                    class: "o-dropdown__item o-locale-switcher__item",
+                    data: { action: "click->localeSwitcher#switch", locale: locale },
+                    title: locale_display_name(locale) do %>
+          <span class="o-locale-switcher__flag"><%= locale_flag(locale) %></span>
+          <span class="o-locale-switcher__label"><%= locale_display_name(locale) %></span>
+        <% end %>
+      <% end %>
     <% end %>
-    <% unless locale == I18n.available_locales.last %>
-      <span class="o-locale-switcher__separator">|</span>
-    <% end %>
-  <% end %>
+  </div>
 </div>

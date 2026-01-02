@@ -11,10 +11,17 @@ module GameHelper
     Engine::Researches.instance.get_name(research_uuid, locale: I18n.locale)
   end
 
+  def locale_flag(locale)
+    {
+      en: "🇺🇸",
+      "zh-CN": "🇨🇳",
+    }[locale.to_sym] || "🌐"
+  end
+
   def locale_display_name(locale)
     {
-      en: "🇺🇸 English",
-      "zh-CN": "🇨🇳 简体中文",
+      en: "English",
+      "zh-CN": "简体中文",
     }[locale.to_sym] || locale.to_s
   end
 end

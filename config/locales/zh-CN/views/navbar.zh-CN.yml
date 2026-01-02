@@ -5,6 +5,7 @@ zh-CN:
     add_factory: 添加工厂
     add_mecha: 添加机甲
     blueprint: 蓝图
+    change_language: 切换语言
     collections: 收藏集
     dyson_spheres: 戴森球
     factories: 工厂
@@ -19,6 +20,5 @@ zh-CN:
     my_collections: 我的收藏集
     my_favorites: 我的收藏
     no_results: 抱歉！没有找到符合条件的蓝图
-    search_placeholder: 搜索标签：商城、炼油厂、分馏塔...
     sort_by: 排序方式
     support_us: 支持我们

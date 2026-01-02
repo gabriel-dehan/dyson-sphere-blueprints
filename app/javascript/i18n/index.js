@@ -40,6 +40,8 @@ export function getRecipes() {
 // UI string translations
 const uiStrings = {
   en: {
+    'filters.tags.placeholder': 'Search for any tag...',
+    'freetags.placeholder': 'Search for a tag or add a new one...',
     'size_warning.quite_big': 'quite big',
     'size_warning.too_big': 'too big',
     'station.supply': 'Supply',
@@ -50,6 +52,8 @@ const uiStrings = {
     'station.max': 'Max:'
   },
   'zh-CN': {
+    'filters.tags.placeholder': '搜索任何标签...',
+    'freetags.placeholder': '搜索标签或添加新标签...',
     'size_warning.quite_big': '相当大',
     'size_warning.too_big': '太大了',
     'station.supply': '供应',

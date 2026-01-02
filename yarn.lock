@@ -1066,10 +1066,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@melloware/coloris@0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@melloware/coloris/-/coloris-0.10.0.tgz#13483d2b35a78d52c8b802c444c85f3c0c1f6f05"
-  integrity sha512-AsHgSIZJKjdELApdcX05WA+Nul4zyeN72YyJtNMuVegPHszafkJKdaj+vmWYZBE4f8naKqwaNY9BuU6v1o0ivQ==
+"@melloware/coloris@0.25.0":
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/@melloware/coloris/-/coloris-0.25.0.tgz#7012c10dc510dca1660b3692ed3c812344aec6ca"
+  integrity sha512-RBWVFLjWbup7GRkOXb9g3+ZtR9AevFtJinrRz2cYPLjZ3TCkNRGMWuNbmQWbZ5cF3VU7aQDZwUsYgIY/bGrh2g==
 
 "@npmcli/move-file@^1.0.1":
   version "1.1.2"

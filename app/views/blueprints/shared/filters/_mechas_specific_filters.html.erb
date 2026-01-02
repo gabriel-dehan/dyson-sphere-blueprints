@@ -1,7 +1,7 @@
 <!-- Colors -->
 <div class="o-blueprint-filters__select">
   <%= f.label :mod_version, "Filter by color (experimental)" %>
-  <%= f.text_field :color, type: 'text', class: 'color-picker', autocomplete: 'off', value: filters[:color] %>
+  <%= f.text_field :color, type: 'text', class: 'color-picker', autocomplete: 'off', value: filters[:color], data: { 'coloris': 'true' } %>
   <%= hidden_field_tag :color_similarity, 80 %>
 </div>
 <%#= f.select :color_similarity, [['10%', 10], ['20%', 20], ['40%', 40], ['50%', 50],  ['60%', 60], ['80%', 80]], prompt: 'Similarity Threshold', selected: filters[:color_similarity] %>
