@@ -1,0 +1,45 @@
+---
+en:
+  devise:
+    confirmations:
+      new:
+        submit: Resend confirmation instructions
+        title: Resend confirmation instructions
+    passwords:
+      edit:
+        submit: Change my password
+        title: Change your password
+      new:
+        submit: Send me reset password instructions
+        title: Forgot your password?
+    registrations:
+      edit:
+        cancel_account: Cancel my account
+        cancel_confirm: Are you sure?
+        current_password_hint: we need your current password to confirm your changes
+        leave_blank_hint: leave blank if you don't want to change it
+        title: Edit profile
+        unhappy: Unhappy?
+        update: Update
+      new:
+        password_hint: "%{minimum} characters minimum"
+        submit: Create your account
+        title: Sign up
+    sessions:
+      new:
+        submit: Log in
+        title: Log in
+    shared:
+      links:
+        already_have_account: Already have an account?
+        forgot_password: Forgot your password?
+        login_with: Login with %{provider}
+        no_account: Don't have an account? Sign up here!
+        resend_confirmation: Didn't receive confirmation instructions?
+        resend_unlock: Didn't receive unlock instructions?
+        sign_in: Log in
+        sign_up: Sign up
+    unlocks:
+      new:
+        submit: Resend unlock instructions
+        title: Resend unlock instructions

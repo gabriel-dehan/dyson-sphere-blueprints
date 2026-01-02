@@ -1,0 +1,21 @@
+---
+zh-CN:
+  common:
+    here: 这里
+  pages:
+    cookies: Cookie 政策
+    home:
+      tagline: 与<em>社区</em>分享你的 <strong class="dsp">Dyson Sphere Program</strong> 蓝图！
+    privacy: 隐私政策
+    terms: 服务条款
+  shared:
+    cookie_consent:
+      accept_all: 全部接受
+      cookie_policy: Cookie 政策
+      description: 我们使用 Cookie 来改善您的体验并分析流量。点击「全部接受」，即表示您同意我们使用 Cookie。
+      privacy_policy: 隐私政策
+      read_more: 阅读我们的 %{privacy_link} 和 %{cookie_link} 了解更多信息。
+      reject_all: 全部拒绝
+      title: 我们使用 Cookie
+    flashes:
+      close: 关闭

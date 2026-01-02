@@ -1,5 +1,5 @@
 <div class="p-blueprint-index">
-  <h1>My favorites</h1>
+  <h1><%= t('users.my_favorites.title') %></h1>
 
   <%= render "blueprints/shared/filters", filters: @filters, filter_path: favorites_users_path %>
   <%= render "blueprints/shared/list", blueprints: @blueprints, filters: @filters %>

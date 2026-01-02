@@ -1,37 +1,35 @@
+---
 en:
-  site:
-    name: "Dyson Sphere Blueprints"
-    tagline: "Share your Dyson Sphere Program blueprints with the community!"
-
   common:
-    login: "Login"
-    logout: "Log out"
-    sign_up: "Sign up"
-    settings: "Settings"
-    submit: "Submit"
-    cancel: "Cancel"
-    edit: "Edit"
-    delete: "Delete"
-    save: "Save"
-    search: "Search"
-    loading: "Loading..."
-    reset: "Reset"
-    confirm_delete: "Are you sure you want to delete this?"
-    copied: "Copied!"
-    copy_to_clipboard: "Copy to clipboard"
-
+    cancel: Cancel
+    confirm_delete: Are you sure you want to delete this?
+    copied: Copied!
+    copy_to_clipboard: Copy to clipboard
+    delete: Delete
+    edit: Edit
+    loading: Loading...
+    login: Login
+    logout: Log out
+    reset: Reset
+    save: Save
+    search: Search
+    settings: Settings
+    sign_up: Sign up
+    submit: Submit
   flash:
-    unauthorized: "You are not authorized to perform this action."
     created: "%{resource} was successfully created."
-    updated: "%{resource} was successfully updated."
     deleted: "%{resource} was successfully deleted."
-
+    unauthorized: You are not authorized to perform this action.
+    updated: "%{resource} was successfully updated."
   footer:
-    made_with: "Made with"
-    issue_notice: "Noticed an issue?"
-    suggestion: "Have a suggestion?"
-    tell_me: "Tell me all about it"
-    or: "or"
-    send_dm: "send me a DM."
-    source_code: "Source code"
-    cookie_settings: "Cookie Settings"
+    cookie_settings: Cookie Settings
+    issue_notice: Noticed an issue?
+    made_with: Made with
+    or: or
+    send_dm: send me a DM.
+    source_code: Source code
+    suggestion: Have a suggestion?
+    tell_me: Tell me all about it
+  site:
+    name: Dyson Sphere Blueprints
+    tagline: Share your Dyson Sphere Program blueprints with the community!

@@ -1,15 +1,15 @@
 <div class="p-my-collections">
-  <h1>My collections</h1>
+  <h1><%= t('users.my_collections.title') %></h1>
   <div class="t-collections">
     <div class="t-collections-actions">
       <div class="t-collections-actions__filters">
-        <%= link_to 'Public', url_for(type: 'Public'), class: "t-collections-actions__filters-choice #{@type == 'Public' ? 'active' : ''}" %>
-        <%= link_to 'All', url_for(type: 'All'), class: "t-collections-actions__filters-choice #{@type == 'All' ? 'active' : ''}" %>
-        <%= link_to 'Private', url_for(type: 'Private'), class: "t-collections-actions__filters-choice #{@type == 'Private' ? 'active' : ''}" %>
+        <%= link_to t('users.my_collections.public'), url_for(type: 'Public'), class: "t-collections-actions__filters-choice #{@type == 'Public' ? 'active' : ''}" %>
+        <%= link_to t('users.my_collections.all'), url_for(type: 'All'), class: "t-collections-actions__filters-choice #{@type == 'All' ? 'active' : ''}" %>
+        <%= link_to t('users.my_collections.private'), url_for(type: 'Private'), class: "t-collections-actions__filters-choice #{@type == 'Private' ? 'active' : ''}" %>
       </div>
       <div class="t-collections-actions__new">
         <%= link_to new_collection_path, class: "a-button" do %>
-          <i class="fas fa-plus"></i> Create a new collection
+          <i class="fas fa-plus"></i> <%= t('users.my_collections.create_new') %>
         <% end %>
       </div>
     </div>

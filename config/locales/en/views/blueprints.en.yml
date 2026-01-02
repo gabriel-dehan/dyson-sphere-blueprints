@@ -1,55 +1,104 @@
+---
 en:
   blueprints:
-    show:
-      author: "Author:"
-      collection: "Collection:"
-      game_version: "Game version:"
-      copied_count: "Copied:"
-      created_at: "Created:"
-      requires: "This blueprint requires"
-      structures:
-        one: "structure"
-        other: "structures"
-      times:
-        one: "time"
-        other: "times"
-      power_consumption: "Power consumption"
-      power_generation: "Power generation"
-      tagged_with: "Tagged with"
-      no_description: "This blueprint doesn't have a description"
-      could_not_decode: "Could not decode blueprint data"
-      open_blueprint: "Open Blueprint"
-      download: "Download"
-      favorite: "Favorite"
-      unfavorite: "Unfavorite"
-      report: "Report"
-
+    confirm_delete: Are you sure you want to delete your blueprint?
+    edit:
+      dyson_sphere_title: Edit <span>Dyson Sphere</span> blueprint
+      factory_title: Edit <span>Factory</span> blueprint
+      mecha_title: Edit <span>Mecha</span> blueprint
+    filters:
+      dyson_spheres: Dyson Spheres
+      factories: Factories
+      filters_for: Filters for
+      mechas: Mechas
+      most_popular: Most Popular
+      most_recent: Most recent
+      most_used: Most used
+      no_dyson_sphere_filters: No specific filters for dyson spheres yet
+      reset: Reset
+      search: Search
+      search_placeholder: Search for a blueprint...
     form:
-      title: "Title"
-      title_placeholder: "Give your blueprint a memorable name"
-      description: "Description"
-      description_placeholder: "Describe what your blueprint does, how to use it, or any special instructions"
-      blueprint_string: "Blueprint string"
-      blueprint_placeholder: "Paste your blueprint string here"
-      collection: "Collection"
-      select_collection: "Select a collection"
-      no_collection: "No collection"
-      cover_picture: "Cover picture"
-      additional_pictures: "Additional pictures"
-      tags: "Tags"
-      tags_help: "Add tags to help others find your blueprint"
-      submit_factory: "Create Factory Blueprint"
-      submit_dyson_sphere: "Create Dyson Sphere Blueprint"
-      submit_mecha: "Create Mecha Blueprint"
-      update: "Update Blueprint"
-
+      additional_no_overwrite: "*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint."
+      additional_pictures: Additional pictures
+      blueprint_placeholder: Paste your blueprint string here
+      blueprint_string: Blueprint string
+      collection: Collection
+      cover_overwrite_warning: "*Uploading a new image will overwrite the existing one."
+      cover_picture: Cover picture
+      description: Description
+      description_placeholder: Describe what your blueprint does, how to use it, or any special instructions
+      need_help: Need help? Don't know what to put here?
+      no_collection: No collection
+      paste_blueprint: Paste your blueprint here
+      preview_requires: This blueprint requires
+      preview_see_breakdown: "(See the breakdown)"
+      preview_structures: structures
+      remove: Remove
+      select_collection: Select a collection
+      size_warning_text: Your blueprint is <strong id="blueprint-sizeWarning-humanizedCounter">quite big</strong>.<br>You will still be able to publish your blueprint but, if your blueprint is too big, <strong>other users won't be able to copy it directly from the blueprint's page</strong>.
+      size_warning_title: Beware
+      submit_dyson_sphere: Create Dyson Sphere Blueprint
+      submit_factory: Create Factory Blueprint
+      submit_mecha: Create Mecha Blueprint
+      tags: Tags
+      tags_help: Add tags to help others find your blueprint
+      tags_label: Tags <em>(1 minimum - 10 maximum)</em>
+      title: Title
+      title_placeholder: Give your blueprint a memorable name
+      update: Update Blueprint
     index:
-      title: "Blueprints"
-      no_blueprints: "No blueprints found"
-
+      all_public: All public
+      no_blueprints: No blueprints found
+      title: Blueprints
+      type_blueprints: "%{type} blueprints"
+    new:
+      dyson_sphere_title: Add a <span>Dyson Sphere</span> blueprint
+      factory_title: Add a <span>Factory</span> blueprint
+      mecha_title: Add a <span>Mecha</span> blueprint
+    show:
+      ago: ago
+      animate: Animate
+      author: 'Author:'
+      blueprint: Blueprint
+      collection: 'Collection:'
+      copied_count: 'Copied:'
+      copy_to_clipboard: Copy to clipboard
+      could_not_decode: Could not decode blueprint data.
+      created_at: 'Created:'
+      delete_tooltip: Delete
+      description_tab: Description
+      download_file: Download file
+      downloaded_count: 'Downloaded:'
+      dyson_sphere_summary: Dyson Sphere summary
+      edit_tooltip: Edit
+      game_version: 'Game version:'
+      large_blueprint_disabled: The <strong>copy function has been disabled</strong> due to the blueprint being too large.
+      large_blueprint_help: On this page, you can select the whole blueprint with <kbd>Ctrl+A</kbd>, then use <kbd>Ctrl+C</kbd> to copy.
+      large_blueprint_view: 'You can view the blueprint''s code on the following page:'
+      mecha_data_not_available: Mecha files data extraction is not yet available.
+      mecha_name: 'Name:'
+      mecha_requirements: Mecha requirements
+      no_description: This blueprint doesn't have a description!
+      not_available_yet: Not available yet
+      open_blueprint: Open Blueprint
+      power_consumption: Power consumption
+      power_generation: Power generation
+      preview_tab: 3D Preview
+      preview_unavailable: The Preview feature is unavailable at the time.
+      requires: This blueprint requires
+      structures:
+        one: structure
+        other: structures
+      tagged_with: Tagged with
+      times:
+        one: time
+        other: times
+      visibility: 'Visibility:'
     types:
-      factory: "Factory"
-      dyson_sphere: "Dyson Sphere"
-      mecha: "Mecha"
-
-    confirm_delete: "Are you sure you want to delete your blueprint?"
+      dyson_sphere: Dyson Sphere
+      dyson_spheres: Dyson Spheres
+      factories: Factories
+      factory: Factory
+      mecha: Mecha
+      mechas: Mechas

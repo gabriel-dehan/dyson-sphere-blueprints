@@ -1,0 +1,17 @@
+---
+zh-CN:
+  users:
+    blueprints:
+      blueprints: 蓝图
+      no_blueprints: 该用户还没有蓝图。
+      title: "%{username} 的"
+    my_blueprints:
+      title: 我的蓝图
+    my_collections:
+      all: 全部
+      create_new: 创建新收藏集
+      private: 私密
+      public: 公开
+      title: 我的收藏集
+    my_favorites:
+      title: 我的收藏

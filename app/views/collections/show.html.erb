@@ -1,10 +1,10 @@
 <div class="p-collections-show">
   <div class="p-page__header inline">
     <h1 class="p-page__header-title">
-      <span class="p-page__header-title-main"><%= @collection.name %> <span class="author">collection by <%= @collection.user.username %></span> </span>
+      <span class="p-page__header-title-main"><%= @collection.name %> <span class="author"><%= t('collections.show.collection_by') %> <%= @collection.user.username %></span> </span>
     </h1>
     <% if @blueprints.any? %>
-      <%= link_to 'Download all as ZIP', bulk_download_collection_path(@collection), class: 'a-button', download: "#{@collection.name}.zip" %>
+      <%= link_to t('collections.show.download_all'), bulk_download_collection_path(@collection), class: 'a-button', download: "#{@collection.name}.zip" %>
     <% end %>
   </div>
   <% if @blueprints.any? %>
@@ -12,7 +12,7 @@
     <%= render "blueprints/shared/list", blueprints: @blueprints %>
   <% else %>
     <div class="t-blueprint-no-result">
-      This collection is empty.
+      <%= t('collections.show.empty_collection') %>
     </div>
   <% end %>
 </div>

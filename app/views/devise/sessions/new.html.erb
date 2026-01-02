@@ -1,7 +1,7 @@
 <div class="p-login">
   <div class="m-form">
     <div class="m-form__container">
-      <h1 class="m-form__title">Log in</h1>
+      <h1 class="m-form__title"><%= t('devise.sessions.new.title') %></h1>
 
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-inputs">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Log in" %>
+          <%= f.button :submit, t('devise.sessions.new.submit') %>
         </div>
       <% end %>
 

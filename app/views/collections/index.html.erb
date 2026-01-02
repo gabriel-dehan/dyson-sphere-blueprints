@@ -1,8 +1,8 @@
 <div class="p-collections-index">
   <div class="p-collections-index__header">
-    <h1>All public collections</h1>
+    <h1><%= t('collections.index.title') %></h1>
     <% if current_user %>
-      <%= link_to 'My collections', collections_users_path, class: 'a-button' %>
+      <%= link_to t('collections.index.my_collections'), collections_users_path, class: 'a-button' %>
     <% end %>
   </div>
 

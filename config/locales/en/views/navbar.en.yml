@@ -1,23 +1,24 @@
+---
 en:
   navbar:
-    blueprint: "Blueprint"
-    add_factory: "Add a Factory"
-    add_dyson_sphere: "Add a Dyson Sphere"
-    add_mecha: "Add a Mecha"
-    collections: "Collections"
-    help: "Help"
-    support_us: "Support Us"
-    my_favorites: "My favorites"
-    my_blueprints: "My blueprints"
-    my_collections: "My collections"
-    filters: "Filters"
-    filters_for: "Filters for"
-    factories: "Factories"
-    dyson_spheres: "Dyson Spheres"
-    mechas: "Mechas"
-    sort_by: "Sort by"
-    most_recent: "Most recent"
-    most_popular: "Most Popular"
-    most_used: "Most used"
-    search_placeholder: "Search for a tag: mall, oil refinery, fractionator..."
-    no_results: "Sorry! Couldn't find any blueprint matching those criteria"
+    add_dyson_sphere: Add a Dyson Sphere
+    add_factory: Add a Factory
+    add_mecha: Add a Mecha
+    blueprint: Blueprint
+    collections: Collections
+    dyson_spheres: Dyson Spheres
+    factories: Factories
+    filters: Filters
+    filters_for: Filters for
+    help: Help
+    mechas: Mechas
+    most_popular: Most Popular
+    most_recent: Most recent
+    most_used: Most used
+    my_blueprints: My blueprints
+    my_collections: My collections
+    my_favorites: My favorites
+    no_results: Sorry! Couldn't find any blueprint matching those criteria
+    search_placeholder: 'Search for a tag: mall, oil refinery, fractionator...'
+    sort_by: Sort by
+    support_us: Support Us

@@ -1,0 +1,21 @@
+---
+en:
+  common:
+    here: here
+  pages:
+    cookies: Cookies
+    home:
+      tagline: Share your <strong class="dsp">Dyson Sphere Program</strong> blueprints with the <em>community</em>!
+    privacy: Privacy
+    terms: Terms
+  shared:
+    cookie_consent:
+      accept_all: Accept All
+      cookie_policy: Cookie Policy
+      description: We use cookies to improve your experience and analyze traffic. By clicking "Accept All", you consent to our use of cookies.
+      privacy_policy: Privacy Policy
+      read_more: Read our %{privacy_link} and %{cookie_link} for more information.
+      reject_all: Reject All
+      title: We use cookies
+    flashes:
+      close: Close
