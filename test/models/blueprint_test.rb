@@ -42,7 +42,7 @@ class BlueprintTest < ActiveSupport::TestCase
     if blueprint.game_version_string >= game_version.latest
       assert blueprint.is_game_version_latest?
     else
-      refute blueprint.is_game_version_latest?
+      assert_not blueprint.is_game_version_latest?
     end
   end
 
@@ -61,13 +61,13 @@ class BlueprintTest < ActiveSupport::TestCase
   test "large_bp? returns false for nil encoded_blueprint" do
     blueprint = blueprints(:public_mecha)
     # Mecha doesn't have encoded_blueprint
-    refute blueprint.large_bp?
+    assert_not blueprint.large_bp?
   end
 
   test "large_bp? returns false for normal sized blueprints" do
     blueprint = blueprints(:public_factory)
     # Fixture blueprints are small
-    refute blueprint.large_bp?
+    assert_not blueprint.large_bp?
   end
 
   test "is_mecha? returns true for Mecha type" do
@@ -77,12 +77,12 @@ class BlueprintTest < ActiveSupport::TestCase
 
   test "is_mecha? returns false for Factory type" do
     blueprint = blueprints(:public_factory)
-    refute blueprint.is_mecha?
+    assert_not blueprint.is_mecha?
   end
 
   test "is_mecha? returns false for DysonSphere type" do
     blueprint = blueprints(:public_dyson_sphere)
-    refute blueprint.is_mecha?
+    assert_not blueprint.is_mecha?
   end
 
   # ============================================

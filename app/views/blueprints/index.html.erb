@@ -1,11 +1,11 @@
 <div class="p-blueprint-index">
   <h1>
     <% if @filters[:type] %>
-      <strong><%= @filters[:type].humanize.pluralize %></strong>
+      <strong><%= t("blueprints.types.#{@filters[:type].pluralize}") %></strong>
     <% else %>
-      All public
+      <%= t('blueprints.index.all_public') %>
     <% end %>
-    blueprints</h1>
+    <%= t('blueprints.index.title').downcase %></h1>
   <%= render "blueprints/shared/filters", filters: @filters, filter_path: blueprints_path %>
   <%= render "blueprints/shared/list", blueprints: @blueprints, filters: @filters %>
 </div>

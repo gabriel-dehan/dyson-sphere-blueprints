@@ -1,0 +1,133 @@
+---
+zh-CN:
+  common:
+    here: 这里
+  pages:
+    cookies: Cookie 政策
+    help:
+      discord_alt: 加入我们的 Discord
+      dyson_sphere:
+        copy_step1: 按照前面的说明操作，然后点击<strong>复制</strong>按钮
+        copy_step2_html: 完成了，蓝图现在在你的剪贴板中，你只需要在添加 %{link} 时将其粘贴到"<em>* 在此粘贴你的蓝图</em>"字段中。
+        copy_step2_link: 你的新戴森球蓝图
+        copy_to_clipboard: 复制到剪贴板
+        how_to_copy: 如何获取蓝图代码？
+        how_to_paste: 如何使用在本网站找到的<strong>戴森球</strong>蓝图代码？
+        how_to_use: 如何在游戏中使用<strong>戴森球</strong>蓝图功能？
+        page_title: "<strong>戴森球</strong>蓝图帮助"
+        paste_step1: 只需点击
+        paste_step1_continued: 蓝图页面上的按钮。
+        paste_step2: 然后，在游戏中，点击<strong>粘贴</strong>按钮
+        paste_step3: 就这样！
+        step1: 进入蓝图创建界面
+        step2: 在右侧你应该可以看到<strong>复制</strong>和<strong>粘贴</strong>选项
+      dyson_sphere_tab: "<strong>戴森球</strong>蓝图帮助"
+      factory:
+        copy_step1: 你首先需要在游戏中创建一个蓝图。在<strong>蓝图</strong>工具栏中，选择第一个图标：
+        copy_step1_continued: 然后选择你的设施。满意后，点击保存蓝图完成你的蓝图。
+        copy_step2: 点击蓝图界面中的<strong>复制</strong>按钮。
+        copy_step3_html: 完成了，蓝图现在在你的剪贴板中，你只需要在添加 %{link} 时将其粘贴到表单字段中。
+        copy_step3_link: 你的新蓝图
+        copy_to_clipboard: 复制到剪贴板
+        how_to_copy: 如何获取蓝图代码？
+        how_to_paste: 如何使用在本网站找到的<strong>工厂</strong>蓝图代码？
+        how_to_use: 如何在游戏中使用<strong>工厂</strong>蓝图功能？
+        page_title: "<strong>工厂</strong>蓝图帮助"
+        paste_step1: 只需点击
+        paste_step1_continued: 蓝图页面上的按钮。
+        paste_step2: 然后，在游戏中，创建一个空蓝图，然后点击新创建的蓝图。
+        paste_step3: 点击蓝图界面中的<strong>粘贴</strong>按钮，然后点击保存更改按钮完成。
+        step1_mass_construction: 首先，你需要解锁批量建造功能，你可以在升级研究标签中找到它。
+        step2_research_tree: 研究树中有 5 个等级的蓝图升级。每次升级都会增加你一次可以复制的设施数量。一级只能复制 60 个，五级则取消限制，给你无限数量。
+        step3_toolbar: 完成后，你应该在工具栏中看到一个新图标。
+      factory_tab: "<strong>工厂</strong>蓝图帮助"
+      mecha:
+        copy_step1: 按照前面的说明操作，然后<strong>在左侧边栏向下滚动</strong>，你应该能找到这个区块：
+        copy_step2: 首先，<em>不要忘记保存你机甲的最新快照</em>。我们用它来生成网站上你机甲的预览图
+        copy_step3: 然后，给你的蓝图文件命名并点击<strong>保存蓝图</strong>
+        copy_step4_game: 或通过游戏界面：
+        copy_step4_html: 保存蓝图后，你需要获取 <strong>.mecha</strong> 文件才能在这里上传。<br>你通常可以在以下位置找到该文件夹：
+        copy_step4_path: C:\Users%USERPROFILE%\Documents\Dyson Sphere Program\Customize\Mecha
+        copy_step5: 找到你的 <strong>.mecha</strong> 文件
+        copy_step6_html: 然后你只需要在添加 %{link} 时上传该文件。
+        copy_step6_link: 你的新机甲蓝图
+        download_file: 下载文件
+        how_to_copy: 如何保存并获取你的<strong>机甲</strong>自定义文件？
+        how_to_paste: 如何使用在本网站下载的<strong>机甲</strong>蓝图文件？
+        how_to_use: 如何在游戏中使用<strong>机甲</strong>自定义功能？
+        note: "<strong>注意</strong>：由于自定义系统相当复杂，我们建议查找相关的教程或指南。"
+        page_title: "<strong>机甲</strong>蓝图帮助"
+        paste_step1: 只需点击
+        paste_step1_continued: 蓝图页面上的按钮。
+        paste_step2_game: 或通过游戏界面：
+        paste_step2_html: 然后进入你的机甲自定义文件夹，通常可以在以下位置找到：
+        paste_step3: 将文件放入此文件夹，你应该可以在游戏中看到它（可能需要重启游戏）
+        paste_step4: 就这样！
+        recommend_videos: 我们推荐 <strong>Panic</strong> 在 YouTube 上的精彩指南：
+        step1: 进入<strong>机甲面板</strong>
+        step2: 在机甲面板中，选择<strong>装甲自定义</strong>
+      mecha_tab: "<strong>机甲</strong>蓝图帮助"
+      title: 需要帮助？
+    home:
+      tagline: 与<em>社区</em>分享你的 <strong class="dsp">Dyson Sphere Program</strong> 蓝图！
+    privacy: 隐私政策
+    support:
+      about_me: 我叫 Gabriel。我从事开发工作已有 15 年，在网络行业工作了 8 年。
+      amazing_numbers: 这些是<strong>惊人的数字</strong>，我非常感谢社区的支持 ❤️
+      beer_alt: 请我喝杯啤酒
+      cheers: 干杯，爱你们 ❤️
+      cost_app_dyno: 应用服务器
+      cost_cdn: 内容分发网络（CDN）和缓存
+      cost_database: 数据库托管
+      cost_depending: "（取决于流量）"
+      cost_images: 图片托管
+      cost_month: "/ 月"
+      cost_worker_dyno: 工作进程服务器
+      costs_caption: 当前服务器和托管费用
+      costs_reference: 以下是我目前为网站自行承担的费用供参考：
+      credit: 捐赠按钮图标由
+      credit_from: 制作，来自
+      gamer: 我也是一个彻头彻尾的游戏玩家，这就是为什么我的大多数项目都与电子游戏有关，我对此非常热衷。
+      github_alt: 在 Github 上支持我
+      grateful: 我非常感激。谢谢你们。
+      high_costs: 但这些数字也意味着额外的托管费用，有点……偏高。
+      hosting_cost: 正如你们中的一些人可能知道的，<strong>托管一个像戴森球蓝图这样相当受欢迎的网络应用是有成本的</strong>，而且成本相当可观：需要支付网站托管、数据库托管、图片存储空间以及 CDN 等以改善加载速度的费用。
+      international: 其中一个重要因素是网站是真正的国际化，我们有来自世界各地的用户，超过一半的用户来自中国，另外不到一半主要来自美国和欧洲。这意味着我们的服务器没有任何停机时间可以帮助降低成本，这也意味着为了能够为我们的亚洲朋友提供尽可能好的体验，我不得不在世界各地设置 CDN 以尝试减少他们的加载时间（服务器更靠近美国/欧洲）。
+      intro: 大家好！
+      labor_of_heart: 戴森球蓝图是我用心打造的作品，看到这么多人喜欢它，我真的很高兴。
+      long_version_title: 为什么我们需要你的支持？详细版（附带一些数据！）
+      no_ads: "<strong>我强烈反对在戴森球蓝图上放置任何广告</strong>，但与此同时，我需要帮助来支付这些费用，因此我创建了这个页面来<strong>寻求你们的帮助</strong>，以维持戴森球蓝图的正常运行。"
+      no_ads_promise: "<strong>我不打算在网站上添加任何形式的广告，也永远不会这样做</strong>，但如果我希望网站体验保持愉快（即不慢），我需要继续使用一个体面的托管计划，而这绝对是昂贵的。"
+      optimization: 我已经尽可能地优化代码以减少服务器的负担，尽管我知道我可以做得更好并将继续努力改进，但我手头的时间有限，而且目前迁移到更便宜的主机将是非常艰巨的。
+      patreon_alt: 在 Patreon 上支持我
+      short_version_title: 为什么我们需要你的支持？简短版
+      spare_time: 但问题是：我在业余时间从事这个项目，并且自己承担所有托管费用。虽然这是我很乐意做的事情，我一点也不介意，但我没有预料到戴森球蓝图会如此成功。
+      stat_blueprints: "<strong>10000</strong> 个蓝图（约一半是公开蓝图）"
+      stat_data: 每天传输 <strong>500GB</strong> 数据
+      stat_requests: 每天处理 <strong>150 万</strong>次请求
+      stat_users: "<strong>8000</strong> 名注册用户"
+      stat_users_per_minute: 平均每分钟 <strong>300</strong> 名用户
+      stat_visitors: 每天最多 <strong>45000</strong> 名访客
+      stats_title: 目前，<strong>戴森球蓝图拥有：</strong>
+      stretching_thin: 网站在目前"便宜"的托管计划下已经捉襟见肘，升级将是下一个明智的步骤。一个明智但昂贵的步骤。
+      support_options: 如果你想支持戴森球蓝图，无论是<strong>请我喝杯</strong>啤酒（开发者唯一需要的燃料），还是通过<strong>每月捐款</strong>赞助戴森球蓝图，请知道你的贡献<em>无论金额多少</em>都将是莫大的帮助，<strong>我将非常感激</strong>。
+      thank_you: 首先，感谢你使用这个应用程序并成为社区的一员。
+      thank_you_final: 如果你读到这里，我非常感谢你，希望你们中的一些人能够提供哪怕是最微小的帮助。
+      tipping_point: 这些费用累加起来很快，<strong>我们正在达到一个临界点，开始花费太多的钱</strong>，如果我希望网站能够在流量增加的情况下继续正常运行，成本还会更高。
+      title: 支持戴森球蓝图
+      total_cost: 这加起来几乎是<strong>每月 100 欧元</strong>的支出。我可以削减开支，回到更便宜的计划，但我们都知道这意味着网站会更慢，你们的体验会更差。
+      wall_of_fame: "★ 前往荣誉墙 ★"
+      why_help: 这就是<strong>我需要你们帮助的原因</strong>。如果即使是少数用户每月捐赠 2 欧元，也基本上可以覆盖大部分费用，这将是太棒了。
+      you_are_amazing: 你太棒了
+    terms: 服务条款
+  shared:
+    cookie_consent:
+      accept_all: 全部接受
+      cookie_policy: Cookie 政策
+      description: 我们使用 Cookie 来改善您的体验并分析流量。点击「全部接受」，即表示您同意我们使用 Cookie。
+      privacy_policy: 隐私政策
+      read_more: 阅读我们的 %{privacy_link} 和 %{cookie_link} 了解更多信息。
+      reject_all: 全部拒绝
+      title: 我们使用 Cookie
+    flashes:
+      close: 关闭

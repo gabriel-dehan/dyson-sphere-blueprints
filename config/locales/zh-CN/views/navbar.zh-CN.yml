@@ -1,0 +1,24 @@
+---
+zh-CN:
+  navbar:
+    add_dyson_sphere: 添加戴森球
+    add_factory: 添加工厂
+    add_mecha: 添加机甲
+    blueprint: 蓝图
+    change_language: 切换语言
+    collections: 收藏集
+    dyson_spheres: 戴森球
+    factories: 工厂
+    filters: 筛选
+    filters_for: 筛选
+    help: 帮助
+    mechas: 机甲
+    most_popular: 最受欢迎
+    most_recent: 最新
+    most_used: 使用最多
+    my_blueprints: 我的蓝图
+    my_collections: 我的收藏集
+    my_favorites: 我的收藏
+    no_results: 抱歉！没有找到符合条件的蓝图
+    sort_by: 排序方式
+    support_us: 支持我们

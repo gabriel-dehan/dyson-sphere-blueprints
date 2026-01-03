@@ -43,6 +43,11 @@ end
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
+  # Set default URL options for tests to handle locale scope
+  def default_url_options
+    { locale: nil }
+  end
+
   # Sign in as a specific user fixture
   def sign_in_as(user_fixture)
     sign_in users(user_fixture)

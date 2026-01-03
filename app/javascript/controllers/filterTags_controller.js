@@ -1,6 +1,7 @@
 import { Controller } from "stimulus"
 import Tagify from '@yaireo/tagify'
 import Rails from "@rails/ujs";
+import { t } from '../i18n';
 
 export default class extends Controller {
   static targets = [ "input" ]
@@ -18,7 +19,7 @@ export default class extends Controller {
       success: (whitelist) => {
         this.tagify = new Tagify(
         this.inputTarget, {
-          placeholder: "Search for any tag...",
+          placeholder: t('filters.tags.placeholder'),
           whitelist: whitelist.map((tag) => ({ value: tag, class: 'whitelist' })),
           editTags: false,
           originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')

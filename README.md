@@ -23,8 +23,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.9.0
-- Added power consumption and generation display for blueprints ([#95](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/95))
+### Latest: 4.10.0 (2025-12)
+- Added Simplified Chinese (zh-CN) internationalization support ([#97](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/97))
 
 ### Previous versions
 
@@ -206,6 +206,28 @@ rails test:system
 - `test/controllers/` - Controller tests
 - `test/policies/` - Pundit authorization policy tests
 - `test/system/` - End-to-end browser tests
+
+### i18n-tasks
+
+This project uses [i18n-tasks](https://github.com/glebm/i18n-tasks) to manage translations and ensure consistency across locales.
+
+**Important:** Due to Ruby 3.2 compatibility issues with ActiveSupport, you must prefix all `i18n-tasks` commands with `RUBYOPT="-rlogger"`:
+
+```bash
+# Normalize translation files
+RUBYOPT="-rlogger" i18n-tasks normalize
+
+# Find missing translations
+RUBYOPT="-rlogger" i18n-tasks missing
+
+# Find unused translations
+RUBYOPT="-rlogger" i18n-tasks unused
+
+# Check for inconsistent interpolations
+RUBYOPT="-rlogger" i18n-tasks check-consistent-interpolations
+```
+
+This ensures the `logger` gem is loaded before ActiveSupport, which is required for Ruby 3.2 compatibility.
 
 ### Continuous Integration
 

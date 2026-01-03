@@ -1,0 +1,24 @@
+---
+en:
+  navbar:
+    add_dyson_sphere: Add a Dyson Sphere
+    add_factory: Add a Factory
+    add_mecha: Add a Mecha
+    blueprint: Blueprint
+    change_language: Change language
+    collections: Collections
+    dyson_spheres: Dyson Spheres
+    factories: Factories
+    filters: Filters
+    filters_for: Filters for
+    help: Help
+    mechas: Mechas
+    most_popular: Most Popular
+    most_recent: Most recent
+    most_used: Most used
+    my_blueprints: My blueprints
+    my_collections: My collections
+    my_favorites: My favorites
+    no_results: Sorry! Couldn't find any blueprint matching those criteria
+    sort_by: Sort by
+    support_us: Support Us

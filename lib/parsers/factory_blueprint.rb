@@ -21,7 +21,7 @@ module Parsers
         data = parse_blueprint_data
         @blueprint.summary = data
 
-        Rails.logger.debug "Saving blueprint #{@blueprint.id}..."
+        Rails.logger.debug { "Saving blueprint #{@blueprint.id}..." }
         @blueprint.save!
 
         Rails.logger.info "Done parsing blueprint #{@blueprint.id}"

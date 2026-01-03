@@ -50,6 +50,11 @@ gem "pg_search"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-discord"
 
+# I18n
+gem "http_accept_language"
+gem "rails-i18n", "~> 6.0"
+gem "kaminari-i18n"
+
 gem "aws-sdk-s3", "~> 1.14"
 gem "shrine", "~> 3.3"
 gem "image_processing", "~> 1.10"
@@ -61,6 +66,8 @@ gem "scout_apm"
 gem "barnes"
 gem "profanity-filter", "~> 1.0"
 gem "camalian", "~> 0.2.0"
+
+gem "coloris"
 
 group :development, :test do
   gem "pry-byebug"
@@ -75,6 +82,9 @@ group :development, :test do
 end
 
 group :development do
+  # I18n translation management
+  gem "i18n-tasks"
+
   # Access an interactive console on exception pages or by calling "console" anywhere in the code.
   gem "web-console", ">= 4.1.0"
   # Display performance information such as SQL time and flame graphs for each request in your browser.

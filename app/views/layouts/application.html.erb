@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <title><%= meta_title%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -38,22 +38,22 @@
       </div>
 
       <footer class="l-footer">
-        <span class="l-footer-item made-with">Made with&nbsp;&nbsp;❤️</span>
+        <span class="l-footer-item made-with"><%= t('footer.made_with') %>&nbsp;&nbsp;❤️</span>
         <span class="l-footer__separator">|</span>
         <span class="l-footer-item issues">
-          Noticed an <strong>issue?</strong> Have a <strong>suggestion</strong>? Tell me all about it&nbsp;<a target="_blank" rel="noopener noreferrer" href="https://github.com/gabriel-dehan/dyson-sphere-blueprints/issues">here.</a> or <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/Diacred">send me a DM.</a>
+          <%= t('footer.issue_notice') %> <%= t('footer.suggestion') %> <%= t('footer.tell_me') %>&nbsp;<a target="_blank" rel="noopener noreferrer" href="https://github.com/gabriel-dehan/dyson-sphere-blueprints/issues"><%= t('common.here', default: 'here') %>.</a> <%= t('footer.or') %> <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/Diacred"><%= t('footer.send_dm') %></a>
         </span>
         <span class="l-footer__separator">|</span>
         <span class="l-footer-item source-code">
-          <a target="_blank" rel="noopener noreferrer" href="https://github.com/gabriel-dehan/dyson-sphere-blueprints">Source code</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/gabriel-dehan/dyson-sphere-blueprints"><%= t('footer.source_code') %></a>
         </span>
         <span class="l-footer__separator">|</span>
         <span class="l-footer-item legal">
-          <%= link_to "Privacy", privacy_path %> · <%= link_to "Cookies", cookies_path %> · <%= link_to "Terms", terms_path %>
+          <%= link_to t('pages.privacy', default: 'Privacy'), privacy_path %> · <%= link_to t('pages.cookies', default: 'Cookies'), cookies_path %> · <%= link_to t('pages.terms', default: 'Terms'), terms_path %>
         </span>
         <span class="l-footer__separator">|</span>
         <span class="l-footer-item cookie-settings">
-          <a href="#" data-action="click->cookieConsent#revokeConsent">Cookie Settings</a>
+          <a href="#" data-action="click->cookieConsent#revokeConsent"><%= t('footer.cookie_settings') %></a>
         </span>
       </footer>
     </div>

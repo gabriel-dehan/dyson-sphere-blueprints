@@ -9,7 +9,7 @@ class AddIndexes < ActiveRecord::Migration[6.1]
     add_index :blueprints, "(summary ->> 'total_structures')", using: :btree
 
     # Tags table
-    add_index :tags, 'LOWER(name)'
+    add_index :tags, "LOWER(name)"
 
     # Mods table
     add_index :mods, :name
@@ -32,7 +32,7 @@ class AddIndexes < ActiveRecord::Migration[6.1]
     remove_index :blueprints, name: "index_blueprints_on_summary_total_structures"
 
     # Tags table
-    remove_index :tags, name: 'index_tags_on_LOWER_name'
+    remove_index :tags, name: "index_tags_on_LOWER_name"
 
     # Mods table
     remove_index :mods, column: :name

@@ -3,8 +3,8 @@
     <h1 class="m-form__title"><%= form_title %></h1>
 
     <%= simple_form_for(collection, html: { class: 'm-form' } ) do |f| %>
-      <%= f.input :name, required: true %>
-      <%= f.input :type, collection: ["Public", "Private"], selected: "Public" %>
+      <%= f.input :name, required: true, label: t('collections.form.title') %>
+      <%= f.input :type, collection: [[t('collections.form.public'), "Public"], [t('collections.form.private'), "Private"]], selected: "Public", label: t('collections.form.type') %>
 
       <%= f.submit %>
     <% end %>

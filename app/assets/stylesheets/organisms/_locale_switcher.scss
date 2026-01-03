@@ -1,0 +1,66 @@
+.o-locale-switcher {
+  font-size: 1em;
+
+  &__trigger {
+    max-height: 35px;
+    font-size: 1.2em;
+    background: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+
+    &:hover {
+      // background: var(--dark-purple);
+    }
+  }
+
+  &__flag {
+    font-size: 1.2em;
+    line-height: 1;
+  }
+
+  &__dropdown {
+    min-width: 140px;
+  }
+
+  &__item {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      color: var(--light-purple);
+      font-weight: normal !important;
+    }
+
+    &--active {
+      // background: var(--darker-blue);
+      cursor: default;
+      color: var(--light-purple);
+      font-weight: bold;
+
+      &:hover {
+        color: var(--light-purple);
+        font-weight: bold !important;
+      }
+    }
+  }
+
+  &__label {
+    font-size: 0.9em;
+  }
+
+  // Override dropdown hover for the trigger
+  &:hover {
+    .o-locale-switcher__trigger {
+      background: none;
+    }
+
+    .o-dropdown__content {
+      left: -35px;
+      top: 28px;
+    }
+  }
+}

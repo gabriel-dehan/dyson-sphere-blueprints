@@ -65,7 +65,7 @@ class CollectionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference("Collection.count", 1) do
       post collections_path, params: {
-        collection: { name: "New Test Collection", type: "Public" }
+        collection: { name: "New Test Collection", type: "Public" },
       }
     end
 
@@ -102,7 +102,7 @@ class CollectionsControllerTest < ActionDispatch::IntegrationTest
     collection = collections(:member_public)
 
     patch collection_path(collection), params: {
-      collection: { name: "Updated Name" }
+      collection: { name: "Updated Name" },
     }
 
     assert_redirected_to collection_path(collection)
@@ -124,7 +124,7 @@ class CollectionsControllerTest < ActionDispatch::IntegrationTest
 
     # Create a new collection to delete (to avoid fixture dependency issues)
     post collections_path, params: {
-      collection: { name: "To Be Deleted", type: "Public" }
+      collection: { name: "To Be Deleted", type: "Public" },
     }
     collection = Collection.last
 
@@ -147,7 +147,7 @@ class CollectionsControllerTest < ActionDispatch::IntegrationTest
   # BULK DOWNLOAD TESTS
   # ============================================
 
-  # Note: Bulk download involves complex file I/O and temp files
+  # NOTE: Bulk download involves complex file I/O and temp files
   # This test is deferred to Phase B where we can properly set up the file handling
   test "bulk_download works without authentication" do
     skip "Bulk download involves complex temp file handling - to be added in Phase B"

@@ -1,0 +1,41 @@
+---
+en:
+  collections:
+    confirm_delete: Are you sure you want to delete this collection? The blueprints will not be deleted.
+    edit:
+      title: Edit Collection
+    form:
+      create: Create Collection
+      description: Description
+      description_placeholder: Describe what this collection is about
+      private: Private
+      public: Public
+      title: Title
+      title_placeholder: Give your collection a name
+      type: Type
+      update: Update Collection
+    index:
+      ago: ago
+      blueprints_count:
+        one: "<strong>%{count}</strong> blueprint"
+        other: "<strong>%{count}</strong> blueprints"
+      created: Created
+      delete_tooltip: Delete
+      edit_tooltip: Edit
+      my_collections: My collections
+      new_collection: New Collection
+      no_collections: No collections found
+      sum_of_all_blueprints: Sum of all blueprints
+      title: All public collections
+    name: collection
+    new:
+      title: New Collection
+    show:
+      blueprints: Blueprints
+      by: by
+      collection_by: collection by
+      delete: Delete Collection
+      download_all: Download all as ZIP
+      edit: Edit Collection
+      empty_collection: This collection is empty.
+      no_blueprints: This collection doesn't have any blueprints yet

@@ -1,7 +1,6 @@
 import { Controller } from 'stimulus'
 import DspBpParser from 'dsp-bp-parser';
-import items from '../data/gameEntities.json';
-import recipes from '../data/gameRecipes.json';
+import { getEntityName, getRecipeName, t } from '../i18n';
 
 const images = require.context('../../assets/images/game_icons', true);
 const imagePath = name => images(name, true);
@@ -32,9 +31,9 @@ export default class extends Controller {
 
     if ('content' in document.createElement('template')) {
       // Customize message based on size, needs improvements, this is just quick and dirty
-      let sizeHumanizedCounter = 'quite big';
+      let sizeHumanizedCounter = t('size_warning.quite_big');
       if (size >= 1000000) {
-        sizeHumanizedCounter = 'too big';
+        sizeHumanizedCounter = t('size_warning.too_big');
       }
 
       const bpElement = document.querySelector('.m-form__important');
@@ -78,7 +77,7 @@ export default class extends Controller {
         entityImageEl.appendChild(image);
 
         // [Building] Assign tooltip
-        this.createTooltip(entityImageEl, items[itemId]);
+        this.createTooltip(entityImageEl, getEntityName(itemId));
 
         // [Building] Assign count
         bpEnt.querySelector("#entity-tally").textContent = data.summary.buildings[itemId].count;
@@ -93,7 +92,7 @@ export default class extends Controller {
           entityRecipeImageEl.appendChild(image);
 
           // [BuildingRecipe] Assign tooltip
-          this.createTooltip(entityRecipeImageEl, recipes[recipeId]);
+          this.createTooltip(entityRecipeImageEl, getRecipeName(recipeId));
 
           // [BuildingRecipe] Assign count
           bpEntRecipe.querySelector('#entity-recipe-tally').textContent = count;
@@ -118,12 +117,12 @@ export default class extends Controller {
               bpEntParam.querySelector("#entity-recipe-image").appendChild(image);
 
               // [StationItem] Assign tooltip
-              this.createTooltip(entityRecipeImageEl, items[p.itemId]);
+              this.createTooltip(entityRecipeImageEl, getEntityName(p.itemId));
 
               // [StationItem] Assign label
-              bpEntParam.querySelector('#entity-param-local').textContent = `Local: ${this.convertLogicLabel(p.localLogic)}`;
-              bpEntParam.querySelector('#entity-param-remote').textContent = `Remote: ${this.convertLogicLabel(p.remoteLogic)}`;
-              bpEntParam.querySelector('#entity-param-max').textContent = `Max: ${p.max}`;
+              bpEntParam.querySelector('#entity-param-local').textContent = `${t('station.local')} ${this.convertLogicLabel(p.localLogic)}`;
+              bpEntParam.querySelector('#entity-param-remote').textContent = `${t('station.remote')} ${this.convertLogicLabel(p.remoteLogic)}`;
+              bpEntParam.querySelector('#entity-param-max').textContent = `${t('station.max')} ${p.max}`;
 
               bpEntParams.querySelector('.t-blueprint__requirements-entity__params').appendChild(bpEntParam);
             })
@@ -145,11 +144,11 @@ export default class extends Controller {
   convertLogicLabel(value) {
     switch (value) {
       case 0:
-        return 'Supply';
+        return t('station.supply');
       case 1:
-        return 'Demand';
+        return t('station.demand');
       case 2:
-        return 'Storage';
+        return t('station.storage');
     }
   }
 
@@ -172,7 +171,7 @@ export default class extends Controller {
       entityImageEl.appendChild(image);
 
       // Assign tooltip
-      this.createTooltip(entityImageEl, items[itemId]);
+      this.createTooltip(entityImageEl, getEntityName(itemId));
 
       // Assign count
       bpEnt.querySelector("#entity-tally").textContent = count;

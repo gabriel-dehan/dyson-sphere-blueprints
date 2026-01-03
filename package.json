@@ -2,7 +2,6 @@
   "name": "dspblueprints",
   "private": true,
   "dependencies": {
-    "@melloware/coloris": "0.10.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.1.3",
     "@rails/ujs": "^6.0.0",

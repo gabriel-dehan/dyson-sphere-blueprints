@@ -1,0 +1,99 @@
+# i18n-tasks finds and manages missing and unused translations: https://github.com/glebm/i18n-tasks
+
+# The "main" locale.
+base_locale: en
+
+# All available locales
+locales: [en, zh-CN]
+
+# Read and write translations.
+data:
+  # Locale files or `Dir.glob` patterns where translations are read from:
+  read:
+    - config/locales/%{locale}/%{locale}.yml
+    - config/locales/%{locale}/**/*.%{locale}.yml
+
+  # Locale files to write new keys to, based on a list of key pattern => file rules.
+  write:
+    # Devise keys
+    - ['{devise}.*', 'config/locales/%{locale}/views/devise.%{locale}.yml']
+    # Blueprint keys
+    - ['{blueprints}.*', 'config/locales/%{locale}/views/blueprints.%{locale}.yml']
+    # Collection keys
+    - ['{collections}.*', 'config/locales/%{locale}/views/collections.%{locale}.yml']
+    # Navbar keys
+    - ['{navbar}.*', 'config/locales/%{locale}/views/navbar.%{locale}.yml']
+    # Page keys
+    - ['{pages,shared}.*', 'config/locales/%{locale}/views/pages.%{locale}.yml']
+    # User keys
+    - ['{users}.*', 'config/locales/%{locale}/views/users.%{locale}.yml']
+    # Game entity keys
+    - ['{game.entities}.*', 'config/locales/%{locale}/game/entities.%{locale}.yml']
+    - ['{game.recipes}.*', 'config/locales/%{locale}/game/recipes.%{locale}.yml']
+    - ['{game.researches}.*', 'config/locales/%{locale}/game/researches.%{locale}.yml']
+    # Catch-all default
+    - config/locales/%{locale}/%{locale}.yml
+
+  yaml:
+    write:
+      # do not wrap lines at 80 characters
+      line_width: -1
+
+# Find translate calls
+search:
+  paths:
+    - app/
+
+  exclude:
+    - app/assets/images
+    - app/assets/fonts
+    - app/assets/videos
+    - app/assets/builds
+
+## Do not consider these keys missing:
+ignore_missing:
+  - 'errors.messages.*'
+  - 'activerecord.errors.*'
+  # JavaScript translations are handled separately
+  - 'size_warning.*'
+  - 'station.*'
+  - 'entities.tags.placeholder'
+
+## Consider these keys used:
+ignore_unused:
+  - 'activerecord.attributes.*'
+  - '{devise,kaminari,will_paginate}.*'
+  - 'simple_form.{yes,no}'
+  - 'simple_form.{placeholders,hints,labels}.*'
+  - 'simple_form.{error_notification,required}.*'
+  # Game entity translations (used dynamically via Engine classes)
+  - 'game.entities.*'
+  - 'game.recipes.*'
+  - 'game.researches.*'
+  # Footer keys (used dynamically)
+  - 'footer.*'
+  - 'common.*'
+  - 'pages.*'
+  # Navbar keys (many are used dynamically for filters)
+  - 'navbar.*'
+  # Blueprint form keys (used in templates and dynamic content)
+  - 'blueprints.form.*'
+  - 'blueprints.index.*'
+  - 'blueprints.show.*'
+  - 'blueprints.filters.*'
+  - 'blueprints.types.*'
+  - 'blueprints.new.*'
+  - 'blueprints.edit.*'
+  - 'blueprints.confirm_delete'
+  # Collection keys (used dynamically)
+  - 'collections.*'
+  # Devise keys
+  - 'devise.*'
+  - 'devise.shared.links.*'
+  # User keys
+  - 'users.*'
+  # Shared keys
+  - 'shared.*'
+  # Site and flash keys
+  - 'site.*'
+  - 'flash.*'

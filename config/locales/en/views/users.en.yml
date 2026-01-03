@@ -1,0 +1,17 @@
+---
+en:
+  users:
+    blueprints:
+      blueprints: Blueprints
+      no_blueprints: This user has no blueprints yet.
+      title: "%{username}'s"
+    my_blueprints:
+      title: My blueprints
+    my_collections:
+      all: All
+      create_new: Create a new collection
+      private: Private
+      public: Public
+      title: My collections
+    my_favorites:
+      title: My favorites

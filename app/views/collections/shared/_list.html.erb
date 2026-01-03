@@ -12,23 +12,23 @@
         </h2>
         <span class="t-collections-list__collection-meta">
           <span class="t-collections-list__collection-meta-type">
-            <strong><%= collection.type %></strong> collection,
+            <strong><%= collection.type %></strong> <%= t('collections.name') %>:
           </span>
           <span class="t-collections-list__collection-meta-count">
-            with <strong><%= collection.blueprints_count %></strong> <%= pluralize_without_count(collection.blueprints_count, 'blueprint') %>
+            <%= raw t('collections.index.blueprints_count', count: collection.blueprints_count) %>
           </span>
         </div>
         <div class="t-collections-list__collection-block">
           <div class="t-collections-list__collection-info">
             <span
             class="t-collections-list__collection-votes tooltip-trigger"
-            data-tippy-content="Sum of all blueprints"
+            data-tippy-content="<%= t('collections.index.sum_of_all_blueprints') %>"
             data-tippy-placement="right"
           >
               <strong><%= collection.total_votes_sum %></strong><i class="fas fa-heart"></i>&nbsp;
             </span>
             <span class="t-collections-list__collection-date">
-              Created <strong><%= time_ago_in_words(collection.created_at) %></strong>
+              <%= t('collections.index.created') %> <strong><%= time_ago_in_words(collection.created_at) %> <%= t('collections.index.ago') %></strong>
             </span>
           </div>
           <% if policy(collection).update? && with_actions %>
@@ -36,7 +36,7 @@
               <%= button_to edit_collection_path(collection), method: :get, class: 't-collections-list__collection-actions-edit' do %>
                 <span
                 class="tooltip-trigger"
-                data-tippy-content="Edit"
+                data-tippy-content="<%= t('collections.index.edit_tooltip') %>"
                 data-tippy-placement="bottom">
                   <i class="fas fa-edit"></i>
                 </span>
@@ -44,7 +44,7 @@
               <%= button_to collection_path(collection), method: :delete, class: 't-collections-list__collection-actions-delete', data: { confirm: 'Deleting a collection will delete all your associated blueprints, are you sure?' } do %>
                 <span
                 class="tooltip-trigger"
-                data-tippy-content="Delete"
+                data-tippy-content="<%= t('collections.index.delete_tooltip') %>"
                 data-tippy-placement="bottom">
                   <i class="fas fa-trash"></i>
                 </span>

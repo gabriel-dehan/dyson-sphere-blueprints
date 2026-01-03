@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   include Pundit::Authorization
+  include HttpAcceptLanguage::AutoLocale
+  before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_game_versions
 
@@ -9,11 +11,38 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:alert] = t("flash.unauthorized")
     redirect_back(fallback_location: root_path)
   end
 
   private
+
+  def set_locale
+    I18n.locale = extract_locale || I18n.default_locale
+  end
+
+  def extract_locale
+    # Priority 1: URL parameter
+    return params[:locale] if valid_locale?(params[:locale])
+
+    # Priority 2: User preference (if logged in)
+    return current_user.preferred_locale if user_signed_in? && current_user.preferred_locale.present? && valid_locale?(current_user.preferred_locale)
+
+    # Priority 3: Cookie (for non-logged in users)
+    return cookies[:locale] if valid_locale?(cookies[:locale])
+
+    # Priority 4: Browser Accept-Language header
+    http_accept_language.compatible_language_from(I18n.available_locales)
+  end
+
+  def valid_locale?(locale)
+    locale.present? && I18n.available_locales.map(&:to_s).include?(locale.to_s)
+  end
+
+  def default_url_options
+    # Only include locale in URL if it's not the default
+    { locale: I18n.locale == I18n.default_locale ? nil : I18n.locale }
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
@@ -31,46 +60,6 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:username, :email, :password) }
-    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:username, :email, :password, :current_password) }
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:username, :email, :password, :current_password, :preferred_locale) }
   end
-
-  # OLD VERSION OF CACHING NOT USING ETAGS, KEPT FOR REFERENCE
-
-  # # Check if the timestamp, resource or collection has been modified since the last request
-  # # Returns true if the resource has not been modified and the request should stop with a 304
-  # # Return false if the resource has been modified and the request should continue
-  # def use_last_modified_cache(resource_collection_or_time)
-  #   # Set cache control headers
-  #   expires_in 1.hour, public: true
-
-  #   last_modified = determine_last_modified(resource_collection_or_time)
-
-  #   # Check for a valid last_modified date
-  #   return false unless last_modified
-
-  #   headers["Last-Modified"] = last_modified.httpdate
-
-  #   if client_has_fresh_copy?(last_modified)
-  #     head :not_modified
-  #     return true
-  #   end
-
-  #   false
-  # end
-
-  # private
-  # def determine_last_modified(resource_collection_or_time)
-  #   if resource_collection_or_time.is_a?(Time)
-  #     resource_collection_or_time
-  #   elsif resource_collection_or_time.respond_to?(:maximum)
-  #     resource_collection_or_time.maximum(:updated_at)
-  #   elsif resource_collection_or_time.respond_to?(:updated_at)
-  #     resource_collection_or_time.updated_at
-  #   end
-  # end
-
-  # def client_has_fresh_copy?(last_modified)
-  #   if_modified_since = request.headers['If-Modified-Since']
-  #   if_modified_since.present? && Time.httpdate(if_modified_since) >= last_modified
-  # end
 end

@@ -1,12 +1,12 @@
 <div class="o-cookie-consent" data-cookieConsent-target="banner" style="display: none;">
   <div class="o-cookie-consent__content">
     <div class="o-cookie-consent__text">
-      <h3 class="o-cookie-consent__title">We use cookies</h3>
+      <h3 class="o-cookie-consent__title"><%= t('shared.cookie_consent.title') %></h3>
       <p class="o-cookie-consent__description">
-        We use cookies to improve your experience and analyze traffic.
-        By clicking "Accept All", you consent to our use of cookies.
-        Read our <%= link_to "Privacy Policy", privacy_path, class: "o-cookie-consent__link" %> and
-        <%= link_to "Cookie Policy", cookies_path, class: "o-cookie-consent__link" %> for more information.
+        <%= t('shared.cookie_consent.description') %>
+        <%= t('shared.cookie_consent.read_more',
+              privacy_link: link_to(t('shared.cookie_consent.privacy_policy'), privacy_path, class: "o-cookie-consent__link"),
+              cookie_link: link_to(t('shared.cookie_consent.cookie_policy'), cookies_path, class: "o-cookie-consent__link")).html_safe %>
       </p>
     </div>
 
@@ -14,12 +14,12 @@
       <button
         class="o-cookie-consent__btn o-cookie-consent__btn--reject"
         data-action="click->cookieConsent#rejectAll">
-        Reject All
+        <%= t('shared.cookie_consent.reject_all') %>
       </button>
       <button
         class="o-cookie-consent__btn o-cookie-consent__btn--accept"
         data-action="click->cookieConsent#acceptAll">
-        Accept All
+        <%= t('shared.cookie_consent.accept_all') %>
       </button>
     </div>
   </div>

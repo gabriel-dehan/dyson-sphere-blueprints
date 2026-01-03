@@ -6,18 +6,18 @@
       <div><%= form_title %></div>
     </h1>
     <%= simple_form_for(blueprint, html: { class: 'm-form' } ) do |f| %>
-      <%= f.input :title, required: true %>
-      <%= f.input :description, as: :rich_text_area, placeholder: "Describe your mecha blueprint here. If you are using mods that modify how Mecha edition works, list them here." %>
+      <%= f.input :title, required: true, label: t('blueprints.form.title'), placeholder: t('blueprints.form.title_placeholder') %>
+      <%= f.input :description, as: :rich_text_area, label: t('blueprints.form.description'), placeholder: t('blueprints.form.description_placeholder') %>
       <%= f.input :collection,
         collection: current_user.collections,
         label_method: :name,
         value_method: :id,
-        label: "Collection",
+        label: t('blueprints.form.collection'),
         selected: @collection.id %>
       <div class="m-form__tags freeTags" data-controller="freeTags" data-freeTags-category-value="mecha">
         <label for="tag_list">
           <abbr title="required">*</abbr>
-          Tags <em>(optional - 10 maximum)</em>
+          <%= raw t('blueprints.form.tags_label_optional') %>
         </label>
         <%= text_field_tag :tag_list, blueprint.tag_list.join(', '), data: { 'freeTags-target': 'input' } %>
         <span class="error-container tags">
@@ -32,7 +32,7 @@
       <div class="m-form__file">
         <label for="blueprint_file">
           <abbr title="required">*</abbr>
-          Mecha file <em>(don't forget to update the snapshot in-game before uploading!)</em>
+          <%= t('blueprints.form.mecha_file') %> <%= raw t('blueprints.form.mecha_file_hint') %>
         </label>
         <div class="m-form__uploader uppy-blue">
           <%= f.file_field :blueprint_file,
@@ -40,16 +40,13 @@
             data: {
               mecha_plugin: true,
               max_file_size: MechaUploader::MAX_SIZE,
-              title: 'Drop your mecha file here, or %{browse}',
-              description: 'Mecha blueprint file. 2 MB maximum',
-              error_message: 'Invalid mecha file',
               upload_server: upload_server,
               upload_result_element: "m-form__blueprint-file-upload-result"
             } %>
         </div>
         <%= f.hidden_field :blueprint_file, value: blueprint.cached_blueprint_file_data, id: "m-form__blueprint-file-upload-result" %>
         <div class="hint-help-container">
-          <div class="hint-help"><%= link_to "Need help? Don't know how to find your mecha's file?", help_path(for: "mecha"), target: '_blank' %></div>
+          <div class="hint-help"><%= link_to t('blueprints.form.mecha_need_help'), help_path(for: "mecha"), target: '_blank' %></div>
         </div>
         <span class="error-container">
           <% if blueprint.errors[:blueprint_file].length > 0 %>
@@ -60,7 +57,7 @@
         </span>
         <div class="m-form__file-preview">
           <% if blueprint.blueprint_file %>
-            <span class="m-form__file-preview__warning">*Uploading a new mecha file will overwrite the existing one.</span>
+            <span class="m-form__file-preview__warning"><%= t('blueprints.form.mecha_file_overwrite_warning') %></span>
             <% if blueprint.cover_picture_data %>
               <%= image_tag blueprint.cover_picture_url(:small), height: 100, width: 100 %>
             <% end %>
@@ -70,7 +67,7 @@
       <div class="m-form__pictures">
         <label for="additional_pictures">
           <abbr title="required">*</abbr>
-          Additional pictures <em>(4 maximum)</em>
+          <%= raw t('blueprints.form.additional_pictures_mecha') %>
         </label>
         <div class="m-form__uploader">
           <%= f.file_field :additional_pictures,
@@ -91,7 +88,7 @@
         </span>
         <div class="m-form__pictures-preview">
           <% if blueprint.additional_pictures.any? %>
-            <span class="m-form__pictures-preview__warning">*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint.</span>
+            <span class="m-form__pictures-preview__warning"><%= raw t('blueprints.form.additional_no_overwrite') %></span>
             <div class="m-form__pictures-preview-remove">
               <%= f.fields_for :additional_pictures do |pictures_form| %>
                 <% additional_picture = pictures_form.object %>
@@ -100,7 +97,7 @@
                   <div class="m-form__pictures-preview-container">
                     <%= pictures_form.check_box :_destroy %>
                     <%= pictures_form.label :_destroy do %>
-                      <strong>Remove</strong>
+                      <strong><%= t('blueprints.form.remove') %></strong>
                       <%= image_tag additional_picture.picture.derivation_url(:thumbnail, 100, 100).to_s %>
                     <% end %>
                   </div>

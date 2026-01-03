@@ -19,7 +19,7 @@ class Blueprint < ApplicationRecord
   validates :title, presence: true
   validates :additional_pictures, length: { maximum: 4, message: "Too many pictures. Please make sure you don't have too many pictures attached." }
 
-  scope :light_query, -> { select(column_names - ['encoded_blueprint']) }
+  scope :light_query, -> { select(column_names - ["encoded_blueprint"]) }
   scope :with_associations, -> { includes(:game_version, :tags, :user, :collection, collection: :user) }
 
   pg_search_scope :search_by_title,

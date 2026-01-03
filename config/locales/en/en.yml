@@ -1,0 +1,51 @@
+---
+en:
+  common:
+    back: Back
+    cancel: Cancel
+    confirm_delete: Are you sure you want to delete this?
+    copied: Copied!
+    copy_to_clipboard: Copy to clipboard
+    delete: Delete
+    edit: Edit
+    loading: Loading...
+    login: Login
+    logout: Log out
+    reset: Reset
+    save: Save
+    search: Search
+    settings: Settings
+    sign_up: Sign up
+    submit: Submit
+  filters:
+    tags:
+      placeholder: Search tags...
+  flash:
+    created: "%{resource} was successfully created."
+    deleted: "%{resource} was successfully deleted."
+    unauthorized: You are not authorized to perform this action.
+    updated: "%{resource} was successfully updated."
+  footer:
+    cookie_settings: Cookie Settings
+    issue_notice: Noticed an issue?
+    made_with: Made with
+    or: or
+    send_dm: send me a DM.
+    source_code: Source code
+    suggestion: Have a suggestion?
+    tell_me: Tell me all about it
+  freetags:
+    placeholder: Add tags...
+  site:
+    name: Dyson Sphere Blueprints
+    tagline: Share your Dyson Sphere Program blueprints with the community!
+  uppy:
+    browse: browse files
+    drop_paste: Drop files here, paste or %{browse}
+    mecha_description: Mecha blueprint file. 2 MB maximum
+    mecha_error: Invalid mecha file
+    mecha_title: Drop your mecha file here, or %{browse}
+    multiple_note: "%{max} pictures maximum, %{size} MB maximum each, ideal ratio 16:9. For instance 1920x1080, etc..."
+    reset: Reset
+    single_note: Single cover picture. %{size} MB maximum, ideal ratio 16:9. For instance 1920x1080, etc...
+    validating: Validating file...

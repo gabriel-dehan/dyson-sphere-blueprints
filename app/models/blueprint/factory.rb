@@ -1,5 +1,6 @@
 class Blueprint::Factory < Blueprint
   def self.sti_name() = "Factory"
+
   def normalize_friendly_id(string) = "factory-#{super}"
 
   # Pictures

@@ -7,21 +7,21 @@
     <li class="o-navbar__nav-item">
       <li class="o-navbar__nav-item o-dropdown">
           <div class="o-navbar__button add-blueprints">
-            <strong>Blueprint</strong>
+            <strong><%= t('navbar.blueprint') %></strong>
             <i class="fas fa-plus-circle"></i>
           </div>
           <div class="o-dropdown__content left red">
             <%= link_to new_blueprint_factory_path, class: "o-dropdown__item" do %>
               <%= image_tag get_category_icon('factory') %>
-              Add a Factory
+              <%= t('navbar.add_factory') %>
             <% end %>
             <%= link_to new_blueprint_dyson_sphere_path, class: "o-dropdown__item" do %>
               <%= image_tag get_category_icon('dyson_sphere') %>
-              Add a Dyson Sphere
+              <%= t('navbar.add_dyson_sphere') %>
             <% end %>
             <%= link_to new_blueprint_mecha_path, class: "o-dropdown__item" do %>
               <%= image_tag get_category_icon('mecha') %>
-              Add a Mecha
+              <%= t('navbar.add_mecha') %>
             <% end %>
           </div>
         </li>
@@ -44,33 +44,38 @@
     </li>
     <li class="o-navbar__nav-item separator"></li>
     <li class="o-navbar__nav-item <%= 'active' if current_page?(collections_path) %>">
-      <%= link_to "Collections", collections_path, class: "nav-link" %>
+      <%= link_to t('navbar.collections'), collections_path, class: "nav-link" %>
     </li>
     <li class="o-navbar__nav-item <%= 'active' if current_page?(help_path) %>">
-      <%= link_to "Help", help_path, class: "nav-link" %>
+      <%= link_to t('navbar.help'), help_path, class: "nav-link" %>
     </li>
     <li class="o-navbar__nav-item separator"></li>
     <li class="o-navbar__nav-item support <%= 'active' if current_page?(supportus_path) %>">
       <%= link_to supportus_path, class: "o-navbar__button" do %>
-        <span>Support Us</span>
+        <span><%= t('navbar.support_us') %></span>
       <% end %>
+    </li>
+    <li class="o-navbar__nav-item separator"></li>
+    <li class="o-navbar__nav-item locale-switcher">
+      <%= render 'shared/locale_switcher' %>
     </li>
     <li class="o-navbar__nav-item separator"></li>
     <% if user_signed_in? %>
     <li class="o-navbar__nav-item o-dropdown">
       <span class="o-dropdown__button round"><i class="fas fa-user"></i></span>
       <div class="o-dropdown__content">
-        <%= link_to "My favorites", favorites_users_path, class: "o-dropdown__item" %>
-        <%= link_to "My blueprints", blueprints_users_path, class: "o-dropdown__item" %>
-        <%= link_to "My collections", collections_users_path, class: "o-dropdown__item" %>
-        <%= link_to "Settings", edit_user_registration_path, class: "o-dropdown__item" %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "o-dropdown__item" %>
+        <%= link_to t('navbar.my_favorites'), favorites_users_path, class: "o-dropdown__item" %>
+        <%= link_to t('navbar.my_blueprints'), blueprints_users_path, class: "o-dropdown__item" %>
+        <%= link_to t('navbar.my_collections'), collections_users_path, class: "o-dropdown__item" %>
+        <%= link_to t('common.settings'), edit_user_registration_path, class: "o-dropdown__item" %>
+        <%= link_to t('common.logout'), destroy_user_session_path, method: :delete, class: "o-dropdown__item" %>
       </div>
     </li>
     <% else %>
     <li class="o-navbar__nav-item <%= 'active' if current_page?(new_user_session_path) %>">
-        <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        <%= link_to t('common.login'), new_user_session_path, class: "nav-link" %>
       </li>
     <% end %>
+
   </ul>
 </div>

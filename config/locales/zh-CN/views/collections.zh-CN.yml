@@ -1,0 +1,41 @@
+---
+zh-CN:
+  collections:
+    confirm_delete: 确定要删除这个收藏集吗？蓝图不会被删除。
+    edit:
+      title: 编辑收藏集
+    form:
+      create: 创建收藏集
+      description: 描述
+      description_placeholder: 描述这个收藏集的内容
+      private: 私密
+      public: 公开
+      title: 标题
+      title_placeholder: 给你的收藏集取一个名字
+      type: 类型
+      update: 更新收藏集
+    index:
+      ago: 前
+      blueprints_count:
+        one: "<strong>%{count}</strong> 个蓝图"
+        other: "<strong>%{count}</strong> 个蓝图"
+      created: 创建时间
+      delete_tooltip: 删除
+      edit_tooltip: 编辑
+      my_collections: 我的收藏集
+      new_collection: 新建收藏集
+      no_collections: 未找到收藏集
+      sum_of_all_blueprints: 所有蓝图的点赞数总和
+      title: 所有公开收藏集
+    name: 收藏集
+    new:
+      title: 新建收藏集
+    show:
+      blueprints: 蓝图
+      by: 作者
+      collection_by: 收藏集 作者
+      delete: 删除收藏集
+      download_all: 全部下载为 ZIP
+      edit: 编辑收藏集
+      empty_collection: 此收藏集为空。
+      no_blueprints: 此收藏集还没有蓝图

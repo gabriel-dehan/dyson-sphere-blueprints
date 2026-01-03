@@ -2,15 +2,15 @@
   <div class="o-blueprint-filters__order" data-controller="submitOnClick">
     <div class="o-blueprint-filters__order-choice" >
       <%= f.radio_button :order, "recent", checked: filters[:order] === 'recent', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_recent, "Most recent" %>
+      <%= f.label :order_recent, t('blueprints.filters.most_recent') %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_popular, "Most Popular" %>
+      <%= f.label :order_popular, t('blueprints.filters.most_popular') %>
     </div>
     <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "usage", checked: filters[:order] === 'usage', data: { 'action': "change->submitOnClick#submit" } %>
-      <%= f.label :order_usage, "Most used" %>
+      <%= f.label :order_usage, t('blueprints.filters.most_used') %>
     </div>
   </div>
 </div>

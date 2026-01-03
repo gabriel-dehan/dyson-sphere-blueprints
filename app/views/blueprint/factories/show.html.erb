@@ -30,11 +30,11 @@
         <% if @blueprint.large_bp? %>
           <%= link_to blueprint_path(@blueprint, format: :text), class: "button", target: :_blank, rel: :noopener do %>
             <i class="fas fa-external-link-alt"></i>
-            Open Blueprint
+            <%= t('blueprints.show.open_blueprint') %>
           <% end %>
         <% else %>
           <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
-            <i class="fas fa-copy"></i>Copy to clipboard
+            <i class="fas fa-copy"></i><%= t('blueprints.show.copy_to_clipboard') %>
           </button>
         <% end %>
       </div>
@@ -56,38 +56,38 @@
         <div class="m-tabs-tab active" data-tabs-target="tab" data-tabs-id="description">
           <div class="t-blueprint__description">
             <% if @blueprint.description.blank? %>
-              This blueprint doesn't have a description! <!-- Instead you can check the <a data-tab-select="3d-preview" data-action="click->tabs#select">3D Preview.</a> -->
+              <%= t('blueprints.show.no_description') %>
             <% else %>
               <%= @blueprint.description %>
             <% end %>
           </div>
         </div>
         <div class="m-tabs-tab" data-tabs-target="tab" data-tabs-id="3d-preview">
-          <div class="o-preview-warning">The Preview feature is unavailable at the time.</div>
+          <div class="o-preview-warning"><%= t('blueprints.show.preview_unavailable') %></div>
           <div class="o-preview">
             <div class="o-preview-container" data-preview-target="output"></div>
             <div class="o-preview-loader" data-preview-target="loader"><%= image_tag 'loader.svg' %></div>
             <div class="o-preview-tooltip" data-preview-target="tooltip"></div>
-            <button class="o-preview-action a-button" data-preview-target="action">Animate</button>
+            <button class="o-preview-action a-button" data-preview-target="action"><%= t('blueprints.show.animate') %></button>
           </div>
         </div>
       </div>
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
-        <h3>Blueprint</h3>
+        <h3><%= t('blueprints.show.blueprint') %></h3>
         <% if @blueprint.large_bp? %>
           <p>
-            The <strong>copy function has been disabled</strong> due to the blueprint being too large.<br />
-            You can view the blueprint's code on the following page:
+            <%= raw t('blueprints.show.large_blueprint_disabled') %><br />
+            <%= t('blueprints.show.large_blueprint_view') %>
           </p>
           <%= link_to blueprint_path(@blueprint, format: :text), class: "button t-blueprint__open", target: :_blank, rel: :noopener do %>
             <i class="fas fa-external-link-alt"></i>
-            Open Blueprint
+            <%= t('blueprints.show.open_blueprint') %>
           <% end %>
-          <p>On this page, you can select the whole blueprint with <kbd>Ctrl+A</kbd>, then use <kbd>Ctrl+C</kbd> to copy.</p>
+          <p><%= raw t('blueprints.show.large_blueprint_help') %></p>
         <% else %>
           <textarea data-preview-target="data" data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
           <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
-            <i class="fas fa-copy"></i>Copy to clipboard
+            <i class="fas fa-copy"></i><%= t('blueprints.show.copy_to_clipboard') %>
           </button>
         <% end %>
       </div>
@@ -96,14 +96,14 @@
       <div class="t-blueprint__info">
         <ul>
           <li>
-            <strong>Author:</strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
+            <strong><%= t('blueprints.show.author') %></strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
           </li>
           <li>
-            <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
+            <strong><%= t('blueprints.show.collection') %></strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
           <li>
             <% compatibility_status, compatibility_message = compatibility_recap(@game_versions, @blueprint) %>
-            <strong>Game version:</strong>
+            <strong><%= t('blueprints.show.game_version') %></strong>
             <span class="t-blueprint__info-mod tooltip-trigger <%= compatibility_status %>"
                 data-tippy-content="<%= compatibility_message %>"
                 data-tippy-placement="right">
@@ -111,10 +111,10 @@
             </span>
           </li>
           <li>
-            <strong>Copied:</strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%=  "time".pluralize(@blueprint.usage_count) %></span>
+            <strong><%= t('blueprints.show.nb_of_copies') %></strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%= t('blueprints.show.times', count: @blueprint.usage_count) %></span>
           </li>
           <li>
-            <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
+            <strong><%= t('blueprints.show.created_at') %></strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> <%= t('blueprints.show.ago') %></span>
           </li>
         </ul>
         <div class="t-blueprint__info-votes">
@@ -134,20 +134,20 @@
       </div>
       <% if policy(@blueprint).update? %>
         <div class="t-blueprint__actions">
-          <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
+          <span class="t-blueprint__actions-type"><%= t('blueprints.show.visibility') %> <strong><%= @blueprint.collection.type %></strong></span>
           <div class="t-blueprint__actions-buttons">
             <%= button_to edit_blueprint_factory_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
               <span
                 class="tooltip-trigger"
-                data-tippy-content="Edit"
+                data-tippy-content="<%= t('blueprints.show.edit_tooltip') %>"
                 data-tippy-placement="bottom">
                 <i class="fas fa-edit"></i>
               </span>
             <% end %>
-            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: 'Are you sure you want to delete your blueprint?' } do %>
+            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: t('blueprints.confirm_delete') } do %>
               <span
                 class="tooltip-trigger"
-                data-tippy-content="Delete"
+                data-tippy-content="<%= t('blueprints.show.delete_tooltip') %>"
                 data-tippy-placement="bottom">
                 <i class="fas fa-trash"></i>
               </span>
@@ -161,13 +161,13 @@
            data-powerCalculator-summary-value='<%= @blueprint.summary.to_json %>'>
           <div class="t-blueprint__requirements-power__consumption">
             <%= image_tag get_category_icon('power') %>
-            <h3>Power consumption</h3>
+            <h3><%= t('blueprints.show.power_consumption') %></h3>
             <span class="t-blueprint__requirements-consumption"
                   data-powerCalculator-target="consumption"
                   style="display: none;"></span>
           </div>
           <div class="t-blueprint__requirements-power__generation">
-            <h3>Power generation</h3>
+            <h3><%= t('blueprints.show.power_generation') %></h3>
             <span class="t-blueprint__requirements-generation"
                   data-powerCalculator-target="generation"
                   style="display: none;"></span>
@@ -176,10 +176,10 @@
       <% end %>
 
       <div class="t-blueprint__requirements">
-        <h3>This blueprint requires</h3>
+        <h3><%= t('blueprints.show.requires') %></h3>
         <% if @blueprint.summary && @blueprint.summary.any? %>
           <% if @blueprint.summary["total_structures"] %>
-            <span class="t-blueprint__requirements-total"><strong><%= @blueprint.summary["total_structures"] %></strong> structures</span>
+            <span class="t-blueprint__requirements-total"><strong><%= @blueprint.summary["total_structures"] %></strong> <%= t('blueprints.show.structures', count: @blueprint.summary["total_structures"]) %></span>
           <% end %>
           <ul class="t-blueprint__requirements-data">
             <% if @blueprint.summary["buildings"] %>
@@ -188,7 +188,7 @@
                   <div class="t-blueprint__requirements-entity__tally">
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
-                      data-tippy-content="<%= data["name"] %>"
+                      data-tippy-content="<%= localized_entity_name(entity_id) %>"
                       data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
@@ -200,7 +200,7 @@
                       <% data["recipes"].each do |recipe_id, recipe| %>
                         <li
                           class="t-blueprint__requirements-entity__recipe tooltip-trigger"
-                          data-tippy-content="<%= recipe["name"] %>"
+                          data-tippy-content="<%= localized_recipe_name(recipe_id) %>"
                           data-tippy-placement="bottom">
                           <%= recipe["tally"] %> <%= image_tag get_game_recipe_icon_by_uuid(recipe_id) %>
                         </li>
@@ -216,7 +216,7 @@
                   <div class="t-blueprint__requirements-entity__tally">
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
-                      data-tippy-content="<%= data["name"] %>"
+                      data-tippy-content="<%= localized_entity_name(entity_id) %>"
                       data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
@@ -232,7 +232,7 @@
                   <div class="t-blueprint__requirements-entity__tally">
                     <span
                       class="t-blueprint__requirements-entity__picture tooltip-trigger"
-                      data-tippy-content="<%= data["name"] %>"
+                      data-tippy-content="<%= localized_entity_name(entity_id) %>"
                       data-tippy-placement="left"
                     >
                       <%= image_tag get_game_entity_icon_by_uuid(entity_id) %>
@@ -245,13 +245,13 @@
           </ul>
         <% else %>
           <div class="t-blueprint__requirements-error">
-            Could not decode blueprint data.
+            <%= t('blueprints.show.could_not_decode') %>
           </div>
         <% end %>
       </div>
       <% if @blueprint.tags.any? %>
         <div class="t-blueprint__tags">
-          <h3>Tagged with</h3>
+          <h3><%= t('blueprints.show.tagged_with') %></h3>
           <ul>
             <% @blueprint.tags.each do |tag| %>
               <li class="t-blueprint__tags-tag">

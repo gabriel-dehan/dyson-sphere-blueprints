@@ -1,6 +1,7 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [v4.10.0](#v4100)
   - [v4.9.0](#v490)
   - [v4.8.0](#v480)
   - [v4.7.0](#v470)
@@ -39,10 +40,18 @@
   - [v.1.0.1 - v.1.0.6](#v101---v106)
   - [v.1.0.0](#v100)
 
-## v4.9.0
+## v4.10.0 (2025-12)
+- Added Simplified Chinese (zh-CN) internationalization support ([#97](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/97))
+  - Added comprehensive Chinese translations for all UI elements, views, and game entities
+  - Added Chinese translations for blueprints, collections, users, and pages
+  - Added Chinese translations for game entities, recipes, and researches
+  - Added JavaScript UI string translations for Simplified Chinese
+  - Updated i18n-tasks configuration to include zh-CN locale
+
+## v4.9.0 (2025-12)
 - Added power consumption and generation display for blueprints ([#95](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/95))
 
-## v4.8.0
+## v4.8.0 (2025-12)
 
 ### GDPR Compliance Implementation
 - **Cookie Consent System**
@@ -74,20 +83,20 @@
   - Updated PagesController with legal page actions
   - All legal pages publicly accessible without authentication
 
-## v4.7.0
+## v4.7.0 (2025-12)
 - Renamed `Mod` model to `GameVersion` - simplified architecture by removing legacy mod support ([#93](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/93))
 - Removed MultiBuild/MultiBuildBeta legacy code
 - Updated rake tasks from `mod:` to `game_version:` namespace
 - Simplified blueprint parsing logic
 - Code cleanup and removal of unused components
 
-## v4.6.0
+## v4.6.0 (2025-12)
 - Added comprehensive test suite with model, controller, policy, and system tests ([#90](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/90))
 - Added GitHub Actions CI workflow for automated testing
 - Memory optimizations and performance improvements to reduce RAM consumption ([#86](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/86))
 - Added database indexes for better query performance
 
-## v4.5.0
+## v4.5.0 (2025-12)
 - Upgraded Ruby from 3.0.0 to 3.2.6 for improved performance and security ([#84](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/84))
 - Updated Rails from 6.1.3 to 6.1.7.10 with security patches
 - Migrated Devise from git source to stable version 4.9.4
@@ -96,10 +105,10 @@
 - Updated dsp_blueprint_parser gem to 0.2.2 to handle recent game changes to building encoding ([#82](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/82))
 - Fixed authenticated banner to properly cover all UI elements ([#81](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/81))
 
-## v4.4.0
+## v4.4.0 (2025-12)
 - Query and filters optimisations to fix the performance issues
 
-## v4.3.1
+## v4.3.1 (2024-06)
 - Removed blueprint code from index pages to make the loading faster
 - Fixed a bug where new version number of the game were ignored
 

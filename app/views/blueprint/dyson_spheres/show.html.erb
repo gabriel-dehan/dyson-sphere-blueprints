@@ -30,37 +30,37 @@
         <% if @blueprint.large_bp? %>
           <%= link_to blueprint_path(@blueprint, format: :text), class: "button", target: :_blank, rel: :noopener do %>
             <i class="fas fa-external-link-alt"></i>
-            Open Blueprint
+            <%= t('blueprints.show.open_blueprint') %>
           <% end %>
         <% else %>
           <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
-            <i class="fas fa-copy"></i>Copy to clipboard
+            <i class="fas fa-copy"></i><%= t('blueprints.show.copy_to_clipboard') %>
           </button>
         <% end %>
       </div>
       <div class="t-blueprint__description">
         <% if @blueprint.description.blank? %>
-          This blueprint doesn't have a description!
+          <%= t('blueprints.show.no_description') %>
         <% else %>
           <%= @blueprint.description %>
         <% end %>
       </div>
       <div class="t-blueprint__blueprint" data-controller="blueprintCopyButton">
-        <h3>Blueprint</h3>
+        <h3><%= t('blueprints.show.blueprint') %></h3>
         <% if @blueprint.large_bp? %>
           <p>
-            The <strong>copy function has been disabled</strong> due to the blueprint being too large.<br />
-            You can view the blueprint's code on the following page:
+            <%= raw t('blueprints.show.large_blueprint_disabled') %><br />
+            <%= t('blueprints.show.large_blueprint_view') %>
           </p>
           <%= link_to blueprint_path(@blueprint, format: :text), class: "button t-blueprint__open", target: :_blank, rel: :noopener do %>
             <i class="fas fa-external-link-alt"></i>
-            Open Blueprint
+            <%= t('blueprints.show.open_blueprint') %>
           <% end %>
-          <p>On this page, you can select the whole blueprint with <kbd>Ctrl+A</kbd>, then use <kbd>Ctrl+C</kbd> to copy.</p>
+          <p><%= raw t('blueprints.show.large_blueprint_help') %></p>
         <% else %>
           <textarea data-preview-target="data" data-clipboard-target="true" readonly><%= @blueprint.encoded_blueprint %></textarea>
           <button class="t-blueprint__copy" data-blueprintCopyButton-target="copy">
-            <i class="fas fa-copy"></i>Copy to clipboard
+            <i class="fas fa-copy"></i><%= t('blueprints.show.copy_to_clipboard') %>
           </button>
         <% end %>
       </div>
@@ -69,14 +69,14 @@
       <div class="t-blueprint__info">
         <ul>
           <li>
-            <strong>Author:</strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
+            <strong><%= t('blueprints.show.author') %></strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
           </li>
           <li>
-            <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
+            <strong><%= t('blueprints.show.collection') %></strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
           <li>
             <% compatibility_status, compatibility_message = compatibility_recap(@game_versions, @blueprint) %>
-            <strong>Game version:</strong>
+            <strong><%= t('blueprints.show.game_version') %></strong>
             <span class="t-blueprint__info-mod tooltip-trigger <%= compatibility_status %>"
                 data-tippy-content="<%= compatibility_message %>"
                 data-tippy-placement="right">
@@ -84,10 +84,10 @@
             </span>
           </li>
           <li>
-            <strong>Copied:</strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%=  "time".pluralize(@blueprint.usage_count) %></span>
+            <strong><%= t('blueprints.show.nb_of_copies') %></strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%= t('blueprints.show.times', count: @blueprint.usage_count) %></span>
           </li>
           <li>
-            <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
+            <strong><%= t('blueprints.show.created_at') %></strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> <%= t('blueprints.show.ago') %></span>
           </li>
         </ul>
         <div class="t-blueprint__info-votes">
@@ -107,20 +107,20 @@
       </div>
       <% if policy(@blueprint).update? %>
         <div class="t-blueprint__actions">
-          <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
+          <span class="t-blueprint__actions-type"><%= t('blueprints.show.visibility') %> <strong><%= @blueprint.collection.type %></strong></span>
           <div class="t-blueprint__actions-buttons">
             <%= button_to edit_blueprint_dyson_sphere_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
               <span
                 class="tooltip-trigger"
-                data-tippy-content="Edit"
+                data-tippy-content="<%= t('blueprints.show.edit_tooltip') %>"
                 data-tippy-placement="bottom">
                 <i class="fas fa-edit"></i>
               </span>
             <% end %>
-            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: 'Are you sure you want to delete your blueprint?' } do %>
+            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: t('blueprints.confirm_delete') } do %>
               <span
                 class="tooltip-trigger"
-                data-tippy-content="Delete"
+                data-tippy-content="<%= t('blueprints.show.delete_tooltip') %>"
                 data-tippy-placement="bottom">
                 <i class="fas fa-trash"></i>
               </span>
@@ -129,18 +129,18 @@
         </div>
       <% end %>
       <div class="t-blueprint__requirements">
-        <h3>Dyson Sphere summary</h3>
+        <h3><%= t('blueprints.show.dyson_sphere_summary') %></h3>
         <% if @blueprint.summary && @blueprint.summary.any? %>
           <%#= TODO %>
         <% else %>
           <div class="t-blueprint__requirements-error">
-            Not available yet
+            <%= t('blueprints.show.not_available_yet') %>
           </div>
         <% end %>
       </div>
       <% if @blueprint.tags.any? %>
         <div class="t-blueprint__tags tag-names">
-          <h3>Tagged with</h3>
+          <h3><%= t('blueprints.show.tagged_with') %></h3>
           <ul>
             <% @blueprint.tags.each do |tag| %>
               <li class="t-blueprint__tags-tag">

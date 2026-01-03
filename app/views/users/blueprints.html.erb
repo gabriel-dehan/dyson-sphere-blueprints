@@ -1,7 +1,7 @@
 <div class="p-user-blueprints">
   <div class="p-page__header">
     <h1 class="p-page__header-title">
-      <span class="p-page__header-title-main" target="_blank" rel="noopener noreferrer"><%= @user.username %>'s </span><span class="p-page__header-title-em">Blueprints</span>
+      <span class="p-page__header-title-main" target="_blank" rel="noopener noreferrer"><%= t('users.blueprints.title', username: @user.username) %> </span><span class="p-page__header-title-em"><%= t('users.blueprints.blueprints') %></span>
     </h1>
     <br />
   </div>
@@ -9,6 +9,6 @@
     <%= render "blueprints/shared/list", blueprints: @blueprints %>
   <% else %>
     <div class="t-blueprint-no-result">
-      This user has no blueprints yet.
+      <%= t('users.blueprints.no_blueprints') %>
     </div>
   <% end %></div>

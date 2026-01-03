@@ -9,7 +9,7 @@
       <div class="swiper-container" data-carousel-target="container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <a href="<%= @blueprint.cover_picture.url %>" target="_blank" rel="noopener noreferrer">
+            <a href="<%= @blueprint&.cover_picture&.url %>" target="_blank" rel="noopener noreferrer">
               <span class="t-blueprint__cover" >
                 <%= image_tag @blueprint.cover_picture_url(:large), height: 495 %>
               </span>
@@ -40,25 +40,25 @@
         <h2><%= @blueprint.title %></h2>
         <a href="<%= @blueprint.blueprint_file_url %>" data-action="click->usageTracker#track">
           <button class="t-blueprint__download">
-            <i class="fas fa-download"></i>Download file
+            <i class="fas fa-download"></i><%= t('blueprints.show.download_file') %>
           </button>
         </a>
       </div>
       <div class="t-blueprint__description">
         <% if @blueprint.description.blank? %>
-          This blueprint doesn't have a description!
+          <%= t('blueprints.show.no_description') %>
         <% else %>
           <%= @blueprint.description %>
         <% end %>
       </div>
       <div class="t-blueprint__blueprint">
-        <h3>Name: <%= @blueprint.summary && @blueprint.summary.any? ? @blueprint.summary["name"] : 'Unknown' %></h3>
+        <h3><%= t('blueprints.show.mecha_name') %> <%= @blueprint.summary && @blueprint.summary.any? ? @blueprint.summary["name"] : 'Unknown' %></h3>
         <p>
-          Mecha files data extraction is not yet available.
+          <%= t('blueprints.show.mecha_data_not_available') %>
         </p>
         <a href="<%= @blueprint.blueprint_file_url %>">
           <button class="t-blueprint__download">
-            <i class="fas fa-download"></i>Download file
+            <i class="fas fa-download"></i><%= t('blueprints.show.download_file') %>
           </button>
         </a>
       </div>
@@ -67,14 +67,14 @@
       <div class="t-blueprint__info">
         <ul>
           <li>
-            <strong>Author:</strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
+            <strong><%= t('blueprints.show.author') %></strong> <%= link_to @blueprint.user.username, user_blueprints_path(@blueprint.user) %>
           </li>
           <li>
-            <strong>Collection:</strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
+            <strong><%= t('blueprints.show.collection') %></strong> <%= link_to @blueprint.collection.name, collection_path(@blueprint.collection) %>
           </li>
           <li>
             <% compatibility_status, compatibility_message = compatibility_recap(@game_versions, @blueprint) %>
-            <strong>Game version:</strong>
+            <strong><%= t('blueprints.show.game_version') %></strong>
             <span class="t-blueprint__info-mod tooltip-trigger <%= compatibility_status %>"
                 data-tippy-content="<%= compatibility_message %>"
                 data-tippy-placement="right">
@@ -82,10 +82,10 @@
             </span>
           </li>
           <li>
-            <strong>Downloaded:</strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%=  "time".pluralize(@blueprint.usage_count) %></span>
+            <strong><%= t('blueprints.show.downloaded_count') %></strong> <span class="t-blueprint__info-usage"><%= number_to_human(@blueprint.usage_count, format: "%n%u") %> <%= t('blueprints.show.times', count: @blueprint.usage_count) %></span>
           </li>
           <li>
-            <strong>Created:</strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> ago</span>
+            <strong><%= t('blueprints.show.created_at') %></strong> <span class="t-blueprint__info-date"><%= time_ago_in_words(@blueprint.created_at) %> <%= t('blueprints.show.ago') %></span>
           </li>
         </ul>
         <div class="t-blueprint__info-votes">
@@ -105,20 +105,20 @@
       </div>
       <% if policy(@blueprint).update? %>
         <div class="t-blueprint__actions">
-          <span class="t-blueprint__actions-type">Visibility: <strong><%= @blueprint.collection.type %></strong></span>
+          <span class="t-blueprint__actions-type"><%= t('blueprints.show.visibility') %> <strong><%= @blueprint.collection.type %></strong></span>
           <div class="t-blueprint__actions-buttons">
             <%= button_to edit_blueprint_mecha_path(@blueprint), method: :get, class: 't-blueprint__actions-edit' do %>
               <span
                 class="tooltip-trigger"
-                data-tippy-content="Edit"
+                data-tippy-content="<%= t('blueprints.show.edit_tooltip') %>"
                 data-tippy-placement="bottom">
                 <i class="fas fa-edit"></i>
               </span>
             <% end %>
-            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: 'Are you sure you want to delete your blueprint?' } do %>
+            <%= button_to blueprint_path(@blueprint), method: :delete, class: 't-blueprint__actions-delete', data: { confirm: t('blueprints.confirm_delete') } do %>
               <span
                 class="tooltip-trigger"
-                data-tippy-content="Delete"
+                data-tippy-content="<%= t('blueprints.show.delete_tooltip') %>"
                 data-tippy-placement="bottom">
                 <i class="fas fa-trash"></i>
               </span>
@@ -127,14 +127,14 @@
         </div>
       <% end %>
       <div class="t-blueprint__requirements">
-        <h3>Mecha requirements</h3>
+        <h3><%= t('blueprints.show.mecha_requirements') %></h3>
         <div class="t-blueprint__requirements-error">
-          Not available yet
+          <%= t('blueprints.show.not_available_yet') %>
         </div>
       </div>
       <% if @blueprint.tags.any? %>
         <div class="t-blueprint__tags tag-names">
-          <h3>Tagged with</h3>
+          <h3><%= t('blueprints.show.tagged_with') %></h3>
           <ul>
             <% @blueprint.tags.each do |tag| %>
               <li class="t-blueprint__tags-tag">

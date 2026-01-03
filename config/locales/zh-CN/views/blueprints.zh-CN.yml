@@ -1,0 +1,113 @@
+---
+zh-CN:
+  blueprints:
+    confirm_delete: 确定要删除你的蓝图吗？
+    edit:
+      dyson_sphere_title: 编辑<span>戴森球</span>蓝图
+      factory_title: 编辑<span>工厂</span>蓝图
+      mecha_title: 编辑<span>机甲</span>蓝图
+    filters:
+      any: 任何
+      by_color: 按颜色筛选 (实验性功能)
+      dyson_spheres: 戴森球
+      factories: 工厂
+      filters_for: 筛选
+      max_structures: 最大建筑数量
+      mechas: 机甲
+      most_popular: 最热门
+      most_recent: 最新
+      most_used: 使用最多
+      no_dyson_sphere_filters: 戴森球暂无特定筛选条件
+      reset: 重置
+      search: 搜索
+      search_by_author_placeholder: 搜索作者...
+      search_placeholder: 搜索蓝图...
+    form:
+      additional_no_overwrite: "*上传新图片<strong>不会</strong>覆盖现有图片。要删除现有图片，请点击下方图片，然后更新蓝图。"
+      additional_pictures: 附加图片
+      additional_pictures_mecha: 附加图片 <em>（最多4张）</em>
+      blueprint_placeholder: 在此粘贴你的蓝图字符串
+      blueprint_string: 蓝图字符串
+      collection: 收藏集
+      cover_overwrite_warning: "*上传新图片将覆盖现有图片。"
+      cover_picture: 封面图片
+      description: 描述
+      description_placeholder: 描述你的蓝图的功能、使用方法或特殊说明
+      mecha_file: 机甲文件
+      mecha_file_hint: "<em>（上传前别忘了在游戏内更新快照！）</em>"
+      mecha_file_overwrite_warning: "*上传新的机甲文件将覆盖现有文件。"
+      mecha_need_help: 需要帮助？不知道如何找到机甲文件？
+      need_help: 需要帮助？不知道该填什么？
+      no_collection: 无收藏集
+      paste_blueprint: 在此粘贴你的蓝图
+      preview_requires: 此蓝图需要
+      preview_see_breakdown: "（查看详情）"
+      preview_structures: 个建筑
+      remove: 删除
+      select_collection: 选择收藏集
+      size_warning_text: 你的蓝图<strong id="blueprint-sizeWarning-humanizedCounter">相当大</strong>。<br>你仍然可以发布蓝图，但如果蓝图太大，<strong>其他用户将无法直接从蓝图页面复制</strong>。
+      size_warning_title: 注意
+      submit_dyson_sphere: 创建戴森球蓝图
+      submit_factory: 创建工厂蓝图
+      submit_mecha: 创建机甲蓝图
+      tags: 标签
+      tags_help: 添加标签帮助他人找到你的蓝图
+      tags_label: 标签 <em>（最少1个 - 最多10个）</em>
+      tags_label_optional: 标签 <em>（可选 - 最多10个）</em>
+      title: 标题
+      title_placeholder: 给你的蓝图取一个好记的名字
+      update: 更新蓝图
+    index:
+      all_public: 所有公开
+      no_blueprints: 未找到蓝图
+      title: 蓝图
+      type_blueprints: "%{type}蓝图"
+    new:
+      dyson_sphere_title: 添加<span>戴森球</span>蓝图
+      factory_title: 添加<span>工厂</span>蓝图
+      mecha_title: 添加<span>机甲</span>蓝图
+    show:
+      ago: 前
+      animate: 动画
+      author: 作者：
+      blueprint: 蓝图
+      collection: 收藏集：
+      copy_to_clipboard: 复制到剪贴板
+      could_not_decode: 无法解码蓝图数据。
+      created_at: 创建时间：
+      delete_tooltip: 删除
+      description_tab: 描述
+      download_file: 下载文件
+      downloaded_count: 下载次数：
+      dyson_sphere_summary: 戴森球概要
+      edit_tooltip: 编辑
+      game_version: 游戏版本：
+      large_blueprint_disabled: 由于蓝图太大，<strong>复制功能已禁用</strong>。
+      large_blueprint_help: 在该页面上，你可以用 <kbd>Ctrl+A</kbd> 全选蓝图，然后用 <kbd>Ctrl+C</kbd> 复制。
+      large_blueprint_view: 你可以在以下页面查看蓝图代码：
+      mecha_data_not_available: 机甲文件数据提取尚不可用。
+      mecha_name: 名称：
+      mecha_requirements: 机甲需求
+      nb_of_copies: 复制次数：
+      no_description: 此蓝图没有描述！
+      not_available_yet: 暂不可用
+      open_blueprint: 打开蓝图
+      power_consumption: 耗电量
+      power_generation: 发电量
+      preview_tab: 3D 预览
+      preview_unavailable: 预览功能暂时不可用。
+      requires: 此蓝图需要
+      structures:
+        other: 个建筑
+      tagged_with: 标签
+      times:
+        one: 次
+        other: 次
+      visibility: 可见性：
+    types:
+      dyson_sphere: 戴森球
+      dyson_spheres: 戴森球
+      factories: 工厂
+      factory: 工厂
+      mecha: 机甲
+      mechas: 机甲

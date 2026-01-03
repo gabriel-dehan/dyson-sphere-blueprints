@@ -1,0 +1,46 @@
+---
+zh-CN:
+  devise:
+    confirmations:
+      new:
+        submit: 重新发送确认说明
+        title: 重新发送确认说明
+    passwords:
+      edit:
+        submit: 更改密码
+        title: 更改密码
+      new:
+        submit: 发送重置密码说明
+        title: 忘记密码？
+    registrations:
+      edit:
+        cancel_account: 删除账户
+        cancel_confirm: 确定吗？
+        current_password_hint: 我们需要您的当前密码来确认更改
+        leave_blank_hint: 如果您不想更改，请留空
+        title: 编辑资料
+        unhappy: 不满意？
+        update: 更新
+        waiting_confirmation: 正在等待确认：%{email}
+      new:
+        password_hint: 至少 %{minimum} 个字符
+        submit: 创建账户
+        title: 注册
+    sessions:
+      new:
+        submit: 登录
+        title: 登录
+    shared:
+      links:
+        already_have_account: 已有账户？
+        forgot_password: 忘记密码？
+        login_with: 使用 %{provider} 登录
+        no_account: 没有账户？点击这里注册！
+        resend_confirmation: 没有收到确认说明？
+        resend_unlock: 没有收到解锁说明？
+        sign_in: 登录
+        sign_up: 注册
+    unlocks:
+      new:
+        submit: 重新发送解锁说明
+        title: 重新发送解锁说明
