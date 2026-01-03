@@ -42,6 +42,7 @@ const uiStrings = {
   en: {
     'filters.tags.placeholder': 'Search for any tag...',
     'freetags.placeholder': 'Search for a tag or add a new one...',
+    'entities.tags.placeholder': 'Search for a tag: mall, oil refinery, fractionator...',
     'size_warning.quite_big': 'quite big',
     'size_warning.too_big': 'too big',
     'station.supply': 'Supply',
@@ -64,6 +65,7 @@ const uiStrings = {
   'zh-CN': {
     'filters.tags.placeholder': '搜索任何标签...',
     'freetags.placeholder': '搜索标签或添加新标签...',
+    'entities.tags.placeholder': '搜索标签：商城、原油精炼、分馏塔...',
     'size_warning.quite_big': '相当大',
     'size_warning.too_big': '太大了',
     'station.supply': '供应',

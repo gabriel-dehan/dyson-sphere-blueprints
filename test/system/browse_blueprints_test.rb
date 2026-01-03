@@ -25,7 +25,7 @@ class BrowseBlueprintsTest < ApplicationSystemTestCase
   test "user can view blueprint details" do
     blueprint = blueprints(:public_factory)
 
-    visit blueprint_path(id: blueprint)
+    visit blueprint_path(blueprint, locale: I18n.locale)
 
     # Should show blueprint title
     assert_text blueprint.title

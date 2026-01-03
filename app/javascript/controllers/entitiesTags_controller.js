@@ -31,14 +31,9 @@ export default class extends Controller {
   }
 
   connect() {
-    const currentLocale = document.documentElement.lang || 'en';
-    const placeholder = currentLocale === 'zh-CN'
-      ? "搜索标签：商城、原油精炼、分馏塔..."
-      : "Search for a tag: mall, oil refinery, fractionator...";
-
     const tagify = new Tagify(
       this.inputTarget, {
-        placeholder: placeholder,
+        placeholder: t('entities.tags.placeholder'),
         whitelist: this.whitelist,
         enforceWhitelist: true,
         editTags: false,
