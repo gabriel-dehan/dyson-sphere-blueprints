@@ -1,50 +1,50 @@
 <div>
-  <h2 class="p-help__pageTitle"><strong>Factory</strong> Blueprint Help</h2>
-  <h2>How to use the <strong>Factory</strong> blueprint function in game?</h2>
+  <h2 class="p-help__pageTitle"><%= raw t('pages.help.factory.page_title') %></h2>
+  <h2><%= raw t('pages.help.factory.how_to_use') %></h2>
   <ol>
     <li>
-      First you need to have Mass construction unlocked, you can find it in the upgrades research tab.<br />
+      <%= t('pages.help.factory.step1_mass_construction') %><br />
       <%= image_tag 'help/help-1-1.png' %>
     </li>
     <li>
-      The research tree has 5 tiers upgrades for the blueprint section. every upgrade increases the number of facilities you can copy at once. Level one you can copy only 60 and level 5 lifts the restriction and gives you unlimited.
+      <%= t('pages.help.factory.step2_research_tree') %>
       <%= image_tag 'help/help-1-2.png' %>
     </li>
     <li>
-      Once completed, you should see a new icon in your toolbar.
+      <%= t('pages.help.factory.step3_toolbar') %>
       <%= image_tag 'help/help-1.png' %>
     </li>
   </ol>
-  <h2 id="copy">How to get a blueprint's code?</h2>
+  <h2 id="copy"><%= t('pages.help.factory.how_to_copy') %></h2>
   <ol>
     <li>
-      You first need to create a blueprint in game. In the <strong>blueprint</strong>'s toolbar, select the first icon:
+      <%= raw t('pages.help.factory.copy_step1') %>
       <%= image_tag 'help/help-2-1.png' %><br />
-      And then select your facilities. Once you're satisfied, finish your blueprint by clicking save blueprint.
+      <%= t('pages.help.factory.copy_step1_continued') %>
     </li>
     <li>
-      Click the <strong>Copy</strong> button in the blueprint screen.<br />
+      <%= raw t('pages.help.factory.copy_step2') %><br />
       <%= image_tag 'help/help-2-2.png' %><br />
     </li>
     <li>
-      You are done, the blueprint is now in your clipboard, and you just need to paste it in the form field when adding <%= link_to "your new blueprint", new_blueprint_factory_path %>.
+      <%= raw t('pages.help.factory.copy_step3_html', link: link_to(t('pages.help.factory.copy_step3_link'), new_blueprint_factory_path)) %>
     </li>
   </ol>
-  <h2 id="paste">How to use a <strong>Factory</strong> blueprint code found on this website?</h2>
+  <h2 id="paste"><%= raw t('pages.help.factory.how_to_paste') %></h2>
   <ol>
     <li>
-      Simply click the&nbsp;
+      <%= t('pages.help.factory.paste_step1') %>&nbsp;
       <button class="t-blueprint__copy">
-        <i class="fas fa-copy"></i>Copy to clipboard
+        <i class="fas fa-copy"></i><%= t('pages.help.factory.copy_to_clipboard') %>
       </button>
-      &nbsp;button on a blueprint's page.
+      &nbsp;<%= t('pages.help.factory.paste_step1_continued') %>
     </li>
     <li>
-      Then, in game, create an empty blueprint and then click on the new created blueprint.
+      <%= t('pages.help.factory.paste_step2') %>
       <%= image_tag 'help/help-3-1.png' %><br />
     </li>
     <li>
-      click the <strong>Paste</strong> button in the blueprint screen, finish by clicking the save changes button.
+      <%= raw t('pages.help.factory.paste_step3') %>
       <%= image_tag 'help/help-3-2.png' %><br />
     </li>
   </ol>

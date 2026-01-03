@@ -25,7 +25,7 @@ class BrowseBlueprintsTest < ApplicationSystemTestCase
   test "user can view blueprint details" do
     blueprint = blueprints(:public_factory)
 
-    visit blueprint_path(blueprint)
+    visit blueprint_path(id: blueprint)
 
     # Should show blueprint title
     assert_text blueprint.title

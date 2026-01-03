@@ -1,19 +1,19 @@
 <div class="p-staticPage p-help">
-  <h1>In need of help?
+  <h1><%= t('pages.help.title') %>
     <a href="https://discord.com/invite/sgU8QfZhuB" target="_blank" rel="noopener noreferrer">
-      <%= image_tag 'buttons/discord.png', alt: 'Join our discord' %>
+      <%= image_tag 'buttons/discord.png', alt: t('pages.help.discord_alt') %>
     </a>
   </h1>
   <div class="m-tabs">
     <div class="m-tabs-select-container">
       <%= link_to help_path(for: 'factory'), class: "m-tabs-select #{(!params[:for] || params[:for] == 'factory') && 'active'}" do %>
-        <strong>Factory</strong> Help
+        <%= raw t('pages.help.factory_tab') %>
       <% end %>
       <%= link_to help_path(for: 'dyson_sphere'), class: "m-tabs-select #{(params[:for] == 'dyson_sphere') && 'active'}" do %>
-        <strong>Dyson Sphere</strong> Help
+        <%= raw t('pages.help.dyson_sphere_tab') %>
       <% end %>
       <%= link_to help_path(for: 'mecha'), class: "m-tabs-select #{(params[:for] == 'mecha') && 'active'}" do %>
-        <strong>Mechas</strong> Help
+        <%= raw t('pages.help.mecha_tab') %>
       <% end %>
     </div>
   </div>

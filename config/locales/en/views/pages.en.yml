@@ -4,9 +4,121 @@ en:
     here: here
   pages:
     cookies: Cookies
+    help:
+      discord_alt: Join our discord
+      dyson_sphere:
+        copy_step1: Follow the previous instructions, then click on the <strong>Copy</strong> button
+        copy_step2_html: You are done, the blueprint is now in your clipboard, and you just need to paste it in the "<em>* Paste your blueprint here</em>" field when adding %{link}.
+        copy_step2_link: your new Dyson Sphere blueprint
+        copy_to_clipboard: Copy to clipboard
+        how_to_copy: How to get a blueprint's code?
+        how_to_paste: How to use a <strong>Dyson Sphere</strong> blueprint code found on this website?
+        how_to_use: How to use the <strong>Dyson Sphere</strong> blueprint function in game?
+        page_title: "<strong>Dyson Sphere</strong> Blueprint Help"
+        paste_step1: Simply click the
+        paste_step1_continued: button on a blueprint's page.
+        paste_step2: Then, in game, click on the <strong>Paste</strong> button
+        paste_step3: That's it!
+        step1: Go to the blueprint creation screen
+        step2: On the right-hand side you should see the option to <strong>Copy</strong> and <strong>Paste</strong>
+      dyson_sphere_tab: "<strong>Dyson Sphere</strong> Help"
+      factory:
+        copy_step1: 'You first need to create a blueprint in game. In the <strong>blueprint</strong>''s toolbar, select the first icon:'
+        copy_step1_continued: And then select your facilities. Once you're satisfied, finish your blueprint by clicking save blueprint.
+        copy_step2: Click the <strong>Copy</strong> button in the blueprint screen.
+        copy_step3_html: You are done, the blueprint is now in your clipboard, and you just need to paste it in the form field when adding %{link}.
+        copy_step3_link: your new blueprint
+        copy_to_clipboard: Copy to clipboard
+        how_to_copy: How to get a blueprint's code?
+        how_to_paste: How to use a <strong>Factory</strong> blueprint code found on this website?
+        how_to_use: How to use the <strong>Factory</strong> blueprint function in game?
+        page_title: "<strong>Factory</strong> Blueprint Help"
+        paste_step1: Simply click the
+        paste_step1_continued: button on a blueprint's page.
+        paste_step2: Then, in game, create an empty blueprint and then click on the new created blueprint.
+        paste_step3: click the <strong>Paste</strong> button in the blueprint screen, finish by clicking the save changes button.
+        step1_mass_construction: First you need to have Mass construction unlocked, you can find it in the upgrades research tab.
+        step2_research_tree: The research tree has 5 tiers upgrades for the blueprint section. every upgrade increases the number of facilities you can copy at once. Level one you can copy only 60 and level 5 lifts the restriction and gives you unlimited.
+        step3_toolbar: Once completed, you should see a new icon in your toolbar.
+      factory_tab: "<strong>Factory</strong> Help"
+      mecha:
+        copy_step1: 'Follow the previous instructions and <strong>scroll down in the left sidebar</strong>, you should be able to find this block:'
+        copy_step2: First of all, <em>don't forget to save an up-to-date snapshot</em> of your mecha. We use it to generate the preview of your mecha on the site
+        copy_step3: Then, give a name to your blueprint file and click on <strong>Save Blueprint</strong>
+        copy_step4_game: 'Or through the game interface:'
+        copy_step4_html: 'Once have saved the blueprint, you have to get the <strong>.mecha</strong> file to upload it here.<br>You can usually find the folder in:'
+        copy_step4_path: C:\Users%USERPROFILE%\Documents\Dyson Sphere Program\Customize\Mecha
+        copy_step5: Find your <strong>.mecha</strong> file
+        copy_step6_html: Then you just need to upload the file when adding %{link}.
+        copy_step6_link: your new Mecha blueprint
+        download_file: Download file
+        how_to_copy: How to save and get your <strong>Mecha</strong> customization file?
+        how_to_paste: How to use a <strong>Mecha</strong> blueprint file downloaded on this website?
+        how_to_use: How to use the <strong>Mecha</strong> customization function in game?
+        note: "<strong>Note</strong>: As the customization system is quite complex, we advise looking for tutorials or guides on the subject."
+        page_title: "<strong>Mecha</strong> Blueprint Help"
+        paste_step1: Simply click the
+        paste_step1_continued: button on a blueprint's page.
+        paste_step2_game: 'Or through the game interface:'
+        paste_step2_html: 'Then go to your Mecha customization folder, which you can usually find in:'
+        paste_step3: Drop the file in this folder and you should see it in game (you might have to restart the game)
+        paste_step4: That's it!
+        recommend_videos: 'We recommend <strong>Panic</strong>''s excellent guides on youtube:'
+        step1: Go to the <strong>Mecha Panel</strong>
+        step2: In the Mecha panel, select <strong>Armor Customize</strong>
+      mecha_tab: "<strong>Mechas</strong> Help"
+      title: In need of help?
     home:
       tagline: Share your <strong class="dsp">Dyson Sphere Program</strong> blueprints with the <em>community</em>!
     privacy: Privacy
+    support:
+      about_me: My name is Gabriel. I have been a developer for the past 15 years and working in the web industry for the past 8.
+      amazing_numbers: These are <strong>amazing numbers</strong> and I am very grateful to the community for that ❤️
+      beer_alt: Buy me a beer
+      cheers: Cheers and love ❤️
+      cost_app_dyno: Application Dyno
+      cost_cdn: Content Delivery Network (CDN) and Cache
+      cost_database: Database Hosting
+      cost_depending: "(depending on traffic)"
+      cost_images: Image Hosting
+      cost_month: "/ month"
+      cost_worker_dyno: Worker Dyno
+      costs_caption: Current server and hosting costs
+      costs_reference: 'As a reference here are the costs I am currently covering by myself for the current website:'
+      credit: Donation Button icon made by
+      credit_from: from
+      gamer: I am also a gamer through and through, which is why most of my projects are video game related and I am really passionate about those.
+      github_alt: Support me on Github
+      grateful: I am so grateful for that. Thank you.
+      high_costs: But those numbers also mean extra hosting expenses that are a bit on the... high side.
+      hosting_cost: 'As some of you might be aware, <strong>hosting a decently popular web application such as Dyson Sphere Blueprints has a cost</strong>, and a pretty substantial one at that: one needs to pay for web hosting, database hosting, image storage space and other things like a CDN to improve loading times.'
+      international: One of the big factors is that the website is truly international, we have users from all around the world, and more than half of our users are from China, the other (little-less-than) half coming mostly from the US and Europe. This means that there isn't ever any downtime for our servers that'd help to reduce the cost and it also means that to be able to provide as best an experience as I could for our asians brethren I've had to setup CDNs around the world to try and reduce their loading times (the servers are closer to the US/Europe).
+      intro: Hello there!
+      labor_of_heart: Dyson Sphere Blueprints is a labor of heart and I am really happy to see so many people enjoying it.
+      long_version_title: Why do we need your support? The long version (with some numbers!)
+      no_ads: "<strong>I am strongly against having any ads on Dyson Sphere Blueprint</strong> but, at the same time, I need help covering the costs, and am thus making this page to <strong>ask for your help</strong> in maintaining Dyson Sphere Program up and running properly."
+      no_ads_promise: "<strong>I am not planning on adding any form of ads to the website nor will I ever do so</strong>, but if I want the website experience to remain pleasant (a.k.a. not slow) I need to keep using a decent hosting plan, and this is definitely expensive."
+      optimization: I've tried to optimise the code as much as I could to reduce the footprint on our servers, and even though I know I can do better and will try to continue to improve on that, I have limited time on hand and a migration to a less expensive host would be very arduous at the moment.
+      patreon_alt: Support me on Patreon
+      short_version_title: Why do we need your support? The short version
+      spare_time: 'But the thing is: I am working on this project in my spare time and covering all the hosting expenses by myself. Although this is something I am glad I am doing and don''t mind at all, I didn''t expect the success of Dyson Sphere Blueprints.'
+      stat_blueprints: "<strong>10000</strong> Blueprints (about half are public blueprints)"
+      stat_data: "<strong>500GB</strong> of data served per day"
+      stat_requests: "<strong>1.5M</strong> Requests served per day"
+      stat_users: "<strong>8000</strong> Users created"
+      stat_users_per_minute: On average <strong>300</strong> users per minute
+      stat_visitors: "<strong>Up to 45000</strong> Visitors a day"
+      stats_title: Currently, <strong>Dyson Sphere Blueprints boasts:</strong>
+      stretching_thin: The website is stretching thin on its current "cheap" web hosting plan and upgrading it would be the next sensible step. A sensible yet expensive step.
+      support_options: If you wish to support Dyson Sphere Blueprints, may it be by <strong>tipping me</strong> a beer (the only fuel a developer needs) once or sponsoring Dyson Sphere Blueprints through a <strong>monthly donation</strong>, know that your contribution <em>whatever the amount</em> will be of great help, and <strong>I would be most grateful</strong>.
+      thank_you: First of all, thank you for using this application and being part of the community.
+      thank_you_final: If you've read up to here, I thank you a lot and hope some of you will be able to help even the tiniest bit.
+      tipping_point: This can add up quickly and <strong>we are reaching a tipping point where it's starting to cost a bit too much money</strong> and it's gonna cost even more if I want the website to continue working properly with the traffic increase.
+      title: Support Dyson Sphere Blueprints
+      total_cost: This amounts to almost <strong>100€ / month</strong> that I have to expend. I could cut back and go back to a less expensive plan, but we all know that would mean a slower site and worse experience for you all.
+      wall_of_fame: "★ Go to the wall of fame ★"
+      why_help: And <strong>this is why I need your help</strong>. If even a small number of our users gave 2€ a month it would pretty much cover most of the costs, which would be amazing.
+      you_are_amazing: You are amazing
     terms: Terms
   shared:
     cookie_consent:

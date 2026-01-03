@@ -1,41 +1,41 @@
 <div>
-  <h2 class="p-help__pageTitle"><strong>Dyson Sphere</strong> Blueprint Help</h2>
-  <h2>How to use the <strong>Dyson Sphere</strong> blueprint function in game?</h2>
+  <h2 class="p-help__pageTitle"><%= raw t('pages.help.dyson_sphere.page_title') %></h2>
+  <h2><%= raw t('pages.help.dyson_sphere.how_to_use') %></h2>
   <ol>
     <li>
-      Go to the blueprint creation screen<br>
+      <%= t('pages.help.dyson_sphere.step1') %><br>
       <%= image_tag 'help/dyson_sphere/help-1-1.png' %>
     </li>
     <li>
-      On the right-hand side you should see the option to <strong>Copy</strong> and <strong>Paste</strong><br>
+      <%= raw t('pages.help.dyson_sphere.step2') %><br>
       <%= image_tag 'help/dyson_sphere/help-1-2.png' %>
     </li>
   </ol>
-  <h2 id="copy">How to get a blueprint's code?</h2>
+  <h2 id="copy"><%= t('pages.help.dyson_sphere.how_to_copy') %></h2>
   <ol>
     <li>
-      Follow the previous instructions, then click on the <strong>Copy</strong> button<br>
+      <%= raw t('pages.help.dyson_sphere.copy_step1') %><br>
       <%= image_tag 'help/dyson_sphere/help-2-1.png' %><br>
     </li>
     <li>
-      You are done, the blueprint is now in your clipboard, and you just need to paste it in the "<em>* Paste your blueprint here</em>" field when adding <%= link_to "your new Dyson Sphere blueprint", new_blueprint_dyson_sphere_path %>.
+      <%= raw t('pages.help.dyson_sphere.copy_step2_html', link: link_to(t('pages.help.dyson_sphere.copy_step2_link'), new_blueprint_dyson_sphere_path)) %>
     </li>
   </ol>
-  <h2 id="paste">How to use a <strong>Dyson Sphere</strong> blueprint code found on this website?</h2>
+  <h2 id="paste"><%= raw t('pages.help.dyson_sphere.how_to_paste') %></h2>
   <ol>
     <li>
-      Simply click the&nbsp;
+      <%= t('pages.help.dyson_sphere.paste_step1') %>&nbsp;
       <button class="t-blueprint__copy">
-        <i class="fas fa-copy"></i>Copy to clipboard
+        <i class="fas fa-copy"></i><%= t('pages.help.dyson_sphere.copy_to_clipboard') %>
       </button>
-      &nbsp;button on a blueprint's page.
+      &nbsp;<%= t('pages.help.dyson_sphere.paste_step1_continued') %>
     </li>
     <li>
-      Then, in game, click on the <strong>Paste</strong> button<br>
+      <%= raw t('pages.help.dyson_sphere.paste_step2') %><br>
       <%= image_tag 'help/dyson_sphere/help-3-1.png' %><br />
     </li>
     <li>
-      That's it!
+      <%= t('pages.help.dyson_sphere.paste_step3') %>
     </li>
   </ol>
 </div>

@@ -1,113 +1,104 @@
 <div class="p-staticPage">
   <h1>
-    Support Dyson Sphere Blueprints
-    <%= link_to "★ Go to the wall of fame ★", walloffame_path, class: "p-staticPage__button" %>
+    <%= t('pages.support.title') %>
+    <%= link_to t('pages.support.wall_of_fame'), walloffame_path, class: "p-staticPage__button" %>
   </h1>
-  <h2>Why do we need your support? The short version</h2>
+  <h2><%= t('pages.support.short_version_title') %></h2>
   <p>
-    First of all, thank you for using this application and being part of the community.
+    <%= t('pages.support.thank_you') %>
     <br />
-    <strong>You are amazing</strong>.
+    <strong><%= t('pages.support.you_are_amazing') %></strong>.
   </p>
   <p>
-    As some of you might be aware, <strong>hosting a decently popular web application such as Dyson Sphere Blueprints has a cost</strong>, and a pretty substiantial one at that:
-    one needs to pay for web hosting, database hosting, image storage space and other things like a CDN to improve loading times.
+    <%= raw t('pages.support.hosting_cost') %>
     <br />
-    This can add up quickly and <strong>we are reaching a tipping point where it's starting to cost a bit too much money</strong> and it's gonna cost even more if I want the website to continue working properly with the traffic increase.
+    <%= raw t('pages.support.tipping_point') %>
     <br />
-    The website is stretching thin on its current "cheap" web hosting plan and upgrading it would be the next sensible step. A sensible yet expensive step.
+    <%= t('pages.support.stretching_thin') %>
   </p>
   <p>
-    <strong>I am strongly against having any ads on Dyson Sphere Blueprint</strong> but, at the same time, I need help covering the costs, and am thus making this page to <strong>ask for your help</strong> in maintaining Dyson Sphere Program up and running properly.
+    <%= raw t('pages.support.no_ads') %>
     <br />
-    If you wish to support Dyson Sphere Blueprints, may it be by <strong>tipping me</strong> a beer (the only fuel a developer needs) once or sponsoring Dyson Sphere Blueprints through a <strong>monthly donation</strong>, know that your contribution <em>whatever the amount</em> will be of great help, and <strong>I would be most grateful</strong>.
+    <%= raw t('pages.support.support_options') %>
   </p>
   <div class="m-supportButtons">
     <a href="https://github.com/sponsors/gabriel-dehan" target="_blank" rel="noopener noreferrer">
-      <%= image_tag 'support/github_button.png', alt: 'Support me on Github' %>
+      <%= image_tag 'support/github_button.png', alt: t('pages.support.github_alt') %>
     </a>
     <a href="https://www.buymeacoffee.com/gabrieldehan" target="_blank" rel="noopener noreferrer">
-      <%= image_tag 'support/beer_button.png', alt: 'Buy me a beer' %>
+      <%= image_tag 'support/beer_button.png', alt: t('pages.support.beer_alt') %>
     </a>
     <a href="https://www.patreon.com/user?u=7061909" target="_blank" rel="noopener noreferrer">
-      <%= image_tag 'support/patreon_button.png', alt: 'Support me on Patreon' %>
+      <%= image_tag 'support/patreon_button.png', alt: t('pages.support.patreon_alt') %>
     </a>
   </div>
-  <h2>Why do we need your support? The long version (with some numbers!)</h2>
-  <p>Hello there!<br />
-    My name is Gabriel. I have been a developer for the past 15 years and working in the web industry for the past 8.<br />
-    I am also a gamer through and through, which is why most of my projects are video game related and I am really passionate about those.
+  <h2><%= t('pages.support.long_version_title') %></h2>
+  <p><%= t('pages.support.intro') %><br />
+    <%= t('pages.support.about_me') %><br />
+    <%= t('pages.support.gamer') %>
   </p>
   <p>
-    Dyson Sphere Blueprints is a labor of heart and I am really happy to see so many people enjoying it.
-    <strong>I am so grateful for that. Thank you.</strong>
+    <%= t('pages.support.labor_of_heart') %>
+    <strong><%= t('pages.support.grateful') %></strong>
     <br />
-    But the thing is: I am working on this project in my spare time and covering all the hosting expenses by myself.
-    Although this is something I am glad I am doing and don't mind at all, I didn't expect the success of Dyson Sphere Blueprints.
+    <%= t('pages.support.spare_time') %>
   </p>
-  <p>Currently, <strong>Dyson Sphere Blueprints boasts:</strong></p>
+  <p><%= raw t('pages.support.stats_title') %></p>
   <ul>
-    <li><strong>8000</strong> Users created</li>
-    <li><strong>10000</strong> Blueprints (about half are public blueprints)</li>
-    <li><strong>Up to 45000</strong> Visitors a day</li>
-    <li>On average <strong>300</strong> users per minute</li>
-    <li><strong>1.5M</strong> Requests served per day</li>
-    <li><strong>500GB</strong> of data served per day</li>
+    <li><%= raw t('pages.support.stat_users') %></li>
+    <li><%= raw t('pages.support.stat_blueprints') %></li>
+    <li><%= raw t('pages.support.stat_visitors') %></li>
+    <li><%= raw t('pages.support.stat_users_per_minute') %></li>
+    <li><%= raw t('pages.support.stat_requests') %></li>
+    <li><%= raw t('pages.support.stat_data') %></li>
   </ul>
-  <p>These are <strong>amazing numbers</strong> and I am very grateful to the community for that ❤️<br>
-    But those numbers also mean extra hosting expenses that are a bit on the... high side.<br>
-    One of the big factors is that the website is truly international, we have users from all around the world, and
-    more than half of our users are from China, the other (little-less-than) half coming mostly from the US and
-    Europe. This means that there isn't ever any downtime for our servers that'd help to reduce the cost and it also
-    means that to be able to provide as best an experience as I could for our asians brethren I've had to setup CDNs
-    around the world to try and reduce their loading times (the servers are closer to the US/Europe).</p>
-  <p>I've tried to optimise the code as much as I could to reduce the footprint on our servers, and even though I know
-    I can do better and will try to continue to improve on that, I have limited time on hand and a migration to a less expensive host would be very arduous at the moment.
+  <p><%= raw t('pages.support.amazing_numbers') %><br>
+    <%= t('pages.support.high_costs') %><br>
+    <%= t('pages.support.international') %></p>
+  <p><%= t('pages.support.optimization') %>
   </p>
-  <p><strong>I am not planning on adding any form of ads to the website nor will I ever do so</strong>, but if I
-    want the website experience to remain pleasant (a.k.a: not slow) I need to keep using a decent hosting plan, and this is definitely expensive.</p>
-  <p>As a reference here are the costs I am currently covering by myself for the current website:</p>
+  <p><%= raw t('pages.support.no_ads_promise') %></p>
+  <p><%= t('pages.support.costs_reference') %></p>
   <table>
-    <caption>Current server and hosting costs</caption>
+    <caption><%= t('pages.support.costs_caption') %></caption>
     <tr>
-      <td><strong>Application Dyno</strong></td>
-      <td><strong>50€</strong> / month</td>
+      <td><strong><%= t('pages.support.cost_app_dyno') %></strong></td>
+      <td><strong>50€</strong> <%= t('pages.support.cost_month') %></td>
     </tr>
     <tr>
-      <td><strong>Worker Dyno</strong></td>
-      <td><strong>25€</strong> / month</td>
+      <td><strong><%= t('pages.support.cost_worker_dyno') %></strong></td>
+      <td><strong>25€</strong> <%= t('pages.support.cost_month') %></td>
     </tr>
     <tr>
-      <td><strong>Database Hosting</strong></td>
-      <td><strong>9€</strong> / month</td>
+      <td><strong><%= t('pages.support.cost_database') %></strong></td>
+      <td><strong>9€</strong> <%= t('pages.support.cost_month') %></td>
     </tr>
     <tr>
-      <td><strong>Image Hosting</strong></td>
-      <td><strong>1-5€</strong> / month (depending on traffic)</td>
+      <td><strong><%= t('pages.support.cost_images') %></strong></td>
+      <td><strong>1-5€</strong> <%= t('pages.support.cost_month') %> <%= t('pages.support.cost_depending') %></td>
     </tr>
     <tr>
-      <td><strong>Content Delivery Network (CDN) and Cache</strong></td>
-      <td><strong>1-5€</strong> / month (depending on traffic)</td>
+      <td><strong><%= t('pages.support.cost_cdn') %></strong></td>
+      <td><strong>1-5€</strong> <%= t('pages.support.cost_month') %> <%= t('pages.support.cost_depending') %></td>
     </tr>
   </table>
-  <p>This amounts to almost <strong>100€ / month</strong> that I have to expend. I could cut back and go back to a less expensive plan, but we all know that would mean a slower site and worse experience for you all.</p>
-  <p>And <strong>this is why I need your help</strong>. If even a small number of our users gave 2€ a month it would pretty much cover most of the
-    costs, which would be amazing.</p>
-  <p>If you've read up to here, I thank you a lot and hope some of you will be able to help even the tiniest bit.</p>
-  <p>Cheers and love ❤️
+  <p><%= raw t('pages.support.total_cost') %></p>
+  <p><%= raw t('pages.support.why_help') %></p>
+  <p><%= t('pages.support.thank_you_final') %></p>
+  <p><%= t('pages.support.cheers') %>
   </p>
   <div class="m-supportButtons">
     <a href="https://github.com/sponsors/gabriel-dehan" target="_blank" rel="noopener noreferrer">
-      <%= image_tag 'support/github_button.png', alt: 'Support me on Github' %>
+      <%= image_tag 'support/github_button.png', alt: t('pages.support.github_alt') %>
     </a>
     <a href="https://www.buymeacoffee.com/gabrieldehan" target="_blank" rel="noopener noreferrer">
-      <%= image_tag 'support/beer_button.png', alt: 'Buy me a beer' %>
+      <%= image_tag 'support/beer_button.png', alt: t('pages.support.beer_alt') %>
     </a>
     <a href="https://www.patreon.com/user?u=7061909" target="_blank" rel="noopener noreferrer">
-      <%= image_tag 'support/patreon_button.png', alt: 'Support me on Patreon' %>
+      <%= image_tag 'support/patreon_button.png', alt: t('pages.support.patreon_alt') %>
     </a>
   </div>
 </div>
 <div class="a-credit">
-  <div>Donation Button icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+  <div><%= t('pages.support.credit') %> <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> <%= t('pages.support.credit_from') %> <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 </div>
