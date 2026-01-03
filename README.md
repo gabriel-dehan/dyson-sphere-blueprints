@@ -207,6 +207,28 @@ rails test:system
 - `test/policies/` - Pundit authorization policy tests
 - `test/system/` - End-to-end browser tests
 
+### i18n-tasks
+
+This project uses [i18n-tasks](https://github.com/glebm/i18n-tasks) to manage translations and ensure consistency across locales.
+
+**Important:** Due to Ruby 3.2 compatibility issues with ActiveSupport, you must prefix all `i18n-tasks` commands with `RUBYOPT="-rlogger"`:
+
+```bash
+# Normalize translation files
+RUBYOPT="-rlogger" i18n-tasks normalize
+
+# Find missing translations
+RUBYOPT="-rlogger" i18n-tasks missing
+
+# Find unused translations
+RUBYOPT="-rlogger" i18n-tasks unused
+
+# Check for inconsistent interpolations
+RUBYOPT="-rlogger" i18n-tasks check-consistent-interpolations
+```
+
+This ensures the `logger` gem is loaded before ActiveSupport, which is required for Ruby 3.2 compatibility.
+
 ### Continuous Integration
 
 This project uses GitHub Actions for CI. Every push and pull request triggers automated tests.

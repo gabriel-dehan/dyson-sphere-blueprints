@@ -8,10 +8,10 @@ en:
       mecha_title: Edit <span>Mecha</span> blueprint
     filters:
       any: Any
+      by_color: Filter by color (experimental)
       dyson_spheres: Dyson Spheres
       factories: Factories
       filters_for: Filters for
-      by_color: Filter by color (experimental)
       max_structures: Max structures
       mechas: Mechas
       most_popular: Most Popular
@@ -20,8 +20,8 @@ en:
       no_dyson_sphere_filters: No specific filters for dyson spheres yet
       reset: Reset
       search: Search
-      search_placeholder: Search for a blueprint...
       search_by_author_placeholder: Search by author...
+      search_placeholder: Search for a blueprint...
     form:
       additional_no_overwrite: "*Uploading new images will <strong>NOT</strong> overwrite existing ones. To remove existing images, click on the pictures below and then update the blueprint."
       additional_pictures: Additional pictures
@@ -66,7 +66,6 @@ en:
       author: 'Author:'
       blueprint: Blueprint
       collection: 'Collection:'
-      nb_of_copies: 'Copied:'
       copy_to_clipboard: Copy to clipboard
       could_not_decode: Could not decode blueprint data.
       created_at: 'Created:'
@@ -83,6 +82,7 @@ en:
       mecha_data_not_available: Mecha files data extraction is not yet available.
       mecha_name: 'Name:'
       mecha_requirements: Mecha requirements
+      nb_of_copies: 'Copied:'
       no_description: This blueprint doesn't have a description!
       not_available_yet: Not available yet
       open_blueprint: Open Blueprint
