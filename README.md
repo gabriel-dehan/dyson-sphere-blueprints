@@ -19,7 +19,7 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Roadmap
 
-[See the roadmap/todo file](ROADMAP.md)
+[Look at our list of issues to get an idea](https://github.com/gabriel-dehan/dyson-sphere-blueprints/issues)
 
 ## Changelog
 
