@@ -29,7 +29,7 @@ namespace :power_data do
       machine = item["machine"]
       power_data[entity_id] = {
         idle: ((machine["drain"] || 0) * 1000).to_i, # Convert kW to W
-        work: ((machine["usage"] || 0) * 1000).to_i  # Convert kW to W
+        work: ((machine["usage"] || 0) * 1000).to_i,  # Convert kW to W
       }
     end
 

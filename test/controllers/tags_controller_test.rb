@@ -30,7 +30,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
     assert_includes tags, "production"
     assert_includes tags, "logistics"
     # Should NOT include dyson_sphere category tags
-    refute_includes tags, "sphere"
+    assert_not_includes tags, "sphere"
   end
 
   # ============================================
@@ -47,7 +47,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
     assert_equal false, result
   end
 
-  # Note: Testing actual profane words would require knowing the profanity filter dict
+  # NOTE: Testing actual profane words would require knowing the profanity filter dict
   # We test the endpoint works and returns boolean
   test "profanity_check returns boolean" do
     sign_in_as(:member)

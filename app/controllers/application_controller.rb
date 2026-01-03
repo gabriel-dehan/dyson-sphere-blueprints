@@ -26,9 +26,7 @@ class ApplicationController < ActionController::Base
     return params[:locale] if valid_locale?(params[:locale])
 
     # Priority 2: User preference (if logged in)
-    if user_signed_in? && current_user.preferred_locale.present?
-      return current_user.preferred_locale if valid_locale?(current_user.preferred_locale)
-    end
+    return current_user.preferred_locale if user_signed_in? && current_user.preferred_locale.present? && valid_locale?(current_user.preferred_locale)
 
     # Priority 3: Cookie (for non-logged in users)
     return cookies[:locale] if valid_locale?(cookies[:locale])

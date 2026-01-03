@@ -51,7 +51,7 @@ class Blueprint::MechasControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_path
   end
 
-  # Note: Full create tests with valid mecha file are complex
+  # NOTE: Full create tests with valid mecha file are complex
   # They require proper binary mecha file which we skip in Phase B
 
   # ============================================
@@ -115,6 +115,6 @@ class Blueprint::MechasControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Missing file", json["error"]
   end
 
-  # Note: Testing with valid mecha file requires a real mecha binary
+  # NOTE: Testing with valid mecha file requires a real mecha binary
   # Skipped for Phase B - add in Phase C with proper test fixtures
 end

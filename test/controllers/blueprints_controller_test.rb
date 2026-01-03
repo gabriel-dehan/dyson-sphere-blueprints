@@ -69,7 +69,7 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
     assert_match blueprints(:public_dyson_sphere).title, response.body
   end
 
-  # Note: Mecha show requires blueprint_file_data which is complex to set up
+  # NOTE: Mecha show requires blueprint_file_data which is complex to set up
   # This test is skipped for Phase A and will be added in Phase B with proper fixtures
   test "show renders mecha blueprint" do
     skip "Mecha blueprints require blueprint_file_data - to be added in Phase B"

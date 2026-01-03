@@ -45,11 +45,11 @@ class UserTest < ActiveSupport::TestCase
       info: {
         email: existing_user.email,
         name: "Updated Discord Name",
-        image: "https://cdn.discord.com/avatar.png"
+        image: "https://cdn.discord.com/avatar.png",
       },
       credentials: {
         token: "new_token_abc",
-        expires_at: 1.day.from_now.to_i
+        expires_at: 1.day.from_now.to_i,
       }
     )
 
@@ -72,11 +72,11 @@ class UserTest < ActiveSupport::TestCase
       info: {
         email: existing_user.email,
         name: "Discord Name",
-        image: "https://cdn.discord.com/avatar.png"
+        image: "https://cdn.discord.com/avatar.png",
       },
       credentials: {
         token: "token_xyz",
-        expires_at: 1.day.from_now.to_i
+        expires_at: 1.day.from_now.to_i,
       }
     )
 
@@ -95,11 +95,11 @@ class UserTest < ActiveSupport::TestCase
       info: {
         email: "brand_new_#{SecureRandom.hex(4)}@discord.com",
         name: "Brand New User",
-        image: "https://cdn.discord.com/new_avatar.png"
+        image: "https://cdn.discord.com/new_avatar.png",
       },
       credentials: {
         token: "new_user_token",
-        expires_at: 1.day.from_now.to_i
+        expires_at: 1.day.from_now.to_i,
       }
     )
 
@@ -127,11 +127,11 @@ class UserTest < ActiveSupport::TestCase
       info: {
         email: existing_user.email,
         name: "Discord User",
-        image: new_avatar_url
+        image: new_avatar_url,
       },
       credentials: {
         token: "token",
-        expires_at: 1.day.from_now.to_i
+        expires_at: 1.day.from_now.to_i,
       }
     )
 

@@ -52,8 +52,8 @@ gem "omniauth-discord"
 
 # I18n
 gem "http_accept_language"
-gem 'rails-i18n', '~> 6.0'
-gem 'kaminari-i18n'
+gem "rails-i18n", "~> 6.0"
+gem "kaminari-i18n"
 
 gem "aws-sdk-s3", "~> 1.14"
 gem "shrine", "~> 3.3"
@@ -67,7 +67,7 @@ gem "barnes"
 gem "profanity-filter", "~> 1.0"
 gem "camalian", "~> 0.2.0"
 
-gem 'coloris'
+gem "coloris"
 
 group :development, :test do
   gem "pry-byebug"
