@@ -23,8 +23,8 @@ Official website: [https://www.dysonsphereblueprints.com](https://www.dysonspher
 
 ## Changelog
 
-### Latest: 4.9.0
-- Added power consumption and generation display for blueprints ([#95](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/95))
+### Latest: 4.10.0 (2025-12)
+- Added Simplified Chinese (zh-CN) internationalization support ([#97](https://github.com/gabriel-dehan/dyson-sphere-blueprints/pull/97))
 
 ### Previous versions
 
