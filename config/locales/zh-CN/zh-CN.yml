@@ -1,6 +1,7 @@
 ---
 zh-CN:
   common:
+    back: 返回
     cancel: 取消
     confirm_delete: 确定要删除吗？
     copied: 已复制！
@@ -16,6 +17,9 @@ zh-CN:
     settings: 设置
     sign_up: 注册
     submit: 提交
+  filters:
+    tags:
+      placeholder: 搜索标签...
   flash:
     created: "%{resource}创建成功。"
     deleted: "%{resource}删除成功。"
@@ -30,6 +34,18 @@ zh-CN:
     source_code: 源代码
     suggestion: 有建议？
     tell_me: 在这里告诉我
+  freetags:
+    placeholder: 添加标签...
   site:
     name: 戴森球蓝图
     tagline: 与社区分享你的戴森球计划蓝图！
+  uppy:
+    browse: 浏览文件
+    drop_paste: 拖放文件到此处，粘贴或 %{browse}
+    mecha_description: 机甲蓝图文件。最大 2 MB
+    mecha_error: 无效的机甲文件
+    mecha_title: 拖放机甲文件到此处，或 %{browse}
+    multiple_note: 最多 %{max} 张图片，每张最大 %{size} MB，理想比例 16:9。例如 1920x1080 等...
+    reset: 重置
+    single_note: 单张封面图片。最大 %{size} MB，理想比例 16:9。例如 1920x1080 等...
+    validating: 正在验证文件...

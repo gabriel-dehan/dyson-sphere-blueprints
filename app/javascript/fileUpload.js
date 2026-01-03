@@ -7,6 +7,7 @@ import {
 import { Plugin } from '@uppy/core';
 
 import randomstring from 'randomstring';
+import { t } from './i18n';
 
 /* Mecha plugin */
 class MechaValidator extends Plugin {
@@ -25,7 +26,7 @@ class MechaValidator extends Plugin {
       const file = this.uppy.getFile(fileID)
       this.uppy.emit('preprocess-progress', file, {
         mode: 'indeterminate',
-        message: 'Validating file...',
+        message: t('uppy.validating'),
       });
 
       const formData = new FormData();
@@ -116,8 +117,14 @@ const singleFileUpload = (fileInput) => {
   const data = fileInput.dataset;
   const container = fileInput.parentNode;
   const uppy = fileUpload(fileInput, { maximum: 1, maxFileSize: data.maxFileSize || null });;
+  const fileSizeMB = data.maxFileSize ? data.maxFileSize / (1024 * 1024) : '3';
+  const isMecha = data.mechaPlugin === 'true';
 
   container.removeChild(fileInput);
+
+  // Use mecha-specific translations if this is a mecha upload
+  const dropPasteText = isMecha ? t('uppy.mecha_title') : t('uppy.drop_paste');
+  const noteText = isMecha ? t('uppy.mecha_description') : t('uppy.single_note').replace('%{size}', fileSizeMB);
 
   uppy
     .use(Dashboard, {
@@ -125,11 +132,12 @@ const singleFileUpload = (fileInput) => {
       target: container,
       locale: {
         strings: {
-          dropPaste: data.title || null,
-          uploadFailed: data.errorMessage || null,
+          dropPaste: dropPasteText,
+          browse: t('uppy.browse'),
+          uploadFailed: t('uppy.mecha_error'),
         }
       },
-      note: data.description || `Single cover picture. ${data.maxFileSize ? data.maxFileSize / (1024 * 1024): '3'} MB maximum, ideal ratio 16:9. For instance 1920x1080, etc...`,
+      note: noteText,
     });
 
   if (data.mechaPlugin === 'true') {
@@ -153,6 +161,7 @@ const multipleFileUpload = (fileInput) => {
   const data = fileInput.dataset;
   const container = fileInput.parentNode
   const uppy = fileUpload(fileInput, { maximum: 4, maxFileSize: data.maxFileSize || null })
+  const fileSizeMB = data.maxFileSize ? data.maxFileSize / (1024 * 1024) : '3';
 
   uppy
     .use(Dashboard, {
@@ -160,10 +169,11 @@ const multipleFileUpload = (fileInput) => {
       target: container,
       locale: {
         strings: {
-          dropPaste: data.title || null,
+          dropPaste: data.title || t('uppy.drop_paste'),
+          browse: t('uppy.browse'),
         }
       },
-      note: data.description || `4 pictures maximum, ${data.maxFileSize ? data.maxFileSize / (1024 * 1024): '3'} MB maximum each, ideal ratio 16:9. For instance 1920x1080, etc...`,
+      note: data.description || t('uppy.multiple_note').replace('%{max}', '4').replace('%{size}', fileSizeMB),
     })
 
   uppy.on('upload-success', (file, response) => {
@@ -194,7 +204,7 @@ const createResetButton = (container, uppy) => {
   if (!container.querySelector('.uppy-DashboardContent-bar .uppy-DashboardContent-reset-button')) {
     const resetButton = document.createElement('button');
     resetButton.classList = 'uppy-DashboardContent-reset-button';
-    resetButton.textContent = 'Reset';
+    resetButton.textContent = t('uppy.reset');
     resetButton.addEventListener('click', function() {
       document
         .querySelectorAll('.m-form__pictures-additional-pictures-data')

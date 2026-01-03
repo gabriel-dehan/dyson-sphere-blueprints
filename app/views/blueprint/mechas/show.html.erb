@@ -9,7 +9,7 @@
       <div class="swiper-container" data-carousel-target="container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <a href="<%= @blueprint.cover_picture.url %>" target="_blank" rel="noopener noreferrer">
+            <a href="<%= @blueprint&.cover_picture&.url %>" target="_blank" rel="noopener noreferrer">
               <span class="t-blueprint__cover" >
                 <%= image_tag @blueprint.cover_picture_url(:large), height: 495 %>
               </span>

@@ -14,13 +14,14 @@ en:
         title: Forgot your password?
     registrations:
       edit:
-        cancel_account: Cancel my account
+        cancel_account: Delete my account
         cancel_confirm: Are you sure?
-        current_password_hint: we need your current password to confirm your changes
-        leave_blank_hint: leave blank if you don't want to change it
+        current_password_hint: We need your current password to confirm your changes
+        leave_blank_hint: Leave blank if you don't want to change it
         title: Edit profile
         unhappy: Unhappy?
         update: Update
+        waiting_confirmation: 'Currently waiting confirmation for: %{email}'
       new:
         password_hint: "%{minimum} characters minimum"
         submit: Create your account

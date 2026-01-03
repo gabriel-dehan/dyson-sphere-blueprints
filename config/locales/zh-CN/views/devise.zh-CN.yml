@@ -14,13 +14,14 @@ zh-CN:
         title: 忘记密码？
     registrations:
       edit:
-        cancel_account: 注销账户
+        cancel_account: 删除账户
         cancel_confirm: 确定吗？
         current_password_hint: 我们需要您的当前密码来确认更改
         leave_blank_hint: 如果您不想更改，请留空
         title: 编辑资料
         unhappy: 不满意？
         update: 更新
+        waiting_confirmation: 正在等待确认：%{email}
       new:
         password_hint: 至少 %{minimum} 个字符
         submit: 创建账户

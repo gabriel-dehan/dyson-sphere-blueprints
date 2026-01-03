@@ -25,6 +25,7 @@ zh-CN:
     form:
       additional_no_overwrite: "*上传新图片<strong>不会</strong>覆盖现有图片。要删除现有图片，请点击下方图片，然后更新蓝图。"
       additional_pictures: 附加图片
+      additional_pictures_mecha: 附加图片 <em>（最多4张）</em>
       blueprint_placeholder: 在此粘贴你的蓝图字符串
       blueprint_string: 蓝图字符串
       collection: 收藏集
@@ -32,6 +33,10 @@ zh-CN:
       cover_picture: 封面图片
       description: 描述
       description_placeholder: 描述你的蓝图的功能、使用方法或特殊说明
+      mecha_file: 机甲文件
+      mecha_file_hint: "<em>（上传前别忘了在游戏内更新快照！）</em>"
+      mecha_file_overwrite_warning: "*上传新的机甲文件将覆盖现有文件。"
+      mecha_need_help: 需要帮助？不知道如何找到机甲文件？
       need_help: 需要帮助？不知道该填什么？
       no_collection: 无收藏集
       paste_blueprint: 在此粘贴你的蓝图
@@ -48,6 +53,7 @@ zh-CN:
       tags: 标签
       tags_help: 添加标签帮助他人找到你的蓝图
       tags_label: 标签 <em>（最少1个 - 最多10个）</em>
+      tags_label_optional: 标签 <em>（可选 - 最多10个）</em>
       title: 标题
       title_placeholder: 给你的蓝图取一个好记的名字
       update: 更新蓝图

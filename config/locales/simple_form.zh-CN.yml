@@ -1,0 +1,9 @@
+zh-CN:
+  simple_form:
+    "yes": '是'
+    "no": '否'
+    required:
+      text: '必填'
+      mark: '*'
+    error_notification:
+      default_message: "请检查以下问题："
