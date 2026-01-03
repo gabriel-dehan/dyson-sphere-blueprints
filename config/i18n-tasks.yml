@@ -57,6 +57,7 @@ ignore_missing:
   # JavaScript translations are handled separately
   - 'size_warning.*'
   - 'station.*'
+  - 'entities.tags.placeholder'
 
 ## Consider these keys used:
 ignore_unused:
