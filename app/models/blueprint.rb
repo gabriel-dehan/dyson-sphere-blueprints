@@ -27,6 +27,47 @@ class Blueprint < ApplicationRecord
                   using: {
                     tsearch: { prefix: true },
                   }
+  
+  def self.trending
+    # Calculate trending score for all blueprints (no time restriction)
+    # Older blueprints can trend again if they get recent engagement
+    # 
+    # What counts:
+    # - Votes (likes): Recent votes (last 7 days) × 3.0, Total votes × 2.0
+    # - Copies/Downloads: Recent copies (last 7 days) × 1.5, Total copies × 1.0
+    # - Time boost: 7 days = 30% boost, 30 days = 15% boost, older = no boost
+    seven_days_ago = connection.quote(7.days.ago)
+    trending_query = <<-SQL
+      WITH blueprint_scores AS (
+        SELECT blueprints.id,
+          (
+            -- Recent engagement (last 7 days weighted more heavily)
+            (
+              COALESCE((SELECT COUNT(*) FROM votes WHERE votes.votable_id = blueprints.id AND votes.votable_type = 'Blueprint' AND votes.created_at >= #{seven_days_ago}), 0) * 3.0 +
+              COALESCE((SELECT COUNT(*) FROM blueprint_usage_metrics WHERE blueprint_usage_metrics.blueprint_id = blueprints.id AND blueprint_usage_metrics.last_used_at >= #{seven_days_ago}), 0) * 1.5
+            ) * 2.0 +  -- Double weight for recent activity
+            -- Total engagement
+            (blueprints.cached_votes_total * 2.0 + 
+              blueprints.usage_count * 1.0)
+          ) * 
+          -- Time boost: 7 days = 30% boost, 30 days = 15% boost, older = no boost
+          CASE 
+            WHEN blueprints.created_at >= NOW() - INTERVAL '7 days' THEN 1.3
+            WHEN blueprints.created_at >= NOW() - INTERVAL '30 days' THEN 1.15
+            ELSE 1.0
+          END
+          as trending_score
+        FROM blueprints
+      )
+      SELECT blueprints.*, COALESCE(blueprint_scores.trending_score, 0) as trending_score
+      FROM blueprints
+      LEFT JOIN blueprint_scores ON blueprint_scores.id = blueprints.id
+    SQL
+
+    from("(#{trending_query}) AS blueprints")
+      .includes(:game_version, :tags, :user)
+      .order('trending_score DESC')
+  end
 
   def tags_without_mass_construction
     tags.reject { |tag| tag.name =~ /mass construction/i }
