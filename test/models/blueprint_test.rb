@@ -94,7 +94,7 @@ class BlueprintTest < ActiveSupport::TestCase
     tags = blueprint.tags_without_mass_construction
 
     # Should not include mass construction tags
-    assert_empty tags.select { |tag| tag.name =~ /mass construction/i }
+    assert_empty(tags.select { |tag| tag.name =~ /mass construction/i })
   end
 
   # ============================================
@@ -105,7 +105,7 @@ class BlueprintTest < ActiveSupport::TestCase
     results = Blueprint.search_by_title("Factory")
 
     assert results.any?
-    assert results.all? { |bp| bp.title.downcase.include?("factory") }
+    assert(results.all? { |bp| bp.title.downcase.include?("factory") })
   end
 
   test "search_by_title returns empty for non-matching query" do
@@ -209,7 +209,7 @@ class BlueprintTest < ActiveSupport::TestCase
   test "trending scope weights recent votes more heavily" do
     # Create a blueprint with recent vote
     blueprint = blueprints(:public_factory)
-    
+
     # Create a recent vote (within last 7 days)
     ActsAsVotable::Vote.create!(
       votable_type: "Blueprint",
@@ -224,7 +224,7 @@ class BlueprintTest < ActiveSupport::TestCase
     result = results.first
 
     if result
-      assert result.trending_score > 0,
+      assert result.trending_score.positive?,
              "Blueprint with recent vote should have positive trending score"
     end
   end
@@ -232,7 +232,7 @@ class BlueprintTest < ActiveSupport::TestCase
   test "trending scope weights recent usage more heavily" do
     # Create a blueprint with recent usage
     blueprint = blueprints(:public_factory)
-    
+
     # Create a recent usage metric (within last 7 days)
     BlueprintUsageMetric.create!(
       blueprint_id: blueprint.id,
@@ -245,7 +245,7 @@ class BlueprintTest < ActiveSupport::TestCase
     result = results.first
 
     if result
-      assert result.trending_score > 0,
+      assert result.trending_score.positive?,
              "Blueprint with recent usage should have positive trending score"
     end
   end
@@ -277,7 +277,7 @@ class BlueprintTest < ActiveSupport::TestCase
     if new_result && old_result
       # New blueprint should have higher score due to time boost
       # (even if old blueprint has more votes/usage)
-      assert new_result.trending_score > 0,
+      assert new_result.trending_score.positive?,
              "New blueprint should have positive trending score"
     end
 
@@ -286,7 +286,7 @@ class BlueprintTest < ActiveSupport::TestCase
 
   test "trending scope only counts votes for Blueprint type" do
     blueprint = blueprints(:public_factory)
-    
+
     # Create a vote for this blueprint
     vote = ActsAsVotable::Vote.create!(
       votable_type: "Blueprint",
@@ -301,7 +301,7 @@ class BlueprintTest < ActiveSupport::TestCase
     result = results.first
 
     if result
-      assert result.trending_score > 0,
+      assert result.trending_score.positive?,
              "Blueprint with vote should have positive trending score"
     end
 

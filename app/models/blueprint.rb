@@ -27,16 +27,17 @@ class Blueprint < ApplicationRecord
                   using: {
                     tsearch: { prefix: true },
                   }
-  
+
   def self.trending
     # Calculate trending score for all blueprints (no time restriction)
     # Older blueprints can trend again if they get recent engagement
-    # 
+    #
     # What counts:
-    # - Votes (likes): Recent votes (last 7 days) × 3.0, Total votes × 2.0
-    # - Copies/Downloads: Recent copies (last 7 days) × 1.5, Total copies × 1.0
+    # - Votes (likes): Recent votes (last 7 days) x 3.0, Total votes x 2.0
+    # - Copies/Downloads: Recent copies (last 7 days) x 1.5, Total copies x 1.0
     # - Time boost: 7 days = 30% boost, 30 days = 15% boost, older = no boost
     seven_days_ago = connection.quote(7.days.ago)
+    # rubocop:disable Rails/SquishedSQLHeredocs
     trending_query = <<-SQL
       WITH blueprint_scores AS (
         SELECT blueprints.id,
@@ -47,11 +48,11 @@ class Blueprint < ApplicationRecord
               COALESCE((SELECT COUNT(*) FROM blueprint_usage_metrics WHERE blueprint_usage_metrics.blueprint_id = blueprints.id AND blueprint_usage_metrics.last_used_at >= #{seven_days_ago}), 0) * 1.5
             ) * 2.0 +  -- Double weight for recent activity
             -- Total engagement
-            (blueprints.cached_votes_total * 2.0 + 
+            (blueprints.cached_votes_total * 2.0 +
               blueprints.usage_count * 1.0)
-          ) * 
+          ) *
           -- Time boost: 7 days = 30% boost, 30 days = 15% boost, older = no boost
-          CASE 
+          CASE
             WHEN blueprints.created_at >= NOW() - INTERVAL '7 days' THEN 1.3
             WHEN blueprints.created_at >= NOW() - INTERVAL '30 days' THEN 1.15
             ELSE 1.0
@@ -63,10 +64,11 @@ class Blueprint < ApplicationRecord
       FROM blueprints
       LEFT JOIN blueprint_scores ON blueprint_scores.id = blueprints.id
     SQL
+    # rubocop:enable Rails/SquishedSQLHeredocs
 
     from("(#{trending_query}) AS blueprints")
       .includes(:game_version, :tags, :user)
-      .order('trending_score DESC')
+      .order("trending_score DESC")
   end
 
   def tags_without_mass_construction
@@ -102,7 +104,7 @@ class Blueprint < ApplicationRecord
   end
 
   def self.find_sti_class(type_name)
-    type_name = "Blueprint::#{type_name}"
+    type_name = "Blueprint::#{type_name}" unless type_name.start_with?("Blueprint::")
     super
   end
 end
