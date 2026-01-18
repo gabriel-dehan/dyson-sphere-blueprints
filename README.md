@@ -139,38 +139,29 @@ $ cp .env.sample .env
 
 ### Restoring Production Data
 
-If you have access to a production database dump, you can restore it to your local development environment for testing with real data.
+An anonymized production database dump is available in the [latest GitHub release](https://github.com/gabriel-dehan/dyson-sphere-blueprints/releases/latest). This dump contains production data with all emails and passwords randomized for development purposes.
 
 **Prerequisites:**
 - Docker compose services must be running (`docker compose up -d`)
-- You have a PostgreSQL dump file (e.g., `latest.dump`)
+- You have downloaded the `dspblueprints.dump.gz` file from the latest GitHub release
 
 **Steps:**
 
-1. Copy the dump file into the PostgreSQL container:
+1. Download the dump file from the [latest GitHub release](https://github.com/gabriel-dehan/dyson-sphere-blueprints/releases/latest) and place it in the `db/` directory:
 ```bash
-docker cp latest.dump dyson-sphere-blueprints-postgres-1:/tmp/
+# The file should be at db/dspblueprints.dump.gz
 ```
 
-2. Drop the existing development database:
+2. Restore the compressed dump using the rake task:
 ```bash
-docker exec dyson-sphere-blueprints-postgres-1 dropdb -U dev dspblueprints_development
+rake db:drop db:create
+rake db:restore_compressed
 ```
 
-3. Create a fresh database:
-```bash
-docker exec dyson-sphere-blueprints-postgres-1 createdb -U dev dspblueprints_development
-```
-
-4. Restore the dump:
-```bash
-docker exec dyson-sphere-blueprints-postgres-1 pg_restore --verbose --no-acl --no-owner -U dev -d dspblueprints_development /tmp/latest.dump
-```
-
-5. Verify the restore (optional):
-```bash
-docker exec dyson-sphere-blueprints-postgres-1 psql -U dev -d dspblueprints_development -c "SELECT COUNT(*) FROM blueprints;"
-```
+This task will automatically:
+- Drop the existing development database
+- Create a fresh database
+- Restore the compressed dump
 
 **Note:** You do NOT need to run `rails db:migrate` after restoring a dump, as the dump already contains the complete schema and data. Just start your Rails server with `rails s`.
 
