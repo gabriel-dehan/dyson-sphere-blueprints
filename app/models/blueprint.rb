@@ -66,13 +66,25 @@ class Blueprint < ApplicationRecord
     
     # rubocop:disable Rails/SquishedSQLHeredocs
     trending_query = <<-SQL
-      WITH blueprint_scores AS (
+      WITH recent_votes AS (
+        SELECT votable_id, COUNT(*) as votes_count
+        FROM votes
+        WHERE votable_type = 'Blueprint' AND created_at >= #{recent_window_ago}
+        GROUP BY votable_id
+      ),
+      recent_usage AS (
+        SELECT blueprint_id, COUNT(*) as usages_count
+        FROM blueprint_usage_metrics
+        WHERE last_used_at >= #{recent_window_ago}
+        GROUP BY blueprint_id
+      ),
+      blueprint_scores AS (
         SELECT blueprints.id,
           (
             -- Recent engagement (last #{new_blueprint_days} days weighted more heavily)
             (
-              COALESCE((SELECT COUNT(*) FROM votes WHERE votes.votable_id = blueprints.id AND votes.votable_type = 'Blueprint' AND votes.created_at >= #{recent_window_ago}), 0) * #{RECENT_VOTE_WEIGHT} +
-              COALESCE((SELECT COUNT(*) FROM blueprint_usage_metrics WHERE blueprint_usage_metrics.blueprint_id = blueprints.id AND blueprint_usage_metrics.last_used_at >= #{recent_window_ago}), 0) * #{RECENT_COPY_WEIGHT}
+              COALESCE(rv.votes_count, 0) * #{RECENT_VOTE_WEIGHT} +
+              COALESCE(ru.usages_count, 0) * #{RECENT_COPY_WEIGHT}
             ) * #{RECENT_ACTIVITY_MULTIPLIER} +  -- Multiplier for recent activity
             -- Total engagement
             (blueprints.cached_votes_total * #{TOTAL_VOTE_WEIGHT} +
@@ -86,6 +98,8 @@ class Blueprint < ApplicationRecord
           END
           as trending_score
         FROM blueprints
+        LEFT JOIN recent_votes rv ON rv.votable_id = blueprints.id
+        LEFT JOIN recent_usage ru ON ru.blueprint_id = blueprints.id
       )
       SELECT #{light_columns}, COALESCE(blueprint_scores.trending_score, 0) as trending_score
       FROM blueprints
