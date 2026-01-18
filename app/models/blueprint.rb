@@ -60,6 +60,10 @@ class Blueprint < ApplicationRecord
     recent_window_ago = connection.quote(RECENT_WINDOW.ago)
     new_blueprint_days = (NEW_BLUEPRINT_WINDOW / 1.day).to_i
     recent_blueprint_days = (RECENT_BLUEPRINT_WINDOW / 1.day).to_i
+    
+    # Use light_query columns (exclude encoded_blueprint to avoid memory issues)
+    light_columns = (column_names - ["encoded_blueprint"]).map { |col| "blueprints.#{col}" }.join(", ")
+    
     # rubocop:disable Rails/SquishedSQLHeredocs
     trending_query = <<-SQL
       WITH blueprint_scores AS (
@@ -83,7 +87,7 @@ class Blueprint < ApplicationRecord
           as trending_score
         FROM blueprints
       )
-      SELECT blueprints.*, COALESCE(blueprint_scores.trending_score, 0) as trending_score
+      SELECT #{light_columns}, COALESCE(blueprint_scores.trending_score, 0) as trending_score
       FROM blueprints
       LEFT JOIN blueprint_scores ON blueprint_scores.id = blueprints.id
     SQL
