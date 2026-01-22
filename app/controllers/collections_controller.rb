@@ -76,12 +76,14 @@ class CollectionsController < ApplicationController
   end
 
   def bulk_download
-    sanitizer = "./@,\\"
+    # Sanitize for Windows Explorer ZIP viewer (invalid filename chars): \\ / : * ? " < > |
+    # Also sanitize historical set used by this app: . / @ , \\
+    sanitizer = "\\/:*?\"<>|./@,\\"
 
     @collection = Collection.friendly.find(params[:id])
     authorize @collection
 
-    safe_collection_name = @collection.name.tr(sanitizer, "")
+    safe_collection_name = @collection.name.tr(sanitizer, "_")
     filename = "#{safe_collection_name}.zip"
 
     zip_buffer = Zip::OutputStream.write_buffer do |io|
@@ -92,7 +94,7 @@ class CollectionsController < ApplicationController
         title += "_#{titles.count(title)}" if titles.count(title).positive?
         titles += [blueprint.title.truncate(100)]
 
-        safe_title = title.tr(sanitizer, "|")
+        safe_title = title.tr(sanitizer, "_")
         extension = is_mecha ? "mecha" : "txt"
 
         io.put_next_entry("#{safe_collection_name}/#{blueprint.type.pluralize.underscore}/#{safe_title}.#{extension}")
