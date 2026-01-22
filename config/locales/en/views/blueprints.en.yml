@@ -18,6 +18,8 @@ en:
       most_recent: Most recent
       most_used: Most used
       no_dyson_sphere_filters: No specific filters for dyson spheres yet
+      recipes: Recipes
+      recipes_placeholder: Filter by recipe...
       reset: Reset
       search: Search
       search_by_author_placeholder: Search by author...
