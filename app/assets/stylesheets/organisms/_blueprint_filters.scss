@@ -253,4 +253,24 @@
       }
     }
   }
+
+  &__recipes {
+    .tagify__tag__content {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tagify__tag__icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .tagify__dropdown__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
 }
