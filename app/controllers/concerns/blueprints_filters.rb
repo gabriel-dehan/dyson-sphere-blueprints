@@ -84,11 +84,8 @@ module BlueprintsFilters
 
       if @filters[:recipe].present?
         @filters[:filtered_for] = :factories
-        recipe_ids = @filters[:recipe].map(&:to_s)
-        blueprints = blueprints.where(
-          "EXISTS (SELECT 1 FROM jsonb_each(COALESCE(summary::jsonb -> 'buildings', '{}'::jsonb)) AS building(entity_id, data) WHERE (data -> 'recipes') ?| array[?])",
-          recipe_ids
-        )
+        recipe_ids = @filters[:recipe].map { |recipe| recipe.to_i }.reject(&:zero?)
+        blueprints = blueprints.where("recipe_ids @> ARRAY[?]::int[]", recipe_ids) if recipe_ids.any?
       end
 
       if @filters[:order] == "recent"

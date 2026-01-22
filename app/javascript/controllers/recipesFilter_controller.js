@@ -53,7 +53,7 @@ export default class extends Controller {
       tagTextProp: "name",
       enforceWhitelist: true,
       editTags: false,
-      originalInputValueFormat: (valuesArr) => valuesArr.map((item) => item.value).join(", "),
+      originalInputValueFormat: (valuesArr) => valuesArr.map((item) => item.value).join(","),
       dropdown: {
         enabled: 0,
         maxItems: 20,
