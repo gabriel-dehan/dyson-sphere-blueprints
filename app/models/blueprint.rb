@@ -13,18 +13,18 @@ class Blueprint < ApplicationRecord
   RECENT_ACTIVITY_MULTIPLIER = 2.0
   TOTAL_VOTE_WEIGHT = 2.0
   TOTAL_USAGE_WEIGHT = 1.0
-  
+
   # Time boost constants
   NEW_BLUEPRINT_WINDOW = 30.days
   NEW_BLUEPRINT_BOOST = 1.3
   RECENT_BLUEPRINT_WINDOW = 60.days
   RECENT_BLUEPRINT_BOOST = 1.15
   OLD_BLUEPRINT_BOOST = 1.0
-  
+
   # Other configuration
   MAX_ADDITIONAL_PICTURES = 4
   BLUEPRINTS_PER_PAGE = 32
-  RETRO_COMPATIBILITY_VERSION = "2.0.6"
+  RETRO_COMPATIBILITY_VERSION = "2.0.6".freeze
 
   paginates_per BLUEPRINTS_PER_PAGE
 
@@ -60,10 +60,10 @@ class Blueprint < ApplicationRecord
     recent_window_ago = connection.quote(RECENT_WINDOW.ago)
     new_blueprint_days = (NEW_BLUEPRINT_WINDOW / 1.day).to_i
     recent_blueprint_days = (RECENT_BLUEPRINT_WINDOW / 1.day).to_i
-    
+
     # Use light_query columns (exclude encoded_blueprint to avoid memory issues)
     light_columns = (column_names - ["encoded_blueprint"]).map { |col| "blueprints.#{col}" }.join(", ")
-    
+
     # rubocop:disable Rails/SquishedSQLHeredocs
     trending_query = <<-SQL
       WITH recent_votes AS (
