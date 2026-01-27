@@ -22,6 +22,7 @@ zh-CN:
       search: 搜索
       search_by_author_placeholder: 搜索作者...
       search_placeholder: 搜索蓝图...
+      trending: 正在流行
     form:
       additional_no_overwrite: "*上传新图片<strong>不会</strong>覆盖现有图片。要删除现有图片，请点击下方图片，然后更新蓝图。"
       additional_pictures: 附加图片
