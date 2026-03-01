@@ -16,7 +16,7 @@
 
     &.mecha_order-container {
       .o-blueprint-filters__order-container {
-        width: 36.6%;
+        width: 60%;
       }
     }
 
@@ -154,7 +154,7 @@
   }
 
   &__order-container {
-    width: 25%;
+    width: 60%;
   }
 
   &__order {
@@ -226,7 +226,7 @@
     // margin-top: 15px;
 
     a, input[type='submit'] {
-      min-width: 268px;
+      min-width: 120px;
       border-color: var(--dark-red);
       background: var(--dark-red);
       color: var(--white);
