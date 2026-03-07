@@ -43,6 +43,29 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
     assert_match blueprints(:public_factory).title, response.body
   end
 
+  test "index filters by recipe ids" do
+    public_factory = blueprints(:public_factory)
+    public_factory.update!(
+      summary: {
+        "buildings" => {
+          # 2305 = Assembling machine Mk.III (DSP entity id)
+          "2305" => {
+            "recipes" => {
+              # 5 = Gear (DSP recipe id)
+              "5" => { "tally" => 10 }
+            }
+          }
+        }
+      }
+    )
+
+    get blueprints_path, params: { recipe: "5" }
+    assert_response :success
+
+    assert_match public_factory.title, response.body
+    assert_no_match(/Public Dyson Sphere/, response.body)
+  end
+
   test "index orders by recent by default" do
     get blueprints_path, params: { order: "recent" }
     assert_response :success

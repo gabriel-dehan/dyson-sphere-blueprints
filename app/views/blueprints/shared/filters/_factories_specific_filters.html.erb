@@ -3,3 +3,11 @@
   <%= f.label :max_structures, t('blueprints.filters.max_structures') %>
   <%= f.select :max_structures, Engine::Researches.instance.formatted_mass_construction_with_limits.invert.to_a, selected: filters[:max_structures], include_blank: t('blueprints.filters.any') %>
 </div>
+<div
+  class="o-blueprint-filters__recipes o-blueprint-filters__select"
+  data-controller="recipesFilter"
+  data-recipes-filter-selected-value="<%= filters[:recipe].to_json %>"
+>
+  <%= label_tag :recipe, t('blueprints.filters.recipes') %>
+  <input id="recipe" name="recipe" type="text" data-recipes-filter-target="input" placeholder="<%= t('blueprints.filters.recipes_placeholder') %>">
+</div>
