@@ -180,12 +180,15 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
   # CODE TESTS
   # ============================================
 
-  test "code requires authentication" do
-    get code_blueprint_path(blueprints(:public_factory))
-    assert_redirected_to new_user_session_path
+  test "code is accessible without authentication" do
+    blueprint = blueprints(:public_factory)
+    get code_blueprint_path(id: blueprint.id)
+    assert_response :success
+    assert_equal "text/plain", response.media_type
+    assert_equal blueprint.encoded_blueprint, response.body
   end
 
-  test "code returns encoded blueprint as text" do
+  test "code returns encoded blueprint as text when authenticated" do
     sign_in_as(:member)
     blueprint = blueprints(:public_factory)
 
