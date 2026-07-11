@@ -60,11 +60,15 @@
   processes.ministack = {
     exec = ''
       VENV="$DEVENV_STATE/ministack-venv"
-      if [ ! -d "$VENV" ]; then
+      if [ ! -x "$VENV/bin/ministack" ]; then
         ${pkgs.python3}/bin/python3 -m venv "$VENV"
         "$VENV/bin/pip" install --quiet ministack
       fi
       export DEFAULT_REGION=eu-west-1
+      export PERSIST_STATE=1
+      export STATE_DIR="$DEVENV_STATE/ministack-state"
+      export S3_PERSIST=1
+      export S3_DATA_DIR="$DEVENV_STATE/ministack-s3"
       export DISABLE_CORS_CHECKS=1
       "$VENV/bin/ministack"
     '';
