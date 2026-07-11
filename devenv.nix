@@ -66,7 +66,7 @@
       fi
       export DEFAULT_REGION=eu-west-1
       export DISABLE_CORS_CHECKS=1
-      "$VENV/bin/ministack" start --host 0.0.0.0 --port 4566
+      "$VENV/bin/ministack"
     '';
   };
 
