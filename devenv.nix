@@ -92,6 +92,46 @@
   };
 
   # --- Tasks (run automatically before shell entry) ---
+  tasks."s3:create-bucket" = {
+    exec = ''
+      set -u
+
+      if [ -z "''${AWS_S3_ENDPOINT:-}" ] || [ -z "''${AWS_S3_BUCKET:-}" ]; then
+        echo "Skipping S3 bucket setup: AWS_S3_ENDPOINT or AWS_S3_BUCKET is unset."
+        exit 0
+      fi
+
+      export AWS_ACCESS_KEY_ID="''${AWS_S3_ACCESS_ID_KEY:-test}"
+      export AWS_SECRET_ACCESS_KEY="''${AWS_S3_ACCESS_SECRET_KEY:-test}"
+      export AWS_DEFAULT_REGION="''${AWS_S3_REGION:-eu-west-1}"
+
+      aws_s3() {
+        aws --endpoint-url "$AWS_S3_ENDPOINT" "$@"
+      }
+
+      if ! aws_s3 s3api list-buckets >/dev/null 2>&1; then
+        echo "Skipping S3 bucket setup: $AWS_S3_ENDPOINT is not reachable. Start MiniStack with devenv up."
+        exit 0
+      fi
+
+      if aws_s3 s3api head-bucket --bucket "$AWS_S3_BUCKET" >/dev/null 2>&1; then
+        echo "S3 bucket already exists: $AWS_S3_BUCKET"
+        exit 0
+      fi
+
+      if [ "$AWS_DEFAULT_REGION" = "us-east-1" ]; then
+        aws_s3 s3api create-bucket --bucket "$AWS_S3_BUCKET"
+      else
+        aws_s3 s3api create-bucket \
+          --bucket "$AWS_S3_BUCKET" \
+          --create-bucket-configuration "LocationConstraint=$AWS_DEFAULT_REGION"
+      fi
+
+      echo "Created S3 bucket: $AWS_S3_BUCKET"
+    '';
+    before = [ "devenv:enterShell" ];
+  };
+
   tasks."deps:bundler" = {
     exec = "gem install bundler -v 2.4.19 --no-document";
     before = [ "devenv:enterShell" ];
