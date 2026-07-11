@@ -30,6 +30,7 @@
     pkgs.chromedriver
     pkgs.overmind          # Procfile runner (runs web + worker from Procfile)
     pkgs.python3           # ministack runs in an isolated Python venv
+    pkgs.awscli2           # ensure local S3 buckets exist on shell entry
   ];
 
   # --- Services (replaces docker-compose postgres + redis) ---
