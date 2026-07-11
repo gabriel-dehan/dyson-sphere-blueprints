@@ -1,7 +1,7 @@
 class BlueprintsController < ApplicationController
   include BlueprintsFilters
 
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :code]
   before_action :set_cache_headers, only: [:index, :show]
 
   def show
