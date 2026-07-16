@@ -11,6 +11,7 @@ module BlueprintsFilters
         author: params[:author],
         order: params[:order] || "recent",
         max_structures: params[:max_structures] || "Any",
+        recipe: parse_recipe_filters(params[:recipe]),
         game_version_id: params[:game_version_id].presence || @game_versions.first.id,
         game_version_string: params[:game_version_string].presence || "Any",
         color: params[:color].presence,
@@ -81,6 +82,12 @@ module BlueprintsFilters
         )
       end
 
+      if @filters[:recipe].present?
+        @filters[:filtered_for] = :factories
+        recipe_ids = @filters[:recipe].map { |recipe| recipe.to_i }.reject(&:zero?)
+        blueprints = blueprints.where("recipe_ids @> ARRAY[?]::int[]", recipe_ids) if recipe_ids.any?
+      end
+
       if @filters[:order] == "recent"
         blueprints = blueprints.reorder(created_at: :desc)
       elsif @filters[:order] == "popular"
@@ -118,6 +125,13 @@ module BlueprintsFilters
       else
         tags_param.split(/\s*,\s*/)
       end
+    end
+
+    def parse_recipe_filters(recipe_param)
+      return [] if recipe_param.blank?
+      return recipe_param if recipe_param.is_a?(Array)
+
+      recipe_param.to_s.split(/\s*,\s*/)
     end
   end
 end
