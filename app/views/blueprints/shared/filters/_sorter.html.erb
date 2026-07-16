@@ -5,6 +5,10 @@
       <%= f.label :order_recent, t('blueprints.filters.most_recent') %>
     </div>
     <div class="o-blueprint-filters__order-choice">
+      <%= f.radio_button :order, "trending", checked: filters[:order] === 'trending', data: { 'action': "change->submitOnClick#submit" } %>
+      <%= f.label :order_trending, t('blueprints.filters.trending') %>
+    </div>
+    <div class="o-blueprint-filters__order-choice">
       <%= f.radio_button :order, "popular", checked: filters[:order] === 'popular', data: { 'action': "change->submitOnClick#submit" } %>
       <%= f.label :order_popular, t('blueprints.filters.most_popular') %>
     </div>
