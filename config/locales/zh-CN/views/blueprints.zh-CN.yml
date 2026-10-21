@@ -18,6 +18,8 @@ zh-CN:
       most_recent: 最新
       most_used: 使用最多
       no_dyson_sphere_filters: 戴森球暂无特定筛选条件
+      recipes: 配方
+      recipes_placeholder: 按配方筛选...
       reset: 重置
       search: 搜索
       search_by_author_placeholder: 搜索作者...

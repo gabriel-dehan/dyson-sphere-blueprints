@@ -101,6 +101,31 @@ class BlueprintTest < ActiveSupport::TestCase
   # SEARCH TESTS
   # ============================================
 
+  test "recipe_ids are derived from summary recipes on save" do
+    blueprint = Blueprint::Factory.new(
+      title: "Recipe Test",
+      collection: collections(:member_public),
+      game_version: game_versions(:dsp),
+      game_version_string: "0.9.27.15466",
+      summary: {
+        "buildings" => {
+          # 2305 = Assembling machine Mk.III (DSP entity id)
+          "2305" => {
+            "recipes" => {
+              # 5 = Gear, 2 = Magnet (DSP recipe ids)
+              "5" => { "tally" => 10 },
+              "2" => { "tally" => 5 }
+            }
+          }
+        }
+      }
+    )
+
+    blueprint.save!
+
+    assert_equal [2, 5], blueprint.recipe_ids
+  end
+
   test "search_by_title finds matching blueprints" do
     results = Blueprint.search_by_title("Factory")
 
