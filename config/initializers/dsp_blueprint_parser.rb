@@ -1,6 +1,8 @@
 # dsp_blueprint_parser 0.2.3 does not consume the content field appended to
 # version -102 building records. Remove this compatibility patch after upgrading
 # to a parser release that handles the field itself.
+# The patch mirrors upstream method names and wraps a private singleton method.
+# rubocop:disable Style/Alias, Naming/VariableNumber
 module DspBlueprintParser
   class BinaryReader
     def skip_dotnet_string
@@ -37,3 +39,4 @@ module DspBlueprintParser
     end
   end
 end
+# rubocop:enable Style/Alias, Naming/VariableNumber
