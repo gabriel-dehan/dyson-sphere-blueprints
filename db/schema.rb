@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2025_12_31_144215) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
@@ -68,7 +69,7 @@ ActiveRecord::Schema.define(version: 2025_12_31_144215) do
     t.bigint "blueprint_id"
     t.bigint "user_id"
     t.integer "count", default: 0, null: false
-    t.datetime "last_used_at", default: "2026-11-09 17:40:57"
+    t.datetime "last_used_at", default: "2022-02-01 23:53:45"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["blueprint_id"], name: "index_blueprint_usage_metrics_on_blueprint_id"
