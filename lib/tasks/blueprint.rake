@@ -4,6 +4,29 @@ namespace :blueprint do
     BlueprintTrendingScore.refresh!
   end
 
+  desc "Backfill recipe IDs from blueprint summaries in batches"
+  task backfill_recipe_ids: :environment do
+    batch_size = Integer(ENV.fetch("BATCH_SIZE", "100"))
+    delay = Float(ENV.fetch("BATCH_DELAY", "2"))
+    raise ArgumentError, "BATCH_SIZE must be positive and BATCH_DELAY non-negative" if batch_size <= 0 || delay.negative?
+
+    processed = 0
+    Blueprint.where(recipe_ids: nil).select(:id).find_in_batches(batch_size: batch_size) do |batch|
+      batch.each do |item|
+        Blueprint.transaction do
+          blueprint = Blueprint.where(id: item.id, recipe_ids: nil).lock.select(:id, :summary, :recipe_ids).first
+          next unless blueprint
+
+          blueprint.update_columns(recipe_ids: blueprint.send(:extract_recipe_ids_from_summary))
+          processed += 1
+        end
+      end
+      puts "Backfilled #{processed} blueprints"
+      sleep delay if delay.positive?
+    end
+    puts "Finished: #{processed} blueprints backfilled"
+  end
+
   desc "Recompute all blueprint datas in batches (safe for production)" # Processes blueprints in batches to avoid overwhelming the queue
   task batch_fix_missing_data: :environment do
     batch_size = ENV.fetch("BATCH_SIZE", 100).to_i

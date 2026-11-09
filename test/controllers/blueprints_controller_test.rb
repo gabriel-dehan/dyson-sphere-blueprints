@@ -43,6 +43,72 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
     assert_match blueprints(:public_factory).title, response.body
   end
 
+  test "index filters by recipe ids" do
+    public_factory = blueprints(:public_factory)
+    public_factory.update!(
+      summary: {
+        "buildings" => {
+          # 2305 = Assembling machine Mk.III (DSP entity id)
+          "2305" => {
+            "recipes" => {
+              # 5 = Gear (DSP recipe id)
+              "5" => { "tally" => 10 }
+            }
+          }
+        }
+      }
+    )
+
+    get blueprints_path, params: { recipe: "5" }
+    assert_response :success
+
+    assert_match public_factory.title, response.body
+    assert_no_match(/Public Dyson Sphere/, response.body)
+  end
+
+  test "recipe filter requires every selected recipe" do
+    matching = blueprints(:public_factory)
+    other = blueprints(:other_user_factory)
+    matching.update!(summary: { buildings: { "1" => { recipes: { "2" => {}, "5" => {} } } } })
+    other.update!(summary: { buildings: { "1" => { recipes: { "5" => {} } } } })
+
+    get blueprints_path, params: { recipe: "2,5" }
+    assert_response :success
+    assert_match matching.title, response.body
+    assert_no_match other.title, response.body
+  end
+
+  test "recipe results are not cached while backfill changes the projection" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update_columns(recipe_ids: nil)
+    get blueprints_path, params: { recipe: "5" }
+    assert_response :success
+    assert_match(/no-store/, response.headers["Cache-Control"])
+    etag = response.headers["ETag"]
+
+    blueprint.update_columns(recipe_ids: [5])
+    get blueprints_path, params: { recipe: "5" }, headers: { "If-None-Match" => etag.to_s, "If-Modified-Since" => 1.day.from_now.httpdate }
+    assert_response :success
+    assert_match blueprint.title, response.body
+  end
+
+  test "recipe filtering and trending work together without caching backfill results" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(summary: { buildings: { "1" => { recipes: { "5" => {} } } } })
+    BlueprintTrendingScore.refresh!
+
+    get blueprints_path, params: { recipe: "5", order: "trending" }
+    assert_response :success
+    assert_match blueprint.title, response.body
+    assert_match(/no-store/, response.headers["Cache-Control"])
+  end
+
+  test "recipe filter rejects malformed recipe identifiers" do
+    assert_raises(ActionController::BadRequest) do
+      get blueprints_path, params: { recipe: "5xyz" }
+    end
+  end
+
   test "index orders by recent by default" do
     get blueprints_path, params: { order: "recent" }
     assert_response :success

@@ -44,4 +44,24 @@ class BrowseBlueprintsTest < ApplicationSystemTestCase
     visit blueprints_path(type: "factories")
     assert_selector "body"
   end
+
+  test "recipe picker restores a selected recipe with its icon" do
+    visit blueprints_path(recipe: "5")
+
+    assert_selector '[data-controller="recipes-filter"] .tagify__tag', text: "Gear"
+    assert_selector '[data-controller="recipes-filter"] .tagify__tag img[src*="/media/recipes/"]'
+
+    find('[data-controller="recipes-filter"] .tagify__input').send_keys("Magnet")
+    find('.tagify__dropdown__item', text: "Magnet", exact_text: true).click
+    assert_selector '[data-controller="recipes-filter"] .tagify__tag', text: "Magnet"
+    assert_selector('input[name="recipe"]', visible: :all) { |input| input.value == "5,2" }
+    click_button "Search"
+    assert_current_path(/recipe=5(%2C|%2c|,)2/)
+    assert_equal "5,2", URI.decode_www_form(URI.parse(current_url).query).to_h["recipe"]
+
+    find('[data-toggleabletabs-select="mechas"]').click
+    click_button "Search"
+    assert_current_path(/\A(?!.*[?&]recipe=).*\z/)
+    assert_not URI.decode_www_form(URI.parse(current_url).query).to_h.key?("recipe")
+  end
 end

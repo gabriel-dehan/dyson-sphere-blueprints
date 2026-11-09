@@ -101,6 +101,41 @@ class BlueprintTest < ActiveSupport::TestCase
   # SEARCH TESTS
   # ============================================
 
+  test "recipe_ids are derived from summary recipes on save" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(
+      summary: {
+        "buildings" => {
+          # 2305 = Assembling machine Mk.III (DSP entity id)
+          "2305" => {
+            "recipes" => {
+              # 5 = Gear, 2 = Magnet (DSP recipe ids)
+              "5" => { "tally" => 10 },
+              "2" => { "tally" => 5 }
+            }
+          }
+        }
+      }
+    )
+
+    blueprint.save!
+
+    assert_equal [2, 5], blueprint.recipe_ids
+  end
+
+  test "recipe ids ignore malformed summary data and are cleared when summary changes" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(summary: { buildings: {
+      "one" => { recipes: { "2" => {}, "5" => {}, "0" => {}, "3x" => {}, "2147483648" => {} } },
+      "two" => { recipes: { "2" => {} } },
+      "bad" => nil,
+    } })
+    assert_equal [2, 5], blueprint.reload.recipe_ids
+
+    blueprint.update!(summary: nil)
+    assert_equal [], blueprint.reload.recipe_ids
+  end
+
   test "search_by_title finds matching blueprints" do
     results = Blueprint.search_by_title("Factory")
 
