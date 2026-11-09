@@ -1,4 +1,9 @@
 namespace :blueprint do
+  desc "Refresh the trending blueprint ranking"
+  task refresh_trending: :environment do
+    BlueprintTrendingScore.refresh!
+  end
+
   desc "Recompute all blueprint datas in batches (safe for production)" # Processes blueprints in batches to avoid overwhelming the queue
   task batch_fix_missing_data: :environment do
     batch_size = ENV.fetch("BATCH_SIZE", 100).to_i

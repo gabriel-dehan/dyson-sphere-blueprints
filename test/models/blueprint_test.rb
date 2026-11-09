@@ -146,165 +146,53 @@ class BlueprintTest < ActiveSupport::TestCase
     end
   end
 
-  # ============================================
-  # TRENDING SCOPE TESTS
-  # ============================================
-
-  test "trending scope returns blueprints" do
-    results = Blueprint.trending
-
-    assert results.respond_to?(:each)
-    assert results.respond_to?(:order)
-  end
-
-  test "trending scope orders by trending_score descending" do
-    results = Blueprint.trending.limit(10).to_a
-
-    # Should be ordered by trending_score DESC
-    scores = results.map { |bp| bp.trending_score || 0 }
-    assert_equal scores, scores.sort.reverse
-  end
-
-  test "trending scope includes trending_score attribute" do
-    results = Blueprint.trending.limit(1).to_a
-
-    if results.any?
-      assert results.first.respond_to?(:trending_score)
-      assert_kind_of Numeric, results.first.trending_score
-    end
-  end
-
-  test "trending scope gives higher score to blueprints with more votes" do
-    # Create two blueprints with different vote counts
-    high_votes = blueprints(:public_dyson_sphere) # 25 votes
-    low_votes = blueprints(:private_factory) # 0 votes
-
-    results = Blueprint.trending.where(id: [high_votes.id, low_votes.id]).to_a
-
-    high_votes_result = results.find { |bp| bp.id == high_votes.id }
-    low_votes_result = results.find { |bp| bp.id == low_votes.id }
-
-    if high_votes_result && low_votes_result
-      assert high_votes_result.trending_score > low_votes_result.trending_score,
-             "Blueprint with more votes should have higher trending score"
-    end
-  end
-
-  test "trending scope gives higher score to blueprints with more usage" do
-    # Create two blueprints with different usage counts
-    high_usage = blueprints(:public_dyson_sphere) # 15 usage
-    low_usage = blueprints(:private_factory) # 0 usage
-
-    results = Blueprint.trending.where(id: [high_usage.id, low_usage.id]).to_a
-
-    high_usage_result = results.find { |bp| bp.id == high_usage.id }
-    low_usage_result = results.find { |bp| bp.id == low_usage.id }
-
-    if high_usage_result && low_usage_result
-      assert high_usage_result.trending_score > low_usage_result.trending_score,
-             "Blueprint with more usage should have higher trending score"
-    end
-  end
-
-  test "trending scope weights recent votes more heavily" do
-    # Create a blueprint with recent vote
+  test "trending scores are persisted until refresh and preserve scope" do
+    BlueprintTrendingScore.refresh!
     blueprint = blueprints(:public_factory)
-
-    # Create a recent vote (within last 7 days)
-    ActsAsVotable::Vote.create!(
-      votable_type: "Blueprint",
-      votable_id: blueprint.id,
-      voter_type: "User",
-      voter_id: users(:admin).id,
-      vote_flag: true,
-      created_at: 1.day.ago
-    )
-
-    results = Blueprint.trending.where(id: blueprint.id).to_a
-    result = results.first
-
-    if result
-      assert result.trending_score.positive?,
-             "Blueprint with recent vote should have positive trending score"
-    end
+    first = Blueprint.light_query.where(id: blueprint.id).trending.first
+    assert_equal blueprint.id, first.id
+    assert_not first.has_attribute?(:encoded_blueprint)
+    blueprint.update_columns(cached_votes_total: 1000)
+    assert_equal first.trending_score, Blueprint.trending.find(blueprint.id).trending_score
+    BlueprintTrendingScore.refresh!
+    assert_operator Blueprint.trending.find(blueprint.id).trending_score, :>, first.trending_score
   end
 
-  test "trending scope weights recent usage more heavily" do
-    # Create a blueprint with recent usage
+  test "refresh applies recent activity and 7 and 30 day age boosts" do
     blueprint = blueprints(:public_factory)
+    blueprint.update_columns(created_at: 40.days.ago, cached_votes_total: 10, usage_count: 5)
+    ActsAsVotable::Vote.where(votable_type: "Blueprint", votable_id: blueprint.id).delete_all
+    BlueprintUsageMetric.where(blueprint_id: blueprint.id).delete_all
+    BlueprintTrendingScore.refresh!
+    assert_in_delta 25.0, Blueprint.trending.find(blueprint.id).trending_score, 0.001
 
-    # Create a recent usage metric (within last 7 days)
-    BlueprintUsageMetric.create!(
-      blueprint_id: blueprint.id,
-      user_id: users(:admin).id,
-      count: 1,
-      last_used_at: 1.day.ago
-    )
+    ActsAsVotable::Vote.create!(votable_type: "Blueprint", votable_id: blueprint.id, voter_type: "User", voter_id: users(:admin).id, vote_flag: true)
+    BlueprintUsageMetric.create!(blueprint_id: blueprint.id, user_id: users(:member).id, count: 20)
+    blueprint.update_columns(created_at: 1.day.ago, cached_votes_total: 10, usage_count: 5)
+    BlueprintTrendingScore.refresh!
+    assert_in_delta 38.35, Blueprint.trending.find(blueprint.id).trending_score, 0.001
 
-    results = Blueprint.trending.where(id: blueprint.id).to_a
-    result = results.first
-
-    if result
-      assert result.trending_score.positive?,
-             "Blueprint with recent usage should have positive trending score"
-    end
+    blueprint.update_columns(created_at: 10.days.ago)
+    BlueprintTrendingScore.refresh!
+    assert_in_delta 33.925, Blueprint.trending.find(blueprint.id).trending_score, 0.001
   end
 
-  test "trending scope gives time boost to newer blueprints" do
-    # Create a new blueprint (within last 7 days)
-    new_blueprint = Blueprint::Factory.create!(
-      title: "New Trending Blueprint",
-      encoded_blueprint: blueprints(:public_factory).encoded_blueprint,
-      cover_picture_data: blueprints(:public_factory).cover_picture_data,
-      collection_id: collections(:member_public).id,
-      game_version_id: 1,
-      game_version_string: "0.9.27.15466",
-      cached_votes_total: 1,
-      usage_count: 1,
-      tag_list: "production",
-      created_at: 1.day.ago
-    )
-
-    # Create an old blueprint (older than 30 days)
-    old_blueprint = blueprints(:public_dyson_sphere)
-    old_blueprint.update!(created_at: 2.months.ago)
-
-    results = Blueprint.trending.where(id: [new_blueprint.id, old_blueprint.id]).to_a
-
-    new_result = results.find { |bp| bp.id == new_blueprint.id }
-    old_result = results.find { |bp| bp.id == old_blueprint.id }
-
-    if new_result && old_result
-      # New blueprint should have higher score due to time boost
-      # (even if old blueprint has more votes/usage)
-      assert new_result.trending_score.positive?,
-             "New blueprint should have positive trending score"
-    end
-
-    new_blueprint.destroy
-  end
-
-  test "trending scope only counts votes for Blueprint type" do
+  test "missing snapshot rows use live lifetime counters" do
+    BlueprintTrendingScore.refresh!
     blueprint = blueprints(:public_factory)
+    blueprint.update_columns(cached_votes_total: 10, usage_count: 5)
+    BlueprintTrendingScore.where(blueprint_id: blueprint.id).delete_all
+    assert_in_delta 25, Blueprint.trending.find(blueprint.id).trending_score, 0.001
+  end
 
-    # Create a vote for this blueprint
-    vote = ActsAsVotable::Vote.create!(
-      votable_type: "Blueprint",
-      votable_id: blueprint.id,
-      voter_type: "User",
-      voter_id: users(:admin).id,
-      vote_flag: true,
-      created_at: 1.day.ago
-    )
-
-    results = Blueprint.trending.where(id: blueprint.id).to_a
-    result = results.first
-
-    if result
-      assert result.trending_score.positive?,
-             "Blueprint with vote should have positive trending score"
-    end
-
-    vote.destroy
+  test "failed refresh rolls back scores and generation" do
+    BlueprintTrendingScore.refresh!
+    old_scores = BlueprintTrendingScore.order(:blueprint_id).pluck(:blueprint_id, :score)
+    connection = BlueprintTrendingScore.connection
+    generation = connection.select_value("SELECT generation FROM blueprint_trending_refreshes WHERE id = 1")
+    connection.execute("ALTER TABLE blueprint_trending_scores ADD CONSTRAINT test_refresh_failure CHECK (score < 0) NOT VALID")
+    assert_raises(ActiveRecord::StatementInvalid) { BlueprintTrendingScore.refresh! }
+    assert_equal old_scores, BlueprintTrendingScore.order(:blueprint_id).pluck(:blueprint_id, :score)
+    assert_equal generation, connection.select_value("SELECT generation FROM blueprint_trending_refreshes WHERE id = 1")
   end
 end

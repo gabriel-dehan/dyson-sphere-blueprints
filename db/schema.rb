@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_01_19_000000) do
+ActiveRecord::Schema.define(version: 2026_01_23_120001) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
@@ -64,15 +65,23 @@ ActiveRecord::Schema.define(version: 2026_01_19_000000) do
     t.index ["color_id"], name: "index_blueprint_mecha_colors_on_color_id"
   end
 
+  create_table "blueprint_trending_refreshes", force: :cascade do |t|
+    t.bigint "generation", default: 0, null: false
+  end
+
+  create_table "blueprint_trending_scores", primary_key: "blueprint_id", force: :cascade do |t|
+    t.float "score", null: false
+  end
+
   create_table "blueprint_usage_metrics", force: :cascade do |t|
     t.bigint "blueprint_id"
     t.bigint "user_id"
     t.integer "count", default: 0, null: false
-    t.datetime "last_used_at", default: "2026-01-07 14:39:35"
+    t.datetime "last_used_at", default: "2022-02-01 23:53:45"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["blueprint_id", "last_used_at"], name: "index_blueprint_usage_metrics_on_blueprint_and_last_used"
     t.index ["blueprint_id"], name: "index_blueprint_usage_metrics_on_blueprint_id"
+    t.index ["last_used_at", "blueprint_id"], name: "index_usage_metrics_on_last_used_at_and_blueprint_id"
     t.index ["user_id"], name: "index_blueprint_usage_metrics_on_user_id"
   end
 
@@ -219,8 +228,8 @@ ActiveRecord::Schema.define(version: 2026_01_19_000000) do
     t.integer "vote_weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at", "votable_id"], name: "index_blueprint_votes_on_created_at_and_votable_id", where: "((votable_type)::text = 'Blueprint'::text)"
     t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-    t.index ["votable_type", "votable_id", "created_at"], name: "index_votes_on_votable_and_created_at"
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"

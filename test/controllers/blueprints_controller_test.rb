@@ -53,6 +53,41 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "trending preserves public and type filters and invalidates cached ranking" do
+    BlueprintTrendingScore.refresh!
+    get blueprints_path, params: { order: "trending", type: "factories" }
+    assert_response :success
+    assert_match blueprints(:public_factory).title, response.body
+    assert_no_match blueprints(:private_factory).title, response.body
+    assert_no_match blueprints(:public_dyson_sphere).title, response.body
+    etag = response.headers["ETag"]
+    assert_match(/max-age=0/, response.headers["Cache-Control"])
+    BlueprintTrendingScore.refresh!
+    get blueprints_path, params: { order: "trending", type: "factories" }, headers: { "If-None-Match" => etag }
+    assert_response :success
+    assert_not_equal etag, response.headers["ETag"]
+  end
+
+  test "trending works before the snapshot migration" do
+    connection = Blueprint.connection
+    connection.execute("ALTER TABLE blueprint_trending_refreshes RENAME TO temporarily_missing_trending_refreshes")
+    get blueprints_path, params: { order: "trending", type: "factories" }
+    assert_response :success
+    assert_match blueprints(:public_factory).title, response.body
+    assert_no_match blueprints(:private_factory).title, response.body
+    connection.execute("ALTER TABLE temporarily_missing_trending_refreshes RENAME TO blueprint_trending_refreshes")
+    connection.execute("INSERT INTO blueprint_trending_refreshes (id, generation) VALUES (1, 0) ON CONFLICT (id) DO UPDATE SET generation = 0")
+    get blueprints_path, params: { order: "trending", type: "factories" }
+    assert_response :success
+    etag = response.headers["ETag"]
+    BlueprintTrendingScore.refresh!
+    get blueprints_path, params: { order: "trending", type: "factories" }, headers: { "If-None-Match" => etag }
+    assert_response :success
+    assert_not_equal etag, response.headers["ETag"]
+  ensure
+    connection.execute("ALTER TABLE temporarily_missing_trending_refreshes RENAME TO blueprint_trending_refreshes") if connection.data_source_exists?("temporarily_missing_trending_refreshes")
+  end
+
   # ============================================
   # SHOW TESTS
   # ============================================
