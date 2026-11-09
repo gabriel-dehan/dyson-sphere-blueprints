@@ -19,5 +19,10 @@ export default class extends Controller {
       selector.classList.add('active');
       target.classList.add('active');
     }
+
+    tabs.forEach(tab => {
+      const recipeInput = tab.querySelector('input[name="recipe"]');
+      if (recipeInput) recipeInput.disabled = !tab.classList.contains('active');
+    });
   }
 }

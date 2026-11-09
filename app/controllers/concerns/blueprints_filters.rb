@@ -11,6 +11,7 @@ module BlueprintsFilters
         author: params[:author],
         order: params[:order] || "recent",
         max_structures: params[:max_structures] || "Any",
+        recipe: parse_recipe_filters(params[:recipe]),
         game_version_id: params[:game_version_id].presence || @game_versions.first.id,
         game_version_string: params[:game_version_string].presence || "Any",
         color: params[:color].presence,
@@ -81,8 +82,15 @@ module BlueprintsFilters
         )
       end
 
+      if @filters[:recipe].present?
+        @filters[:filtered_for] = :factories
+        blueprints = blueprints.where(type: "Factory").where("recipe_ids @> ARRAY[?]::int[]", @filters[:recipe])
+      end
+
       if @filters[:order] == "recent"
         blueprints = blueprints.reorder(created_at: :desc)
+      elsif @filters[:order] == "trending"
+        blueprints = blueprints.trending
       elsif @filters[:order] == "popular"
         blueprints = blueprints.reorder(cached_votes_total: :desc)
       elsif @filters[:order] == "usage"
@@ -118,6 +126,18 @@ module BlueprintsFilters
       else
         tags_param.split(/\s*,\s*/)
       end
+    end
+
+    def parse_recipe_filters(recipe_param)
+      return [] if recipe_param.blank?
+
+      values = recipe_param.is_a?(Array) ? recipe_param : [recipe_param]
+      raise ActionController::BadRequest, "Invalid recipe filter" unless values.all?(String)
+
+      values = values.flat_map { |value| value.split(/\s*,\s*/) }
+      raise ActionController::BadRequest, "Invalid recipe filter" if values.length > 50 || values.any? { |value| !value.match?(/\A[1-9]\d{0,9}\z/) || value.to_i > 2_147_483_647 }
+
+      values.map(&:to_i).uniq
     end
   end
 end

@@ -94,18 +94,57 @@ class BlueprintTest < ActiveSupport::TestCase
     tags = blueprint.tags_without_mass_construction
 
     # Should not include mass construction tags
-    assert_empty tags.select { |tag| tag.name =~ /mass construction/i }
+    assert_empty(tags.select { |tag| tag.name =~ /mass construction/i })
   end
 
   # ============================================
   # SEARCH TESTS
   # ============================================
 
+  test "recipe_ids are derived from summary recipes on save" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(
+      summary: {
+        "buildings" => {
+          # 2305 = Assembling machine Mk.III (DSP entity id)
+          "2305" => {
+            "recipes" => {
+              # 5 = Gear, 2 = Magnet (DSP recipe ids)
+              "5" => { "tally" => 10 },
+              "2" => { "tally" => 5 },
+            },
+          },
+        },
+      }
+    )
+
+    blueprint.save!
+
+    assert_equal [2, 5], blueprint.recipe_ids
+  end
+
+  test "recipe ids ignore malformed summary data and are cleared when summary changes" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(
+      summary: {
+        buildings: {
+          "one" => { recipes: { "2" => {}, "5" => {}, "0" => {}, "3x" => {}, "2147483648" => {} } },
+          "two" => { recipes: { "2" => {} } },
+          "bad" => nil,
+        },
+      }
+    )
+    assert_equal [2, 5], blueprint.reload.recipe_ids
+
+    blueprint.update!(summary: nil)
+    assert_equal [], blueprint.reload.recipe_ids
+  end
+
   test "search_by_title finds matching blueprints" do
     results = Blueprint.search_by_title("Factory")
 
     assert results.any?
-    assert results.all? { |bp| bp.title.downcase.include?("factory") }
+    assert(results.all? { |bp| bp.title.downcase.include?("factory") })
   end
 
   test "search_by_title returns empty for non-matching query" do
@@ -144,5 +183,55 @@ class BlueprintTest < ActiveSupport::TestCase
       bp.tags
       bp.collection
     end
+  end
+
+  test "trending scores are persisted until refresh and preserve scope" do
+    BlueprintTrendingScore.refresh!
+    blueprint = blueprints(:public_factory)
+    first = Blueprint.light_query.where(id: blueprint.id).trending.first
+    assert_equal blueprint.id, first.id
+    assert_not first.has_attribute?(:encoded_blueprint)
+    blueprint.update_columns(cached_votes_total: 1000) # rubocop:disable Rails/SkipsModelValidations
+    assert_equal first.trending_score, Blueprint.trending.find(blueprint.id).trending_score
+    BlueprintTrendingScore.refresh!
+    assert_operator Blueprint.trending.find(blueprint.id).trending_score, :>, first.trending_score
+  end
+
+  test "refresh applies recent activity and 7 and 30 day age boosts" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update_columns(created_at: 40.days.ago, cached_votes_total: 10, usage_count: 5) # rubocop:disable Rails/SkipsModelValidations
+    ActsAsVotable::Vote.where(votable_type: "Blueprint", votable_id: blueprint.id).delete_all
+    BlueprintUsageMetric.where(blueprint_id: blueprint.id).delete_all
+    BlueprintTrendingScore.refresh!
+    assert_in_delta 25.0, Blueprint.trending.find(blueprint.id).trending_score, 0.001
+
+    ActsAsVotable::Vote.create!(votable_type: "Blueprint", votable_id: blueprint.id, voter_type: "User", voter_id: users(:admin).id, vote_flag: true)
+    BlueprintUsageMetric.create!(blueprint_id: blueprint.id, user_id: users(:member).id, count: 20)
+    blueprint.update_columns(created_at: 1.day.ago, cached_votes_total: 10, usage_count: 5) # rubocop:disable Rails/SkipsModelValidations
+    BlueprintTrendingScore.refresh!
+    assert_in_delta 38.35, Blueprint.trending.find(blueprint.id).trending_score, 0.001
+
+    blueprint.update_columns(created_at: 10.days.ago) # rubocop:disable Rails/SkipsModelValidations
+    BlueprintTrendingScore.refresh!
+    assert_in_delta 33.925, Blueprint.trending.find(blueprint.id).trending_score, 0.001
+  end
+
+  test "missing snapshot rows use live lifetime counters" do
+    BlueprintTrendingScore.refresh!
+    blueprint = blueprints(:public_factory)
+    blueprint.update_columns(cached_votes_total: 10, usage_count: 5) # rubocop:disable Rails/SkipsModelValidations
+    BlueprintTrendingScore.where(blueprint_id: blueprint.id).delete_all
+    assert_in_delta 25, Blueprint.trending.find(blueprint.id).trending_score, 0.001
+  end
+
+  test "failed refresh rolls back scores and generation" do
+    BlueprintTrendingScore.refresh!
+    old_scores = BlueprintTrendingScore.order(:blueprint_id).pluck(:blueprint_id, :score)
+    connection = BlueprintTrendingScore.connection
+    generation = connection.select_value("SELECT generation FROM blueprint_trending_refreshes WHERE id = 1")
+    connection.execute("ALTER TABLE blueprint_trending_scores ADD CONSTRAINT test_refresh_failure CHECK (score < 0) NOT VALID")
+    assert_raises(ActiveRecord::StatementInvalid) { BlueprintTrendingScore.refresh! }
+    assert_equal old_scores, BlueprintTrendingScore.order(:blueprint_id).pluck(:blueprint_id, :score)
+    assert_equal generation, connection.select_value("SELECT generation FROM blueprint_trending_refreshes WHERE id = 1")
   end
 end

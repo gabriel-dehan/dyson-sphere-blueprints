@@ -24,12 +24,21 @@ class BlueprintsController < ApplicationController
       .joins(:collection)
       .where(collection: { type: "Public" })
 
-    # Fetch the latest updated_at timestamp for the relevant records
-    last_modified = general_scope.maximum(:updated_at)
+    if @filters[:recipe].present?
+      response.headers["Cache-Control"] = "no-store"
+      render_results = true
+    else
+      last_modified = general_scope.maximum(:updated_at)
+      etag = [general_scope, current_user]
+      if @filters[:order] == "trending"
+        etag << Blueprint.trending_generation
+        last_modified = nil
+        expires_in 0, public: true, must_revalidate: true
+      end
+      render_results = stale?(etag: etag, last_modified: last_modified, public: true)
+    end
 
-    # Generate an ETag based on the general_scope and current_user
-    if stale?(etag: [general_scope, current_user], last_modified: last_modified, public: true)
-      # Apply filters and paginate only if the request is not cached
+    if render_results
       @blueprints = filter(general_scope.with_associations)
 
       @blueprints = @blueprints.page(params[:page])

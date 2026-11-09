@@ -43,6 +43,72 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
     assert_match blueprints(:public_factory).title, response.body
   end
 
+  test "index filters by recipe ids" do
+    public_factory = blueprints(:public_factory)
+    public_factory.update!(
+      summary: {
+        "buildings" => {
+          # 2305 = Assembling machine Mk.III (DSP entity id)
+          "2305" => {
+            "recipes" => {
+              # 5 = Gear (DSP recipe id)
+              "5" => { "tally" => 10 },
+            },
+          },
+        },
+      }
+    )
+
+    get blueprints_path, params: { recipe: "5" }
+    assert_response :success
+
+    assert_match public_factory.title, response.body
+    assert_no_match(/Public Dyson Sphere/, response.body)
+  end
+
+  test "recipe filter requires every selected recipe" do
+    matching = blueprints(:public_factory)
+    other = blueprints(:other_user_factory)
+    matching.update!(summary: { buildings: { "1" => { recipes: { "2" => {}, "5" => {} } } } })
+    other.update!(summary: { buildings: { "1" => { recipes: { "5" => {} } } } })
+
+    get blueprints_path, params: { recipe: "2,5" }
+    assert_response :success
+    assert_match matching.title, response.body
+    assert_no_match other.title, response.body
+  end
+
+  test "recipe results are not cached while backfill changes the projection" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update_columns(recipe_ids: nil) # rubocop:disable Rails/SkipsModelValidations
+    get blueprints_path, params: { recipe: "5" }
+    assert_response :success
+    assert_match(/no-store/, response.headers["Cache-Control"])
+    etag = response.headers["ETag"]
+
+    blueprint.update_columns(recipe_ids: [5]) # rubocop:disable Rails/SkipsModelValidations
+    get blueprints_path, params: { recipe: "5" }, headers: { "If-None-Match" => etag.to_s, "If-Modified-Since" => 1.day.from_now.httpdate }
+    assert_response :success
+    assert_match blueprint.title, response.body
+  end
+
+  test "recipe filtering and trending work together without caching backfill results" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(summary: { buildings: { "1" => { recipes: { "5" => {} } } } })
+    BlueprintTrendingScore.refresh!
+
+    get blueprints_path, params: { recipe: "5", order: "trending" }
+    assert_response :success
+    assert_match blueprint.title, response.body
+    assert_match(/no-store/, response.headers["Cache-Control"])
+  end
+
+  test "recipe filter rejects malformed recipe identifiers" do
+    assert_raises(ActionController::BadRequest) do
+      get blueprints_path, params: { recipe: "5xyz" }
+    end
+  end
+
   test "index orders by recent by default" do
     get blueprints_path, params: { order: "recent" }
     assert_response :success
@@ -51,6 +117,41 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
   test "index orders by popular" do
     get blueprints_path, params: { order: "popular" }
     assert_response :success
+  end
+
+  test "trending preserves public and type filters and invalidates cached ranking" do
+    BlueprintTrendingScore.refresh!
+    get blueprints_path, params: { order: "trending", type: "factories" }
+    assert_response :success
+    assert_match blueprints(:public_factory).title, response.body
+    assert_no_match blueprints(:private_factory).title, response.body
+    assert_no_match blueprints(:public_dyson_sphere).title, response.body
+    etag = response.headers["ETag"]
+    assert_match(/max-age=0/, response.headers["Cache-Control"])
+    BlueprintTrendingScore.refresh!
+    get blueprints_path, params: { order: "trending", type: "factories" }, headers: { "If-None-Match" => etag }
+    assert_response :success
+    assert_not_equal etag, response.headers["ETag"]
+  end
+
+  test "trending works before the snapshot migration" do
+    connection = Blueprint.connection
+    connection.execute("ALTER TABLE blueprint_trending_refreshes RENAME TO temporarily_missing_trending_refreshes")
+    get blueprints_path, params: { order: "trending", type: "factories" }
+    assert_response :success
+    assert_match blueprints(:public_factory).title, response.body
+    assert_no_match blueprints(:private_factory).title, response.body
+    connection.execute("ALTER TABLE temporarily_missing_trending_refreshes RENAME TO blueprint_trending_refreshes")
+    connection.execute("INSERT INTO blueprint_trending_refreshes (id, generation) VALUES (1, 0) ON CONFLICT (id) DO UPDATE SET generation = 0")
+    get blueprints_path, params: { order: "trending", type: "factories" }
+    assert_response :success
+    etag = response.headers["ETag"]
+    BlueprintTrendingScore.refresh!
+    get blueprints_path, params: { order: "trending", type: "factories" }, headers: { "If-None-Match" => etag }
+    assert_response :success
+    assert_not_equal etag, response.headers["ETag"]
+  ensure
+    connection.execute("ALTER TABLE temporarily_missing_trending_refreshes RENAME TO blueprint_trending_refreshes") if connection.data_source_exists?("temporarily_missing_trending_refreshes")
   end
 
   # ============================================
