@@ -111,10 +111,10 @@ class BlueprintTest < ActiveSupport::TestCase
             "recipes" => {
               # 5 = Gear, 2 = Magnet (DSP recipe ids)
               "5" => { "tally" => 10 },
-              "2" => { "tally" => 5 }
-            }
-          }
-        }
+              "2" => { "tally" => 5 },
+            },
+          },
+        },
       }
     )
 
@@ -125,11 +125,15 @@ class BlueprintTest < ActiveSupport::TestCase
 
   test "recipe ids ignore malformed summary data and are cleared when summary changes" do
     blueprint = blueprints(:public_factory)
-    blueprint.update!(summary: { buildings: {
-      "one" => { recipes: { "2" => {}, "5" => {}, "0" => {}, "3x" => {}, "2147483648" => {} } },
-      "two" => { recipes: { "2" => {} } },
-      "bad" => nil,
-    } })
+    blueprint.update!(
+      summary: {
+        buildings: {
+          "one" => { recipes: { "2" => {}, "5" => {}, "0" => {}, "3x" => {}, "2147483648" => {} } },
+          "two" => { recipes: { "2" => {} } },
+          "bad" => nil,
+        },
+      }
+    )
     assert_equal [2, 5], blueprint.reload.recipe_ids
 
     blueprint.update!(summary: nil)

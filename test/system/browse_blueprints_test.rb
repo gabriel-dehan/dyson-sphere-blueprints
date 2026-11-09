@@ -52,7 +52,7 @@ class BrowseBlueprintsTest < ApplicationSystemTestCase
     assert_selector '[data-controller="recipes-filter"] .tagify__tag img[src*="/media/recipes/"]'
 
     find('[data-controller="recipes-filter"] .tagify__input').send_keys("Magnet")
-    find('.tagify__dropdown__item', text: "Magnet", exact_text: true).click
+    find(".tagify__dropdown__item", text: "Magnet", exact_text: true).click
     assert_selector '[data-controller="recipes-filter"] .tagify__tag', text: "Magnet"
     assert_selector('input[name="recipe"]', visible: :all) { |input| input.value == "5,2" }
     click_button "Search"

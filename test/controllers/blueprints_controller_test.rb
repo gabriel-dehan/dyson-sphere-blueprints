@@ -52,10 +52,10 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
           "2305" => {
             "recipes" => {
               # 5 = Gear (DSP recipe id)
-              "5" => { "tally" => 10 }
-            }
-          }
-        }
+              "5" => { "tally" => 10 },
+            },
+          },
+        },
       }
     )
 
@@ -80,13 +80,13 @@ class BlueprintsControllerTest < ActionDispatch::IntegrationTest
 
   test "recipe results are not cached while backfill changes the projection" do
     blueprint = blueprints(:public_factory)
-    blueprint.update_columns(recipe_ids: nil)
+    blueprint.update_columns(recipe_ids: nil) # rubocop:disable Rails/SkipsModelValidations
     get blueprints_path, params: { recipe: "5" }
     assert_response :success
     assert_match(/no-store/, response.headers["Cache-Control"])
     etag = response.headers["ETag"]
 
-    blueprint.update_columns(recipe_ids: [5])
+    blueprint.update_columns(recipe_ids: [5]) # rubocop:disable Rails/SkipsModelValidations
     get blueprints_path, params: { recipe: "5" }, headers: { "If-None-Match" => etag.to_s, "If-Modified-Since" => 1.day.from_now.httpdate }
     assert_response :success
     assert_match blueprint.title, response.body

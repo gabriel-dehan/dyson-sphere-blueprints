@@ -130,12 +130,10 @@ module BlueprintsFilters
       return [] if recipe_param.blank?
 
       values = recipe_param.is_a?(Array) ? recipe_param : [recipe_param]
-      raise ActionController::BadRequest, "Invalid recipe filter" unless values.all? { |value| value.is_a?(String) }
+      raise ActionController::BadRequest, "Invalid recipe filter" unless values.all?(String)
 
       values = values.flat_map { |value| value.split(/\s*,\s*/) }
-      if values.length > 50 || values.any? { |value| !value.match?(/\A[1-9]\d{0,9}\z/) || value.to_i > 2_147_483_647 }
-        raise ActionController::BadRequest, "Invalid recipe filter"
-      end
+      raise ActionController::BadRequest, "Invalid recipe filter" if values.length > 50 || values.any? { |value| !value.match?(/\A[1-9]\d{0,9}\z/) || value.to_i > 2_147_483_647 }
 
       values.map(&:to_i).uniq
     end

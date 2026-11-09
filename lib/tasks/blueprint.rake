@@ -12,7 +12,7 @@ namespace :blueprint do
           blueprint = Blueprint.where(id: item.id, recipe_ids: nil).lock.select(:id, :summary, :recipe_ids).first
           next unless blueprint
 
-          blueprint.update_columns(recipe_ids: blueprint.send(:extract_recipe_ids_from_summary))
+          blueprint.update_columns(recipe_ids: blueprint.send(:extract_recipe_ids_from_summary)) # rubocop:disable Rails/SkipsModelValidations
           processed += 1
         end
       end
