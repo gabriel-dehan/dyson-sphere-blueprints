@@ -2,7 +2,7 @@ class IndexBlueprintRecipeIds < ActiveRecord::Migration[6.1]
   disable_ddl_transaction!
 
   def up
-    invalid = select_value(<<~SQL)
+    invalid = select_value(<<~SQL.squish)
       SELECT NOT i.indisvalid FROM pg_index i
       JOIN pg_class c ON c.oid = i.indexrelid
       JOIN pg_namespace n ON n.oid = c.relnamespace
