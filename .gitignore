@@ -57,3 +57,8 @@ localstack/data
 .claude/plans
 .claude/investigations
 *.dump
+
+# Nix devenv
+.devenv*
+.direnv
+/vendor/bundle

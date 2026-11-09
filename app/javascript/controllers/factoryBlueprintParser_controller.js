@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus'
-import DspBpParser from 'dsp-bp-parser';
+import DspBpParser from '../lib/dspBlueprintParser';
 import { getEntityName, getRecipeName, t } from '../i18n';
 
 const images = require.context('../../assets/images/game_icons', true);
