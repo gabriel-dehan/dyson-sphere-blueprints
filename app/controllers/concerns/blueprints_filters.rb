@@ -84,8 +84,7 @@ module BlueprintsFilters
 
       if @filters[:recipe].present?
         @filters[:filtered_for] = :factories
-        recipe_ids = @filters[:recipe].map { |recipe| recipe.to_i }.reject(&:zero?)
-        blueprints = blueprints.where("recipe_ids @> ARRAY[?]::int[]", recipe_ids) if recipe_ids.any?
+        blueprints = blueprints.where(type: "Factory").where("recipe_ids @> ARRAY[?]::int[]", @filters[:recipe])
       end
 
       if @filters[:order] == "recent"
@@ -129,9 +128,16 @@ module BlueprintsFilters
 
     def parse_recipe_filters(recipe_param)
       return [] if recipe_param.blank?
-      return recipe_param if recipe_param.is_a?(Array)
 
-      recipe_param.to_s.split(/\s*,\s*/)
+      values = recipe_param.is_a?(Array) ? recipe_param : [recipe_param]
+      raise ActionController::BadRequest, "Invalid recipe filter" unless values.all? { |value| value.is_a?(String) }
+
+      values = values.flat_map { |value| value.split(/\s*,\s*/) }
+      if values.length > 50 || values.any? { |value| !value.match?(/\A[1-9]\d{0,9}\z/) || value.to_i > 2_147_483_647 }
+        raise ActionController::BadRequest, "Invalid recipe filter"
+      end
+
+      values.map(&:to_i).uniq
     end
   end
 end

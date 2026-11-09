@@ -102,11 +102,8 @@ class BlueprintTest < ActiveSupport::TestCase
   # ============================================
 
   test "recipe_ids are derived from summary recipes on save" do
-    blueprint = Blueprint::Factory.new(
-      title: "Recipe Test",
-      collection: collections(:member_public),
-      game_version: game_versions(:dsp),
-      game_version_string: "0.9.27.15466",
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(
       summary: {
         "buildings" => {
           # 2305 = Assembling machine Mk.III (DSP entity id)
@@ -124,6 +121,19 @@ class BlueprintTest < ActiveSupport::TestCase
     blueprint.save!
 
     assert_equal [2, 5], blueprint.recipe_ids
+  end
+
+  test "recipe ids ignore malformed summary data and are cleared when summary changes" do
+    blueprint = blueprints(:public_factory)
+    blueprint.update!(summary: { buildings: {
+      "one" => { recipes: { "2" => {}, "5" => {}, "0" => {}, "3x" => {}, "2147483648" => {} } },
+      "two" => { recipes: { "2" => {} } },
+      "bad" => nil,
+    } })
+    assert_equal [2, 5], blueprint.reload.recipe_ids
+
+    blueprint.update!(summary: nil)
+    assert_equal [], blueprint.reload.recipe_ids
   end
 
   test "search_by_title finds matching blueprints" do

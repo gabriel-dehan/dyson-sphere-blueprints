@@ -79,13 +79,19 @@ class Blueprint < ApplicationRecord
     buildings = summary["buildings"] || summary[:buildings]
     return [] unless buildings.is_a?(Hash)
 
-    recipe_ids = buildings.values.flat_map do |building|
+    buildings.values.flat_map do |building|
+      next [] unless building.is_a?(Hash)
+
       recipes = building["recipes"] || building[:recipes]
       next [] unless recipes.is_a?(Hash)
 
-      recipes.keys
-    end
+      recipes.keys.filter_map do |key|
+        value = key.to_s
+        next unless value.match?(/\A[1-9]\d{0,9}\z/)
 
-    recipe_ids.compact.map { |id| id.to_i }.uniq.sort
+        id = value.to_i
+        id if id <= 2_147_483_647
+      end
+    end.uniq.sort
   end
 end

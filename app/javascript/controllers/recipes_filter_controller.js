@@ -1,12 +1,18 @@
 import { Controller } from "stimulus";
 import Tagify from "@yaireo/tagify";
-import { getRecipes, t } from "../i18n";
+import { getRecipes } from "../i18n";
+
+const recipeIcons = require.context("../../assets/images/game_icons/recipes", false, /\.png$/);
 
 const buildRecipeIconUrl = (value) => {
-  const id = value && value !== "0" ? value : "default";
-  const base = window._cdnURL || "";
-  return `${base}/public/game_icons/recipes/${id}.png`;
+  const path = `./${value}.png`;
+  const icon = recipeIcons.keys().includes(path) ? recipeIcons(path) : recipeIcons("./default.png");
+  return icon.default || icon;
 };
+
+const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+})[character]);
 
 export default class extends Controller {
   static targets = ["input"];
@@ -23,7 +29,7 @@ export default class extends Controller {
     const tagTemplate = function (tagData) {
       const label = tagData.name || tagData.value;
       return `
-        <tag title="${this.escapeHTML(label)}"
+        <tag title="${escapeHTML(label)}"
           contenteditable='false'
           spellcheck='false'
           tabindex="-1"
@@ -32,7 +38,7 @@ export default class extends Controller {
           <x title='remove tag' class='tagify__tag__removeBtn'></x>
           <div class="tagify__tag__content">
             <img class="tagify__tag__icon" src="${buildRecipeIconUrl(tagData.value)}" alt="" loading="lazy" />
-            <span class='tagify__tag-text'>${this.escapeHTML(label)}</span>
+            <span class='tagify__tag-text'>${escapeHTML(label)}</span>
           </div>
         </tag>
       `;
@@ -43,7 +49,7 @@ export default class extends Controller {
       return `
         <div class="tagify__dropdown__item" ${this.getAttributes(tagData)}>
           <img class="tagify__tag__icon" src="${buildRecipeIconUrl(tagData.value)}" alt="" loading="lazy" />
-          <span>${this.escapeHTML(label)}</span>
+          <span>${escapeHTML(label)}</span>
         </div>
       `;
     };
@@ -55,6 +61,7 @@ export default class extends Controller {
       editTags: false,
       originalInputValueFormat: (valuesArr) => valuesArr.map((item) => item.value).join(","),
       dropdown: {
+        classname: "recipes-dropdown",
         enabled: 0,
         maxItems: 20,
         searchKeys: ["name", "value"],
@@ -63,7 +70,7 @@ export default class extends Controller {
         tag: tagTemplate,
         dropdownItem: dropdownItemTemplate,
       },
-      placeholder: t("recipes.filters.placeholder"),
+      placeholder: this.inputTarget.placeholder,
     });
 
     if (this.hasSelectedValue && this.selectedValue.length) {
