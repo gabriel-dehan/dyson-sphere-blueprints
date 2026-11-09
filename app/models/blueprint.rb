@@ -22,6 +22,8 @@ class Blueprint < ApplicationRecord
   scope :light_query, -> { select(column_names - ["encoded_blueprint"]) }
   scope :with_associations, -> { includes(:game_version, :tags, :user, :collection, collection: :user) }
 
+  before_save :set_recipe_ids, if: :will_save_change_to_summary?
+
   pg_search_scope :search_by_title,
                   against: [:title],
                   using: {
@@ -63,5 +65,33 @@ class Blueprint < ApplicationRecord
   def self.find_sti_class(type_name)
     type_name = "Blueprint::#{type_name}"
     super
+  end
+
+  private
+
+  def set_recipe_ids
+    self.recipe_ids = extract_recipe_ids_from_summary
+  end
+
+  def extract_recipe_ids_from_summary
+    return [] unless summary.is_a?(Hash)
+
+    buildings = summary["buildings"] || summary[:buildings]
+    return [] unless buildings.is_a?(Hash)
+
+    buildings.values.flat_map do |building|
+      next [] unless building.is_a?(Hash)
+
+      recipes = building["recipes"] || building[:recipes]
+      next [] unless recipes.is_a?(Hash)
+
+      recipes.keys.filter_map do |key|
+        value = key.to_s
+        next unless value.match?(/\A[1-9]\d{0,9}\z/)
+
+        id = value.to_i
+        id if id <= 2_147_483_647
+      end
+    end.uniq.sort
   end
 end
