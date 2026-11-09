@@ -3,7 +3,7 @@ class AddTrendingIndexesToVotesAndMetrics < ActiveRecord::Migration[6.1]
 
   def up
     %w[index_blueprint_votes_on_created_at_and_votable_id index_usage_metrics_on_last_used_at_and_blueprint_id].each do |name|
-      invalid = select_value(<<~SQL)
+      invalid = select_value(<<~SQL.squish)
         SELECT NOT i.indisvalid FROM pg_index i
         JOIN pg_class c ON c.oid = i.indexrelid
         JOIN pg_namespace n ON n.oid = c.relnamespace

@@ -4,7 +4,7 @@ class BlueprintTrendingScore < ApplicationRecord
       connection.execute("INSERT INTO blueprint_trending_refreshes (id, generation) VALUES (1, 0) ON CONFLICT (id) DO NOTHING")
       connection.execute("SELECT id FROM blueprint_trending_refreshes WHERE id = 1 FOR UPDATE")
       connection.execute("DELETE FROM blueprint_trending_scores")
-      connection.execute(<<~SQL)
+      connection.execute(<<~SQL.squish)
         INSERT INTO blueprint_trending_scores (blueprint_id, score)
         WITH recent_votes AS (
           SELECT votable_id, COUNT(*) AS count FROM votes

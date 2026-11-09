@@ -9,7 +9,7 @@ class BlueprintTrendingConcurrencyTest < ActiveSupport::TestCase
     connection = ActiveRecord::Base.connection
     old_scores = BlueprintTrendingScore.order(:blueprint_id).pluck(:blueprint_id, :score)
     old_generation = Blueprint.trending_generation
-    blueprints(:public_factory).update_columns(cached_votes_total: 999)
+    blueprints(:public_factory).update_columns(cached_votes_total: 999) # rubocop:disable Rails/SkipsModelValidations
     paused = Queue.new
     resume = Queue.new
     second_pid = Queue.new
@@ -54,7 +54,7 @@ class BlueprintTrendingConcurrencyTest < ActiveSupport::TestCase
   test "deleting a blueprint does not wait on a paused snapshot refresh" do
     connection = ActiveRecord::Base.connection
     source_id = blueprints(:public_factory).id
-    id = connection.select_value(<<~SQL).to_i
+    id = connection.select_value(<<~SQL.squish).to_i
       INSERT INTO blueprints (title, type, collection_id, game_version_id, game_version_string, created_at, updated_at)
       SELECT 'Concurrency test', type, collection_id, game_version_id, game_version_string, NOW(), NOW()
       FROM blueprints WHERE id = #{Integer(source_id)} RETURNING id
