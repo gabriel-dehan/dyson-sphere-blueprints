@@ -36,30 +36,38 @@ Pull requests are always welcome, if you want a copy of the production or stagin
 
 ### Setting up
 
-Install ruby dependencies
-```
+Use Ruby 3.2.9 (see `.ruby-version`). For JavaScript, CI uses Node 18 and the Nix environment uses Node 22. With modern Node versions, Webpacker 5 needs `NODE_OPTIONS=--openssl-legacy-provider`, which is included in `.env.sample`.
+
+If you use Nix and devenv, start the local services with `devenv up`, then open `devenv shell` in another terminal. This sets up the runtimes and installs the Ruby and JavaScript dependencies. The configuration is in `devenv.nix`.
+
+Otherwise, install Ruby, Bundler, Node, Yarn, PostgreSQL client libraries and ImageMagick, then install the dependencies:
+
+```bash
 bundle install
+yarn install --frozen-lockfile
 ```
 
-Install node dependencies
-```
-yarn
+Set up your local services and `.env` as described in [Build development environment](#build-development-environment), then create the database and run the migrations:
+
+```bash
+bin/rails db:create db:migrate
 ```
 
-Then set up the database, either using docker or your own postgresql instance.
-Once done, you can run the migrations and create the database:
-
-```
-rails db:create db:migrate db:seed
-```
-
-If migrations are failing the first time, just re-run them again.
+See [Seeding](#seeding) to add the initial game-version data. The full `db/seeds.rb` script also creates an admin with a default password and collections, so it is only intended for a fresh local database.
 
 You should then be able to run the application:
 
 ```
-rails s
+bin/rails server
 ```
+
+In another terminal, start Sidekiq to process blueprint uploads, images and game-version updates:
+
+```bash
+bundle exec sidekiq -C config/sidekiq.yml
+```
+
+If you have Overmind installed (included with devenv), you can also run `overmind start` to start both processes from the `Procfile`.
 
 ### Seeding
 
@@ -95,12 +103,12 @@ AWS_S3_REGION=eu-west-1
 AWS_S3_BUCKET=dyson-sphere-blueprints
 AWS_CLOUDFRONT_URL=https://XYZ.cloudfront.net
 ```
-Most of those are not needed to be able to work on most features, but if you want images to display and be able to upload images for instance you will need to setup an AWS S3 and Cloudfront.
+You'll need Discord credentials to use Discord sign-in. For local image uploads, you can use the S3 emulator with `AWS_S3_ENDPOINT` from `.env.sample`, without setting up an AWS account or CloudFront. Tests use in-memory upload storage.
 An example can be found in `.env.sample`
 
 ### Build development environment
 
-You can also build a development environment with docker compose.
+You can run the local services with Docker Compose and run Rails and Sidekiq on your machine. Use either Docker Compose or devenv for the services: both use the same ports, which may also conflict with an existing PostgreSQL or Redis installation.
 
 Using the `docker-compose.yml`, will start the following services:
 - PostgreSQL
@@ -152,18 +160,14 @@ An anonymized production database dump is available in the [latest GitHub releas
 # The file should be at db/dspblueprints.dump.gz
 ```
 
-2. Restore the compressed dump using the rake task:
+2. Restore the compressed dump:
 ```bash
-rake db:drop db:create
-rake db:restore_compressed
+bundle exec rake db:restore_compressed
 ```
 
-This task will automatically:
-- Drop the existing development database
-- Create a fresh database
-- Restore the compressed dump
+**Warning:** This replaces your local development database, including any data already in it. Check your database configuration before running it.
 
-**Note:** You do NOT need to run `rails db:migrate` after restoring a dump, as the dump already contains the complete schema and data. Just start your Rails server with `rails s`.
+After restoring, run `bin/rails db:migrate` to apply any migrations added since the dump was created. You can then start Rails and Sidekiq.
 
 ### Rake tasks
 
@@ -175,7 +179,7 @@ rake blueprint:recompute_data # updates all blueprints summary if you have made 
 
 ### Testing
 
-The project has a comprehensive test suite covering models, controllers, policies, and system tests.
+The Minitest suite covers models, controllers, policies, parsers, translations, mailers and browser flows.
 
 **Running tests:**
 ```bash
@@ -188,8 +192,9 @@ rails test test/models/blueprint_test.rb
 # Run a specific test by line number
 rails test test/models/blueprint_test.rb:10
 
-# Run system tests (requires Chrome/Chromium)
-rails test:system
+# Run system tests (requires Chrome/Chromium and compiled assets)
+RAILS_ENV=test bin/rails webpacker:compile
+bin/rails test:system
 ```
 
 **Test structure:**
@@ -222,13 +227,15 @@ This ensures the `logger` gem is loaded before ActiveSupport, which is required 
 
 ### Continuous Integration
 
-This project uses GitHub Actions for CI. Every push and pull request triggers automated tests.
+GitHub Actions runs the test workflow for pushes to `main` (except Markdown-only changes) and pull requests targeting `main`. The workflow configuration is in [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
-The CI workflow:
-- Runs on Ubuntu with PostgreSQL and Redis services
-- Executes RuboCop for code style checks
-- Runs the full test suite
-- Compiles assets to catch any frontend issues
+The test workflow:
+- Runs on Ubuntu with Ruby 3.2, Node 18, PostgreSQL 14 and Chrome
+- Loads the test database schema
+- Compiles Webpacker assets
+- Runs the non-system and system test suites separately
+
+RuboCop runs on pull requests in the separate [reviewdog workflow](.github/workflows/reviewdog.yml). The test workflow does not provision Redis.
 
 **Before submitting a PR:**
 1. Make sure all tests pass locally: `rails test`

@@ -37,7 +37,7 @@ yarn-debug.log*
 # Ignore .env file containing credentials.
 .env*
 # Ignore local development notes
-CLAUDE.local.md
+AGENTS.local.md
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
